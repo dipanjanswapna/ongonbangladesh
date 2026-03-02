@@ -1,0 +1,35 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "hero-bg",
+      "description": "A diverse group of people joining hands to show community support",
+      "imageUrl": "https://picsum.photos/seed/sevasetu-hero/1200/600",
+      "imageHint": "community support"
+    },
+    {
+      "id": "medical-aid",
+      "description": "Medical professionals providing care",
+      "imageUrl": "https://picsum.photos/seed/medical/400/300",
+      "imageHint": "medical care"
+    },
+    {
+      "id": "education-aid",
+      "description": "Children studying in a classroom",
+      "imageUrl": "https://picsum.photos/seed/education/400/300",
+      "imageHint": "education children"
+    },
+    {
+      "id": "food-aid",
+      "description": "Volunteers distributing food packages",
+      "imageUrl": "https://picsum.photos/seed/food/400/300",
+      "imageHint": "food distribution"
+    },
+    {
+      "id": "shelter-aid",
+      "description": "A warm and safe community shelter",
+      "imageUrl": "https://picsum.photos/seed/shelter/400/300",
+      "imageHint": "community shelter"
+    }
+  ]
+}
