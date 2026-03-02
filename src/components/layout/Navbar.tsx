@@ -1,8 +1,9 @@
+
 'use client';
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Heart, Menu, User, LogIn, UserPlus, Globe } from 'lucide-react';
+import { Heart, Menu, User, LogIn, UserPlus, Globe, Droplet } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import {
@@ -34,7 +35,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-6">
             <Link href="/about" className="text-xs font-bold text-gray-600 hover:text-primary transition-colors">আমাদের সম্পর্কে</Link>
             <Link href="/campaigns" className="text-xs font-bold text-gray-600 hover:text-primary transition-colors">ক্যাম্পেইনসমূহ</Link>
-            <Link href="/blog" className="text-xs font-bold text-gray-600 hover:text-primary transition-colors">ব্লগ</Link>
+            <Link href="/blood" className="text-xs font-bold text-red-600 flex items-center gap-1 hover:scale-105 transition-all"><Droplet className="h-3 w-3 fill-red-600" /> রক্তদান</Link>
             <Link href="/requests" className="text-xs font-bold text-gray-600 hover:text-primary transition-colors">সাহায্য অনুরোধ</Link>
           </div>
 
@@ -90,11 +91,10 @@ export function Navbar() {
                   <div className="flex-grow p-6 space-y-2">
                     <Link href="/about" className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-gray-700 font-bold transition-all">আমাদের সম্পর্কে</Link>
                     <Link href="/campaigns" className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-gray-700 font-bold transition-all">ক্যাম্পেইনসমূহ</Link>
-                    <Link href="/blog" className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-gray-700 font-bold transition-all">ব্লগ</Link>
+                    <Link href="/blood" className="flex items-center gap-3 p-3 rounded-xl hover:bg-red-50 text-red-600 font-bold transition-all"><Droplet className="h-4 w-4 fill-red-600" /> রক্তদান কেন্দ্র</Link>
                     <Link href="/requests" className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-gray-700 font-bold transition-all">সাহায্য অনুরোধ</Link>
                     <Link href="/volunteer" className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-gray-700 font-bold transition-all">স্বেচ্ছাসেবক হন</Link>
                     <Link href="/donate" className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-gray-700 font-bold transition-all">অনুদান কেন্দ্র</Link>
-                    <Link href="/profile" className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-gray-700 font-bold transition-all">ইউজার পোর্টাল</Link>
                   </div>
 
                   <div className="p-6 bg-white border-t border-gray-100 space-y-4">
