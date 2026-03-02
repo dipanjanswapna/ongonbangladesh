@@ -144,7 +144,7 @@ export default function Home() {
         </section>
 
         {/* Featured Requests Section */}
-        <section className="py-20 md:py-28 bg-black/10">
+        <section className="py-20 md:py-28" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 text-center md:text-left">
               <div className="w-full md:w-auto">
@@ -168,7 +168,10 @@ export default function Home() {
       {/* Improved Footer with Rounded Design and Red Theme */}
       <footer className="px-4 pb-8 md:pb-12 bg-transparent">
         <div className="container mx-auto max-w-7xl">
-          <div className="bg-[#781013] rounded-[2.5rem] p-8 md:p-14 shadow-2xl relative overflow-hidden border border-white/10">
+          <div 
+            className="rounded-[2.5rem] p-8 md:p-14 shadow-2xl relative overflow-hidden border border-white/10"
+            style={{ backgroundColor: 'rgb(110, 14, 17)' }}
+          >
             {/* Top Section */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12">
               {/* Brand & Description */}
@@ -252,3 +255,4 @@ export default function Home() {
     </div>
   );
 }
+
