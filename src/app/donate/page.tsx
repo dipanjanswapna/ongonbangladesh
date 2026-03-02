@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Navbar } from '@/components/layout/Navbar';
@@ -42,7 +41,13 @@ export default function DonatePage() {
               return (
                 <Card key={fund.id} className="glass-card border-white/10 overflow-hidden flex flex-col group hover:scale-[1.02] transition-all">
                   <div className="relative h-32 w-full">
-                    <Image src={fund.image} alt={fund.title} fill className="object-cover opacity-40 group-hover:opacity-60 transition-opacity" unoptimized />
+                    <Image 
+                      src={fund.image} 
+                      alt={fund.title} 
+                      fill 
+                      className="object-cover opacity-40 group-hover:opacity-60 transition-opacity" 
+                      unoptimized 
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
                     <div className="absolute bottom-4 left-4">
                       <div className={`p-2 rounded-lg ${fund.color} text-white shadow-lg`}>
@@ -95,7 +100,10 @@ export default function DonatePage() {
                       <span>{Math.round((camp.raised / camp.target) * 100)}%</span>
                     </div>
                     <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
-                      <div className="h-full bg-white transition-all duration-1000" style={{ width: `${(camp.raised / camp.target) * 100}%` }} />
+                      <div 
+                        className="h-full bg-white transition-all duration-1000" 
+                        style={{ width: `${(camp.raised / camp.target) * 100}%` }} 
+                      />
                     </div>
                   </div>
                 </CardContent>
