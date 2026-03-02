@@ -49,20 +49,21 @@ export default function Home() {
       <Navbar />
 
       <main className="flex-grow">
-        {/* Hero Section - Full Screen with New Image Background */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-20">
+        {/* Hero Section - Full Screen with Background Image */}
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             {heroImage && (
               <Image 
                 src={heroImage.imageUrl} 
                 alt={heroImage.description}
                 fill
-                className="object-cover opacity-40"
+                className="object-cover opacity-60"
                 priority
                 data-ai-hint={heroImage.imageHint}
               />
             )}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-background" />
+            {/* Dark gradient overlay to make text pop */}
+            <div className="absolute inset-0 bg-black/50" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10 text-center">
@@ -94,7 +95,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Search Bar Section - Overlaying the transition */}
+        {/* Search Bar Section */}
         <section className="container mx-auto px-4 -mt-10 md:-mt-12 relative z-20">
           <div className="glass-card p-3 md:p-5 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-3 items-center max-w-3xl mx-auto border-white/10">
             <div className="relative flex-grow w-full">
