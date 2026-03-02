@@ -44,7 +44,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen overflow-x-hidden">
+    <div className="flex flex-col min-h-screen overflow-x-hidden bg-background">
       <Navbar />
 
       <main className="flex-grow">
@@ -56,7 +56,7 @@ export default function Home() {
                 src={heroImage.imageUrl} 
                 alt={heroImage.description}
                 fill
-                className="object-cover opacity-30"
+                className="object-cover opacity-20"
                 priority
                 data-ai-hint={heroImage.imageHint}
               />
@@ -67,18 +67,18 @@ export default function Home() {
           <div className="container mx-auto px-4 relative z-10 text-center md:text-left">
             <div className="max-w-3xl animate-in fade-in slide-in-from-left-4 duration-700">
               <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                হৃদয় সংযোগ, <span className="text-primary">ক্ষুধার অবসান।</span>
+                হৃদয় সংযোগ, <span className="text-white underline decoration-white/30">ক্ষুধার অবসান।</span>
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto md:mx-0">
+              <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto md:mx-0">
                 সেবা সেতু একটি ডেডিকেটেড কমিউনিটি প্ল্যাটফর্ম যেখানে মানবিকতা প্রয়োজনে সাড়া দেয়। আপনি সাহায্য খুঁজছেন বা দিতে চান, আমরা আপনার সংযোগ তৈরি করি।
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <Link href="/requests/new" className="w-full sm:w-auto">
-                  <Button size="lg" className="bg-primary hover:bg-primary/90 h-14 px-8 text-lg font-bold w-full">
+                  <Button size="lg" className="bg-white text-primary hover:bg-white/90 h-14 px-8 text-lg font-bold w-full shadow-xl">
                     আমার সাহায্য চাই
                   </Button>
                 </Link>
-                <Button size="lg" variant="outline" className="h-14 px-8 text-lg font-bold border-white/20 text-white hover:bg-white/5 w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="h-14 px-8 text-lg font-bold border-white/40 text-white hover:bg-white/10 w-full sm:w-auto backdrop-blur-sm">
                   আমি স্বেচ্ছাসেবক হতে চাই
                 </Button>
               </div>
@@ -90,24 +90,24 @@ export default function Home() {
         <section className="container mx-auto px-4 -mt-8 md:-mt-12 relative z-20">
           <div className="glass-card p-4 md:p-6 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-4 items-center">
             <div className="relative flex-grow w-full">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-5 w-5" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 h-5 w-5" />
               <Input 
                 placeholder="সাহায্যের জন্য খুঁজুন (যেমন: 'অক্সিজেন', 'খাবার', 'ঢাকা')" 
-                className="pl-10 h-12 bg-background/50 border-white/10 w-full"
+                className="pl-10 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 w-full"
               />
             </div>
-            <Button size="lg" className="bg-primary text-white hover:bg-primary/90 w-full md:w-auto h-12 px-8 font-bold">
+            <Button size="lg" className="bg-white text-primary hover:bg-white/90 w-full md:w-auto h-12 px-8 font-bold">
               সব দেখুন
             </Button>
           </div>
         </section>
 
         {/* Features Section */}
-        <section className="py-16 md:py-24 bg-background">
+        <section className="py-16 md:py-24">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">কেন সেবা সেতু ব্যবহার করবেন?</h2>
-              <p className="text-muted-foreground text-base md:text-lg">আমরা আধুনিক প্রযুক্তি এবং স্থানীয় কমিউনিটির মাধ্যমে সাহায্য সরাসরি প্রাপকের কাছে পৌঁছানো নিশ্চিত করি।</p>
+              <p className="text-white/80 text-base md:text-lg">আমরা আধুনিক প্রযুক্তি এবং স্থানীয় কমিউনিটির মাধ্যমে সাহায্য সরাসরি প্রাপকের কাছে পৌঁছানো নিশ্চিত করি।</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
@@ -117,12 +117,12 @@ export default function Home() {
                 { icon: Users, title: "কমিউনিটি ভিত্তিক", desc: "আস্থা ও দীর্ঘমেয়াদী সমর্থনের একটি নেটওয়ার্ক তৈরি করুন।" },
                 { icon: Heart, title: "সরাসরি প্রভাব", desc: "দাতা বা স্বেচ্ছাসেবকদের সাথে সরাসরি রিয়েল-টাইমে যোগাযোগ করুন।" }
               ].map((feature, i) => (
-                <div key={i} className="p-6 bg-card rounded-xl border border-white/5 hover:border-primary/30 transition-all text-center group">
-                  <div className="mb-4 inline-flex p-3 rounded-full bg-primary/10 text-primary group-hover:scale-110 transition-transform">
+                <div key={i} className="p-6 glass-card rounded-xl hover:bg-white/15 transition-all text-center group">
+                  <div className="mb-4 inline-flex p-3 rounded-full bg-white/20 text-white group-hover:scale-110 transition-transform">
                     <feature.icon className="h-6 w-6" />
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-white">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground">{feature.desc}</p>
+                  <p className="text-sm text-white/70">{feature.desc}</p>
                 </div>
               ))}
             </div>
@@ -130,14 +130,14 @@ export default function Home() {
         </section>
 
         {/* Featured Requests Section */}
-        <section className="py-16 md:py-24 bg-secondary/20">
+        <section className="py-16 md:py-24 bg-black/10">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4">
               <div className="text-left w-full md:w-auto">
                 <h2 className="text-3xl md:text-4xl font-bold mb-2 text-white">জরুরি সাহায্যের অনুরোধসমূহ</h2>
-                <p className="text-muted-foreground">এই অনুরোধগুলোতে আপনার দ্রুত মনোযোগ প্রয়োজন।</p>
+                <p className="text-white/80">এই অনুরোধগুলোতে আপনার দ্রুত মনোযোগ প্রয়োজন।</p>
               </div>
-              <Button variant="link" className="text-primary hover:text-primary/80 font-bold text-lg p-0">সব অনুরোধ দেখুন →</Button>
+              <Button variant="link" className="text-white hover:text-white/80 font-bold text-lg p-0">সব অনুরোধ দেখুন →</Button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -149,45 +149,45 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="bg-card border-t border-white/5 py-12 mt-12">
+      <footer className="bg-black/20 border-t border-white/10 py-12">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             <div className="space-y-4">
               <Link href="/" className="flex items-center gap-2">
-                <Heart className="h-6 w-6 md:h-8 md:w-8 text-primary fill-primary" />
+                <Heart className="h-6 w-6 md:h-8 md:w-8 text-white fill-white" />
                 <span className="text-xl font-bold text-white">সেবা সেতু</span>
               </Link>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-white/70">
                 যাদের প্রয়োজন তাদের সাথে যারা দিতে পারেন তাদের সংযোগ করা। বাংলাদেশের জন্য একটি কমিউনিটি-চালিত প্ল্যাটফর্ম।
               </p>
             </div>
             <div>
               <h4 className="font-bold mb-4 text-white">লিঙ্ক</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/requests" className="hover:text-primary transition-colors">অনুরোধ খুঁজুন</Link></li>
-                <li><Link href="/volunteer" className="hover:text-primary transition-colors">স্বেচ্ছাসেবক</Link></li>
-                <li><Link href="/about" className="hover:text-primary transition-colors">আমাদের সম্পর্কে</Link></li>
-                <li><Link href="/contact" className="hover:text-primary transition-colors">সাপোর্ট</Link></li>
+              <ul className="space-y-2 text-sm text-white/60">
+                <li><Link href="/requests" className="hover:text-white transition-colors">অনুরোধ খুঁজুন</Link></li>
+                <li><Link href="/volunteer" className="hover:text-white transition-colors">স্বেচ্ছাসেবক</Link></li>
+                <li><Link href="/about" className="hover:text-white transition-colors">আমাদের সম্পর্কে</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition-colors">সাপোর্ট</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold mb-4 text-white">আইনগত</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/terms" className="hover:text-primary transition-colors">ব্যবহারের শর্তাবলী</Link></li>
-                <li><Link href="/privacy" className="hover:text-primary transition-colors">প্রাইভেসি পলিসি</Link></li>
-                <li><Link href="/guidelines" className="hover:text-primary transition-colors">কমিউনিটি নির্দেশিকা</Link></li>
+              <ul className="space-y-2 text-sm text-white/60">
+                <li><Link href="/terms" className="hover:text-white transition-colors">ব্যবহারের শর্তাবলী</Link></li>
+                <li><Link href="/privacy" className="hover:text-white transition-colors">প্রাইভেসি পলিসি</Link></li>
+                <li><Link href="/guidelines" className="hover:text-white transition-colors">কমিউনিটি নির্দেশিকা</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold mb-4 text-white">নিউজলেটার</h4>
-              <p className="text-sm text-muted-foreground mb-4">কমিউনিটির সর্বশেষ খ খবর পেতে যুক্ত হন।</p>
+              <p className="text-sm text-white/70 mb-4">কমিউনিটির সর্বশেষ খ খবর পেতে যুক্ত হন।</p>
               <div className="flex flex-col gap-2">
-                <Input placeholder="ইমেইল অ্যাড্রেস" className="bg-background/50 border-white/10 w-full" />
-                <Button className="bg-primary hover:bg-primary/90 w-full text-white font-bold">যুক্ত হন</Button>
+                <Input placeholder="ইমেইল অ্যাড্রেস" className="bg-white/10 border-white/20 text-white placeholder:text-white/50 w-full" />
+                <Button className="bg-white text-primary hover:bg-white/90 w-full font-bold">যুক্ত হন</Button>
               </div>
             </div>
           </div>
-          <div className="pt-8 border-t border-white/5 text-center text-xs text-muted-foreground">
+          <div className="pt-8 border-t border-white/10 text-center text-xs text-white/40">
             © {new Date().getFullYear()} সেবা সেতু এনজিও। সর্বস্বত্ব সংরক্ষিত।
           </div>
         </div>
