@@ -48,8 +48,8 @@ export default function Home() {
       <Navbar />
 
       <main className="flex-grow">
-        {/* Hero Section - Optimized for responsiveness */}
-        <section className="relative min-h-[85vh] md:min-h-[80vh] flex items-center overflow-hidden pt-20 pb-16 md:py-0">
+        {/* Hero Section - Lowered content using pt-32/pt-48 */}
+        <section className="relative min-h-[90vh] flex items-start overflow-hidden pt-32 md:pt-48 pb-16 md:pb-24">
           <div className="absolute inset-0 z-0">
             {heroImage && (
               <Image 
@@ -69,11 +69,11 @@ export default function Home() {
               <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-white/80 text-[10px] md:text-xs font-bold mb-6 border border-white/10 uppercase tracking-widest">
                 <Zap className="h-3 w-3 text-yellow-400 fill-yellow-400" /> Sister concern of PRANGON'S ECOSYSTEM
               </div>
-              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1]">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1]">
                 হৃদয় সংযোগ, <br className="hidden md:block" /> 
                 <span className="text-white underline decoration-white/30">ক্ষুধার অবসান।</span>
               </h1>
-              <p className="text-sm md:text-lg lg:text-xl text-white/90 mb-10 leading-relaxed max-w-2xl mx-auto md:mx-0">
+              <p className="text-base md:text-lg lg:text-xl text-white/90 mb-10 leading-relaxed max-w-2xl mx-auto md:mx-0 font-medium">
                 ONGON BANGLADESH একটি ডেডিকেটেড কমিউনিটি প্ল্যাটফর্ম যেখানে মানবিকতা প্রয়োজনে সাড়া দেয়। আপনি সাহায্য খুঁজছেন বা দিতে চান, আমরা আপনার সংযোগ তৈরি করি।
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
@@ -90,14 +90,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Search Bar Section */}
-        <section className="container mx-auto px-4 -mt-8 relative z-20">
+        {/* Search Bar Section - Slightly lowered using -mt-4 instead of -mt-8 */}
+        <section className="container mx-auto px-4 -mt-4 md:-mt-6 relative z-20">
           <div className="glass-card p-3 md:p-5 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-3 items-center">
             <div className="relative flex-grow w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/50 h-4 w-4" />
               <Input 
                 placeholder="সাহায্যের জন্য খুঁজুন (যেমন: 'অক্সিজেন', 'খাবার')" 
-                className="pl-10 h-11 bg-white/5 border-white/10 text-white placeholder:text-white/40 w-full rounded-xl text-sm"
+                className="pl-10 h-11 bg-white/10 border-white/20 text-white placeholder:text-white/40 w-full rounded-xl text-sm"
               />
             </div>
             <Button size="lg" className="bg-white text-primary-foreground hover:bg-white/90 w-full md:w-auto h-11 px-8 font-bold rounded-xl text-sm">
@@ -155,7 +155,7 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Footer - Optimized for responsive */}
+      {/* Footer */}
       <footer className="bg-black/30 border-t border-white/5 py-12 md:py-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-12">
