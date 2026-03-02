@@ -1,4 +1,3 @@
-
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
@@ -146,13 +145,15 @@ export default function Home() {
                 className="pl-12 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/40 w-full rounded-xl text-sm"
               />
             </div>
-            <Button size="lg" className="bg-white text-[#781013] hover:bg-white/90 w-full md:w-auto h-12 px-8 font-bold rounded-xl text-sm">
-              সব দেখুন
-            </Button>
+            <Link href="/requests" className="w-full md:w-auto">
+              <Button size="lg" className="bg-white text-[#781013] hover:bg-white/90 w-full h-12 px-8 font-bold rounded-xl text-sm">
+                সব দেখুন
+              </Button>
+            </Link>
           </div>
         </section>
 
-        {/* Features Section - Standardized Spacing */}
+        {/* Features Section */}
         <section className="py-10 md:py-12">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-2xl mx-auto mb-8">
@@ -165,7 +166,7 @@ export default function Home() {
                 { icon: ShieldCheck, title: "যাচাইকৃত অনুরোধ", desc: "প্রতিটি পোস্ট আমাদের স্বেচ্ছাসেবক টিম দ্বারা যাচাই করা হয়।" },
                 { icon: Zap, title: "এআই ক্যাটাগরি", desc: "স্মার্ট এআই দ্রুত আবিষ্কারের জন্য সঠিক বিভাগ সাজেস্ট করে।" },
                 { icon: Users, title: "কমিউনিটি ভিত্তিক", desc: "আস্থা ও দীর্ঘমেয়াদী সমর্থনের একটি নেটওয়ার্ক তৈরি করুন।" },
-                { icon: Heart, title: "সরাসরি প্রভাব", desc: "দাতা বা স্বেচ্ছাসেবকদের সাথে সরাসরি রিয়েল-টাইমে যোগাযোগ করুন।" }
+                { icon: Heart, title: " সরাসরি প্রভাব", desc: "দাতা বা স্বেচ্ছাসেবকদের সাথে সরাসরি রিয়েল-টাইমে যোগাযোগ করুন।" }
               ].map((feature, i) => (
                 <div key={i} className="p-6 glass-card rounded-2xl hover:bg-white/15 transition-all text-center group border-white/5">
                   <div className="mb-4 inline-flex p-3 rounded-xl bg-white/10 text-white group-hover:scale-110 transition-transform">
@@ -179,7 +180,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Featured Requests Section - Standardized Spacing */}
+        {/* Featured Requests Section */}
         <section className="py-10 md:py-12" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 text-center md:text-left">
@@ -187,9 +188,11 @@ export default function Home() {
                 <h2 className="text-2xl md:text-3xl font-bold mb-1 text-white">জরুরি সাহায্যের অনুরোধসমূহ</h2>
                 <p className="text-white/60 text-xs">এই অনুরোধগুলোতে আপনার দ্রুত মনোযোগ প্রয়োজন।</p>
               </div>
-              <Button variant="link" className="text-white hover:text-white/80 font-bold text-sm p-0 flex items-center gap-2">
-                সব অনুরোধ দেখুন <ArrowRight className="h-4 w-4" />
-              </Button>
+              <Link href="/requests">
+                <Button variant="link" className="text-white hover:text-white/80 font-bold text-sm p-0 flex items-center gap-2">
+                  সব অনুরোধ দেখুন <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -200,7 +203,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Join Us Section - Standardized Spacing */}
+        {/* Join Us Section */}
         <section className="py-10 md:py-12 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-2xl mx-auto mb-8">
@@ -229,7 +232,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Media Coverage Section - Standardized Spacing */}
+        {/* Media Coverage Section */}
         <section className="py-10 md:py-12 bg-background border-t border-white/5">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-8">
