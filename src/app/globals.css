@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    /* rgb(237, 31, 38) -> HSL(358, 86%, 53%) */
-    --background: 358 86% 53%;
+    /* rgb(120, 16, 19) -> HSL(358, 77%, 27%) */
+    --background: 358 77% 27%;
     /* rgb(255, 255, 255) -> HSL(0, 0%, 100%) */
     --foreground: 0 0% 100%;
     
@@ -16,9 +16,9 @@
     --popover: 0 0% 18%;
     --popover-foreground: 0 0% 100%;
     
-    /* Primary set to White for contrast on Red background */
+    /* Primary set to White for contrast on Dark Red background */
     --primary: 0 0% 100%;
-    --primary-foreground: 358 86% 53%;
+    --primary-foreground: 358 77% 27%;
     
     --secondary: 0 0% 25%;
     --secondary-foreground: 0 0% 100%;
@@ -27,7 +27,7 @@
     --muted-foreground: 0 0% 85%;
     
     --accent: 0 0% 100%;
-    --accent-foreground: 358 86% 53%;
+    --accent-foreground: 358 77% 27%;
     
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -59,7 +59,7 @@
 }
 
 .hero-gradient {
-  background: linear-gradient(to bottom, rgba(237, 31, 38, 0.2), rgba(237, 31, 38, 1));
+  background: linear-gradient(to bottom, rgba(120, 16, 19, 0.2), rgba(120, 16, 19, 1));
 }
 
 .card-shadow {
