@@ -1,14 +1,16 @@
+
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
 import { Input } from '@/components/ui/input';
-import { Heart, ShieldCheck, Users, Zap, Search, ArrowRight, Calendar, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase, Newspaper, Tv, BookOpen, Globe } from 'lucide-react';
+import { Heart, ShieldCheck, Users, Zap, Search, ArrowRight, Calendar, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase, Newspaper, Tv, BookOpen, Globe, Smartphone, GraduationCap, Stethoscope } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { campaigns } from '@/lib/campaigns-data';
+import { funds } from '@/lib/funds-data';
 
 export default function Home() {
   const heroImage = PlaceHolderImages.find(img => img.id === 'hero-bg');
@@ -46,39 +48,12 @@ export default function Home() {
     }
   ];
 
-  const joinOptions = [
-    {
-      icon: HandCoins,
-      title: "নিয়মিত দাতা",
-      description: "প্রতি মাসে একটি নির্দিষ্ট অংক দান করে আমাদের কার্যক্রম সচল রাখুন।",
-      link: "/donate/regular"
-    },
-    {
-      icon: UserCheck,
-      title: "আজীবন ও দাতা সদস্য",
-      description: "সংস্থার স্থায়ী সদস্য হয়ে দীর্ঘমেয়াদী মানবিক লক্ষ্য অর্জনে পাশে থাকুন।",
-      link: "/membership"
-    },
-    {
-      icon: HeartHandshake,
-      title: "স্বেচ্ছাসেবক",
-      description: "আপনার দক্ষতা ও সময় দিয়ে সরাসরি মাঠ পর্যায়ে সাহায্য পৌঁছে দিন।",
-      link: "/volunteer"
-    },
-    {
-      icon: Briefcase,
-      title: "ক্যারিয়ার",
-      description: "মানবিক কাজের মাধ্যমে আপনার পেশাদার জীবন গড়ে তুলুন।",
-      link: "/careers"
-    }
-  ];
-
-  const mediaCoverage = [
-    { id: '1', title: 'Daily Ittefaq', date: '10 Aug', imageId: 'news-ittefaq', type: 'newspaper' },
-    { id: '2', title: 'Prothom Alo', date: '17 Aug', imageId: 'news-prothom-alo', type: 'newspaper' },
-    { id: '3', title: 'Kaler Kontho', date: '16 Aug', imageId: 'news-kaler-kontho', type: 'newspaper' },
-    { id: '4', title: 'Kal Bela', date: '10 Aug', imageId: 'news-kalbela', type: 'newspaper' },
-  ];
+  const fundIcons: Record<string, any> = {
+    Heart,
+    HandCoins,
+    GraduationCap,
+    Stethoscope,
+  };
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-background">
@@ -202,6 +177,38 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Donation Funds Section */}
+        <section className="py-12 md:py-16 bg-white/5 border-y border-white/5">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">অনুদান তহবিলসমূহ</h2>
+              <p className="text-white/60 max-w-2xl mx-auto">নির্দিষ্ট লক্ষ্যে সরাসরি অনুদান দিয়ে আমাদের পাশে থাকুন।</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {funds.map((fund) => {
+                const Icon = fundIcons[fund.icon] || Heart;
+                return (
+                  <Card key={fund.id} className="glass-card border-white/10 hover:bg-white/10 transition-colors">
+                    <CardHeader className="text-center">
+                      <div className={`mx-auto p-4 rounded-2xl ${fund.color} text-white mb-4 shadow-xl`}>
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <CardTitle className="text-white text-lg">{fund.title}</CardTitle>
+                    </CardHeader>
+                    <CardFooter>
+                      <Link href={`/donate/${fund.id}`} className="w-full">
+                        <Button variant="link" className="text-white font-bold w-full text-xs">
+                          অনুদান দিন <ArrowRight className="h-3 w-3 ml-2" />
+                        </Button>
+                      </Link>
+                    </CardFooter>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* Featured Requests Section */}
         <section className="py-12 md:py-16" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
           <div className="container mx-auto px-4">
@@ -236,7 +243,12 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {joinOptions.map((option, i) => (
+              {[
+                { icon: HandCoins, title: "নিয়মিত দাতা", description: "প্রতি মাসে একটি নির্দিষ্ট অংক দান করে আমাদের কার্যক্রম সচল রাখুন।", link: "/donate/regular" },
+                { icon: UserCheck, title: "আজীবন ও দাতা সদস্য", description: "সংস্থার স্থায়ী সদস্য হয়ে দীর্ঘমেয়াদী মানবিক লক্ষ্য অর্জনে পাশে থাকুন।", link: "/membership" },
+                { icon: HeartHandshake, title: "স্বেচ্ছাসেবক", description: "আপনার দক্ষতা ও সময় দিয়ে সরাসরি মাঠ পর্যায়ে সাহায্য পৌঁছে দিন।", link: "/volunteer" },
+                { icon: Briefcase, title: "ক্যারিয়ার", description: "মানবিক কাজের মাধ্যমে আপনার পেশাদার জীবন গড়ে তুলুন।", link: "/careers" }
+              ].map((option, i) => (
                 <div key={i} className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 flex flex-col items-center text-center">
                   <div className="mb-4 p-3 rounded-xl bg-white/10 text-white group-hover:bg-primary group-hover:text-primary-foreground transition-all">
                     <option.icon className="h-6 w-6" />
@@ -276,7 +288,12 @@ export default function Home() {
 
               <TabsContent value="newspaper">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                  {mediaCoverage.map((item) => {
+                  {[
+                    { id: '1', title: 'Daily Ittefaq', date: '10 Aug', imageId: 'news-ittefaq' },
+                    { id: '2', title: 'Prothom Alo', date: '17 Aug', imageId: 'news-prothom-alo' },
+                    { id: '3', title: 'Kaler Kontho', date: '16 Aug', imageId: 'news-kaler-kontho' },
+                    { id: '4', title: 'Kal Bela', date: '10 Aug', imageId: 'news-kalbela' },
+                  ].map((item) => {
                     const img = PlaceHolderImages.find(p => p.id === item.imageId);
                     return (
                       <Card key={item.id} className="glass-card border-white/10 overflow-hidden hover:scale-[1.02] transition-transform duration-300">

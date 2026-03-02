@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -64,7 +65,7 @@ export function Navbar() {
               <User className="h-4 w-4 md:h-5 md:w-5" />
             </Button>
 
-            <Link href="/campaigns">
+            <Link href="/donate">
               <Button className="bg-[#008744] hover:bg-[#007038] text-white font-bold px-3 md:px-5 h-8 md:h-9 rounded-lg shadow-sm transition-all text-[10px] md:text-xs">
                 Donate
               </Button>
@@ -91,6 +92,7 @@ export function Navbar() {
                     <Link href="/blog" className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-gray-700 font-bold transition-all">ব্লগ</Link>
                     <Link href="/requests" className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-gray-700 font-bold transition-all">সাহায্য অনুরোধ</Link>
                     <Link href="/volunteer" className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-gray-700 font-bold transition-all">স্বেচ্ছাসেবক হন</Link>
+                    <Link href="/donate" className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-gray-700 font-bold transition-all">অনুদান কেন্দ্র</Link>
                   </div>
 
                   <div className="p-6 bg-white border-t border-gray-100 space-y-4">
