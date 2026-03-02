@@ -48,13 +48,6 @@ export default function Home() {
     }
   ];
 
-  const fundIcons: Record<string, any> = {
-    Heart,
-    HandCoins,
-    GraduationCap,
-    Stethoscope,
-  };
-
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-background">
       <Navbar />
@@ -128,7 +121,7 @@ export default function Home() {
         </section>
 
         {/* Campaigns Section */}
-        <section className="py-12 md:py-16 bg-background">
+        <section className="py-10 md:py-12 bg-background">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
               <div className="max-w-2xl">
@@ -177,40 +170,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Donation Funds Section */}
-        <section className="py-12 md:py-16 bg-white/5 border-y border-white/5">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">অনুদান তহবিলসমূহ</h2>
-              <p className="text-white/60 max-w-2xl mx-auto">নির্দিষ্ট লক্ষ্যে সরাসরি অনুদান দিয়ে আমাদের পাশে থাকুন।</p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {funds.map((fund) => {
-                const Icon = fundIcons[fund.icon] || Heart;
-                return (
-                  <Card key={fund.id} className="glass-card border-white/10 hover:bg-white/10 transition-colors">
-                    <CardHeader className="text-center">
-                      <div className={`mx-auto p-4 rounded-2xl ${fund.color} text-white mb-4 shadow-xl`}>
-                        <Icon className="h-6 w-6" />
-                      </div>
-                      <CardTitle className="text-white text-lg">{fund.title}</CardTitle>
-                    </CardHeader>
-                    <CardFooter>
-                      <Link href={`/donate/${fund.id}`} className="w-full">
-                        <Button variant="link" className="text-white font-bold w-full text-xs">
-                          অনুদান দিন <ArrowRight className="h-3 w-3 ml-2" />
-                        </Button>
-                      </Link>
-                    </CardFooter>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
         {/* Featured Requests Section */}
-        <section className="py-12 md:py-16" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
+        <section className="py-10 md:py-12" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 text-center md:text-left">
               <div className="w-full md:w-auto">
@@ -233,7 +194,7 @@ export default function Home() {
         </section>
 
         {/* Join Us Section */}
-        <section className="py-12 md:py-16 bg-background">
+        <section className="py-10 md:py-12 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-2xl mx-auto mb-10">
               <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">আমাদের সাথে যুক্ত হোন</h2>
@@ -267,7 +228,7 @@ export default function Home() {
         </section>
 
         {/* Media Coverage Section */}
-        <section className="py-12 md:py-16 bg-background border-t border-white/5">
+        <section className="py-10 md:py-12 bg-background border-t border-white/5">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-10">
               <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">যেখানে আমাদের গল্প প্রকাশিত হয়েছে</h2>
@@ -299,13 +260,15 @@ export default function Home() {
                       <Card key={item.id} className="glass-card border-white/10 overflow-hidden hover:scale-[1.02] transition-transform duration-300">
                         <CardContent className="p-0">
                           <div className="relative aspect-[3/4] w-full bg-white/5">
-                            <Image 
-                              src={img?.imageUrl || 'https://picsum.photos/400/500'} 
-                              alt={item.title} 
-                              fill 
-                              className="object-cover"
-                              unoptimized
-                            />
+                            {img?.imageUrl ? (
+                              <Image 
+                                src={img.imageUrl} 
+                                alt={item.title} 
+                                fill 
+                                className="object-cover"
+                                unoptimized
+                              />
+                            ) : null}
                           </div>
                           <div className="p-3 text-center bg-white/5">
                             <h4 className="font-bold text-xs text-white truncate">{item.title}</h4>
@@ -410,3 +373,4 @@ export default function Home() {
     </div>
   );
 }
+
