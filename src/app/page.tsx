@@ -3,14 +3,13 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
 import { Input } from '@/components/ui/input';
-import { Heart, ShieldCheck, Users, Zap, Search, ArrowRight, Calendar, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase, Newspaper, Tv, BookOpen, Globe, Smartphone, GraduationCap, Stethoscope } from 'lucide-react';
+import { Heart, ShieldCheck, Users, Zap, Search, ArrowRight, Calendar, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase, Newspaper, Tv, BookOpen, Globe, Smartphone, GraduationCap, Stethoscope, Lock } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { campaigns } from '@/lib/campaigns-data';
-import { funds } from '@/lib/funds-data';
 
 export default function Home() {
   const heroImage = PlaceHolderImages.find(img => img.id === 'hero-bg');
@@ -339,6 +338,7 @@ export default function Home() {
                     <li><Link href="/about" className="text-white/70 hover:text-white">আমাদের সম্পর্কে</Link></li>
                     <li><Link href="/blog" className="text-white/70 hover:text-white">ব্লগ</Link></li>
                     <li><Link href="/volunteer" className="text-white/70 hover:text-white">স্বেচ্ছাসেবক হন</Link></li>
+                    <li><Link href="/admin/login" className="text-white/70 hover:text-white flex items-center gap-1"><Lock className="h-3 w-3" /> অ্যাডমিন পোর্টাল</Link></li>
                   </ul>
                 </div>
                 <div className="space-y-4">
@@ -373,4 +373,3 @@ export default function Home() {
     </div>
   );
 }
-
