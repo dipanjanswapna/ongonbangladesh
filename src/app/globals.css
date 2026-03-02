@@ -4,25 +4,37 @@
 
 @layer base {
   :root {
-    --background: 0 100% 10%;
+    /* rgb(41, 41, 41) -> HSL(0, 0%, 16%) */
+    --background: 0 0% 16%;
+    /* rgb(255, 255, 255) -> HSL(0, 0%, 100%) */
     --foreground: 0 0% 100%;
-    --card: 0 100% 12%;
+    
+    --card: 0 0% 18%;
     --card-foreground: 0 0% 100%;
-    --popover: 0 100% 12%;
+    
+    --popover: 0 0% 18%;
     --popover-foreground: 0 0% 100%;
-    --primary: 0 100% 50%;
+    
+    /* rgb(237, 31, 38) -> HSL(358, 86%, 53%) */
+    --primary: 358 86% 53%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 100% 20%;
+    
+    --secondary: 0 0% 25%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 0 100% 20%;
-    --muted-foreground: 0 0% 80%;
-    --accent: 45 100% 50%;
-    --accent-foreground: 0 100% 10%;
+    
+    --muted: 0 0% 25%;
+    --muted-foreground: 0 0% 70%;
+    
+    --accent: 358 86% 53%;
+    --accent-foreground: 0 0% 100%;
+    
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 100% 20%;
-    --input: 0 100% 20%;
-    --ring: 0 100% 50%;
+    
+    --border: 0 0% 25%;
+    --input: 0 0% 25%;
+    --ring: 358 86% 53%;
+    
     --radius: 0.75rem;
   }
 }
@@ -40,11 +52,11 @@
 }
 
 .glass-card {
-  background: rgba(120, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .hero-gradient {
-  background: linear-gradient(to bottom, rgba(30, 0, 0, 0.2), rgba(30, 0, 0, 1));
+  background: linear-gradient(to bottom, rgba(41, 41, 41, 0.2), rgba(41, 41, 41, 1));
 }

@@ -56,7 +56,7 @@ export default function Home() {
                 src={heroImage.imageUrl} 
                 alt={heroImage.description}
                 fill
-                className="object-cover opacity-40"
+                className="object-cover opacity-30"
                 priority
                 data-ai-hint={heroImage.imageHint}
               />
@@ -64,21 +64,21 @@ export default function Home() {
             <div className="absolute inset-0 hero-gradient" />
           </div>
 
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="container mx-auto px-4 relative z-10 text-center md:text-left">
             <div className="max-w-3xl animate-in fade-in slide-in-from-left-4 duration-700">
               <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                হৃদয় সংযোগ, <span className="text-accent">ক্ষুধার অবসান।</span>
+                হৃদয় সংযোগ, <span className="text-primary">ক্ষুধার অবসান।</span>
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl">
+              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto md:mx-0">
                 সেবা সেতু একটি ডেডিকেটেড কমিউনিটি প্ল্যাটফর্ম যেখানে মানবিকতা প্রয়োজনে সাড়া দেয়। আপনি সাহায্য খুঁজছেন বা দিতে চান, আমরা আপনার সংযোগ তৈরি করি।
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <Link href="/requests/new" className="w-full sm:w-auto">
                   <Button size="lg" className="bg-primary hover:bg-primary/90 h-14 px-8 text-lg font-bold w-full">
                     আমার সাহায্য চাই
                   </Button>
                 </Link>
-                <Button size="lg" variant="outline" className="h-14 px-8 text-lg font-bold border-accent text-accent hover:bg-accent/10 w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="h-14 px-8 text-lg font-bold border-white/20 text-white hover:bg-white/5 w-full sm:w-auto">
                   আমি স্বেচ্ছাসেবক হতে চাই
                 </Button>
               </div>
@@ -96,7 +96,7 @@ export default function Home() {
                 className="pl-10 h-12 bg-background/50 border-white/10 w-full"
               />
             </div>
-            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 w-full md:w-auto h-12 px-8 font-bold">
+            <Button size="lg" className="bg-primary text-white hover:bg-primary/90 w-full md:w-auto h-12 px-8 font-bold">
               সব দেখুন
             </Button>
           </div>
@@ -117,8 +117,8 @@ export default function Home() {
                 { icon: Users, title: "কমিউনিটি ভিত্তিক", desc: "আস্থা ও দীর্ঘমেয়াদী সমর্থনের একটি নেটওয়ার্ক তৈরি করুন।" },
                 { icon: Heart, title: "সরাসরি প্রভাব", desc: "দাতা বা স্বেচ্ছাসেবকদের সাথে সরাসরি রিয়েল-টাইমে যোগাযোগ করুন।" }
               ].map((feature, i) => (
-                <div key={i} className="p-6 bg-card rounded-xl border border-white/5 hover:border-primary/30 transition-colors text-center">
-                  <div className="mb-4 inline-flex p-3 rounded-full bg-primary/10 text-primary">
+                <div key={i} className="p-6 bg-card rounded-xl border border-white/5 hover:border-primary/30 transition-all text-center group">
+                  <div className="mb-4 inline-flex p-3 rounded-full bg-primary/10 text-primary group-hover:scale-110 transition-transform">
                     <feature.icon className="h-6 w-6" />
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-white">{feature.title}</h3>
@@ -130,14 +130,14 @@ export default function Home() {
         </section>
 
         {/* Featured Requests Section */}
-        <section className="py-16 md:py-24 bg-secondary/30">
+        <section className="py-16 md:py-24 bg-secondary/20">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4">
               <div className="text-left w-full md:w-auto">
                 <h2 className="text-3xl md:text-4xl font-bold mb-2 text-white">জরুরি সাহায্যের অনুরোধসমূহ</h2>
                 <p className="text-muted-foreground">এই অনুরোধগুলোতে আপনার দ্রুত মনোযোগ প্রয়োজন।</p>
               </div>
-              <Button variant="link" className="text-accent hover:text-accent/80 font-bold text-lg p-0">সব অনুরোধ দেখুন →</Button>
+              <Button variant="link" className="text-primary hover:text-primary/80 font-bold text-lg p-0">সব অনুরোধ দেখুন →</Button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -154,7 +154,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             <div className="space-y-4">
               <Link href="/" className="flex items-center gap-2">
-                <Heart className="h-6 w-6 text-primary fill-primary" />
+                <Heart className="h-6 w-6 md:h-8 md:w-8 text-primary fill-primary" />
                 <span className="text-xl font-bold text-white">সেবা সেতু</span>
               </Link>
               <p className="text-sm text-muted-foreground">
@@ -180,10 +180,10 @@ export default function Home() {
             </div>
             <div>
               <h4 className="font-bold mb-4 text-white">নিউজলেটার</h4>
-              <p className="text-sm text-muted-foreground mb-4">কমিউনিটির সর্বশেষ খবরাখবর পেতে যুক্ত হন।</p>
+              <p className="text-sm text-muted-foreground mb-4">কমিউনিটির সর্বশেষ খ খবর পেতে যুক্ত হন।</p>
               <div className="flex flex-col gap-2">
                 <Input placeholder="ইমেইল অ্যাড্রেস" className="bg-background/50 border-white/10 w-full" />
-                <Button className="bg-primary hover:bg-primary/90 w-full">যুক্ত হন</Button>
+                <Button className="bg-primary hover:bg-primary/90 w-full text-white font-bold">যুক্ত হন</Button>
               </div>
             </div>
           </div>

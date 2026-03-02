@@ -36,35 +36,35 @@ export function AidCard({ id, title, description, location, category, urgency, c
   };
 
   return (
-    <Card className="overflow-hidden group hover:shadow-lg hover:shadow-primary/10 transition-all border-white/5 bg-card">
+    <Card className="overflow-hidden group hover:shadow-lg hover:shadow-primary/10 transition-all border-white/5 bg-card flex flex-col h-full">
       <CardHeader className="p-4 flex flex-row items-start justify-between space-y-0">
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-full bg-primary/10 text-primary">
             <Icon className="h-5 w-5" />
           </div>
           <div>
-            <Badge variant="outline" className="mb-1 uppercase tracking-wider text-[10px] text-accent border-accent/30">
+            <Badge variant="outline" className="mb-1 uppercase tracking-wider text-[10px] text-primary border-primary/30">
               {category}
             </Badge>
-            <h3 className="text-lg font-bold leading-tight group-hover:text-accent transition-colors text-white">
+            <h3 className="text-lg font-bold leading-tight group-hover:text-primary transition-colors text-white">
               {title}
             </h3>
           </div>
         </div>
         <Badge className={cn(
-          "text-white border-0",
-          urgency === 'high' ? "bg-red-600" : urgency === 'medium' ? "bg-orange-500" : "bg-green-600"
+          "text-white border-0 shrink-0 ml-2",
+          urgency === 'high' ? "bg-primary" : urgency === 'medium' ? "bg-orange-500" : "bg-green-600"
         )}>
           {urgencyText[urgency]}
         </Badge>
       </CardHeader>
-      <CardContent className="p-4 pt-0">
+      <CardContent className="p-4 pt-0 flex-grow">
         <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
           {description}
         </p>
         <div className="flex flex-col gap-2 text-xs text-muted-foreground">
           <div className="flex items-center gap-1">
-            <MapPin className="h-3 w-3" /> {location}
+            <MapPin className="h-3 w-3 text-primary" /> {location}
           </div>
           <div className="flex items-center gap-1">
             <Clock className="h-3 w-3" /> {createdAt}
@@ -72,10 +72,10 @@ export function AidCard({ id, title, description, location, category, urgency, c
         </div>
       </CardContent>
       <CardFooter className="p-4 border-t border-white/5 flex gap-2">
-        <Button size="sm" className="w-full bg-primary hover:bg-primary/90 font-bold">
+        <Button size="sm" className="w-full bg-primary hover:bg-primary/90 font-bold text-white">
           {type === 'request' ? 'সাহায্য করতে চাই' : 'সাহায্য চাই'}
         </Button>
-        <Button size="sm" variant="ghost" className="px-2 text-white">
+        <Button size="sm" variant="ghost" className="px-2 text-white hover:bg-white/5">
           <ArrowRight className="h-4 w-4" />
         </Button>
       </CardFooter>
