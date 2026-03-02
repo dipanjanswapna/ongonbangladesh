@@ -89,7 +89,7 @@ export default function Home() {
         {/* Hero Section - Full Screen with Background Image */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
-            {heroImage ? (
+            {heroImage?.imageUrl ? (
               <Image 
                 src={heroImage.imageUrl} 
                 alt={heroImage.description}
@@ -231,7 +231,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Media Coverage Section - New */}
+        {/* Media Coverage Section */}
         <section className="py-20 md:py-28 bg-white text-gray-900">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-12">
@@ -258,15 +258,21 @@ export default function Home() {
                     return (
                       <Card key={item.id} className="border-0 shadow-xl rounded-2xl overflow-hidden hover:scale-[1.03] transition-transform duration-300">
                         <CardContent className="p-0">
-                          <div className="relative aspect-[4/5] w-full">
-                            <Image 
-                              src={img?.imageUrl || ''} 
-                              alt={item.title} 
-                              fill 
-                              className="object-cover"
-                              unoptimized
-                              data-ai-hint={img?.imageHint}
-                            />
+                          <div className="relative aspect-[4/5] w-full bg-muted">
+                            {img?.imageUrl ? (
+                              <Image 
+                                src={img.imageUrl} 
+                                alt={item.title} 
+                                fill 
+                                className="object-cover"
+                                unoptimized
+                                data-ai-hint={img.imageHint}
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                                <Newspaper className="h-12 w-12 opacity-20" />
+                              </div>
+                            )}
                           </div>
                           <div className="p-5 text-center bg-white">
                             <h4 className="font-bold text-lg mb-1">{item.title}</h4>
@@ -279,13 +285,22 @@ export default function Home() {
                 </div>
               </TabsContent>
               <TabsContent value="tv">
-                <div className="text-center py-20 text-gray-400 font-medium">টিভি নিউজ কাভারেজ লোড হচ্ছে...</div>
+                <div className="text-center py-20 text-gray-400 font-medium flex flex-col items-center gap-4">
+                  <Tv className="h-12 w-12 opacity-20" />
+                  টিভি নিউজ কাভারেজ লোড হচ্ছে...
+                </div>
               </TabsContent>
               <TabsContent value="magazine">
-                <div className="text-center py-20 text-gray-400 font-medium">ম্যাগাজিন ফিচার লোড হচ্ছে...</div>
+                <div className="text-center py-20 text-gray-400 font-medium flex flex-col items-center gap-4">
+                  <BookOpen className="h-12 w-12 opacity-20" />
+                  ম্যাগাজিন ফিচার লোড হচ্ছে...
+                </div>
               </TabsContent>
               <TabsContent value="online">
-                <div className="text-center py-20 text-gray-400 font-medium">অনলাইন আর্টিকেল লোড হচ্ছে...</div>
+                <div className="text-center py-20 text-gray-400 font-medium flex flex-col items-center gap-4">
+                  <Globe className="h-12 w-12 opacity-20" />
+                  অনলাইন আর্টিকেল লোড হচ্ছে...
+                </div>
               </TabsContent>
             </Tabs>
           </div>
