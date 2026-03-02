@@ -1,4 +1,3 @@
-
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
@@ -57,13 +56,13 @@ export default function Home() {
                 src={heroImage.imageUrl} 
                 alt={heroImage.description}
                 fill
-                className="object-cover opacity-60"
+                className="object-cover"
                 priority
                 data-ai-hint={heroImage.imageHint}
               />
             )}
-            {/* Dark gradient overlay to make text pop */}
-            <div className="absolute inset-0 bg-black/50" />
+            {/* Dark overlay to make text pop while keeping image visible */}
+            <div className="absolute inset-0 bg-black/40" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10 text-center">
