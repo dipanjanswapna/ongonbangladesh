@@ -6,7 +6,8 @@ import { AidCard } from '@/components/aid/AidCard';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Search, Filter, MapPin } from 'lucide-react';
+import { Search, Filter, Plus, HeartHandshake, AlertCircle } from 'lucide-react';
+import Link from 'next/link';
 
 export default function RequestsPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -17,7 +18,7 @@ export default function RequestsPage() {
       id: '1',
       title: 'শিশুর জন্য জরুরি চিকিৎসা সহায়তা',
       description: 'ঢাকার ৫ বছর বয়সী এক শিশুর হার্টের অপারেশনের জন্য জরুরি আর্থিক সহায়তা প্রয়োজন। পরিবার রক্তদাতাও খুঁজছে।',
-      location: 'ঢাকা, বাংলাদেশ',
+      location: 'ঢাকা মেডিকেল কলেজ',
       category: 'চিকিৎসা',
       urgency: 'high' as const,
       createdAt: '২ ঘণ্টা আগে',
@@ -83,39 +84,50 @@ export default function RequestsPage() {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-background selection:bg-white/20">
       <Navbar />
       
-      <main className="container mx-auto px-4 py-24 flex-grow">
-        <div className="max-w-6xl mx-auto space-y-8">
-          <div className="text-center space-y-4">
-            <h1 className="text-3xl md:text-5xl font-bold text-white">জরুরি সাহায্যের অনুরোধসমূহ</h1>
-            <p className="text-white/70 max-w-2xl mx-auto">
-              আমাদের কমিউনিটির সদস্যরাই একে অপরের শক্তি। নিচের অনুরোধগুলো দেখুন এবং আপনার সাধ্যমতো সাহায্যের হাত বাড়িয়ে দিন।
-            </p>
+      <main className="container mx-auto px-4 py-32 flex-grow">
+        <div className="max-w-7xl mx-auto space-y-12">
+          {/* Header & CTA Section */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8 bg-white/5 border border-white/10 p-8 rounded-[2.5rem] backdrop-blur-md">
+            <div className="space-y-4 text-center md:text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-white text-[10px] font-bold uppercase tracking-widest border border-white/10">
+                <HeartHandshake className="h-3 w-3" /> Community Support
+              </div>
+              <h1 className="text-3xl md:text-5xl font-bold text-white tracking-tight">সাহায্যের জন্য আবেদনসমূহ</h1>
+              <p className="text-white/60 max-w-xl leading-relaxed">
+                আমাদের কমিউনিটির মেম্বারদের করা এই অনুরোধগুলোতে আপনার দ্রুত মনোযোগ প্রয়োজন। আপনার একটু সহায়তা কারো জীবন বদলে দিতে পারে।
+              </p>
+            </div>
+            <Link href="/requests/new">
+              <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-bold h-16 px-10 rounded-2xl shadow-2xl flex items-center gap-3 text-lg transition-transform active:scale-95">
+                <Plus className="h-6 w-6" /> আবেদন করুন
+              </Button>
+            </Link>
           </div>
 
           {/* Search and Filter Section */}
-          <div className="glass-card p-4 rounded-3xl border-white/10 flex flex-col md:flex-row gap-4 items-center">
+          <div className="flex flex-col md:flex-row gap-4 items-center">
             <div className="relative flex-grow w-full">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 h-5 w-5" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 h-5 w-5" />
               <Input 
-                placeholder="শিরোনাম বা অবস্থান দিয়ে খুঁজুন..." 
-                className="pl-12 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/40 w-full rounded-2xl"
+                placeholder="টাইটেল, অবস্থান বা কী-ওয়ার্ড দিয়ে খুঁজুন..." 
+                className="pl-12 h-14 bg-white/5 border-white/10 text-white placeholder:text-white/30 w-full rounded-2xl focus:ring-primary/40"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
             
-            <div className="w-full md:w-48">
+            <div className="w-full md:w-64">
               <Select value={category} onValueChange={setCategory}>
-                <SelectTrigger className="bg-white/10 border-white/20 text-white h-12 rounded-2xl">
+                <SelectTrigger className="bg-white/5 border-white/10 text-white h-14 rounded-2xl">
                   <div className="flex items-center gap-2">
-                    <Filter className="h-4 w-4" />
-                    <SelectValue placeholder="বিভাগ" />
+                    <Filter className="h-4 w-4 text-white/40" />
+                    <SelectValue placeholder="বিভাগ নির্বাচন করুন" />
                   </div>
                 </SelectTrigger>
-                <SelectContent className="bg-[#781013] border-white/10 text-white">
+                <SelectContent className="bg-[#1a0405] border-white/10 text-white">
                   <SelectItem value="all">সব বিভাগ</SelectItem>
                   <SelectItem value="চিকিৎসা">চিকিৎসা</SelectItem>
                   <SelectItem value="শিক্ষা">শিক্ষা</SelectItem>
@@ -129,18 +141,26 @@ export default function RequestsPage() {
 
           {/* Requests Grid */}
           {filteredRequests.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredRequests.map((req) => (
                 <AidCard key={req.id} {...req} />
               ))}
             </div>
           ) : (
-            <div className="text-center py-20 bg-white/5 rounded-3xl border border-dashed border-white/10">
-              <p className="text-white/40 font-medium">আপনার খোঁজা অনুযায়ী কোনো অনুরোধ পাওয়া যায়নি।</p>
+            <div className="text-center py-32 bg-white/5 rounded-[2.5rem] border border-dashed border-white/10 flex flex-col items-center gap-4">
+              <AlertCircle className="h-12 w-12 text-white/20" />
+              <p className="text-white/40 font-bold text-lg">দুঃখিত, আপনার খোঁজা অনুযায়ী কোনো অনুরোধ পাওয়া যায়নি।</p>
+              <Button variant="outline" onClick={() => {setSearchTerm(''); setCategory('all')}} className="border-white/20 text-white hover:bg-white/10 rounded-xl">সবগুলো দেখুন</Button>
             </div>
           )}
         </div>
       </main>
+
+      <footer className="py-12 text-center border-t border-white/5 bg-black/10">
+        <p className="text-[10px] text-white/20 uppercase tracking-[0.3em] font-bold">
+          ONGON BANGLADESH • CONNECTING THOSE IN NEED
+        </p>
+      </footer>
     </div>
   );
 }
