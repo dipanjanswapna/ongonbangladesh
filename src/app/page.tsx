@@ -2,7 +2,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
 import { Input } from '@/components/ui/input';
-import { Heart, ShieldCheck, Users, Zap, Search } from 'lucide-react';
+import { Heart, ShieldCheck, Users, Zap, Search, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -48,8 +48,8 @@ export default function Home() {
       <Navbar />
 
       <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="relative min-h-[70vh] md:h-[80vh] flex items-center overflow-hidden py-16 md:py-0">
+        {/* Hero Section - Optimized for responsiveness */}
+        <section className="relative min-h-[85vh] md:min-h-[80vh] flex items-center overflow-hidden pt-20 pb-16 md:py-0">
           <div className="absolute inset-0 z-0">
             {heroImage && (
               <Image 
@@ -65,21 +65,25 @@ export default function Home() {
           </div>
 
           <div className="container mx-auto px-4 relative z-10 text-center md:text-left">
-            <div className="max-w-3xl animate-in fade-in slide-in-from-left-4 duration-700">
-              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                হৃদয় সংযোগ, <span className="text-white underline decoration-white/30">ক্ষুধার অবসান।</span>
+            <div className="max-w-4xl mx-auto md:mx-0 animate-in fade-in slide-in-from-left-4 duration-700">
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-white/80 text-[10px] md:text-xs font-bold mb-6 border border-white/10 uppercase tracking-widest">
+                <Zap className="h-3 w-3 text-yellow-400 fill-yellow-400" /> Sister concern of PRANGON'S ECOSYSTEM
+              </div>
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1]">
+                হৃদয় সংযোগ, <br className="hidden md:block" /> 
+                <span className="text-white underline decoration-white/30">ক্ষুধার অবসান।</span>
               </h1>
-              <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto md:mx-0">
+              <p className="text-sm md:text-lg lg:text-xl text-white/90 mb-10 leading-relaxed max-w-2xl mx-auto md:mx-0">
                 ONGON BANGLADESH একটি ডেডিকেটেড কমিউনিটি প্ল্যাটফর্ম যেখানে মানবিকতা প্রয়োজনে সাড়া দেয়। আপনি সাহায্য খুঁজছেন বা দিতে চান, আমরা আপনার সংযোগ তৈরি করি।
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <Link href="/requests/new" className="w-full sm:w-auto">
-                  <Button size="lg" className="bg-white text-primary-foreground hover:bg-white/90 h-14 px-8 text-lg font-bold w-full shadow-xl">
+                  <Button size="lg" className="bg-white text-primary-foreground hover:bg-white/90 h-12 md:h-14 px-8 text-sm md:text-lg font-bold w-full shadow-2xl rounded-xl">
                     আমার সাহায্য চাই
                   </Button>
                 </Link>
-                <Button size="lg" variant="outline" className="h-14 px-8 text-lg font-bold border-white/40 text-white hover:bg-white/10 w-full sm:w-auto backdrop-blur-sm">
-                  আমি স্বেচ্ছাসেবক হতে চাই
+                <Button size="lg" variant="outline" className="h-12 md:h-14 px-8 text-sm md:text-lg font-bold border-white/20 text-white hover:bg-white/10 w-full sm:w-auto backdrop-blur-sm rounded-xl">
+                  স্বেচ্ছাসেবক হতে চাই
                 </Button>
               </div>
             </div>
@@ -87,16 +91,16 @@ export default function Home() {
         </section>
 
         {/* Search Bar Section */}
-        <section className="container mx-auto px-4 -mt-8 md:-mt-12 relative z-20">
-          <div className="glass-card p-4 md:p-6 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-4 items-center">
+        <section className="container mx-auto px-4 -mt-8 relative z-20">
+          <div className="glass-card p-3 md:p-5 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-3 items-center">
             <div className="relative flex-grow w-full">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 h-5 w-5" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/50 h-4 w-4" />
               <Input 
-                placeholder="সাহায্যের জন্য খুঁজুন (যেমন: 'অক্সিজেন', 'খাবার', 'ঢাকা')" 
-                className="pl-10 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 w-full"
+                placeholder="সাহায্যের জন্য খুঁজুন (যেমন: 'অক্সিজেন', 'খাবার')" 
+                className="pl-10 h-11 bg-white/5 border-white/10 text-white placeholder:text-white/40 w-full rounded-xl text-sm"
               />
             </div>
-            <Button size="lg" className="bg-white text-primary-foreground hover:bg-white/90 w-full md:w-auto h-12 px-8 font-bold">
+            <Button size="lg" className="bg-white text-primary-foreground hover:bg-white/90 w-full md:w-auto h-11 px-8 font-bold rounded-xl text-sm">
               সব দেখুন
             </Button>
           </div>
@@ -106,23 +110,23 @@ export default function Home() {
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white"> কেন ONGON BANGLADESH ব্যবহার করবেন?</h2>
-              <p className="text-white/80 text-base md:text-lg">আমরা আধুনিক প্রযুক্তি এবং প্রাঙ্গণ ইকোসিস্টেম-এর সমর্থনের মাধ্যমে সাহায্য সরাসরি প্রাপকের কাছে পৌঁছানো নিশ্চিত করি।</p>
+              <h2 className="text-2xl md:text-4xl font-bold mb-4 text-white"> কেন আমাদের প্ল্যাটফর্ম ব্যবহার করবেন?</h2>
+              <p className="text-white/70 text-sm md:text-base">আমরা আধুনিক প্রযুক্তির মাধ্যমে সাহায্য সরাসরি প্রাপকের কাছে পৌঁছানো নিশ্চিত করি।</p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {[
                 { icon: ShieldCheck, title: "যাচাইকৃত অনুরোধ", desc: "প্রতিটি পোস্ট আমাদের স্বেচ্ছাসেবক টিম দ্বারা যাচাই করা হয়।" },
                 { icon: Zap, title: "এআই ক্যাটাগরি", desc: "স্মার্ট এআই দ্রুত আবিষ্কারের জন্য সঠিক বিভাগ সাজেস্ট করে।" },
                 { icon: Users, title: "কমিউনিটি ভিত্তিক", desc: "আস্থা ও দীর্ঘমেয়াদী সমর্থনের একটি নেটওয়ার্ক তৈরি করুন।" },
                 { icon: Heart, title: "সরাসরি প্রভাব", desc: "দাতা বা স্বেচ্ছাসেবকদের সাথে সরাসরি রিয়েল-টাইমে যোগাযোগ করুন।" }
               ].map((feature, i) => (
-                <div key={i} className="p-6 glass-card rounded-xl hover:bg-white/15 transition-all text-center group">
-                  <div className="mb-4 inline-flex p-3 rounded-full bg-white/20 text-white group-hover:scale-110 transition-transform">
-                    <feature.icon className="h-6 w-6" />
+                <div key={i} className="p-6 glass-card rounded-2xl hover:bg-white/15 transition-all text-center group border-white/5">
+                  <div className="mb-4 inline-flex p-3 rounded-2xl bg-white/10 text-white group-hover:scale-110 transition-transform shadow-lg">
+                    <feature.icon className="h-5 w-5 md:h-6 md:w-6" />
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-white">{feature.title}</h3>
-                  <p className="text-sm text-white/70">{feature.desc}</p>
+                  <h3 className="text-lg font-bold mb-2 text-white">{feature.title}</h3>
+                  <p className="text-xs text-white/60 leading-relaxed">{feature.desc}</p>
                 </div>
               ))}
             </div>
@@ -132,15 +136,17 @@ export default function Home() {
         {/* Featured Requests Section */}
         <section className="py-16 md:py-24 bg-black/10">
           <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4">
-              <div className="text-left w-full md:w-auto">
-                <h2 className="text-3xl md:text-4xl font-bold mb-2 text-white">জরুরি সাহায্যের অনুরোধসমূহ</h2>
-                <p className="text-white/80">এই অনুরোধগুলোতে আপনার দ্রুত মনোযোগ প্রয়োজন।</p>
+            <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 text-center md:text-left">
+              <div className="w-full md:w-auto">
+                <h2 className="text-2xl md:text-4xl font-bold mb-2 text-white">জরুরি সাহায্যের অনুরোধসমূহ</h2>
+                <p className="text-white/60 text-sm">এই অনুরোধগুলোতে আপনার দ্রুত মনোযোগ প্রয়োজন।</p>
               </div>
-              <Button variant="link" className="text-white hover:text-white/80 font-bold text-lg p-0">সব অনুরোধ দেখুন →</Button>
+              <Button variant="link" className="text-white hover:text-white/80 font-bold text-sm md:text-lg p-0 flex items-center gap-2">
+                সব অনুরোধ দেখুন <ArrowRight className="h-4 w-4" />
+              </Button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {featuredRequests.map((req) => (
                 <AidCard key={req.id} {...req} />
               ))}
@@ -149,48 +155,51 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="bg-black/20 border-t border-white/10 py-12">
+      {/* Footer - Optimized for responsive */}
+      <footer className="bg-black/30 border-t border-white/5 py-12 md:py-20">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-            <div className="space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-12">
+            <div className="space-y-5">
               <Link href="/" className="flex items-center gap-2">
-                <Heart className="h-6 w-6 md:h-8 md:w-8 text-white fill-white" />
-                <span className="text-xl font-bold text-white uppercase tracking-tighter">ONGON BANGLADESH</span>
+                <Heart className="h-6 w-6 text-white fill-white" />
+                <span className="text-lg font-bold text-white uppercase tracking-tighter">ONGON BANGLADESH</span>
               </Link>
-              <p className="text-sm text-white/70">
-                যাদের প্রয়োজন তাদের সাথে যারা দিতে পারেন তাদের সংযোগ করা। বাংলাদেশের জন্য একটি কমিউনিটি-চালিত প্ল্যাটফর্ম।
+              <p className="text-xs text-white/60 leading-relaxed">
+                বাংলাদেশের জন্য একটি কমিউনিটি-চালিত প্ল্যাটফর্ম। যাদের প্রয়োজন তাদের সাথে যারা দিতে পারেন তাদের সংযোগ করা।
               </p>
-              <p className="text-xs text-white/50 font-bold italic">
-                A sister concern of PRANGON'S ECOSYSTEM
-              </p>
+              <div className="pt-2">
+                <p className="text-[10px] text-white/40 font-bold italic uppercase tracking-widest">
+                  Sister concern of PRANGON'S ECOSYSTEM
+                </p>
+              </div>
             </div>
             <div>
-              <h4 className="font-bold mb-4 text-white">লিঙ্ক</h4>
-              <ul className="space-y-2 text-sm text-white/60">
+              <h4 className="font-bold mb-4 text-white text-sm">প্রয়োজনীয় লিঙ্ক</h4>
+              <ul className="space-y-3 text-xs text-white/50">
                 <li><Link href="/requests" className="hover:text-white transition-colors">অনুরোধ খুঁজুন</Link></li>
                 <li><Link href="/volunteer" className="hover:text-white transition-colors">স্বেচ্ছাসেবক</Link></li>
-                <li><Link href="/about" className="hover:text-white transition-colors">আমাদের সম্পর্কে</Link></li>
+                <li><Link href="/about" className="hover:text-white transition-colors">আমাদের লক্ষ্য</Link></li>
                 <li><Link href="/contact" className="hover:text-white transition-colors">সাপোর্ট</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4 text-white">আইনগত</h4>
-              <ul className="space-y-2 text-sm text-white/60">
+              <h4 className="font-bold mb-4 text-white text-sm">আইনগত</h4>
+              <ul className="space-y-3 text-xs text-white/50">
                 <li><Link href="/terms" className="hover:text-white transition-colors">ব্যবহারের শর্তাবলী</Link></li>
                 <li><Link href="/privacy" className="hover:text-white transition-colors">প্রাইভেসি পলিসি</Link></li>
-                <li><Link href="/guidelines" className="hover:text-white transition-colors">কমিউনিটি নির্দেশিকা</Link></li>
+                <li><Link href="/guidelines" className="hover:text-white transition-colors">নির্দেশিকা</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4 text-white">নিউজলেটার</h4>
-              <p className="text-sm text-white/70 mb-4">কমিউনিটির সর্বশেষ খবর পেতে যুক্ত হন।</p>
+              <h4 className="font-bold mb-4 text-white text-sm">নিউজলেটার</h4>
+              <p className="text-xs text-white/50 mb-4 leading-relaxed">সর্বশেষ খবর পেতে যুক্ত হন।</p>
               <div className="flex flex-col gap-2">
-                <Input placeholder="ইমেইল অ্যাড্রেস" className="bg-white/10 border-white/20 text-white placeholder:text-white/50 w-full" />
-                <Button className="bg-white text-primary-foreground hover:bg-white/90 w-full font-bold">যুক্ত হন</Button>
+                <Input placeholder="ইমেইল অ্যাড্রেস" className="bg-white/5 border-white/10 text-white placeholder:text-white/30 w-full h-10 text-xs rounded-xl" />
+                <Button className="bg-white text-primary-foreground hover:bg-white/90 w-full font-bold h-10 text-xs rounded-xl shadow-lg">যুক্ত হন</Button>
               </div>
             </div>
           </div>
-          <div className="pt-8 border-t border-white/10 text-center text-xs text-white/40">
+          <div className="pt-8 border-t border-white/5 text-center text-[10px] text-white/30 font-medium">
             © {new Date().getFullYear()} ONGON BANGLADESH (PRANGON'S ECOSYSTEM). সর্বস্বত্ব সংরক্ষিত।
           </div>
         </div>
