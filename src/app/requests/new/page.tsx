@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -26,7 +25,7 @@ export default function NewRequestPage() {
 
   const handleAutoCategorize = async () => {
     if (!description.trim()) {
-      toast({ title: "Please enter a description first.", variant: "destructive" });
+      toast({ title: "প্রথমে একটি বর্ণনা লিখুন।", variant: "destructive" });
       return;
     }
 
@@ -37,9 +36,9 @@ export default function NewRequestPage() {
       if (result.categories.length > 0) {
         setCategory(result.categories[0]);
       }
-      toast({ title: "AI suggestions ready!" });
+      toast({ title: "এআই পরামর্শ প্রস্তুত!" });
     } catch (error) {
-      toast({ title: "AI categorization failed. Please select manually.", variant: "destructive" });
+      toast({ title: "এআই বিভাগ নির্ধারণ ব্যর্থ হয়েছে। অনুগ্রহ করে ম্যানুয়ালি নির্বাচন করুন।", variant: "destructive" });
     } finally {
       setIsCategorizing(false);
     }
@@ -47,83 +46,85 @@ export default function NewRequestPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Request submitted successfully!", description: "It will appear on the platform after admin review." });
-    // Reset or redirect
+    toast({ 
+      title: "আবেদন সফলভাবে জমা দেওয়া হয়েছে!", 
+      description: "অ্যাডমিন রিভিউয়ের পর এটি প্ল্যাটফর্মে প্রদর্শিত হবে।" 
+    });
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
-      <main className="container mx-auto px-4 py-12 flex-grow flex items-center justify-center">
-        <Card className="w-full max-w-2xl border-white/5 bg-card/50 backdrop-blur">
-          <CardHeader className="text-center">
-            <CardTitle className="text-3xl font-headline font-bold">Post an Aid Request</CardTitle>
-            <CardDescription className="text-muted-foreground">Describe your need clearly so the community can support you effectively.</CardDescription>
+      <main className="container mx-auto px-4 py-24 flex-grow flex items-start justify-center">
+        <Card className="w-full max-w-2xl border-white/10 bg-white/5 backdrop-blur-md shadow-2xl rounded-3xl overflow-hidden mt-8">
+          <CardHeader className="text-center pb-2">
+            <CardTitle className="text-2xl md:text-3xl font-bold text-white">সাহায্যের জন্য আবেদন করুন</CardTitle>
+            <CardDescription className="text-white/60">আপনার প্রয়োজনীয়তা স্পষ্টভাবে বর্ণনা করুন যাতে আমাদের কমিউনিটি আপনাকে কার্যকরভাবে সাহায্য করতে পারে।</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-6">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="title">Request Title</Label>
+                <Label htmlFor="title" className="text-white font-bold">আবেদনের শিরোনাম</Label>
                 <Input 
                   id="title" 
-                  placeholder="e.g. Oxygen Cylinder for Elderly Patient" 
+                  placeholder="যেমন: বয়স্ক রোগীর জন্য অক্সিজেন সিলিন্ডার" 
                   value={title} 
                   onChange={(e) => setTitle(e.target.value)}
-                  className="bg-background/50"
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/40 h-12 rounded-xl focus:ring-white/30"
                   required
                 />
               </div>
 
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <Label htmlFor="description">Detailed Description</Label>
+                  <Label htmlFor="description" className="text-white font-bold">বিস্তারিত বর্ণনা</Label>
                   <Button 
                     type="button" 
                     variant="ghost" 
                     size="sm" 
-                    className="text-accent hover:text-accent hover:bg-accent/10 flex items-center gap-1"
+                    className="text-white bg-white/10 hover:bg-white/20 flex items-center gap-1 rounded-lg px-3"
                     onClick={handleAutoCategorize}
                     disabled={isCategorizing || !description}
                   >
-                    {isCategorizing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
-                    Auto-categorize
+                    {isCategorizing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4 text-yellow-400" />}
+                    অটো-ক্যাটাগরি
                   </Button>
                 </div>
                 <Textarea 
                   id="description" 
-                  placeholder="Describe what you need, why it's urgent, and how people can help..." 
-                  className="min-h-[120px] bg-background/50"
+                  placeholder="আপনার কী প্রয়োজন, কেন এটি জরুরি এবং মানুষ কীভাবে আপনাকে সাহায্য করতে পারে তা বর্ণনা করুন..." 
+                  className="min-h-[120px] bg-white/10 border-white/20 text-white placeholder:text-white/40 rounded-xl focus:ring-white/30"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   required
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="category">Category</Label>
+                  <Label htmlFor="category" className="text-white font-bold">বিভাগ</Label>
                   <Select value={category} onValueChange={setCategory}>
-                    <SelectTrigger className="bg-background/50">
-                      <SelectValue placeholder="Select category" />
+                    <SelectTrigger className="bg-white/10 border-white/20 text-white h-12 rounded-xl">
+                      <SelectValue placeholder="বিভাগ নির্বাচন করুন" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="medical">Medical</SelectItem>
-                      <SelectItem value="food">Food</SelectItem>
-                      <SelectItem value="education">Education</SelectItem>
-                      <SelectItem value="housing">Housing/Shelter</SelectItem>
-                      <SelectItem value="financial">Financial</SelectItem>
-                      <SelectItem value="clothing">Clothing</SelectItem>
-                      <SelectItem value="general">General</SelectItem>
+                    <SelectContent className="bg-[#781013] border-white/10 text-white">
+                      <SelectItem value="medical">চিকিৎসা</SelectItem>
+                      <SelectItem value="food">খাদ্য</SelectItem>
+                      <SelectItem value="education">শিক্ষা</SelectItem>
+                      <SelectItem value="housing">আবাসন/আশ্রয়</SelectItem>
+                      <SelectItem value="financial">আর্থিক</SelectItem>
+                      <SelectItem value="clothing">পোশাক</SelectItem>
+                      <SelectItem value="general">সাধারণ</SelectItem>
                     </SelectContent>
                   </Select>
                   {suggestedCategories.length > 0 && (
                     <div className="flex flex-wrap gap-2 mt-2">
-                      <span className="text-[10px] uppercase text-muted-foreground w-full">AI Suggestions:</span>
+                      <span className="text-[10px] uppercase text-white/40 font-bold w-full">এআই পরামর্শ:</span>
                       {suggestedCategories.map((cat) => (
                         <Badge 
                           key={cat} 
                           variant="secondary" 
-                          className="cursor-pointer hover:bg-primary/20"
+                          className="cursor-pointer bg-white/10 hover:bg-white/20 text-white border-0"
                           onClick={() => setCategory(cat)}
                         >
                           {cat}
@@ -134,34 +135,34 @@ export default function NewRequestPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="urgency">Urgency Level</Label>
+                  <Label htmlFor="urgency" className="text-white font-bold">জরুরিতার মাত্রা</Label>
                   <Select value={urgency} onValueChange={setUrgency}>
-                    <SelectTrigger className="bg-background/50">
-                      <SelectValue placeholder="Select urgency" />
+                    <SelectTrigger className="bg-white/10 border-white/20 text-white h-12 rounded-xl">
+                      <SelectValue placeholder="মাত্রা নির্বাচন করুন" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="low">Low - Not Immediate</SelectItem>
-                      <SelectItem value="medium">Medium - Within a few days</SelectItem>
-                      <SelectItem value="high">High - Immediate Attention</SelectItem>
+                    <SelectContent className="bg-[#781013] border-white/10 text-white">
+                      <SelectItem value="low">স্বল্প - তাৎক্ষণিক নয়</SelectItem>
+                      <SelectItem value="medium">মাঝারি - কয়েক দিনের মধ্যে</SelectItem>
+                      <SelectItem value="high">উচ্চ - জরুরি মনোযোগ প্রয়োজন</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="location">Location</Label>
+                <Label htmlFor="location" className="text-white font-bold">অবস্থান</Label>
                 <Input 
                   id="location" 
-                  placeholder="e.g. Dhanmondi, Dhaka" 
+                  placeholder="যেমন: ধানমন্ডি, ঢাকা" 
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="bg-background/50"
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/40 h-12 rounded-xl focus:ring-white/30"
                   required
                 />
               </div>
 
-              <Button type="submit" className="w-full bg-primary hover:bg-primary/90 h-12 text-lg font-bold flex items-center gap-2">
-                <Send className="h-5 w-5" /> Submit Aid Request
+              <Button type="submit" className="w-full bg-white text-[#781013] hover:bg-white/90 h-14 text-lg font-bold rounded-xl flex items-center justify-center gap-2 shadow-xl transition-all hover:scale-[1.02] active:scale-95">
+                <Send className="h-5 w-5" /> সাহায্য আবেদন জমা দিন
               </Button>
             </form>
           </CardContent>
