@@ -2,15 +2,15 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
 import { Input } from '@/components/ui/input';
-import { Heart, ShieldCheck, Users, Zap, Search, ArrowRight, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase, Newspaper, Tv, BookOpen, Globe } from 'lucide-react';
+import { Heart, ShieldCheck, Users, Zap, Search, ArrowRight, Calendar, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase, Newspaper, Tv, BookOpen, Globe } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { campaigns } from '@/lib/campaigns-data';
 
 export default function Home() {
-  // Find the specific hero image from the placeholder data
   const heroImage = PlaceHolderImages.find(img => img.id === 'hero-bg');
 
   const featuredRequests = [
@@ -85,7 +85,7 @@ export default function Home() {
       <Navbar />
 
       <main className="flex-grow">
-        {/* Hero Section - Full Screen */}
+        {/* Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             {heroImage?.imageUrl ? (
@@ -96,7 +96,6 @@ export default function Home() {
                 className="object-cover"
                 priority
                 unoptimized
-                data-ai-hint={heroImage.imageHint}
               />
             ) : (
               <div className="w-full h-full bg-[#781013]" />
@@ -153,40 +152,63 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Features Section */}
-        <section className="py-10 md:py-12">
+        {/* Campaigns Section */}
+        <section className="py-12 md:py-16 bg-background">
           <div className="container mx-auto px-4">
-            <div className="text-center max-w-2xl mx-auto mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold mb-3 text-white">কেন আমাদের প্ল্যাটফর্ম ব্যবহার করবেন?</h2>
-              <p className="text-white/70 text-sm">আমরা আধুনিক প্রযুক্তির মাধ্যমে সাহায্য সরাসরি প্রাপকের কাছে পৌঁছানো নিশ্চিত করি।</p>
+            <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
+              <div className="max-w-2xl">
+                <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">আমাদের ক্যাম্পেইনসমূহ</h2>
+                <p className="text-white/70">আমাদের চলমান মানবিক কার্যক্রমগুলোতে অংশ নিয়ে আপনিও হতে পারেন একজন অনুপ্রেরণা।</p>
+              </div>
+              <Link href="/campaigns">
+                <Button variant="link" className="text-white font-bold p-0 flex items-center gap-2">
+                  সব ক্যাম্পেইন দেখুন <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                { icon: ShieldCheck, title: "যাচাইকৃত অনুরোধ", desc: "প্রতিটি পোস্ট আমাদের স্বেচ্ছাসেবক টিম দ্বারা যাচাই করা হয়।" },
-                { icon: Zap, title: "এআই ক্যাটাগরি", desc: "স্মার্ট এআই দ্রুত আবিষ্কারের জন্য সঠিক বিভাগ সাজেস্ট করে।" },
-                { icon: Users, title: "কমিউনিটি ভিত্তিক", desc: "আস্থা ও দীর্ঘমেয়াদী সমর্থনের একটি নেটওয়ার্ক তৈরি করুন।" },
-                { icon: Heart, title: " সরাসরি প্রভাব", desc: "দাতা বা স্বেচ্ছাসেবকদের সাথে সরাসরি রিয়েল-টাইমে যোগাযোগ করুন।" }
-              ].map((feature, i) => (
-                <div key={i} className="p-6 glass-card rounded-2xl hover:bg-white/15 transition-all text-center group border-white/5">
-                  <div className="mb-4 inline-flex p-3 rounded-xl bg-white/10 text-white group-hover:scale-110 transition-transform">
-                    <feature.icon className="h-6 w-6" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {campaigns.map((camp) => (
+                <Card key={camp.id} className="glass-card border-white/10 overflow-hidden flex flex-col group">
+                  <div className="relative h-48 w-full">
+                    <Image src={camp.image} alt={camp.title} fill className="object-cover" unoptimized />
                   </div>
-                  <h3 className="text-lg font-bold mb-2 text-white">{feature.title}</h3>
-                  <p className="text-xs text-white/60 leading-relaxed">{feature.desc}</p>
-                </div>
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-2 text-white/50 text-[10px] mb-2 font-bold uppercase tracking-wider">
+                      <Calendar className="h-3 w-3" /> {camp.date}
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-white line-clamp-2 leading-tight group-hover:text-primary transition-colors">{camp.title}</h3>
+                    <p className="text-xs text-white/60 line-clamp-2 mb-6">{camp.excerpt}</p>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-[10px] text-white/80 font-bold">
+                        <span>সংগৃহীত: ৳{camp.raised.toLocaleString()}</span>
+                        <span>{Math.round((camp.raised / camp.target) * 100)}%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                        <div className="h-full bg-white" style={{ width: `${(camp.raised / camp.target) * 100}%` }} />
+                      </div>
+                    </div>
+                  </CardContent>
+                  <CardFooter className="p-6 pt-0">
+                    <Link href={`/campaigns/${camp.id}`} className="w-full">
+                      <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white hover:text-primary font-bold rounded-xl h-10 text-xs">
+                        বিস্তারিত পড়ুন
+                      </Button>
+                    </Link>
+                  </CardFooter>
+                </Card>
               ))}
             </div>
           </div>
         </section>
 
         {/* Featured Requests Section */}
-        <section className="py-10 md:py-12" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
+        <section className="py-12 md:py-16" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
           <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 text-center md:text-left">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 text-center md:text-left">
               <div className="w-full md:w-auto">
-                <h2 className="text-2xl md:text-3xl font-bold mb-1 text-white">জরুরি সাহায্যের অনুরোধসমূহ</h2>
-                <p className="text-white/60 text-xs">এই অনুরোধগুলোতে আপনার দ্রুত মনোযোগ প্রয়োজন।</p>
+                <h2 className="text-3xl md:text-4xl font-bold mb-1 text-white">জরুরি সাহায্যের অনুরোধসমূহ</h2>
+                <p className="text-white/60 text-sm">এই অনুরোধগুলোতে আপনার দ্রুত মনোযোগ প্রয়োজন।</p>
               </div>
               <Link href="/requests">
                 <Button variant="link" className="text-white hover:text-white/80 font-bold text-sm p-0 flex items-center gap-2">
@@ -195,7 +217,7 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredRequests.map((req) => (
                 <AidCard key={req.id} {...req} />
               ))}
@@ -204,11 +226,11 @@ export default function Home() {
         </section>
 
         {/* Join Us Section */}
-        <section className="py-10 md:py-12 bg-background">
+        <section className="py-12 md:py-16 bg-background">
           <div className="container mx-auto px-4">
-            <div className="text-center max-w-2xl mx-auto mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold mb-3 text-white">আমাদের সাথে যুক্ত হোন</h2>
-              <p className="text-white/70 text-sm md:text-base">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">আমাদের সাথে যুক্ত হোন</h2>
+              <p className="text-white/70">
                 নিচের যে কোনো পদ্ধতিতে আমাদের সঙ্গে যুক্ত হয়ে আর্তমানবতার সেবায় ভূমিকা রাখতে পারেন।
               </p>
             </div>
@@ -233,11 +255,11 @@ export default function Home() {
         </section>
 
         {/* Media Coverage Section */}
-        <section className="py-10 md:py-12 bg-background border-t border-white/5">
+        <section className="py-12 md:py-16 bg-background border-t border-white/5">
           <div className="container mx-auto px-4">
-            <div className="text-center max-w-3xl mx-auto mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold mb-3 text-white">যেখানে আমাদের গল্প প্রকাশিত হয়েছে</h2>
-              <p className="text-white/60 text-sm md:text-base">
+            <div className="text-center max-w-3xl mx-auto mb-10">
+              <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">যেখানে আমাদের গল্প প্রকাশিত হয়েছে</h2>
+              <p className="text-white/60">
                 আমাদের কাজ প্রকাশিত হয়েছে দেশের শীর্ষস্থানীয় সংবাদপত্র, টিভি চ্যানেল, ম্যাগাজিন এবং অনলাইন প্ল্যাটফর্মে।
               </p>
             </div>
@@ -260,20 +282,13 @@ export default function Home() {
                       <Card key={item.id} className="glass-card border-white/10 overflow-hidden hover:scale-[1.02] transition-transform duration-300">
                         <CardContent className="p-0">
                           <div className="relative aspect-[3/4] w-full bg-white/5">
-                            {img?.imageUrl ? (
-                              <Image 
-                                src={img.imageUrl} 
-                                alt={item.title} 
-                                fill 
-                                className="object-cover"
-                                unoptimized
-                                data-ai-hint={img.imageHint}
-                              />
-                            ) : (
-                              <div className="w-full h-full flex items-center justify-center text-white/20">
-                                <Newspaper className="h-8 w-8" />
-                              </div>
-                            )}
+                            <Image 
+                              src={img?.imageUrl || 'https://picsum.photos/400/500'} 
+                              alt={item.title} 
+                              fill 
+                              className="object-cover"
+                              unoptimized
+                            />
                           </div>
                           <div className="p-3 text-center bg-white/5">
                             <h4 className="font-bold text-xs text-white truncate">{item.title}</h4>
@@ -308,7 +323,6 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Improved Footer */}
       <footer className="px-4 pb-8 bg-transparent">
         <div className="container mx-auto max-w-7xl">
           <div 
