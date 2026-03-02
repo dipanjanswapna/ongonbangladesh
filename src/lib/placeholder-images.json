@@ -1,3 +1,34 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-bg",
+      "description": "ONGON BANGLADESH Hero Background",
+      "imageUrl": "https://i.postimg.cc/ZqMsP1F1/1690289479-3647.avif",
+      "imageHint": "community aid"
+    },
+    {
+      "id": "medical-aid",
+      "description": "Medical professionals providing care",
+      "imageUrl": "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtZWRpY2FsJTIwY2FyZXxlbnwwfHx8fDE3NzIzOTczOTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "medical care"
+    },
+    {
+      "id": "education-aid",
+      "description": "Children studying in a classroom",
+      "imageUrl": "https://images.unsplash.com/photo-1768637757037-31720529ee53?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxlZHVjYXRpb24lMjBjaGlsZHJlbnxlbnwwfHx8fDE3NzI0NzQ3MjB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "education children"
+    },
+    {
+      "id": "food-aid",
+      "description": "Volunteers distributing food packages",
+      "imageUrl": "https://images.unsplash.com/photo-1760727466909-a73872aeecda?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxmb29kJTIwZGlzdHJpYnV0aW9ufGVufDB8fHx8MTc3MjQ3NDcyMHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "food distribution"
+    },
+    {
+      "id": "shelter-aid",
+      "description": "A warm and safe community shelter",
+      "imageUrl": "https://images.unsplash.com/photo-1769013649623-b35b160ec440?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb21tdW5pdHklMjBzaGVsdGVyfGVufDB8fHx8MTc3MjQ3NDcxOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "community shelter"
+    }
+  ]
 }

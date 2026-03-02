@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function Home() {
+  // Find the specific hero image from the placeholder data
   const heroImage = PlaceHolderImages.find(img => img.id === 'hero-bg');
 
   const featuredRequests = [
@@ -52,7 +53,7 @@ export default function Home() {
         {/* Hero Section - Full Screen with Background Image */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
-            {heroImage && (
+            {heroImage ? (
               <Image 
                 src={heroImage.imageUrl} 
                 alt={heroImage.description}
@@ -62,9 +63,12 @@ export default function Home() {
                 unoptimized
                 data-ai-hint={heroImage.imageHint}
               />
+            ) : (
+              // Fallback background color if image fails
+              <div className="w-full h-full bg-[#ed1f26]" />
             )}
             {/* Overlay to ensure text visibility and allow image to be seen */}
-            <div className="absolute inset-0 bg-black/50" />
+            <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10 text-center">
@@ -73,18 +77,18 @@ export default function Home() {
                 <Zap className="h-3 w-3 text-yellow-400 fill-yellow-400" /> Sister concern of PRANGON&apos;S ECOSYSTEM
               </div>
               
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-lg">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl">
                 হৃদয় সংযোগ, <br /> 
                 <span className="text-white">ক্ষুধার অবসান।</span>
               </h1>
               
-              <p className="text-sm md:text-base lg:text-lg text-white/95 mb-10 leading-relaxed max-w-2xl mx-auto font-medium px-4 drop-shadow-md">
+              <p className="text-sm md:text-base lg:text-lg text-white/95 mb-10 leading-relaxed max-w-2xl mx-auto font-medium px-4 drop-shadow-lg">
                 ONGON BANGLADESH একটি ডেডিকেটেড কমিউনিটি প্ল্যাটফর্ম যেখানে মানবিকতা প্রয়োজনে সাড়া দেয়। আপনি সাহায্য খুঁজছেন বা দিতে চান, আমরা আপনার সংযোগ তৈরি করি।
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4">
                 <Link href="/requests/new" className="w-full sm:w-auto">
-                  <Button size="lg" className="bg-white text-primary-foreground hover:bg-white/90 h-11 md:h-12 px-6 text-sm md:text-base font-bold w-full shadow-2xl rounded-xl transition-all hover:scale-105 active:scale-95">
+                  <Button size="lg" className="bg-white text-[#ed1f26] hover:bg-white/90 h-11 md:h-12 px-6 text-sm md:text-base font-bold w-full shadow-2xl rounded-xl transition-all hover:scale-105 active:scale-95">
                     আমার সাহায্য চাই
                   </Button>
                 </Link>
@@ -106,7 +110,7 @@ export default function Home() {
                 className="pl-11 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/40 w-full rounded-xl text-sm"
               />
             </div>
-            <Button size="lg" className="bg-white text-primary-foreground hover:bg-white/90 w-full md:w-auto h-12 px-8 font-bold rounded-xl text-sm shadow-xl">
+            <Button size="lg" className="bg-white text-[#ed1f26] hover:bg-white/90 w-full md:w-auto h-12 px-8 font-bold rounded-xl text-sm shadow-xl">
               সব দেখুন
             </Button>
           </div>
@@ -201,7 +205,7 @@ export default function Home() {
               <p className="text-xs text-white/50 mb-4 leading-relaxed">সর্বশেষ খবর পেতে যুক্ত হন।</p>
               <div className="flex flex-col gap-2">
                 <Input placeholder="ইমেইল অ্যাড্রেস" className="bg-white/5 border-white/10 text-white placeholder:text-white/30 w-full h-10 text-xs rounded-lg" />
-                <Button className="bg-white text-primary-foreground hover:bg-white/90 w-full font-bold h-10 text-xs rounded-lg shadow-lg">যুক্ত হন</Button>
+                <Button className="bg-white text-[#ed1f26] hover:bg-white/90 w-full font-bold h-10 text-xs rounded-lg shadow-lg">যুক্ত হন</Button>
               </div>
             </div>
           </div>
