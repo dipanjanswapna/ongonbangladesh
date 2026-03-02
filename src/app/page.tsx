@@ -44,12 +44,12 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen overflow-x-hidden">
       <Navbar />
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative h-[80vh] flex items-center overflow-hidden">
+        <section className="relative min-h-[70vh] md:h-[80vh] flex items-center overflow-hidden py-16 md:py-0">
           <div className="absolute inset-0 z-0">
             {heroImage && (
               <Image 
@@ -66,19 +66,19 @@ export default function Home() {
 
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl animate-in fade-in slide-in-from-left-4 duration-700">
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
                 হৃদয় সংযোগ, <span className="text-accent">ক্ষুধার অবসান।</span>
               </h1>
-              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl">
                 সেবা সেতু একটি ডেডিকেটেড কমিউনিটি প্ল্যাটফর্ম যেখানে মানবিকতা প্রয়োজনে সাড়া দেয়। আপনি সাহায্য খুঁজছেন বা দিতে চান, আমরা আপনার সংযোগ তৈরি করি।
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/requests/new">
-                  <Button size="lg" className="bg-primary hover:bg-primary/90 h-14 px-8 text-lg font-bold w-full sm:w-auto">
+                <Link href="/requests/new" className="w-full sm:w-auto">
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 h-14 px-8 text-lg font-bold w-full">
                     আমার সাহায্য চাই
                   </Button>
                 </Link>
-                <Button size="lg" variant="outline" className="h-14 px-8 text-lg font-bold border-accent text-accent hover:bg-accent/10">
+                <Button size="lg" variant="outline" className="h-14 px-8 text-lg font-bold border-accent text-accent hover:bg-accent/10 w-full sm:w-auto">
                   আমি স্বেচ্ছাসেবক হতে চাই
                 </Button>
               </div>
@@ -87,13 +87,13 @@ export default function Home() {
         </section>
 
         {/* Search Bar Section */}
-        <section className="container mx-auto px-4 -mt-12 relative z-20">
-          <div className="glass-card p-6 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-4 items-center">
+        <section className="container mx-auto px-4 -mt-8 md:-mt-12 relative z-20">
+          <div className="glass-card p-4 md:p-6 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-4 items-center">
             <div className="relative flex-grow w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-5 w-5" />
               <Input 
                 placeholder="সাহায্যের জন্য খুঁজুন (যেমন: 'অক্সিজেন', 'খাবার', 'ঢাকা')" 
-                className="pl-10 h-12 bg-background/50 border-white/10"
+                className="pl-10 h-12 bg-background/50 border-white/10 w-full"
               />
             </div>
             <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 w-full md:w-auto h-12 px-8 font-bold">
@@ -103,14 +103,14 @@ export default function Home() {
         </section>
 
         {/* Features Section */}
-        <section className="py-24 bg-background">
+        <section className="py-16 md:py-24 bg-background">
           <div className="container mx-auto px-4">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-4xl font-bold mb-4 text-white">কেন সেবা সেতু ব্যবহার করবেন?</h2>
-              <p className="text-muted-foreground text-lg">আমরা আধুনিক প্রযুক্তি এবং স্থানীয় কমিউনিটির মাধ্যমে সাহায্য সরাসরি প্রাপকের কাছে পৌঁছানো নিশ্চিত করি।</p>
+            <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">কেন সেবা সেতু ব্যবহার করবেন?</h2>
+              <p className="text-muted-foreground text-base md:text-lg">আমরা আধুনিক প্রযুক্তি এবং স্থানীয় কমিউনিটির মাধ্যমে সাহায্য সরাসরি প্রাপকের কাছে পৌঁছানো নিশ্চিত করি।</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
               {[
                 { icon: ShieldCheck, title: "যাচাইকৃত অনুরোধ", desc: "প্রতিটি পোস্ট আমাদের স্বেচ্ছাসেবক টিম দ্বারা যাচাই করা হয়।" },
                 { icon: Zap, title: "এআই ক্যাটাগরি", desc: "স্মার্ট এআই দ্রুত আবিষ্কারের জন্য সঠিক বিভাগ সাজেস্ট করে।" },
@@ -130,17 +130,17 @@ export default function Home() {
         </section>
 
         {/* Featured Requests Section */}
-        <section className="py-24 bg-secondary/30">
+        <section className="py-16 md:py-24 bg-secondary/30">
           <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4">
               <div className="text-left w-full md:w-auto">
-                <h2 className="text-4xl font-bold mb-2 text-white">জরুরি সাহায্যের অনুরোধসমূহ</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-2 text-white">জরুরি সাহায্যের অনুরোধসমূহ</h2>
                 <p className="text-muted-foreground">এই অনুরোধগুলোতে আপনার দ্রুত মনোযোগ প্রয়োজন।</p>
               </div>
-              <Button variant="link" className="text-accent hover:text-accent/80 font-bold text-lg">সব অনুরোধ দেখুন →</Button>
+              <Button variant="link" className="text-accent hover:text-accent/80 font-bold text-lg p-0">সব অনুরোধ দেখুন →</Button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {featuredRequests.map((req) => (
                 <AidCard key={req.id} {...req} />
               ))}
@@ -151,7 +151,7 @@ export default function Home() {
 
       <footer className="bg-card border-t border-white/5 py-12 mt-12">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             <div className="space-y-4">
               <Link href="/" className="flex items-center gap-2">
                 <Heart className="h-6 w-6 text-primary fill-primary" />
@@ -164,26 +164,26 @@ export default function Home() {
             <div>
               <h4 className="font-bold mb-4 text-white">লিঙ্ক</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/requests" className="hover:text-primary">অনুরোধ খুঁজুন</Link></li>
-                <li><Link href="/offers" className="hover:text-primary">অফার দেখুন</Link></li>
-                <li><Link href="/about" className="hover:text-primary">আমাদের সম্পর্কে</Link></li>
-                <li><Link href="/contact" className="hover:text-primary">সাপোর্ট</Link></li>
+                <li><Link href="/requests" className="hover:text-primary transition-colors">অনুরোধ খুঁজুন</Link></li>
+                <li><Link href="/volunteer" className="hover:text-primary transition-colors">স্বেচ্ছাসেবক</Link></li>
+                <li><Link href="/about" className="hover:text-primary transition-colors">আমাদের সম্পর্কে</Link></li>
+                <li><Link href="/contact" className="hover:text-primary transition-colors">সাপোর্ট</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold mb-4 text-white">আইনগত</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/terms" className="hover:text-primary">ব্যবহারের শর্তাবলী</Link></li>
-                <li><Link href="/privacy" className="hover:text-primary">প্রাইভেসি পলিসি</Link></li>
-                <li><Link href="/guidelines" className="hover:text-primary">কমিউনিটি নির্দেশিকা</Link></li>
+                <li><Link href="/terms" className="hover:text-primary transition-colors">ব্যবহারের শর্তাবলী</Link></li>
+                <li><Link href="/privacy" className="hover:text-primary transition-colors">প্রাইভেসি পলিসি</Link></li>
+                <li><Link href="/guidelines" className="hover:text-primary transition-colors">কমিউনিটি নির্দেশিকা</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold mb-4 text-white">নিউজলেটার</h4>
               <p className="text-sm text-muted-foreground mb-4">কমিউনিটির সর্বশেষ খবরাখবর পেতে যুক্ত হন।</p>
-              <div className="flex gap-2">
-                <Input placeholder="ইমেইল অ্যাড্রেস" className="bg-background/50 border-white/10" />
-                <Button className="bg-primary hover:bg-primary/90">যুক্ত হন</Button>
+              <div className="flex flex-col gap-2">
+                <Input placeholder="ইমেইল অ্যাড্রেস" className="bg-background/50 border-white/10 w-full" />
+                <Button className="bg-primary hover:bg-primary/90 w-full">যুক্ত হন</Button>
               </div>
             </div>
           </div>

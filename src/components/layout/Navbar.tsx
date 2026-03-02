@@ -14,8 +14,8 @@ export function Navbar() {
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <Heart className="h-8 w-8 text-primary fill-primary" />
-          <span className="text-2xl font-bold text-white tracking-tight">সেবা সেতু</span>
+          <Heart className="h-6 w-6 md:h-8 md:w-8 text-primary fill-primary" />
+          <span className="text-lg md:text-2xl font-bold text-white tracking-tight">সেবা সেতু</span>
         </Link>
 
         {/* Desktop Menu */}
@@ -26,37 +26,50 @@ export function Navbar() {
           
           {isLoggedIn ? (
             <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon"><Bell className="h-5 w-5" /></Button>
-              <Link href="/profile">
-                <Button variant="outline" className="flex items-center gap-2">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10"><Bell className="h-5 w-5" /></Button>
+              <Link href="/admin">
+                <Button variant="outline" className="flex items-center gap-2 border-white/20 text-white hover:bg-white/10">
                   <User className="h-4 w-4" /> ড্যাশবোর্ড
                 </Button>
               </Link>
-              <Button variant="ghost" size="sm" onClick={() => setIsLoggedIn(false)}><LogOut className="h-4 w-4" /></Button>
+              <Button variant="ghost" size="sm" onClick={() => setIsLoggedIn(false)} className="text-white hover:text-primary"><LogOut className="h-4 w-4" /></Button>
             </div>
           ) : (
             <div className="flex items-center gap-3">
-              <Button variant="ghost" onClick={() => setIsLoggedIn(true)}>লগ ইন</Button>
-              <Button className="bg-primary hover:bg-primary/90">সাইন আপ</Button>
+              <Button variant="ghost" onClick={() => setIsLoggedIn(true)} className="text-white hover:bg-white/10">লগ ইন</Button>
+              <Button className="bg-primary hover:bg-primary/90 text-white">সাইন আপ</Button>
             </div>
           )}
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? <X /> : <Menu />}
+        <button className="md:hidden text-white p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden border-t bg-card p-4 space-y-4 animate-in slide-in-from-top-2 duration-200">
-          <Link href="/requests" className="block text-lg font-bold">সাহায্য খুঁজুন</Link>
-          <Link href="/volunteer" className="block text-lg font-bold">স্বেচ্ছাসেবক</Link>
-          <Link href="/about" className="block text-lg font-bold">আমাদের লক্ষ্য</Link>
-          <div className="pt-4 border-t space-y-3">
-            <Button className="w-full bg-primary">শুরু করুন</Button>
-            <Button variant="outline" className="w-full">সাইন ইন</Button>
+        <div className="md:hidden fixed inset-x-0 top-16 bg-card border-b p-6 space-y-6 animate-in slide-in-from-top-4 duration-300 shadow-2xl z-40">
+          <nav className="flex flex-col space-y-4">
+            <Link href="/requests" className="text-lg font-bold text-white hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>সাহায্য খুঁজুন</Link>
+            <Link href="/volunteer" className="text-lg font-bold text-white hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>স্বেচ্ছাসেবক</Link>
+            <Link href="/about" className="text-lg font-bold text-white hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>আমাদের লক্ষ্য</Link>
+          </nav>
+          <div className="pt-6 border-t border-white/5 space-y-3">
+            {isLoggedIn ? (
+              <>
+                <Link href="/admin" onClick={() => setIsMenuOpen(false)}>
+                  <Button className="w-full bg-primary mb-2">ড্যাশবোর্ড</Button>
+                </Link>
+                <Button variant="outline" className="w-full text-white border-white/10" onClick={() => setIsLoggedIn(false)}>লগ আউট</Button>
+              </>
+            ) : (
+              <>
+                <Button className="w-full bg-primary" onClick={() => setIsLoggedIn(true)}>লগ ইন</Button>
+                <Button variant="outline" className="w-full text-white border-white/10">সাইন আপ</Button>
+              </>
+            )}
           </div>
         </div>
       )}
