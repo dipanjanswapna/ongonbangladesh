@@ -3,6 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { MapPin, Clock, ArrowRight, HeartPulse, GraduationCap, Utensils, Home } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 interface AidCardProps {
   id: string;
@@ -72,12 +73,16 @@ export function AidCard({ id, title, description, location, category, urgency, c
         </div>
       </CardContent>
       <CardFooter className="p-4 border-t border-white/5 flex gap-2">
-        <Button size="sm" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold">
-          {type === 'request' ? 'সাহায্য করতে চাই' : 'সাহায্য চাই'}
-        </Button>
-        <Button size="sm" variant="ghost" className="px-2 text-white hover:bg-white/5">
-          <ArrowRight className="h-4 w-4" />
-        </Button>
+        <Link href={`/requests/${id}`} className="w-full">
+          <Button size="sm" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold">
+            {type === 'request' ? 'সাহায্য করতে চাই' : 'সাহায্য চাই'}
+          </Button>
+        </Link>
+        <Link href={`/requests/${id}`}>
+          <Button size="sm" variant="ghost" className="px-2 text-white hover:bg-white/5">
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );
