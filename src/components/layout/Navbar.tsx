@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -16,29 +15,29 @@ export function Navbar() {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <Heart className="h-8 w-8 text-primary fill-primary" />
-          <span className="text-2xl font-headline font-bold text-white tracking-tight">SevaSetu</span>
+          <span className="text-2xl font-bold text-white tracking-tight">সেবা সেতু</span>
         </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">
-          <Link href="/requests" className="text-sm font-medium hover:text-accent transition-colors">Find Aid</Link>
-          <Link href="/volunteer" className="text-sm font-medium hover:text-accent transition-colors">Volunteer</Link>
-          <Link href="/about" className="text-sm font-medium hover:text-accent transition-colors">Our Mission</Link>
+          <Link href="/requests" className="text-sm font-medium hover:text-accent transition-colors">সাহায্য খুঁজুন</Link>
+          <Link href="/volunteer" className="text-sm font-medium hover:text-accent transition-colors">স্বেচ্ছাসেবক</Link>
+          <Link href="/about" className="text-sm font-medium hover:text-accent transition-colors">আমাদের লক্ষ্য</Link>
           
           {isLoggedIn ? (
             <div className="flex items-center gap-4">
               <Button variant="ghost" size="icon"><Bell className="h-5 w-5" /></Button>
               <Link href="/profile">
                 <Button variant="outline" className="flex items-center gap-2">
-                  <User className="h-4 w-4" /> Dashboard
+                  <User className="h-4 w-4" /> ড্যাশবোর্ড
                 </Button>
               </Link>
               <Button variant="ghost" size="sm" onClick={() => setIsLoggedIn(false)}><LogOut className="h-4 w-4" /></Button>
             </div>
           ) : (
             <div className="flex items-center gap-3">
-              <Button variant="ghost" onClick={() => setIsLoggedIn(true)}>Log in</Button>
-              <Button className="bg-primary hover:bg-primary/90">Sign up</Button>
+              <Button variant="ghost" onClick={() => setIsLoggedIn(true)}>লগ ইন</Button>
+              <Button className="bg-primary hover:bg-primary/90">সাইন আপ</Button>
             </div>
           )}
         </div>
@@ -52,12 +51,12 @@ export function Navbar() {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden border-t bg-card p-4 space-y-4 animate-in slide-in-from-top-2 duration-200">
-          <Link href="/requests" className="block text-lg font-headline">Find Aid</Link>
-          <Link href="/volunteer" className="block text-lg font-headline">Volunteer</Link>
-          <Link href="/about" className="block text-lg font-headline">Our Mission</Link>
+          <Link href="/requests" className="block text-lg font-bold">সাহায্য খুঁজুন</Link>
+          <Link href="/volunteer" className="block text-lg font-bold">স্বেচ্ছাসেবক</Link>
+          <Link href="/about" className="block text-lg font-bold">আমাদের লক্ষ্য</Link>
           <div className="pt-4 border-t space-y-3">
-            <Button className="w-full bg-primary">Get Started</Button>
-            <Button variant="outline" className="w-full">Sign in</Button>
+            <Button className="w-full bg-primary">শুরু করুন</Button>
+            <Button variant="outline" className="w-full">সাইন ইন</Button>
           </div>
         </div>
       )}

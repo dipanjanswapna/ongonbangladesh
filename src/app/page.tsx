@@ -13,32 +13,32 @@ export default function Home() {
   const featuredRequests = [
     {
       id: '1',
-      title: 'Urgent Medical Assistance for Child',
-      description: 'A 5-year-old in Dhaka requires urgent surgery for a cardiac condition. The family is seeking financial support and blood donors.',
-      location: 'Dhaka, Bangladesh',
-      category: 'Medical',
+      title: 'শিশুর জন্য জরুরি চিকিৎসা সহায়তা',
+      description: 'ঢাকার ৫ বছর বয়সী এক শিশুর হার্টের অপারেশনের জন্য জরুরি আর্থিক সহায়তা প্রয়োজন। পরিবার রক্তদাতাও খুঁজছে।',
+      location: 'ঢাকা, বাংলাদেশ',
+      category: 'চিকিৎসা',
       urgency: 'high' as const,
-      createdAt: '2 hours ago',
+      createdAt: '২ ঘণ্টা আগে',
       type: 'request' as const
     },
     {
       id: '2',
-      title: 'Volunteer Teachers for Rural School',
-      description: 'Our community school in Sylhet needs volunteers to teach basic English and Mathematics to primary grade students.',
-      location: 'Sylhet, Bangladesh',
-      category: 'Education',
+      title: 'পল্লী স্কুলের জন্য স্বেচ্ছাসেবক শিক্ষক',
+      description: 'সিলেটের আমাদের কমিউনিটি স্কুলে প্রাথমিক স্তরের শিক্ষার্থীদের ইংরেজি ও গণিত শেখানোর জন্য স্বেচ্ছাসেবক প্রয়োজন।',
+      location: 'সিলেট, বাংলাদেশ',
+      category: 'শিক্ষা',
       urgency: 'medium' as const,
-      createdAt: '5 hours ago',
+      createdAt: '৫ ঘণ্টা আগে',
       type: 'request' as const
     },
     {
       id: '3',
-      title: 'Emergency Food Distribution',
-      description: 'Providing dry food packages to 50 families affected by recent flash floods. Volunteers needed for packaging and delivery.',
-      location: 'Chittagong, Bangladesh',
-      category: 'Food',
+      title: 'জরুরি খাদ্য বিতরণ কর্মসূচি',
+      description: 'সাম্প্রতিক বন্যায় ক্ষতিগ্রস্ত ৫০টি পরিবারকে শুকনো খাবার সরবরাহ করা হচ্ছে। প্যাকিং ও ডেলিভারির জন্য স্বেচ্ছাসেবক প্রয়োজন।',
+      location: 'চট্টগ্রাম, বাংলাদেশ',
+      category: 'খাদ্য',
       urgency: 'high' as const,
-      createdAt: '1 day ago',
+      createdAt: '১ দিন আগে',
       type: 'request' as const
     }
   ];
@@ -65,19 +65,21 @@ export default function Home() {
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-2xl animate-in fade-in slide-in-from-left-4 duration-700">
-              <h1 className="text-5xl md:text-7xl font-headline font-bold text-white mb-6 leading-tight">
-                Bridging Hearts, <span className="text-primary">Ending Hunger.</span>
+            <div className="max-w-3xl animate-in fade-in slide-in-from-left-4 duration-700">
+              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                হৃদয় সংযোগ, <span className="text-accent">ক্ষুধার অবসান।</span>
               </h1>
-              <p className="text-xl text-muted-foreground mb-8 leading-relaxed font-body">
-                SevaSetu is a dedicated community platform where kindness meets necessity. Whether you are seeking aid or have something to offer, we bridge the gap.
+              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+                সেবা সেতু একটি ডেডিকেটেড কমিউনিটি প্ল্যাটফর্ম যেখানে মানবিকতা প্রয়োজনে সাড়া দেয়। আপনি সাহায্য খুঁজছেন বা দিতে চান, আমরা আপনার সংযোগ তৈরি করি।
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 h-14 px-8 text-lg font-bold">
-                  I Need Help
-                </Button>
+                <Link href="/requests/new">
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 h-14 px-8 text-lg font-bold w-full sm:w-auto">
+                    আমার সাহায্য চাই
+                  </Button>
+                </Link>
                 <Button size="lg" variant="outline" className="h-14 px-8 text-lg font-bold border-accent text-accent hover:bg-accent/10">
-                  I Want to Volunteer
+                  আমি স্বেচ্ছাসেবক হতে চাই
                 </Button>
               </div>
             </div>
@@ -90,12 +92,12 @@ export default function Home() {
             <div className="relative flex-grow w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-5 w-5" />
               <Input 
-                placeholder="Search for aid requests (e.g. 'oxygen', 'food', 'Dhaka')" 
+                placeholder="সাহায্যের জন্য খুঁজুন (যেমন: 'অক্সিজেন', 'খাবার', 'ঢাকা')" 
                 className="pl-10 h-12 bg-background/50 border-white/10"
               />
             </div>
-            <Button size="lg" className="bg-accent hover:bg-accent/90 w-full md:w-auto h-12 px-8">
-              Explore All
+            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 w-full md:w-auto h-12 px-8 font-bold">
+              সব দেখুন
             </Button>
           </div>
         </section>
@@ -104,22 +106,22 @@ export default function Home() {
         <section className="py-24 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-4xl font-headline font-bold mb-4">Why Trust SevaSetu?</h2>
-              <p className="text-muted-foreground text-lg">We use modern technology and local community roots to ensure aid reaches those who need it most.</p>
+              <h2 className="text-4xl font-bold mb-4 text-white">কেন সেবা সেতু ব্যবহার করবেন?</h2>
+              <p className="text-muted-foreground text-lg">আমরা আধুনিক প্রযুক্তি এবং স্থানীয় কমিউনিটির মাধ্যমে সাহায্য সরাসরি প্রাপকের কাছে পৌঁছানো নিশ্চিত করি।</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               {[
-                { icon: ShieldCheck, title: "Verified Requests", desc: "Every post is reviewed by our volunteer admin team." },
-                { icon: Zap, title: "AI Categorization", desc: "Smart AI suggests the right categories for faster discovery." },
-                { icon: Users, title: "Community Focused", desc: "Build local networks of trust and long-term support." },
-                { icon: Heart, title: "Direct Impact", desc: "Connect directly with donors or volunteers in real-time." }
+                { icon: ShieldCheck, title: "যাচাইকৃত অনুরোধ", desc: "প্রতিটি পোস্ট আমাদের স্বেচ্ছাসেবক টিম দ্বারা যাচাই করা হয়।" },
+                { icon: Zap, title: "এআই ক্যাটাগরি", desc: "স্মার্ট এআই দ্রুত আবিষ্কারের জন্য সঠিক বিভাগ সাজেস্ট করে।" },
+                { icon: Users, title: "কমিউনিটি ভিত্তিক", desc: "আস্থা ও দীর্ঘমেয়াদী সমর্থনের একটি নেটওয়ার্ক তৈরি করুন।" },
+                { icon: Heart, title: "সরাসরি প্রভাব", desc: "দাতা বা স্বেচ্ছাসেবকদের সাথে সরাসরি রিয়েল-টাইমে যোগাযোগ করুন।" }
               ].map((feature, i) => (
                 <div key={i} className="p-6 bg-card rounded-xl border border-white/5 hover:border-primary/30 transition-colors text-center">
                   <div className="mb-4 inline-flex p-3 rounded-full bg-primary/10 text-primary">
                     <feature.icon className="h-6 w-6" />
                   </div>
-                  <h3 className="text-xl font-headline font-bold mb-2">{feature.title}</h3>
+                  <h3 className="text-xl font-bold mb-2 text-white">{feature.title}</h3>
                   <p className="text-sm text-muted-foreground">{feature.desc}</p>
                 </div>
               ))}
@@ -130,12 +132,12 @@ export default function Home() {
         {/* Featured Requests Section */}
         <section className="py-24 bg-secondary/30">
           <div className="container mx-auto px-4">
-            <div className="flex justify-between items-end mb-12">
-              <div>
-                <h2 className="text-4xl font-headline font-bold mb-2">Urgent Aid Requests</h2>
-                <p className="text-muted-foreground">These individuals or families need your immediate attention.</p>
+            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+              <div className="text-left w-full md:w-auto">
+                <h2 className="text-4xl font-bold mb-2 text-white">জরুরি সাহায্যের অনুরোধসমূহ</h2>
+                <p className="text-muted-foreground">এই অনুরোধগুলোতে আপনার দ্রুত মনোযোগ প্রয়োজন।</p>
               </div>
-              <Button variant="link" className="text-accent hover:text-accent/80 font-bold">View all requests →</Button>
+              <Button variant="link" className="text-accent hover:text-accent/80 font-bold text-lg">সব অনুরোধ দেখুন →</Button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -153,40 +155,40 @@ export default function Home() {
             <div className="space-y-4">
               <Link href="/" className="flex items-center gap-2">
                 <Heart className="h-6 w-6 text-primary fill-primary" />
-                <span className="text-xl font-headline font-bold text-white">SevaSetu</span>
+                <span className="text-xl font-bold text-white">সেবা সেতু</span>
               </Link>
               <p className="text-sm text-muted-foreground">
-                Connecting those in need with those who can give. A community-driven platform for social impact in Bangladesh.
+                যাদের প্রয়োজন তাদের সাথে যারা দিতে পারেন তাদের সংযোগ করা। বাংলাদেশের জন্য একটি কমিউনিটি-চালিত প্ল্যাটফর্ম।
               </p>
             </div>
             <div>
-              <h4 className="font-headline font-bold mb-4">Quick Links</h4>
+              <h4 className="font-bold mb-4 text-white">লিঙ্ক</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/requests" className="hover:text-primary">Browse Requests</Link></li>
-                <li><Link href="/offers" className="hover:text-primary">Browse Offers</Link></li>
-                <li><Link href="/about" className="hover:text-primary">About Us</Link></li>
-                <li><Link href="/contact" className="hover:text-primary">Contact Support</Link></li>
+                <li><Link href="/requests" className="hover:text-primary">অনুরোধ খুঁজুন</Link></li>
+                <li><Link href="/offers" className="hover:text-primary">অফার দেখুন</Link></li>
+                <li><Link href="/about" className="hover:text-primary">আমাদের সম্পর্কে</Link></li>
+                <li><Link href="/contact" className="hover:text-primary">সাপোর্ট</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-headline font-bold mb-4">Legal</h4>
+              <h4 className="font-bold mb-4 text-white">আইনগত</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/terms" className="hover:text-primary">Terms of Service</Link></li>
-                <li><Link href="/privacy" className="hover:text-primary">Privacy Policy</Link></li>
-                <li><Link href="/guidelines" className="hover:text-primary">Community Guidelines</Link></li>
+                <li><Link href="/terms" className="hover:text-primary">ব্যবহারের শর্তাবলী</Link></li>
+                <li><Link href="/privacy" className="hover:text-primary">প্রাইভেসি পলিসি</Link></li>
+                <li><Link href="/guidelines" className="hover:text-primary">কমিউনিটি নির্দেশিকা</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-headline font-bold mb-4">Newsletter</h4>
-              <p className="text-sm text-muted-foreground mb-4">Stay updated with the latest community needs.</p>
+              <h4 className="font-bold mb-4 text-white">নিউজলেটার</h4>
+              <p className="text-sm text-muted-foreground mb-4">কমিউনিটির সর্বশেষ খবরাখবর পেতে যুক্ত হন।</p>
               <div className="flex gap-2">
-                <Input placeholder="Email address" className="bg-background/50 border-white/10" />
-                <Button className="bg-primary hover:bg-primary/90">Join</Button>
+                <Input placeholder="ইমেইল অ্যাড্রেস" className="bg-background/50 border-white/10" />
+                <Button className="bg-primary hover:bg-primary/90">যুক্ত হন</Button>
               </div>
             </div>
           </div>
           <div className="pt-8 border-t border-white/5 text-center text-xs text-muted-foreground">
-            © {new Date().getFullYear()} SevaSetu NGO. All rights reserved.
+            © {new Date().getFullYear()} সেবা সেতু এনজিও। সর্বস্বত্ব সংরক্ষিত।
           </div>
         </div>
       </footer>

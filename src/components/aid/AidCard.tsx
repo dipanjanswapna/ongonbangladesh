@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -22,10 +21,19 @@ const categoryIcons: Record<string, any> = {
   food: Utensils,
   housing: Home,
   shelter: Home,
+  চিকিৎসা: HeartPulse,
+  শিক্ষা: GraduationCap,
+  খাদ্য: Utensils,
 };
 
 export function AidCard({ id, title, description, location, category, urgency, createdAt, type }: AidCardProps) {
-  const Icon = categoryIcons[category.toLowerCase()] || HeartPulse;
+  const Icon = categoryIcons[category.toLowerCase()] || categoryIcons[category] || HeartPulse;
+
+  const urgencyText = {
+    high: 'জরুরি',
+    medium: 'মাঝারি',
+    low: 'স্বল্প'
+  };
 
   return (
     <Card className="overflow-hidden group hover:shadow-lg hover:shadow-primary/10 transition-all border-white/5 bg-card">
@@ -35,19 +43,19 @@ export function AidCard({ id, title, description, location, category, urgency, c
             <Icon className="h-5 w-5" />
           </div>
           <div>
-            <Badge variant="outline" className="mb-1 uppercase tracking-wider text-[10px]">
+            <Badge variant="outline" className="mb-1 uppercase tracking-wider text-[10px] text-accent border-accent/30">
               {category}
             </Badge>
-            <h3 className="font-headline text-lg font-bold leading-tight group-hover:text-accent transition-colors">
+            <h3 className="text-lg font-bold leading-tight group-hover:text-accent transition-colors text-white">
               {title}
             </h3>
           </div>
         </div>
         <Badge className={cn(
           "text-white border-0",
-          urgency === 'high' ? "bg-primary" : urgency === 'medium' ? "bg-orange-500" : "bg-green-600"
+          urgency === 'high' ? "bg-red-600" : urgency === 'medium' ? "bg-orange-500" : "bg-green-600"
         )}>
-          {urgency}
+          {urgencyText[urgency]}
         </Badge>
       </CardHeader>
       <CardContent className="p-4 pt-0">
@@ -64,10 +72,10 @@ export function AidCard({ id, title, description, location, category, urgency, c
         </div>
       </CardContent>
       <CardFooter className="p-4 border-t border-white/5 flex gap-2">
-        <Button size="sm" className="w-full bg-primary hover:bg-primary/90">
-          {type === 'request' ? 'Offer Help' : 'Request Help'}
+        <Button size="sm" className="w-full bg-primary hover:bg-primary/90 font-bold">
+          {type === 'request' ? 'সাহায্য করতে চাই' : 'সাহায্য চাই'}
         </Button>
-        <Button size="sm" variant="ghost" className="px-2">
+        <Button size="sm" variant="ghost" className="px-2 text-white">
           <ArrowRight className="h-4 w-4" />
         </Button>
       </CardFooter>
