@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -9,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { MapPin, Search, Phone, Droplet, User, Navigation } from 'lucide-react';
 import { bloodDonors } from '@/lib/blood-data';
 import { Badge } from '@/components/ui/badge';
+import Image from 'next/image';
 
 export default function DonorsListPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -90,7 +90,9 @@ export default function DonorsListPage() {
                   onClick={() => setSelectedDonor(donor)}
                 >
                   <div className={`p-2 rounded-full transition-all ${selectedDonor?.id === donor.id ? 'bg-red-600 scale-125' : 'bg-white text-red-600 hover:scale-110'}`}>
-                    <Droplet className="h-5 w-5" />
+                    <div className="h-5 w-5 flex items-center justify-center">
+                      <Droplet className="h-full w-full" />
+                    </div>
                   </div>
                   <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 hidden group-hover:block bg-white text-red-600 px-2 py-1 rounded text-[10px] font-bold whitespace-nowrap z-50">
                     {donor.name} ({donor.group})
