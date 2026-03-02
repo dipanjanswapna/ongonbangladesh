@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -61,9 +60,11 @@ export function Navbar() {
               </button>
             </div>
 
-            <Button variant="ghost" size="icon" className="h-8 w-8 md:h-9 md:w-9 bg-orange-50 hover:bg-orange-100 border border-orange-100 rounded-lg text-orange-600 transition-colors">
-              <User className="h-4 w-4 md:h-5 md:w-5" />
-            </Button>
+            <Link href="/login">
+              <Button variant="ghost" size="icon" className="h-8 w-8 md:h-9 md:w-9 bg-orange-50 hover:bg-orange-100 border border-orange-100 rounded-lg text-orange-600 transition-colors">
+                <User className="h-4 w-4 md:h-5 md:w-5" />
+              </Button>
+            </Link>
 
             <Link href="/donate">
               <Button className="bg-[#008744] hover:bg-[#007038] text-white font-bold px-3 md:px-5 h-8 md:h-9 rounded-lg shadow-sm transition-all text-[10px] md:text-xs">
@@ -93,9 +94,13 @@ export function Navbar() {
                     <Link href="/requests" className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-gray-700 font-bold transition-all">সাহায্য অনুরোধ</Link>
                     <Link href="/volunteer" className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-gray-700 font-bold transition-all">স্বেচ্ছাসেবক হন</Link>
                     <Link href="/donate" className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-gray-700 font-bold transition-all">অনুদান কেন্দ্র</Link>
+                    <Link href="/profile" className="flex items-center gap-3 p-3 rounded-xl hover:bg-primary/5 text-gray-700 font-bold transition-all">ইউজার পোর্টাল</Link>
                   </div>
 
                   <div className="p-6 bg-white border-t border-gray-100 space-y-4">
+                    <Link href="/login" className="w-full">
+                      <Button className="w-full bg-primary text-white font-bold h-12 rounded-xl">লগইন করুন</Button>
+                    </Link>
                     <div className="flex items-center justify-between bg-gray-100 p-1 rounded-xl">
                       <button onClick={() => setLang('bn')} className={cn("flex-1 py-2 text-xs font-bold rounded-lg transition-all", lang === 'bn' ? "bg-white shadow-sm text-gray-900" : "text-gray-500")}>বাংলা</button>
                       <button onClick={() => setLang('en')} className={cn("flex-1 py-2 text-xs font-bold rounded-lg transition-all", lang === 'en' ? "bg-white shadow-sm text-gray-900" : "text-gray-500")}>English</button>
