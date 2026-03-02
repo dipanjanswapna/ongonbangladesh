@@ -1,3 +1,4 @@
+
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
@@ -25,7 +26,7 @@ export default function Home() {
       id: '2',
       title: 'পল্লী স্কুলের জন্য স্বেচ্ছাসেবক শিক্ষক',
       description: 'সিলেটের আমাদের কমিউনিটি স্কুলে প্রাথমিক স্তরের শিক্ষার্থীদের ইংরেজি ও গণিত শেখানোর জন্য স্বেচ্ছাসেবক প্রয়োজন।',
-      location: 'সিলেট, বাংলাদেশ',
+      location: 'শিক্ষা',
       category: 'শিক্ষা',
       urgency: 'medium' as const,
       createdAt: '৫ ঘণ্টা আগে',
@@ -58,11 +59,12 @@ export default function Home() {
                 fill
                 className="object-cover"
                 priority
+                unoptimized
                 data-ai-hint={heroImage.imageHint}
               />
             )}
-            {/* Dark overlay to make text pop while keeping image visible */}
-            <div className="absolute inset-0 bg-black/40" />
+            {/* Overlay to ensure text visibility and allow image to be seen */}
+            <div className="absolute inset-0 bg-black/50" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10 text-center">
