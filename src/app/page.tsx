@@ -1,3 +1,4 @@
+
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
@@ -48,7 +49,7 @@ export default function Home() {
       <Navbar />
 
       <main className="flex-grow">
-        {/* Hero Section - Full Screen with Centered Content */}
+        {/* Hero Section - Full Screen with New Image Background */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-20">
           <div className="absolute inset-0 z-0">
             {heroImage && (
@@ -56,36 +57,36 @@ export default function Home() {
                 src={heroImage.imageUrl} 
                 alt={heroImage.description}
                 fill
-                className="object-cover opacity-20"
+                className="object-cover opacity-40"
                 priority
                 data-ai-hint={heroImage.imageHint}
               />
             )}
-            <div className="absolute inset-0 hero-gradient" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-background" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10 text-center">
             <div className="max-w-4xl mx-auto animate-in fade-in zoom-in duration-1000">
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-white/90 text-[9px] md:text-xs font-bold mb-6 border border-white/10 uppercase tracking-widest mx-auto">
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-white/90 text-[10px] md:text-xs font-bold mb-6 border border-white/10 uppercase tracking-widest mx-auto">
                 <Zap className="h-3 w-3 text-yellow-400 fill-yellow-400" /> Sister concern of PRANGON&apos;S ECOSYSTEM
               </div>
               
-              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-lg">
                 হৃদয় সংযোগ, <br /> 
-                <span className="text-white underline decoration-white/30">ক্ষুধার অবসান।</span>
+                <span className="text-white">ক্ষুধার অবসান।</span>
               </h1>
               
-              <p className="text-sm md:text-lg lg:text-xl text-white/90 mb-10 leading-relaxed max-w-2xl mx-auto font-medium px-4">
+              <p className="text-sm md:text-base lg:text-lg text-white/95 mb-10 leading-relaxed max-w-2xl mx-auto font-medium px-4 drop-shadow-md">
                 ONGON BANGLADESH একটি ডেডিকেটেড কমিউনিটি প্ল্যাটফর্ম যেখানে মানবিকতা প্রয়োজনে সাড়া দেয়। আপনি সাহায্য খুঁজছেন বা দিতে চান, আমরা আপনার সংযোগ তৈরি করি।
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4">
                 <Link href="/requests/new" className="w-full sm:w-auto">
-                  <Button size="lg" className="bg-white text-primary-foreground hover:bg-white/90 h-12 md:h-14 px-8 text-base md:text-lg font-bold w-full shadow-2xl rounded-xl transition-all hover:scale-105 active:scale-95">
+                  <Button size="lg" className="bg-white text-primary-foreground hover:bg-white/90 h-11 md:h-12 px-6 text-sm md:text-base font-bold w-full shadow-2xl rounded-xl transition-all hover:scale-105 active:scale-95">
                     আমার সাহায্য চাই
                   </Button>
                 </Link>
-                <Button size="lg" variant="outline" className="h-12 md:h-14 px-8 text-base md:text-lg font-bold border-white/30 text-white hover:bg-white/10 w-full sm:w-auto backdrop-blur-md rounded-xl transition-all hover:scale-105 active:scale-95">
+                <Button size="lg" variant="outline" className="h-11 md:h-12 px-6 text-sm md:text-base font-bold border-white/30 text-white hover:bg-white/10 w-full sm:w-auto backdrop-blur-md rounded-xl transition-all hover:scale-105 active:scale-95">
                   স্বেচ্ছাসেবক হতে চাই
                 </Button>
               </div>
