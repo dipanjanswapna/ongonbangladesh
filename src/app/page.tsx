@@ -87,7 +87,7 @@ export default function Home() {
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             {heroImage?.imageUrl ? (
               <Image 
@@ -102,7 +102,7 @@ export default function Home() {
             ) : (
               <div className="w-full h-full bg-[#781013]" />
             )}
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]" />
+            <div className="absolute inset-0 bg-black/50 backdrop-blur-[1px]" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10 text-center">
@@ -111,23 +111,23 @@ export default function Home() {
                 <Zap className="h-3 w-3 text-yellow-400 fill-yellow-400" /> Sister concern of PRANGON&apos;S ECOSYSTEM
               </div>
               
-              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-4 leading-tight tracking-tight drop-shadow-2xl">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 leading-tight tracking-tight drop-shadow-2xl">
                 হৃদয় সংযোগ, <br /> 
                 <span className="text-white">ক্ষুধার অবসান।</span>
               </h1>
               
-              <p className="text-[10px] md:text-sm text-white/90 mb-8 leading-relaxed max-w-lg mx-auto font-medium px-4 drop-shadow-lg">
+              <p className="text-xs md:text-base text-white/90 mb-8 leading-relaxed max-w-xl mx-auto font-medium px-4 drop-shadow-lg">
                 ONGON BANGLADESH একটি ডেডিকেটেড কমিউনিটি প্ল্যাটফর্ম যেখানে মানবিকতা প্রয়োজনে সাড়া দেয়। আপনি সাহায্য খুঁজছেন বা দিতে চান, আমরা আপনার সংযোগ তৈরি করি।
               </p>
               
               <div className="flex flex-col sm:flex-row gap-3 justify-center items-center px-4">
                 <Link href="/requests/new" className="w-full sm:w-auto">
-                  <Button size="sm" className="bg-white text-[#781013] hover:bg-white/90 h-10 px-6 text-xs md:text-sm font-bold w-full shadow-2xl rounded-xl">
+                  <Button size="lg" className="bg-white text-[#781013] hover:bg-white/90 h-12 px-8 text-sm font-bold w-full shadow-2xl rounded-xl">
                     আমার সাহায্য চাই
                   </Button>
                 </Link>
                 <Link href="/volunteer" className="w-full sm:w-auto">
-                  <Button size="sm" variant="outline" className="h-10 px-6 text-xs md:text-sm font-bold border-white/30 text-white hover:bg-white/10 w-full backdrop-blur-md rounded-xl">
+                  <Button size="lg" variant="outline" className="h-12 px-8 text-sm font-bold border-white/30 text-white hover:bg-white/10 w-full backdrop-blur-md rounded-xl">
                     স্বেচ্ছাসেবক হতে চাই
                   </Button>
                 </Link>
@@ -153,9 +153,9 @@ export default function Home() {
         </section>
 
         {/* Features Section */}
-        <section className="py-16 md:py-24">
+        <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
-            <div className="text-center max-w-2xl mx-auto mb-12">
+            <div className="text-center max-w-2xl mx-auto mb-10">
               <h2 className="text-2xl md:text-3xl font-bold mb-3 text-white"> কেন আমাদের প্ল্যাটফর্ম ব্যবহার করবেন?</h2>
               <p className="text-white/70 text-sm">আমরা আধুনিক প্রযুক্তির মাধ্যমে সাহায্য সরাসরি প্রাপকের কাছে পৌঁছানো নিশ্চিত করি।</p>
             </div>
@@ -180,7 +180,7 @@ export default function Home() {
         </section>
 
         {/* Featured Requests Section */}
-        <section className="py-16 md:py-24" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
+        <section className="py-12 md:py-16" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 text-center md:text-left">
               <div className="w-full md:w-auto">
@@ -201,9 +201,9 @@ export default function Home() {
         </section>
 
         {/* Join Us Section */}
-        <section className="py-16 md:py-24 bg-background">
+        <section className="py-12 md:py-16 bg-background">
           <div className="container mx-auto px-4">
-            <div className="text-center max-w-2xl mx-auto mb-12">
+            <div className="text-center max-w-2xl mx-auto mb-10">
               <h2 className="text-2xl md:text-4xl font-bold mb-4 text-white">আমাদের সাথে যুক্ত হোন</h2>
               <p className="text-white/70 text-sm md:text-base">
                 নিচের যে কোনো পদ্ধতিতে আমাদের সঙ্গে যুক্ত হয়ে আর্তমানবতার সেবায় ভূমিকা রাখতে পারেন।
@@ -230,9 +230,9 @@ export default function Home() {
         </section>
 
         {/* Media Coverage Section */}
-        <section className="py-16 md:py-24 bg-background border-t border-white/5">
+        <section className="py-12 md:py-16 bg-background border-t border-white/5">
           <div className="container mx-auto px-4">
-            <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="text-center max-w-3xl mx-auto mb-10">
               <h2 className="text-2xl md:text-4xl font-bold mb-3 text-white">যেখানে আমাদের গল্প প্রকাশিত হয়েছে</h2>
               <p className="text-white/60 text-sm md:text-base">
                 আমাদের কাজ প্রকাশিত হয়েছে দেশের শীর্ষস্থানীয় সংবাদপত্র, টিভি চ্যানেল, ম্যাগাজিন এবং অনলাইন প্ল্যাটফর্মে।
@@ -240,7 +240,7 @@ export default function Home() {
             </div>
 
             <Tabs defaultValue="newspaper" className="w-full">
-              <div className="flex justify-center mb-10">
+              <div className="flex justify-center mb-8">
                 <TabsList className="bg-white/10 p-1 rounded-full h-auto border border-white/10 backdrop-blur-md">
                   <TabsTrigger value="newspaper" className="rounded-full px-6 py-2 data-[state=active]:bg-white data-[state=active]:text-[#781013] font-bold text-[10px] md:text-xs text-white">সংবাদপত্র</TabsTrigger>
                   <TabsTrigger value="tv" className="rounded-full px-6 py-2 data-[state=active]:bg-white data-[state=active]:text-[#781013] font-bold text-[10px] md:text-xs text-white">টিভি</TabsTrigger>
