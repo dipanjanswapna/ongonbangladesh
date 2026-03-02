@@ -3,10 +3,12 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
 import { Input } from '@/components/ui/input';
-import { Heart, ShieldCheck, Users, Zap, Search, ArrowRight, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase } from 'lucide-react';
+import { Heart, ShieldCheck, Users, Zap, Search, ArrowRight, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase, Newspaper, Tv, BookOpen, Globe } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent } from '@/components/ui/card';
 
 export default function Home() {
   // Find the specific hero image from the placeholder data
@@ -72,6 +74,13 @@ export default function Home() {
     }
   ];
 
+  const mediaCoverage = [
+    { id: '1', title: 'Daily Ittefaq', date: '10 Aug', imageId: 'news-ittefaq', type: 'newspaper' },
+    { id: '2', title: 'Prothom Alo', date: '17 Aug', imageId: 'news-prothom-alo', type: 'newspaper' },
+    { id: '3', title: 'Kaler Kontho', date: '16 Aug', imageId: 'news-kaler-kontho', type: 'newspaper' },
+    { id: '4', title: 'Kal Bela', date: '10 Aug', imageId: 'news-kalbela', type: 'newspaper' },
+  ];
+
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-background">
       <Navbar />
@@ -104,24 +113,26 @@ export default function Home() {
                 <Zap className="h-3 w-3 text-yellow-400 fill-yellow-400" /> Sister concern of PRANGON&apos;S ECOSYSTEM
               </div>
               
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-2xl">
                 হৃদয় সংযোগ, <br /> 
                 <span className="text-white">ক্ষুধার অবসান।</span>
               </h1>
               
-              <p className="text-sm md:text-base lg:text-lg text-white/95 mb-10 leading-relaxed max-w-2xl mx-auto font-medium px-4 drop-shadow-lg">
+              <p className="text-xs md:text-sm lg:text-base text-white/95 mb-10 leading-relaxed max-w-xl mx-auto font-medium px-4 drop-shadow-lg">
                 ONGON BANGLADESH একটি ডেডিকেটেড কমিউনিটি প্ল্যাটফর্ম যেখানে মানবিকতা প্রয়োজনে সাড়া দেয়। আপনি সাহায্য খুঁজছেন বা দিতে চান, আমরা আপনার সংযোগ তৈরি করি।
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center px-4">
                 <Link href="/requests/new" className="w-full sm:w-auto">
-                  <Button size="lg" className="bg-white text-[#781013] hover:bg-white/90 h-11 md:h-12 px-6 text-sm md:text-base font-bold w-full shadow-2xl rounded-xl transition-all hover:scale-105 active:scale-95">
+                  <Button size="lg" className="bg-white text-[#781013] hover:bg-white/90 h-10 md:h-11 px-6 text-xs md:text-sm font-bold w-full shadow-2xl rounded-xl transition-all hover:scale-105 active:scale-95">
                     আমার সাহায্য চাই
                   </Button>
                 </Link>
-                <Button size="lg" variant="outline" className="h-11 md:h-12 px-6 text-sm md:text-base font-bold border-white/30 text-white hover:bg-white/10 w-full sm:w-auto backdrop-blur-md rounded-xl transition-all hover:scale-105 active:scale-95">
-                  স্বেচ্ছাসেবক হতে চাই
-                </Button>
+                <Link href="/volunteer" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="h-10 md:h-11 px-6 text-xs md:text-sm font-bold border-white/30 text-white hover:bg-white/10 w-full sm:w-auto backdrop-blur-md rounded-xl transition-all hover:scale-105 active:scale-95">
+                    স্বেচ্ছাসেবক হতে চাই
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -217,6 +228,66 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Media Coverage Section - New */}
+        <section className="py-20 md:py-28 bg-white text-gray-900">
+          <div className="container mx-auto px-4">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tighter">যেখানে আমাদের গল্প প্রকাশিত হয়েছে</h2>
+              <p className="text-gray-500 text-sm md:text-lg">
+                আমাদের কাজ প্রকাশিত হয়েছে দেশের শীর্ষস্থানীয় সংবাদপত্র, টিভি চ্যানেল, ম্যাগাজিন এবং অনলাইন প্ল্যাটফর্মে।
+              </p>
+            </div>
+
+            <Tabs defaultValue="newspaper" className="w-full">
+              <div className="flex justify-center mb-12">
+                <TabsList className="bg-gray-100 p-1 rounded-full h-auto">
+                  <TabsTrigger value="newspaper" className="rounded-full px-6 py-2 data-[state=active]:bg-primary data-[state=active]:text-white font-bold text-xs md:text-sm">সংবাদপত্র</TabsTrigger>
+                  <TabsTrigger value="tv" className="rounded-full px-6 py-2 data-[state=active]:bg-primary data-[state=active]:text-white font-bold text-xs md:text-sm">টিভি</TabsTrigger>
+                  <TabsTrigger value="magazine" className="rounded-full px-6 py-2 data-[state=active]:bg-primary data-[state=active]:text-white font-bold text-xs md:text-sm">ম্যাগাজিন</TabsTrigger>
+                  <TabsTrigger value="online" className="rounded-full px-6 py-2 data-[state=active]:bg-primary data-[state=active]:text-white font-bold text-xs md:text-sm">অনলাইন</TabsTrigger>
+                </TabsList>
+              </div>
+
+              <TabsContent value="newspaper">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {mediaCoverage.map((item) => {
+                    const img = PlaceHolderImages.find(p => p.id === item.imageId);
+                    return (
+                      <Card key={item.id} className="border-0 shadow-xl rounded-2xl overflow-hidden hover:scale-[1.03] transition-transform duration-300">
+                        <CardContent className="p-0">
+                          <div className="relative aspect-[4/5] w-full">
+                            <Image 
+                              src={img?.imageUrl || ''} 
+                              alt={item.title} 
+                              fill 
+                              className="object-cover"
+                              unoptimized
+                              data-ai-hint={img?.imageHint}
+                            />
+                          </div>
+                          <div className="p-5 text-center bg-white">
+                            <h4 className="font-bold text-lg mb-1">{item.title}</h4>
+                            <p className="text-xs text-gray-400 font-medium">{item.date}</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </TabsContent>
+              <TabsContent value="tv">
+                <div className="text-center py-20 text-gray-400 font-medium">টিভি নিউজ কাভারেজ লোড হচ্ছে...</div>
+              </TabsContent>
+              <TabsContent value="magazine">
+                <div className="text-center py-20 text-gray-400 font-medium">ম্যাগাজিন ফিচার লোড হচ্ছে...</div>
+              </TabsContent>
+              <TabsContent value="online">
+                <div className="text-center py-20 text-gray-400 font-medium">অনলাইন আর্টিকেল লোড হচ্ছে...</div>
+              </TabsContent>
+            </Tabs>
           </div>
         </section>
       </main>
