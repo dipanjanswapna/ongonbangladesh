@@ -74,7 +74,7 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <Link href="/requests/new" className="w-full sm:w-auto">
-                  <Button size="lg" className="bg-white text-primary hover:bg-white/90 h-14 px-8 text-lg font-bold w-full shadow-xl">
+                  <Button size="lg" className="bg-white text-primary-foreground hover:bg-white/90 h-14 px-8 text-lg font-bold w-full shadow-xl">
                     আমার সাহায্য চাই
                   </Button>
                 </Link>
@@ -96,7 +96,7 @@ export default function Home() {
                 className="pl-10 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50 w-full"
               />
             </div>
-            <Button size="lg" className="bg-white text-primary hover:bg-white/90 w-full md:w-auto h-12 px-8 font-bold">
+            <Button size="lg" className="bg-white text-primary-foreground hover:bg-white/90 w-full md:w-auto h-12 px-8 font-bold">
               সব দেখুন
             </Button>
           </div>
@@ -106,7 +106,7 @@ export default function Home() {
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">কেন সেবা সেতু ব্যবহার করবেন?</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white"> কেন সেবা সেতু ব্যবহার করবেন?</h2>
               <p className="text-white/80 text-base md:text-lg">আমরা আধুনিক প্রযুক্তি এবং স্থানীয় কমিউনিটির মাধ্যমে সাহায্য সরাসরি প্রাপকের কাছে পৌঁছানো নিশ্চিত করি।</p>
             </div>
 
@@ -180,10 +180,10 @@ export default function Home() {
             </div>
             <div>
               <h4 className="font-bold mb-4 text-white">নিউজলেটার</h4>
-              <p className="text-sm text-white/70 mb-4">কমিউনিটির সর্বশেষ খ খবর পেতে যুক্ত হন।</p>
+              <p className="text-sm text-white/70 mb-4">কমিউনিটির সর্বশেষ খবর পেতে যুক্ত হন।</p>
               <div className="flex flex-col gap-2">
                 <Input placeholder="ইমেইল অ্যাড্রেস" className="bg-white/10 border-white/20 text-white placeholder:text-white/50 w-full" />
-                <Button className="bg-white text-primary hover:bg-white/90 w-full font-bold">যুক্ত হন</Button>
+                <Button className="bg-white text-primary-foreground hover:bg-white/90 w-full font-bold">যুক্ত হন</Button>
               </div>
             </div>
           </div>

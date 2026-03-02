@@ -11,18 +11,18 @@ export function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Simulated auth state
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <Heart className="h-6 w-6 md:h-8 md:w-8 text-primary fill-primary" />
+          <Heart className="h-6 w-6 md:h-8 md:w-8 text-white fill-white" />
           <span className="text-lg md:text-2xl font-bold text-white tracking-tight">সেবা সেতু</span>
         </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">
-          <Link href="/requests" className="text-sm font-medium hover:text-accent transition-colors">সাহায্য খুঁজুন</Link>
-          <Link href="/volunteer" className="text-sm font-medium hover:text-accent transition-colors">স্বেচ্ছাসেবক</Link>
-          <Link href="/about" className="text-sm font-medium hover:text-accent transition-colors">আমাদের লক্ষ্য</Link>
+          <Link href="/requests" className="text-sm font-medium text-white/80 hover:text-white transition-colors">সাহায্য খুঁজুন</Link>
+          <Link href="/volunteer" className="text-sm font-medium text-white/80 hover:text-white transition-colors">স্বেচ্ছাসেবক</Link>
+          <Link href="/about" className="text-sm font-medium text-white/80 hover:text-white transition-colors">আমাদের লক্ষ্য</Link>
           
           {isLoggedIn ? (
             <div className="flex items-center gap-4">
@@ -37,7 +37,7 @@ export function Navbar() {
           ) : (
             <div className="flex items-center gap-3">
               <Button variant="ghost" onClick={() => setIsLoggedIn(true)} className="text-white hover:bg-white/10">লগ ইন</Button>
-              <Button className="bg-primary hover:bg-primary/90 text-white">সাইন আপ</Button>
+              <Button className="bg-white text-primary-foreground hover:bg-white/90 font-bold">সাইন আপ</Button>
             </div>
           )}
         </div>
@@ -50,7 +50,7 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-16 bg-card border-b p-6 space-y-6 animate-in slide-in-from-top-4 duration-300 shadow-2xl z-40">
+        <div className="md:hidden fixed inset-x-0 top-16 bg-card border-b border-white/10 p-6 space-y-6 animate-in slide-in-from-top-4 duration-300 shadow-2xl z-40">
           <nav className="flex flex-col space-y-4">
             <Link href="/requests" className="text-lg font-bold text-white hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>সাহায্য খুঁজুন</Link>
             <Link href="/volunteer" className="text-lg font-bold text-white hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>স্বেচ্ছাসেবক</Link>
