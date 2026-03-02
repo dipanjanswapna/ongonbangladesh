@@ -3,7 +3,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
 import { Input } from '@/components/ui/input';
-import { Heart, ShieldCheck, Users, Zap, Search, ArrowRight } from 'lucide-react';
+import { Heart, ShieldCheck, Users, Zap, Search, ArrowRight, Facebook, Youtube, Instagram } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -65,7 +65,7 @@ export default function Home() {
               />
             ) : (
               // Fallback background color if image fails
-              <div className="w-full h-full bg-[#ed1f26]" />
+              <div className="w-full h-full bg-[#781013]" />
             )}
             {/* Overlay to ensure text visibility and allow image to be seen */}
             <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
@@ -88,7 +88,7 @@ export default function Home() {
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4">
                 <Link href="/requests/new" className="w-full sm:w-auto">
-                  <Button size="lg" className="bg-white text-[#ed1f26] hover:bg-white/90 h-11 md:h-12 px-6 text-sm md:text-base font-bold w-full shadow-2xl rounded-xl transition-all hover:scale-105 active:scale-95">
+                  <Button size="lg" className="bg-white text-[#781013] hover:bg-white/90 h-11 md:h-12 px-6 text-sm md:text-base font-bold w-full shadow-2xl rounded-xl transition-all hover:scale-105 active:scale-95">
                     আমার সাহায্য চাই
                   </Button>
                 </Link>
@@ -110,7 +110,7 @@ export default function Home() {
                 className="pl-11 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/40 w-full rounded-xl text-sm"
               />
             </div>
-            <Button size="lg" className="bg-white text-[#ed1f26] hover:bg-white/90 w-full md:w-auto h-12 px-8 font-bold rounded-xl text-sm shadow-xl">
+            <Button size="lg" className="bg-white text-[#781013] hover:bg-white/90 w-full md:w-auto h-12 px-8 font-bold rounded-xl text-sm shadow-xl">
               সব দেখুন
             </Button>
           </div>
@@ -165,52 +165,87 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-black/30 border-t border-white/5 py-12 md:py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-            <div className="space-y-4">
-              <Link href="/" className="flex items-center gap-2">
-                <Heart className="h-6 w-6 text-white fill-white" />
-                <span className="text-lg font-bold text-white uppercase tracking-tighter">ONGON BANGLADESH</span>
-              </Link>
-              <p className="text-xs text-white/60 leading-relaxed">
-                বাংলাদেশের জন্য একটি কমিউনিটি-চালিত প্ল্যাটফর্ম। যাদের প্রয়োজন তাদের সাথে যারা দিতে পারেন তাদের সংযোগ করা।
-              </p>
-              <div className="pt-2">
-                <p className="text-[10px] text-white/40 font-bold italic uppercase tracking-widest">
-                  Sister concern of PRANGON&apos;S ECOSYSTEM
+      {/* Improved Footer with Rounded Design and Red Theme */}
+      <footer className="px-4 pb-8 md:pb-12 bg-transparent">
+        <div className="container mx-auto max-w-7xl">
+          <div className="bg-[#781013] rounded-[2.5rem] p-8 md:p-14 shadow-2xl relative overflow-hidden border border-white/10">
+            {/* Top Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12">
+              {/* Brand & Description */}
+              <div className="lg:col-span-5 space-y-6">
+                <div className="flex items-center gap-3">
+                  <div className="bg-white/10 p-2 rounded-xl">
+                    <Heart className="h-6 w-6 text-white fill-white" />
+                  </div>
+                  <span className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter">ONGON BANGLADESH</span>
+                </div>
+                <p className="text-sm md:text-base text-white/80 leading-relaxed max-w-md">
+                  বাংলাদেশের জন্য একটি AI-চালিত কমিউনিটি প্ল্যাটফর্ম, যা মানবিক সহায়তার প্রয়োজনে দ্রুত সংযোগ তৈরি করে এবং স্বচ্ছতা নিশ্চিত করে। আমরা সরাসরি সাহায্য পৌঁছানো নিশ্চিত করি।
+                </p>
+                <div className="pt-2">
+                  <p className="text-[10px] md:text-xs text-white/40 font-bold italic uppercase tracking-[0.2em]">
+                    Sister concern of PRANGON&apos;S ECOSYSTEM
+                  </p>
+                </div>
+                
+                {/* Newsletter Section Integrated Like Image */}
+                <div className="pt-8 space-y-4">
+                  <h4 className="font-bold text-white text-base md:text-lg">নিউজলেটারে যোগ দিন</h4>
+                  <div className="flex flex-col sm:flex-row gap-3 max-w-md">
+                    <Input 
+                      placeholder="আপনার ইমেইল ঠিকানা" 
+                      className="bg-white/10 border-white/20 text-white placeholder:text-white/40 h-12 rounded-xl focus:ring-white/30" 
+                    />
+                    <Button className="bg-[#a3e635] hover:bg-[#bef264] text-[#1a1a1a] font-black h-12 px-8 rounded-xl shadow-lg transition-transform hover:scale-105 active:scale-95 whitespace-nowrap">
+                      সাবস্ক্রাইব করুন
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Link Columns */}
+              <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
+                <div className="space-y-5">
+                  <h4 className="font-black text-white text-xs uppercase tracking-widest opacity-50">বৈশিষ্ট্যসমূহ</h4>
+                  <ul className="space-y-3 text-sm font-bold">
+                    <li><Link href="/ai-help" className="text-white/70 hover:text-white transition-colors">AI চ্যাট সহায়তা</Link></li>
+                    <li><Link href="/tracking" className="text-white/70 hover:text-white transition-colors">অনুরোধ ট্র্যাকিং</Link></li>
+                    <li><Link href="/verification" className="text-white/70 hover:text-white transition-colors">ভেরিফিকেশন</Link></li>
+                  </ul>
+                </div>
+                <div className="space-y-5">
+                  <h4 className="font-black text-white text-xs uppercase tracking-widest opacity-50">সেবাসমূহ</h4>
+                  <ul className="space-y-3 text-sm font-bold">
+                    <li><Link href="/requests" className="text-white/70 hover:text-white transition-colors">সাহায্য খুঁজুন</Link></li>
+                    <li><Link href="/volunteer" className="text-white/70 hover:text-white transition-colors">স্বেচ্ছাসেবক হন</Link></li>
+                    <li><Link href="/community" className="text-white/70 hover:text-white transition-colors">কমিউনিটি</Link></li>
+                  </ul>
+                </div>
+                <div className="space-y-5">
+                  <h4 className="font-black text-white text-xs uppercase tracking-widest opacity-50">অন্যান্য</h4>
+                  <ul className="space-y-3 text-sm font-bold">
+                    <li><Link href="/about" className="text-white/70 hover:text-white transition-colors">আমাদের সম্পর্কে</Link></li>
+                    <li><Link href="/contact" className="text-white/70 hover:text-white transition-colors">যোগাযোগ</Link></li>
+                    <li><Link href="/faq" className="text-white/70 hover:text-white transition-colors">সাধারণ জিজ্ঞাসা</Link></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Section */}
+            <div className="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+              <div className="flex items-center gap-5">
+                <Link href="#" className="text-white/50 hover:text-white transition-colors"><Facebook className="h-5 w-5" /></Link>
+                <Link href="#" className="text-white/50 hover:text-white transition-colors"><Youtube className="h-5 w-5" /></Link>
+                <Link href="#" className="text-white/50 hover:text-white transition-colors"><Instagram className="h-5 w-5" /></Link>
+              </div>
+              <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+                <Link href="/terms" className="text-[10px] md:text-xs font-bold text-white/50 hover:text-white transition-colors uppercase tracking-widest">ব্যবহারের শর্তাবলী</Link>
+                <p className="text-[10px] md:text-xs font-medium text-white/30">
+                  © {new Date().getFullYear()} ONGON BANGLADESH. সর্বস্বত্ব সংরক্ষিত।
                 </p>
               </div>
             </div>
-            <div>
-              <h4 className="font-bold mb-4 text-white text-sm">প্রয়োজনীয় লিঙ্ক</h4>
-              <ul className="space-y-2 text-xs text-white/50">
-                <li><Link href="/requests" className="hover:text-white transition-colors">অনুরোধ খুঁজুন</Link></li>
-                <li><Link href="/volunteer" className="hover:text-white transition-colors">স্বেচ্ছাসেবক</Link></li>
-                <li><Link href="/about" className="hover:text-white transition-colors">আমাদের লক্ষ্য</Link></li>
-                <li><Link href="/contact" className="hover:text-white transition-colors">সাপোর্ট</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4 text-white text-sm">আইনগত</h4>
-              <ul className="space-y-2 text-xs text-white/50">
-                <li><Link href="/terms" className="hover:text-white transition-colors">ব্যবহারের শর্তাবলী</Link></li>
-                <li><Link href="/privacy" className="hover:text-white transition-colors">প্রাইভেসি পলিসি</Link></li>
-                <li><Link href="/guidelines" className="hover:text-white transition-colors">নির্দেশিকা</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4 text-white text-sm">নিউজলেটার</h4>
-              <p className="text-xs text-white/50 mb-4 leading-relaxed">সর্বশেষ খবর পেতে যুক্ত হন।</p>
-              <div className="flex flex-col gap-2">
-                <Input placeholder="ইমেইল অ্যাড্রেস" className="bg-white/5 border-white/10 text-white placeholder:text-white/30 w-full h-10 text-xs rounded-lg" />
-                <Button className="bg-white text-[#ed1f26] hover:bg-white/90 w-full font-bold h-10 text-xs rounded-lg shadow-lg">যুক্ত হন</Button>
-              </div>
-            </div>
-          </div>
-          <div className="pt-8 border-t border-white/5 text-center text-[10px] text-white/30 font-medium">
-            © {new Date().getFullYear()} ONGON BANGLADESH (PRANGON&apos;S ECOSYSTEM). সর্বস্বত্ব সংরক্ষিত।
           </div>
         </div>
       </footer>
