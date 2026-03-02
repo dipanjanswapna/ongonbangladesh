@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -45,7 +44,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <Navbar />
       <div className="flex flex-1 pt-16 md:pt-20">
         <AdminSidebar />
-        <main className="flex-1 p-4 md:p-8 overflow-x-hidden">
+        <main className="flex-1 p-4 md:p-8 lg:p-10 overflow-x-hidden w-full">
           <div className="container mx-auto max-w-7xl">
             {children}
           </div>
