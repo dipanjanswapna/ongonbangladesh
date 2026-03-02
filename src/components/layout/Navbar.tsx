@@ -15,7 +15,7 @@ export function Navbar() {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <Heart className="h-6 w-6 md:h-8 md:w-8 text-white fill-white" />
-          <span className="text-lg md:text-2xl font-bold text-white tracking-tight">সেবা সেতু</span>
+          <span className="text-lg md:text-2xl font-bold text-white tracking-tight uppercase">ONGON BANGLADESH</span>
         </Link>
 
         {/* Desktop Menu */}

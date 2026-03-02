@@ -70,7 +70,7 @@ export default function Home() {
                 হৃদয় সংযোগ, <span className="text-white underline decoration-white/30">ক্ষুধার অবসান।</span>
               </h1>
               <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto md:mx-0">
-                সেবা সেতু একটি ডেডিকেটেড কমিউনিটি প্ল্যাটফর্ম যেখানে মানবিকতা প্রয়োজনে সাড়া দেয়। আপনি সাহায্য খুঁজছেন বা দিতে চান, আমরা আপনার সংযোগ তৈরি করি।
+                ONGON BANGLADESH একটি ডেডিকেটেড কমিউনিটি প্ল্যাটফর্ম যেখানে মানবিকতা প্রয়োজনে সাড়া দেয়। আপনি সাহায্য খুঁজছেন বা দিতে চান, আমরা আপনার সংযোগ তৈরি করি।
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <Link href="/requests/new" className="w-full sm:w-auto">
@@ -106,8 +106,8 @@ export default function Home() {
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white"> কেন সেবা সেতু ব্যবহার করবেন?</h2>
-              <p className="text-white/80 text-base md:text-lg">আমরা আধুনিক প্রযুক্তি এবং স্থানীয় কমিউনিটির মাধ্যমে সাহায্য সরাসরি প্রাপকের কাছে পৌঁছানো নিশ্চিত করি।</p>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white"> কেন ONGON BANGLADESH ব্যবহার করবেন?</h2>
+              <p className="text-white/80 text-base md:text-lg">আমরা আধুনিক প্রযুক্তি এবং প্রাঙ্গণ ইকোসিস্টেম-এর সমর্থনের মাধ্যমে সাহায্য সরাসরি প্রাপকের কাছে পৌঁছানো নিশ্চিত করি।</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
@@ -155,10 +155,13 @@ export default function Home() {
             <div className="space-y-4">
               <Link href="/" className="flex items-center gap-2">
                 <Heart className="h-6 w-6 md:h-8 md:w-8 text-white fill-white" />
-                <span className="text-xl font-bold text-white">সেবা সেতু</span>
+                <span className="text-xl font-bold text-white uppercase tracking-tighter">ONGON BANGLADESH</span>
               </Link>
               <p className="text-sm text-white/70">
                 যাদের প্রয়োজন তাদের সাথে যারা দিতে পারেন তাদের সংযোগ করা। বাংলাদেশের জন্য একটি কমিউনিটি-চালিত প্ল্যাটফর্ম।
+              </p>
+              <p className="text-xs text-white/50 font-bold italic">
+                A sister concern of PRANGON'S ECOSYSTEM
               </p>
             </div>
             <div>
@@ -188,7 +191,7 @@ export default function Home() {
             </div>
           </div>
           <div className="pt-8 border-t border-white/10 text-center text-xs text-white/40">
-            © {new Date().getFullYear()} সেবা সেতু এনজিও। সর্বস্বত্ব সংরক্ষিত।
+            © {new Date().getFullYear()} ONGON BANGLADESH (PRANGON'S ECOSYSTEM). সর্বস্বত্ব সংরক্ষিত।
           </div>
         </div>
       </footer>
