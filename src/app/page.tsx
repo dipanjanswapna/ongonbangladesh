@@ -3,7 +3,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
 import { Input } from '@/components/ui/input';
-import { Heart, ShieldCheck, Users, Zap, Search, ArrowRight, Facebook, Youtube, Instagram } from 'lucide-react';
+import { Heart, ShieldCheck, Users, Zap, Search, ArrowRight, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -42,6 +42,33 @@ export default function Home() {
       urgency: 'high' as const,
       createdAt: '১ দিন আগে',
       type: 'request' as const
+    }
+  ];
+
+  const joinOptions = [
+    {
+      icon: HandCoins,
+      title: "নিয়মিত দাতা",
+      description: "প্রতি মাসে একটি নির্দিষ্ট অংক দান করে আমাদের কার্যক্রম সচল রাখুন।",
+      link: "/donate/regular"
+    },
+    {
+      icon: UserCheck,
+      title: "আজীবন ও দাতা সদস্য",
+      description: "সংস্থার স্থায়ী সদস্য হয়ে দীর্ঘমেয়াদী মানবিক লক্ষ্য অর্জনে পাশে থাকুন।",
+      link: "/membership"
+    },
+    {
+      icon: HeartHandshake,
+      title: "স্বেচ্ছাসেবক",
+      description: "আপনার দক্ষতা ও সময় দিয়ে সরাসরি মাঠ পর্যায়ে সাহায্য পৌঁছে দিন।",
+      link: "/volunteer"
+    },
+    {
+      icon: Briefcase,
+      title: "ক্যারিয়ার",
+      description: "মানবিক কাজের মাধ্যমে আপনার পেশাদার জীবন গড়ে তুলুন।",
+      link: "/careers"
     }
   ];
 
@@ -163,6 +190,35 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Join Us Section */}
+        <section className="py-20 md:py-28 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white tracking-tight">আমাদের সাথে যুক্ত হোন</h2>
+              <p className="text-white/70 text-base md:text-lg leading-relaxed">
+                নিচের যে কোনো পদ্ধতিতে আমাদের সঙ্গে যুক্ত হয়ে আর্তমানবতার সেবায় ভূমিকা রাখতে পারেন। আমরা আপনার জন্য অপশনগুলো সহজ করেছি।
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {joinOptions.map((option, i) => (
+                <div key={i} className="group p-8 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 flex flex-col items-center text-center">
+                  <div className="mb-6 p-4 rounded-2xl bg-white/10 text-white group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 shadow-xl">
+                    <option.icon className="h-8 w-8" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-white">{option.title}</h3>
+                  <p className="text-sm text-white/60 leading-relaxed mb-6">{option.description}</p>
+                  <Link href={option.link} className="mt-auto w-full">
+                    <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white hover:text-[#781013] font-bold rounded-xl transition-all">
+                      বিস্তারিত দেখুন
+                    </Button>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
 
       {/* Improved Footer with Rounded Design and Red Theme */}
@@ -255,4 +311,3 @@ export default function Home() {
     </div>
   );
 }
-
