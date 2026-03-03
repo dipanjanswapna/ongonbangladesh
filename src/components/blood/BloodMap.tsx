@@ -25,25 +25,29 @@ interface BloodMapProps {
   onSelectDonor: (donor: Donor) => void;
 }
 
-// Component to handle map centering and zoom animation
-function MapUpdater({ center, zoom, active }: { center: [number, number], zoom: number, active: boolean }) {
+// Component to handle map centering and zoom animation with safe validation
+function MapUpdater({ lat, lng, zoom, active }: { lat: number, lng: number, zoom: number, active: boolean }) {
   const map = useMap();
+  
   useEffect(() => {
-    // Validate coordinates to prevent (NaN, NaN) error before calling flyTo
-    const isValidCoordinate = 
-      Array.isArray(center) && 
-      center.length === 2 && 
-      typeof center[0] === 'number' && !isNaN(center[0]) &&
-      typeof center[1] === 'number' && !isNaN(center[1]);
+    // Extra safe check for lat/lng and zoom to prevent (NaN, NaN) errors
+    const isLatValid = typeof lat === 'number' && !isNaN(lat) && isFinite(lat);
+    const isLngValid = typeof lng === 'number' && !isNaN(lng) && isFinite(lng);
+    const isZoomValid = typeof zoom === 'number' && !isNaN(zoom);
 
-    if (active && isValidCoordinate) {
-      map.flyTo(center, zoom, {
-        animate: true,
-        duration: 1.5,
-        easeLinearity: 0.25
-      });
+    if (active && isLatValid && isLngValid && isZoomValid) {
+      try {
+        map.flyTo([lat, lng], zoom, {
+          animate: true,
+          duration: 1.5,
+          easeLinearity: 0.25
+        });
+      } catch (err) {
+        // Silently catch Leaflet internal errors to prevent UI crash
+      }
     }
-  }, [center, zoom, map, active]);
+  }, [lat, lng, zoom, map, active]);
+
   return null;
 }
 
@@ -57,16 +61,24 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
 
   const defaultCenter: [number, number] = [23.7509, 90.3843]; // Default to Dhaka
   
-  const mapCenter = useMemo(() => {
-    // Prioritize selected donor location with validation
-    if (selectedDonor && typeof selectedDonor.lat === 'number' && !isNaN(selectedDonor.lat)) {
-      return [selectedDonor.lat, selectedDonor.lng] as [number, number];
+  // Compute safe individual lat/lng values for the MapUpdater
+  const mapCoords = useMemo(() => {
+    // 1. Prioritize selected donor location with strict validation
+    if (selectedDonor && 
+        typeof selectedDonor.lat === 'number' && !isNaN(selectedDonor.lat) &&
+        typeof selectedDonor.lng === 'number' && !isNaN(selectedDonor.lng)) {
+      return { lat: selectedDonor.lat, lng: selectedDonor.lng, active: true };
     }
-    // Fallback to user location with validation
-    if (userLocation && typeof userLocation.lat === 'number' && !isNaN(userLocation.lat)) {
-      return [userLocation.lat, userLocation.lng] as [number, number];
+    
+    // 2. Fallback to user location with strict validation
+    if (userLocation && 
+        typeof userLocation.lat === 'number' && !isNaN(userLocation.lat) &&
+        typeof userLocation.lng === 'number' && !isNaN(userLocation.lng)) {
+      return { lat: userLocation.lat, lng: userLocation.lng, active: true };
     }
-    return defaultCenter;
+    
+    // 3. Absolute fallback to default center
+    return { lat: defaultCenter[0], lng: defaultCenter[1], active: false };
   }, [selectedDonor, userLocation]);
 
   const zoomLevel = selectedDonor ? 17 : 14;
@@ -123,30 +135,46 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
         />
         
         <ZoomControl position="topright" />
-        <MapUpdater center={mapCenter} zoom={zoomLevel} active={!!selectedDonor || !!userLocation} />
+        
+        <MapUpdater 
+          lat={mapCoords.lat} 
+          lng={mapCoords.lng} 
+          zoom={zoomLevel} 
+          active={mapCoords.active} 
+        />
 
-        {donors.map((donor) => (
-          <Marker 
-            key={donor.id} 
-            position={[donor.lat, donor.lng]} 
-            icon={donorIcon(donor.group, selectedDonor?.id === donor.id)}
-            eventHandlers={{
-              click: () => onSelectDonor(donor),
-            }}
-          >
-            <Popup closeButton={false} offset={[0, -5]} className="donor-popup">
-              <div className="p-2 min-w-[140px] text-center">
-                <h4 className="font-bold text-xs text-white leading-none">{donor.name}</h4>
-                <div className="flex items-center justify-center gap-1 mt-2">
-                  <Badge className="bg-red-600 text-[8px] h-4 px-1.5 font-black">{donor.group}</Badge>
-                  <span className="text-[9px] text-white/40">{donor.location}</span>
+        {donors.map((donor) => {
+          // Extra safety check for each marker position
+          if (typeof donor.lat !== 'number' || isNaN(donor.lat) || 
+              typeof donor.lng !== 'number' || isNaN(donor.lng)) {
+            return null;
+          }
+
+          return (
+            <Marker 
+              key={donor.id} 
+              position={[donor.lat, donor.lng]} 
+              icon={donorIcon(donor.group, selectedDonor?.id === donor.id)}
+              eventHandlers={{
+                click: () => onSelectDonor(donor),
+              }}
+            >
+              <Popup closeButton={false} offset={[0, -5]} className="donor-popup">
+                <div className="p-2 min-w-[140px] text-center">
+                  <h4 className="font-bold text-xs text-white leading-none">{donor.name}</h4>
+                  <div className="flex items-center justify-center gap-1 mt-2">
+                    <Badge className="bg-red-600 text-[8px] h-4 px-1.5 font-black">{donor.group}</Badge>
+                    <span className="text-[9px] text-white/40">{donor.location}</span>
+                  </div>
                 </div>
-              </div>
-            </Popup>
-          </Marker>
-        ))}
+              </Popup>
+            </Marker>
+          );
+        })}
 
-        {userLocation && (
+        {userLocation && 
+         typeof userLocation.lat === 'number' && !isNaN(userLocation.lat) &&
+         typeof userLocation.lng === 'number' && !isNaN(userLocation.lng) && (
           <Marker position={[userLocation.lat, userLocation.lng]} icon={userIcon}>
             <Popup closeButton={false} offset={[0, -10]}>
               <div className="p-2 text-center">
