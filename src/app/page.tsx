@@ -118,45 +118,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Leadership Section */}
-        <section className="py-24 bg-background">
-          <div className="container mx-auto px-4">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">আমাদের নেতৃত্ব</h2>
-              <p className="text-white/70">
-                ওঙ্গন বাংলাদেশের নীতি-নির্ধারক ও পরিচালনা পর্ষদের একঝলক।
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { name: "দীপাঞ্জন স্বপ্ন প্রাঙ্গণ", role: "চেয়ারম্যান", image: "https://picsum.photos/seed/leader1/400/400" },
-                { name: "মোঃ আরিফুর রহমান", role: "ভাইস চেয়ারম্যান", image: "https://picsum.photos/seed/leader2/400/400" },
-                { name: "সাদিয়া ইসলাম", role: "সেক্রেটারি জেনারেল", image: "https://picsum.photos/seed/leader3/400/400" }
-              ].map((leader, i) => (
-                <div key={i} className="group relative text-center">
-                  <div className="relative h-64 w-64 mx-auto rounded-full overflow-hidden border-4 border-white/5 shadow-2xl mb-6">
-                    <Image src={leader.image} alt={leader.name} fill className="object-cover transition-transform duration-500 group-hover:scale-110" unoptimized />
-                    <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <Quote className="text-white h-10 w-10 opacity-50" />
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-bold text-white">{leader.name}</h3>
-                  <p className="text-xs text-white/40 uppercase tracking-widest font-black mt-1">{leader.role}</p>
-                </div>
-              ))}
-            </div>
-            
-            <div className="text-center mt-12">
-              <Link href="/leadership/messages">
-                <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-full h-12 px-8 font-bold">
-                  সকল বাণী পড়ুন <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
-
         {/* Campaigns Section */}
         <section className="py-20" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
           <div className="container mx-auto px-4">
@@ -336,6 +297,45 @@ export default function Home() {
                 </div>
               </TabsContent>
             </Tabs>
+          </div>
+        </section>
+
+        {/* Leadership Section */}
+        <section className="py-24 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="text-center max-w-2xl mx-auto mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">আমাদের নেতৃত্ব</h2>
+              <p className="text-white/70">
+                ওঙ্গন বাংলাদেশের নীতি-নির্ধারক ও পরিচালনা পর্ষদের একঝলক।
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                { name: "দীপাঞ্জন স্বপ্ন প্রাঙ্গণ", role: "চেয়ারম্যান", image: "https://picsum.photos/seed/leader1/400/400" },
+                { name: "মোঃ আরিফুর রহমান", role: "ভাইস চেয়ারম্যান", image: "https://picsum.photos/seed/leader2/400/400" },
+                { name: "সাদিয়া ইসলাম", role: "সেক্রেটারি জেনারেল", image: "https://picsum.photos/seed/leader3/400/400" }
+              ].map((leader, i) => (
+                <div key={i} className="group relative text-center">
+                  <div className="relative h-64 w-64 mx-auto rounded-none overflow-hidden border-4 border-white/5 shadow-2xl mb-6">
+                    <Image src={leader.image} alt={leader.name} fill className="object-cover transition-transform duration-500 group-hover:scale-110" unoptimized />
+                    <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <Quote className="text-white h-10 w-10 opacity-50" />
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold text-white">{leader.name}</h3>
+                  <p className="text-xs text-white/40 uppercase tracking-widest font-black mt-1">{leader.role}</p>
+                </div>
+              ))}
+            </div>
+            
+            <div className="text-center mt-12">
+              <Link href="/leadership/messages">
+                <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-full h-12 px-8 font-bold">
+                  সকল বাণী পড়ুন <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </section>
       </main>
