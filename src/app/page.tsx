@@ -72,7 +72,7 @@ export default function Home() {
           <div className="container mx-auto px-4 relative z-10 text-center pt-20">
             <div className="max-w-4xl mx-auto">
               <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-white/90 text-[10px] md:text-xs font-bold mb-4 border border-white/10 uppercase tracking-widest mx-auto">
-                <Zap className="h-3 w-3 text-yellow-400 fill-yellow-400" /> Sister concern of PRANGON&apos;S ECOSYSTEM
+                < Zap className="h-3 w-3 text-yellow-400 fill-yellow-400" /> Sister concern of PRANGON&apos;S ECOSYSTEM
               </div>
               
               <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 leading-tight tracking-tight drop-shadow-2xl">
@@ -208,14 +208,14 @@ export default function Home() {
                 { icon: HeartHandshake, title: "স্বেচ্ছাসেবক", description: "আপনার দক্ষতা ও সময় দিয়ে সরাসরি মাঠ পর্যায়ে সাহায্য পৌঁছে দিন।", link: "/volunteer" },
                 { icon: Briefcase, title: "ক্যারিয়ার", description: "মানবিক কাজের মাধ্যমে আপনার পেশাদার জীবন গড়ে তুলুন।", link: "/careers" }
               ].map((option, i) => (
-                <div key={i} className="group p-8 rounded-[2.5rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-500 flex flex-col items-center text-center shadow-2xl backdrop-blur-sm">
-                  <div className="mb-6 p-4 rounded-3xl bg-white/10 text-white group-hover:bg-white group-hover:text-[#7a1013] transition-all shadow-xl">
+                <div key={i} className="group p-8 rounded-none bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-500 flex flex-col items-center text-center shadow-2xl backdrop-blur-sm">
+                  <div className="mb-6 p-4 rounded-none bg-white/10 text-white group-hover:bg-white group-hover:text-[#7a1013] transition-all shadow-xl">
                     <option.icon className="h-8 w-8" />
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-white">{option.title}</h3>
                   <p className="text-sm text-white/50 mb-8 leading-relaxed">{option.description}</p>
                   <Link href={option.link} className="mt-auto w-full">
-                    <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white hover:text-[#7a1013] font-bold rounded-2xl transition-all h-12 shadow-lg">
+                    <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white hover:text-[#7a1013] font-bold rounded-none transition-all h-12 shadow-lg">
                       বিস্তারিত দেখুন
                     </Button>
                   </Link>
