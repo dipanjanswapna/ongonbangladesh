@@ -316,6 +316,10 @@ export default function Home() {
                 <p className="text-sm text-white/80 leading-relaxed max-sm:max-w-xs">
                   বাংলাদেশের একটি AI-চালিত কমিউনিটি প্ল্যাটফর্ম, যা মানবিক সহায়তার প্রয়োজনে দ্রুত সংযোগ তৈরি করে।
                 </p>
+                <div className="pt-4">
+                  <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em]">Founder & Leadership</p>
+                  <p className="text-xs font-bold text-white mt-1 uppercase">DIPANJAN SWAPNA PRANGON</p>
+                </div>
                 <div className="pt-6 space-y-3">
                   <h4 className="font-bold text-white text-sm">নিউজলেটারে যোগ দিন</h4>
                   <div className="flex flex-col sm:flex-row gap-2 max-w-sm">
@@ -360,7 +364,7 @@ export default function Home() {
             </div>
 
             <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-white/30 uppercase font-bold tracking-widest">
-              <p>© {new Date().getFullYear()} ONGON BANGLADESH.</p>
+              <p>© {new Date().getFullYear()} ONGON BANGLADESH. LEAD BY DIPANJAN SWAPNA PRANGON.</p>
               <div className="flex gap-6">
                 <Link href="/privacy" className="hover:text-white transition-colors">গোপনীয়তা নীতি</Link>
                 <Link href="/terms" className="hover:text-white transition-colors">ব্যবহারের শর্তাবলী</Link>
