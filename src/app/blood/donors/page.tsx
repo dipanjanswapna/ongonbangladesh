@@ -54,17 +54,14 @@ export default function DonorsListPage() {
           const { latitude, longitude } = position.coords;
           setUserLocation({ lat: latitude, lng: longitude });
           setIsLocating(false);
-          // Auto switch to map on mobile to show location
           if (window.innerWidth < 1024) setViewMode('map');
         },
         () => {
-          alert("আপনার লোকেশন পাওয়া যায়নি। দয়া করে জিপিএস পারমিশন চেক করুন।");
           setIsLocating(false);
         },
         { enableHighAccuracy: true }
       );
     } else {
-      alert("আপনার ব্রাউজার জিপিএস সাপোর্ট করে না।");
       setIsLocating(false);
     }
   };
@@ -87,10 +84,10 @@ export default function DonorsListPage() {
   }, [searchTerm, userLocation]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0a0a0a] selection:bg-red-600/30 overflow-hidden font-body">
+    <div className="min-h-screen flex flex-col bg-[#0a0a0a] selection:bg-red-600/30 overflow-hidden">
       <Navbar />
       
-      <main className="flex-grow pt-16 md:pt-20 overflow-hidden h-screen">
+      <main className="flex-grow pt-16 md:pt-20 overflow-hidden h-[100dvh]">
         <div className="h-full flex flex-col lg:flex-row overflow-hidden relative">
           
           {/* Mobile View Toggle */}
@@ -121,7 +118,7 @@ export default function DonorsListPage() {
 
           {/* Sidebar Section */}
           <aside className={cn(
-            "w-full lg:w-[420px] h-full flex flex-col border-r border-white/5 bg-[#0f0203] transition-all duration-300 z-50 shrink-0",
+            "w-full lg:w-[420px] h-full flex flex-col border-r border-white/5 bg-[#0f0203] z-50 shrink-0",
             viewMode === 'map' ? 'hidden lg:flex' : 'flex'
           )}>
             {/* Sidebar Header */}
@@ -131,12 +128,12 @@ export default function DonorsListPage() {
                   <ArrowLeft className="h-4 w-4" />
                   <span className="text-[10px] font-black uppercase tracking-widest">ফিরে যান</span>
                 </Link>
-                <Badge className="bg-red-600 text-white animate-pulse text-[9px] font-black tracking-widest px-2 py-0.5">LIVE MAP</Badge>
+                <Badge className="bg-red-600 text-white text-[9px] font-black tracking-widest px-2 py-0.5">LIVE MAP</Badge>
               </div>
               
               <div className="space-y-3">
-                <div className="relative group">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 group-focus-within:text-red-600 transition-colors" />
+                <div className="relative">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30" />
                   <Input 
                     placeholder="শহর বা ব্লাড গ্রুপ (উদা: A+)" 
                     className="bg-white/5 border-white/10 text-white pl-12 h-12 rounded-xl focus:ring-red-600/50 focus:border-red-600 transition-all placeholder:text-white/20 text-sm"
@@ -150,13 +147,13 @@ export default function DonorsListPage() {
                   disabled={isLocating}
                   className="w-full bg-red-600 hover:bg-red-700 text-white font-black h-12 rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95 group text-xs uppercase tracking-wider"
                 >
-                  {isLocating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Crosshair className="h-4 w-4 group-hover:rotate-90 transition-transform" />}
+                  {isLocating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Crosshair className="h-4 w-4" />}
                   নিকটস্থ দাতা খুঁজুন (GPS)
                 </Button>
               </div>
             </div>
 
-            {/* Donor List with Custom Scrollbar */}
+            {/* Donor List */}
             <div className="flex-grow overflow-y-auto px-4 py-6 space-y-4 custom-scrollbar scroll-smooth pb-24 lg:pb-6">
               {filteredDonors.length > 0 ? filteredDonors.map((donor) => (
                 <Card 
@@ -177,7 +174,7 @@ export default function DonorsListPage() {
                         <span className="text-xl">{donor.group}</span>
                       </div>
                       <div className="space-y-0.5">
-                        <h4 className="text-white font-bold text-base leading-tight group-hover:text-red-400 transition-colors">{donor.name}</h4>
+                        <h4 className="text-white font-bold text-base leading-tight">{donor.name}</h4>
                         <div className="flex items-center gap-1.5 text-[9px] text-white/40 uppercase tracking-widest font-black">
                           <MapPin className="h-3 w-3 text-red-600" /> {donor.location}
                         </div>
@@ -224,7 +221,7 @@ export default function DonorsListPage() {
 
           {/* Map Section */}
           <div className={cn(
-            "flex-grow relative bg-[#0a0a0a] overflow-hidden transition-all duration-700",
+            "flex-grow relative bg-[#0a0a0a] overflow-hidden transition-all duration-300",
             viewMode === 'list' ? 'hidden lg:block' : 'block'
           )}>
             <BloodMap 
@@ -234,7 +231,7 @@ export default function DonorsListPage() {
               onSelectDonor={(donor) => setSelectedDonor(donor)}
             />
 
-            {/* Selection Card Overlay (Mobile Friendly) */}
+            {/* Selection Card Overlay */}
             {selectedDonor && (
               <div className="absolute bottom-24 md:bottom-10 left-4 right-4 md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-md z-[1000] animate-in slide-in-from-bottom-10 duration-500">
                 <Card className="glass-card border-white/20 p-5 rounded-[2rem] shadow-2xl border-b-8 border-red-600">

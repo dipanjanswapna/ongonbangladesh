@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Droplet, Phone, MapPin, Navigation } from 'lucide-react';
+import { Droplet, MapPin } from 'lucide-react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -26,7 +26,6 @@ interface BloodMapProps {
   onSelectDonor: (donor: Donor) => void;
 }
 
-// Component to handle map view updates
 function MapUpdater({ center, zoom }: { center: [number, number], zoom: number }) {
   const map = useMap();
   useEffect(() => {
@@ -44,11 +43,10 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
 
   if (!isMounted) return <div className="w-full h-full bg-[#0a0a0a]" />;
 
-  const defaultCenter: [number, number] = [23.7509, 90.3843]; // Dhaka center
+  const defaultCenter: [number, number] = [23.7509, 90.3843];
   const mapCenter = selectedDonor ? [selectedDonor.lat, selectedDonor.lng] : (userLocation ? [userLocation.lat, userLocation.lng] : defaultCenter);
   const zoomLevel = selectedDonor ? 15 : 13;
 
-  // Custom Donor Icon
   const donorIcon = (group: string, isSelected: boolean) => L.divIcon({
     html: renderToStaticMarkup(
       <div className={`relative transition-all duration-300 ${isSelected ? 'scale-110' : 'hover:scale-105'}`}>
@@ -65,7 +63,6 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
     iconAnchor: [20, 20],
   });
 
-  // Custom User Location Icon
   const userIcon = L.divIcon({
     html: renderToStaticMarkup(
       <div className="relative">
@@ -94,7 +91,6 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
         <ZoomControl position="topright" />
         <MapUpdater center={mapCenter as [number, number]} zoom={zoomLevel} />
 
-        {/* Donor Markers */}
         {donors.map((donor) => (
           <Marker 
             key={donor.id} 
@@ -129,7 +125,6 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
           </Marker>
         ))}
 
-        {/* User Location Marker */}
         {userLocation && (
           <Marker position={[userLocation.lat, userLocation.lng]} icon={userIcon}>
             <Popup closeButton={false}>

@@ -6,38 +6,25 @@
 
 @layer base {
   :root {
-    /* rgb(120, 16, 19) -> HSL(358, 77%, 27%) */
     --background: 358 77% 27%;
-    /* rgb(255, 255, 255) -> HSL(0, 0%, 100%) */
     --foreground: 0 0% 100%;
-    
-    /* rgb(41, 41, 41) -> HSL(0, 0%, 16%) */
     --card: 0 0% 16%;
     --card-foreground: 0 0% 100%;
-    
     --popover: 0 0% 18%;
     --popover-foreground: 0 0% 100%;
-    
-    /* Primary set to White for contrast on Dark Red background */
     --primary: 0 0% 100%;
     --primary-foreground: 358 77% 27%;
-    
     --secondary: 0 0% 25%;
     --secondary-foreground: 0 0% 100%;
-    
     --muted: 0 0% 25%;
     --muted-foreground: 0 0% 85%;
-    
     --accent: 0 0% 100%;
     --accent-foreground: 358 77% 27%;
-    
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    
     --border: 0 0% 100% / 0.2;
     --input: 0 0% 100% / 0.1;
     --ring: 0 0% 100%;
-    
     --radius: 0.75rem;
   }
 }
@@ -68,7 +55,6 @@
   box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.5);
 }
 
-/* Premium Custom Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 5px;
 }
@@ -87,7 +73,6 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* Custom Leaflet Styles */
 .leaflet-container {
   background: #0f0203 !important;
   width: 100%;
