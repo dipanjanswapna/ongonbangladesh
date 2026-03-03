@@ -1,6 +1,8 @@
+
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -8,9 +10,14 @@ import { Input } from '@/components/ui/input';
 import { MapPin, Search, Phone, Droplet, Navigation, Crosshair, List, Map as MapIcon, Loader2, Info } from 'lucide-react';
 import { bloodDonors } from '@/lib/blood-data';
 import { Badge } from '@/components/ui/badge';
-import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+
+// Dynamically import the Map component to avoid SSR issues with Leaflet
+const BloodMap = dynamic(() => import('@/components/blood/BloodMap'), { 
+  ssr: false,
+  loading: () => <div className="w-full h-full bg-[#0a0a0a] flex items-center justify-center text-white/20 animate-pulse font-bold uppercase tracking-[0.5em]">ম্যাপ লোড হচ্ছে...</div>
+});
 
 export default function DonorsListPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,7 +25,6 @@ export default function DonorsListPage() {
   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [isLocating, setIsLocating] = useState(false);
-  const [isMapLoaded, setIsMapLoaded] = useState(false);
 
   // Haversine formula to calculate distance in km
   const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
@@ -68,11 +74,6 @@ export default function DonorsListPage() {
 
     return result;
   }, [searchTerm, userLocation]);
-
-  // Map scaling logic for simulation
-  const centerLat = 23.75; // Approx center for Dhaka
-  const centerLng = 90.40;
-  const zoomFactor = 1500; // Scaling for visualization
 
   return (
     <div className="min-h-screen flex flex-col bg-background selection:bg-red-500/30">
@@ -190,86 +191,17 @@ export default function DonorsListPage() {
             </div>
           </div>
 
-          {/* Main Map Visual Component */}
+          {/* Real Map Integration Section */}
           <div className={cn(
             "flex-grow relative bg-[#0a0a0a] overflow-hidden transition-all duration-500",
             viewMode === 'list' ? 'hidden lg:block' : 'block'
           )}>
-            <div className="absolute inset-0 opacity-40">
-              <Image 
-                src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2000" 
-                alt="Map Background" 
-                fill 
-                className="object-cover grayscale"
-                onLoad={() => setIsMapLoaded(true)}
-                unoptimized
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#0f0203] via-transparent to-[#0f0203]" />
-            </div>
-
-            {/* Map Grid Overlay for simulation */}
-            <div className="absolute inset-0 pointer-events-none opacity-5">
-              <div className="w-full h-full" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-            </div>
-
-            {/* Simulated Live Markers */}
-            <div className="absolute inset-0 z-10">
-              {filteredDonors.map((donor) => {
-                // Coordinate to Pixel Mapping (Simplified)
-                const top = 50 - (donor.lat - centerLat) * zoomFactor;
-                const left = 50 + (donor.lng - centerLng) * zoomFactor;
-
-                return (
-                  <div 
-                    key={donor.id}
-                    className="absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 group"
-                    style={{ top: `${top}%`, left: `${left}%` }}
-                    onClick={() => setSelectedDonor(donor)}
-                  >
-                    <div className={cn(
-                      "relative p-3 rounded-full shadow-2xl transition-all duration-300",
-                      selectedDonor?.id === donor.id ? 'bg-red-600 scale-150 ring-4 ring-white/20' : 'bg-white text-red-600 hover:scale-125'
-                    )}>
-                      <Droplet className={cn("h-5 w-5", selectedDonor?.id === donor.id ? 'fill-white' : 'fill-red-600')} />
-                      
-                      {/* Badge on Marker */}
-                      <div className="absolute -top-1 -right-1 h-4 w-4 bg-red-800 text-white text-[8px] font-bold rounded-full flex items-center justify-center border border-white/20">
-                        {donor.group}
-                      </div>
-
-                      {/* Radar Effect for Selected */}
-                      {selectedDonor?.id === donor.id && (
-                        <div className="absolute -inset-4 bg-red-600/30 rounded-full animate-ping" />
-                      )}
-                    </div>
-                    
-                    {/* Tooltip on Hover */}
-                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-[#1a0405] border border-white/10 text-white px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap shadow-2xl z-50">
-                      {donor.name} • {donor.group}
-                    </div>
-                  </div>
-                );
-              })}
-
-              {/* User Current Location Pointer */}
-              {userLocation && (
-                <div 
-                  className="absolute z-20 transform -translate-x-1/2 -translate-y-1/2"
-                  style={{ 
-                    top: `${50 - (userLocation.lat - centerLat) * zoomFactor}%`, 
-                    left: `${50 + (userLocation.lng - centerLng) * zoomFactor}%` 
-                  }}
-                >
-                  <div className="relative">
-                    <div className="h-6 w-6 bg-blue-600 rounded-full border-4 border-white shadow-2xl animate-pulse" />
-                    <div className="absolute -inset-6 bg-blue-600/20 rounded-full animate-ping" />
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-blue-600 text-white text-[8px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest">
-                      আপনি এখানে
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
+            <BloodMap 
+              donors={filteredDonors} 
+              userLocation={userLocation} 
+              selectedDonor={selectedDonor}
+              onSelectDonor={(donor) => setSelectedDonor(donor)}
+            />
 
             {/* Selected Donor Info Card (Overlay) */}
             {selectedDonor && (
@@ -310,7 +242,11 @@ export default function DonorsListPage() {
                         <Phone className="h-6 w-6" /> কল করুন
                       </Button>
                     </Link>
-                    <Button variant="outline" className="flex-1 h-16 border-white/10 bg-white/5 text-white hover:bg-white/10 rounded-2xl font-bold transition-all">
+                    <Button 
+                      variant="outline" 
+                      className="flex-1 h-16 border-white/10 bg-white/5 text-white hover:bg-white/10 rounded-2xl font-bold transition-all"
+                      onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${selectedDonor.lat},${selectedDonor.lng}`, '_blank')}
+                    >
                       <Navigation className="h-6 w-6 mr-2" /> লোকেশন
                     </Button>
                   </div>
@@ -319,7 +255,7 @@ export default function DonorsListPage() {
             )}
 
             {/* Map Controls */}
-            <div className="absolute top-8 right-8 flex flex-col gap-3 z-40">
+            <div className="absolute top-8 right-8 flex flex-col gap-3 z-[1000]">
               <Button size="icon" className="bg-white/10 backdrop-blur-xl border border-white/20 text-white hover:bg-white hover:text-red-600 rounded-2xl shadow-2xl h-12 w-12 md:h-14 md:w-14" onClick={() => window.location.reload()}>
                 <Navigation className="h-6 w-6" />
               </Button>
@@ -330,7 +266,7 @@ export default function DonorsListPage() {
 
             {/* Empty State Instruction */}
             {!selectedDonor && (
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center space-y-6 pointer-events-none opacity-40">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center space-y-6 pointer-events-none opacity-40 z-0">
                 <div className="p-10 rounded-[3rem] bg-white/5 backdrop-blur-xl border border-white/10 inline-block shadow-2xl">
                   <Droplet className="h-16 w-16 md:h-24 md:w-24 text-red-600/30 animate-pulse mx-auto fill-red-600" />
                 </div>
