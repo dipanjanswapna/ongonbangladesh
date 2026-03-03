@@ -7,6 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import { Droplet, MapPin, Navigation } from 'lucide-react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 
 interface Donor {
