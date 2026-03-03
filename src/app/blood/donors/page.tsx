@@ -6,7 +6,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { MapPin, Search, Phone, Droplet, Navigation, Crosshair, List, Map as MapIcon, Loader2, ChevronRight, ArrowLeft, X, LocateFixed } from 'lucide-react';
+import { MapPin, Search, Phone, Droplet, Navigation, Crosshair, List, Map as MapIcon, Loader2, ChevronRight, ArrowLeft, X, LocateFixed, Filter, CheckCircle2 } from 'lucide-react';
 import { bloodDonors } from '@/lib/blood-data';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
@@ -34,15 +34,35 @@ const isValidCoord = (val: any): boolean => {
   return typeof num === 'number' && !isNaN(num) && isFinite(num);
 };
 
+// City name mapping for English to Bengali search
+const cityMapping: Record<string, string> = {
+  'dhaka': 'ঢাকা',
+  'chittagong': 'চট্টগ্রাম',
+  'sylhet': 'সিলেট',
+  'rajshahi': 'রাজশাহী',
+  'khulna': 'খুলনা',
+  'barisal': 'বরিশাল',
+  'rangpur': 'রংপুর',
+  'mymensingh': 'ময়মনসিংহ',
+  'dhanmondi': 'ধানমণ্ডি',
+  'uttara': 'উত্তরা',
+  'banani': 'বনানী',
+  'mirpur': 'মিরপুর',
+  'motijheel': 'মতিঝিল',
+};
+
 export default function DonorsListPage() {
   const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
   const [selectedDonor, setSelectedDonor] = useState<any>(null);
   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [isLocating, setIsLocating] = useState(false);
   const [isTracking, setIsTracking] = useState(false);
   const watchId = useRef<number | null>(null);
+
+  const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
 
   // Haversine formula to calculate distance in km
   const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
@@ -65,7 +85,6 @@ export default function DonorsListPage() {
     }
 
     setIsLocating(true);
-    
     if (watchId.current) navigator.geolocation.clearWatch(watchId.current);
 
     watchId.current = navigator.geolocation.watchPosition(
@@ -104,11 +123,22 @@ export default function DonorsListPage() {
   }, []);
 
   const filteredDonors = useMemo(() => {
-    let result = bloodDonors.filter(donor => 
-      donor.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      donor.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      donor.group.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    let result = bloodDonors.filter(donor => {
+      const term = searchTerm.toLowerCase().trim();
+      
+      // Group filter (Quick Chips)
+      const matchesGroup = selectedGroup ? donor.group === selectedGroup : true;
+      
+      // Text Search matches (Name, Group, Location)
+      const matchesName = donor.name.toLowerCase().includes(term);
+      const matchesBloodGroupSearch = donor.group.toLowerCase().includes(term);
+      
+      // City search mapping: search 'dhaka' -> 'ঢাকা'
+      const translatedTerm = cityMapping[term] || term;
+      const matchesLocation = donor.location.toLowerCase().includes(term) || donor.location.includes(translatedTerm);
+      
+      return matchesGroup && (matchesName || matchesBloodGroupSearch || matchesLocation);
+    });
 
     result = result.filter(donor => isValidCoord(donor.lat) && isValidCoord(donor.lng));
 
@@ -124,7 +154,7 @@ export default function DonorsListPage() {
     }
 
     return result;
-  }, [searchTerm, userLocation]);
+  }, [searchTerm, selectedGroup, userLocation]);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0a0a0a] selection:bg-red-600/30 overflow-hidden">
@@ -133,7 +163,7 @@ export default function DonorsListPage() {
       <main className="flex-grow pt-16 md:pt-20 overflow-hidden h-[100dvh]">
         <div className="h-full flex flex-col lg:flex-row overflow-hidden relative">
           
-          {/* Mobile Toggler */}
+          {/* Mobile View Toggler */}
           <div className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[1001] bg-black/80 backdrop-blur-2xl border border-white/10 p-1.5 rounded-full flex gap-1 shadow-2xl">
             <Button 
               size="sm"
@@ -159,93 +189,124 @@ export default function DonorsListPage() {
             </Button>
           </div>
 
-          {/* Sidebar List */}
+          {/* Sidebar Area */}
           <aside className={cn(
-            "w-full lg:w-[400px] h-full flex flex-col border-r border-white/5 bg-[#0f0203] z-[50] shrink-0 transition-transform duration-300",
+            "w-full lg:w-[420px] h-full flex flex-col border-r border-white/5 bg-[#0f0203] z-[50] shrink-0 transition-transform duration-300",
             viewMode === 'map' ? 'hidden lg:flex' : 'flex'
           )}>
-            <div className="p-6 space-y-4 bg-[#0f0203] border-b border-white/5 shrink-0">
+            <div className="p-6 space-y-6 bg-[#0f0203] border-b border-white/5 shrink-0 shadow-2xl">
               <div className="flex items-center justify-between">
                 <Link href="/blood" className="flex items-center gap-2 text-white/40 hover:text-white transition-colors">
                   <ArrowLeft className="h-4 w-4" />
                   <span className="text-[10px] font-black uppercase tracking-widest">ফিরে যান</span>
                 </Link>
                 {isTracking && (
-                  <div className="flex items-center gap-1.5 animate-pulse">
-                    <div className="h-2 w-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
-                    <span className="text-[9px] font-bold text-green-500 uppercase">GPS ACTIVE</span>
+                  <div className="flex items-center gap-1.5 animate-pulse bg-green-500/10 px-2 py-1 rounded-full border border-green-500/20">
+                    <div className="h-1.5 w-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
+                    <span className="text-[8px] font-bold text-green-500 uppercase tracking-tighter">LIVE TRACKING</span>
                   </div>
                 )}
               </div>
               
-              <div className="space-y-3">
-                <div className="relative">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30" />
+              <div className="space-y-4">
+                <div className="relative group">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 group-focus-within:text-red-600 transition-colors" />
                   <Input 
-                    placeholder="শহর বা ব্লাড গ্রুপ (A+)" 
-                    className="bg-white/5 border-white/10 text-white pl-12 h-12 rounded-2xl focus:ring-red-600/50 focus:border-red-600 transition-all placeholder:text-white/20 text-sm"
+                    placeholder="নাম, শহর (Dhaka/ঢাকা) বা গ্রুপ" 
+                    className="bg-white/5 border-white/10 text-white pl-12 h-12 rounded-2xl focus:ring-red-600/30 focus:border-red-600/50 transition-all placeholder:text-white/20 text-sm shadow-inner"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </div>
+
+                {/* Quick Group Filters */}
+                <div className="space-y-2">
+                  <p className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] ml-1">ব্লাড গ্রুপ ফিল্টার</p>
+                  <div className="flex flex-wrap gap-2">
+                    {bloodGroups.map((g) => (
+                      <button
+                        key={g}
+                        onClick={() => setSelectedGroup(selectedGroup === g ? null : g)}
+                        className={cn(
+                          "px-3 py-1.5 rounded-xl text-[10px] font-bold transition-all border",
+                          selectedGroup === g 
+                            ? "bg-red-600 border-red-500 text-white shadow-lg shadow-red-900/20 scale-105" 
+                            : "bg-white/5 border-white/5 text-white/40 hover:bg-white/10 hover:text-white"
+                        )}
+                      >
+                        {g}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 <Button 
                   onClick={isTracking ? stopTracking : startTracking}
                   disabled={isLocating}
                   className={cn(
-                    "w-full font-black h-12 rounded-2xl flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95 group text-xs uppercase tracking-wider",
+                    "w-full font-black h-12 rounded-2xl flex items-center justify-center gap-2 shadow-xl transition-all active:scale-95 group text-[10px] uppercase tracking-widest",
                     isTracking ? "bg-green-600 hover:bg-green-700 text-white" : "bg-red-600 hover:bg-red-700 text-white"
                   )}
                 >
                   {isLocating ? <Loader2 className="h-4 w-4 animate-spin" /> : isTracking ? <LocateFixed className="h-4 w-4" /> : <Crosshair className="h-4 w-4" />}
-                  {isTracking ? "লাইভ ট্র্যাকিং বন্ধ করুন" : "নিকটস্থ দাতা খুঁজুন (GPS)"}
+                  {isTracking ? "ট্র্যাকিং বন্ধ করুন" : "নিকটস্থ দাতা খুঁজুন (GPS)"}
                 </Button>
               </div>
             </div>
 
-            <div className="flex-grow overflow-y-auto px-4 py-6 space-y-4 custom-scrollbar scroll-smooth pb-28 lg:pb-6">
-              {filteredDonors.length > 0 ? filteredDonors.map((donor) => (
-                <Card 
-                  key={donor.id} 
-                  className={cn(
-                    "border-white/5 bg-white/5 hover:bg-white/10 transition-all cursor-pointer rounded-[2rem] p-5 group relative overflow-hidden",
-                    selectedDonor?.id === donor.id ? 'ring-2 ring-red-600 bg-white/10 shadow-xl' : ''
-                  )}
-                  onClick={() => {
-                    setSelectedDonor(donor);
-                    if (window.innerWidth < 1024) setViewMode('map');
-                  }}
-                >
-                  <div className="flex justify-between items-start">
-                    <div className="flex items-center gap-4">
-                      <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 flex flex-col items-center justify-center text-white font-black shadow-lg">
-                        <span className="text-[8px] uppercase leading-none opacity-60 mb-0.5">Group</span>
-                        <span className="text-2xl">{donor.group}</span>
-                      </div>
-                      <div className="space-y-0.5">
-                        <h4 className="text-white font-bold text-lg leading-tight">{donor.name}</h4>
-                        <div className="flex items-center gap-1.5 text-[10px] text-white/40 uppercase tracking-widest font-bold">
-                          <MapPin className="h-3.5 w-3.5 text-red-600" /> {donor.location}
-                        </div>
-                        {donor.distance !== undefined && donor.distance !== null && (
-                          <div className="text-[10px] text-green-400 font-black flex items-center gap-1 mt-1">
-                            <Navigation className="h-3 w-3" /> {Number(donor.distance).toFixed(1)} km দূরে
+            {/* Donor List Scrollable Area */}
+            <div className="flex-grow overflow-y-auto px-4 py-6 space-y-4 custom-scrollbar scroll-smooth pb-28 lg:pb-6 bg-black/20">
+              {filteredDonors.length > 0 ? (
+                <div className="space-y-4">
+                  <p className="text-[10px] font-bold text-white/20 uppercase tracking-widest px-2">
+                    {filteredDonors.length} জন দাতা পাওয়া গেছে
+                  </p>
+                  {filteredDonors.map((donor) => (
+                    <Card 
+                      key={donor.id} 
+                      className={cn(
+                        "border-white/5 bg-[#1a0405]/40 hover:bg-[#2a080a] transition-all cursor-pointer rounded-[2rem] p-5 group relative overflow-hidden backdrop-blur-sm",
+                        selectedDonor?.id === donor.id ? 'ring-2 ring-red-600/50 bg-[#2a080a] shadow-[0_10px_30px_rgba(220,38,38,0.1)]' : ''
+                      )}
+                      onClick={() => {
+                        setSelectedDonor(donor);
+                        if (window.innerWidth < 1024) setViewMode('map');
+                      }}
+                    >
+                      <div className="flex justify-between items-start">
+                        <div className="flex items-center gap-4">
+                          <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 flex flex-col items-center justify-center text-white font-black shadow-lg shrink-0 pt-0.5">
+                            <span className="text-[7px] uppercase leading-none opacity-60 mb-0.5">Group</span>
+                            <span className="text-2xl">{donor.group}</span>
                           </div>
-                        )}
+                          <div className="space-y-0.5 min-w-0">
+                            <h4 className="text-white font-bold text-base leading-tight truncate group-hover:text-red-400 transition-colors">{donor.name}</h4>
+                            <div className="flex items-center gap-1.5 text-[10px] text-white/40 uppercase tracking-widest font-bold truncate">
+                              <MapPin className="h-3 w-3 text-red-600" /> {donor.location}
+                            </div>
+                            {donor.distance !== undefined && donor.distance !== null && (
+                              <div className="text-[10px] text-green-400 font-black flex items-center gap-1 mt-1.5 bg-green-400/5 w-fit px-2 py-0.5 rounded-full border border-green-400/10">
+                                <Navigation className="h-2.5 w-2.5" /> {Number(donor.distance).toFixed(1)} km দূরে
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <ChevronRight className="h-5 w-5 text-white/10 group-hover:text-red-600 transition-all group-hover:translate-x-1 shrink-0" />
                       </div>
-                    </div>
-                    <ChevronRight className="h-5 w-5 text-white/10 group-hover:text-red-600 transition-colors" />
-                  </div>
-                </Card>
-              )) : (
-                <div className="text-center py-24 px-6 opacity-40">
-                  <Search className="h-12 w-12 mx-auto mb-4" />
-                  <h3 className="text-white font-bold text-base">দাতা পাওয়া যায়নি</h3>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-24 px-6 opacity-40 animate-in fade-in duration-700">
+                  <Search className="h-12 w-12 mx-auto mb-4 text-white/20" />
+                  <h3 className="text-white font-bold text-sm uppercase tracking-widest">দাতা পাওয়া যায়নি</h3>
+                  <p className="text-[10px] text-white/40 mt-2">অন্য কোনো এলাকা বা গ্রুপ লিখে চেষ্টা করুন</p>
                 </div>
               )}
             </div>
           </aside>
 
-          {/* Map View */}
+          {/* Map Section */}
           <div className={cn(
             "flex-grow relative bg-[#0a0a0a] overflow-hidden",
             viewMode === 'list' ? 'hidden lg:block' : 'block'
@@ -257,12 +318,15 @@ export default function DonorsListPage() {
               onSelectDonor={(donor) => setSelectedDonor(donor)}
             />
 
-            {/* Selected Donor UI Fix */}
+            {/* Selected Donor Card (UI/UX Fused Design) */}
             {selectedDonor && (
-              <div className="absolute bottom-24 lg:bottom-10 left-4 right-4 lg:left-1/2 lg:-translate-x-1/2 lg:w-full lg:max-w-md z-[1000] animate-in slide-in-from-bottom-10 duration-500">
-                <Card className="bg-[#1a0405]/95 backdrop-blur-2xl border border-white/20 p-6 rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] border-b-8 border-red-600 relative overflow-hidden">
+              <div className="absolute bottom-24 lg:bottom-10 left-4 right-4 lg:left-1/2 lg:-translate-x-1/2 lg:w-full lg:max-w-md z-[1000] animate-in slide-in-from-bottom-12 duration-500 ease-out">
+                <Card className="bg-[#1a0405]/95 backdrop-blur-3xl border border-white/20 p-6 rounded-[2.5rem] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.9)] border-b-8 border-red-600 relative overflow-hidden ring-1 ring-white/10">
                   
-                  {/* Improved Close Button */}
+                  {/* Glass Background Elements */}
+                  <div className="absolute -top-10 -right-10 w-32 h-32 bg-red-600/10 rounded-full blur-3xl" />
+                  <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-red-600/10 rounded-full blur-3xl" />
+
                   <Button 
                     size="icon" 
                     variant="ghost" 
@@ -272,28 +336,31 @@ export default function DonorsListPage() {
                     <X className="h-5 w-5" />
                   </Button>
 
-                  <div className="flex items-center gap-5 mb-6">
-                    <div className="h-16 w-16 rounded-3xl bg-red-600 flex flex-col items-center justify-center text-white font-black text-3xl shadow-xl ring-4 ring-white/5 shrink-0 pt-1">
-                      <span className="text-[7px] uppercase opacity-60 -mb-1">Group</span>
+                  <div className="flex items-center gap-5 mb-8 relative">
+                    <div className="h-16 w-16 rounded-3xl bg-red-600 flex flex-col items-center justify-center text-white font-black text-3xl shadow-[0_0_20px_rgba(220,38,38,0.4)] ring-4 ring-white/5 shrink-0 pt-1 transition-transform group-hover:scale-105">
+                      <span className="text-[7px] uppercase opacity-60 -mb-1 font-bold">Group</span>
                       {selectedDonor.group}
                     </div>
                     <div className="min-w-0 pr-6">
-                      <h2 className="text-xl font-black text-white truncate tracking-tight">{selectedDonor.name}</h2>
+                      <div className="flex items-center gap-2">
+                        <h2 className="text-xl font-black text-white truncate tracking-tight">{selectedDonor.name}</h2>
+                        <CheckCircle2 className="h-4 w-4 text-green-500" />
+                      </div>
                       <p className="text-white/50 text-xs flex items-center gap-1.5 font-bold mt-1.5">
                         <MapPin className="h-3.5 w-3.5 text-red-600" /> {selectedDonor.location}
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex gap-3">
+                  <div className="flex gap-3 relative">
                     <Link href={`tel:${selectedDonor.phone}`} className="flex-1">
-                      <Button className="w-full h-14 bg-white text-red-700 hover:bg-white/90 font-black text-base rounded-2xl shadow-xl flex items-center justify-center gap-2 uppercase tracking-tight">
+                      <Button className="w-full h-14 bg-white text-[#781013] hover:bg-white/90 font-black text-sm rounded-2xl shadow-xl flex items-center justify-center gap-2 uppercase tracking-widest transition-all active:scale-95">
                         <Phone className="h-5 w-5" /> এখনই কল দিন
                       </Button>
                     </Link>
                     <Button 
                       variant="outline" 
-                      className="h-14 w-14 border-white/10 bg-white/5 text-white hover:bg-white/10 rounded-2xl flex items-center justify-center transition-all shrink-0"
+                      className="h-14 w-14 border-white/10 bg-white/5 text-white hover:bg-white/10 rounded-2xl flex items-center justify-center transition-all shrink-0 active:scale-90"
                       onClick={() => {
                         if (isValidCoord(selectedDonor.lat) && isValidCoord(selectedDonor.lng)) {
                           window.open(`https://www.google.com/maps/dir/?api=1&destination=${selectedDonor.lat},${selectedDonor.lng}`, '_blank');
