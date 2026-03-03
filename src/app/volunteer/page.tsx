@@ -19,7 +19,7 @@ export default function VolunteerPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col selection:bg-white/20" style={{ backgroundColor: 'rgb(110, 14, 17)' }}>
+    <div className="min-h-screen flex flex-col selection:bg-white/20" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
       <Navbar />
       <main className="container mx-auto px-4 py-32 flex-grow flex items-center justify-center">
         <Card className="w-full max-w-2xl glass-card border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl">
@@ -49,7 +49,7 @@ export default function VolunteerPage() {
                   <SelectTrigger className="bg-white/5 border-white/10 text-white h-12 rounded-xl">
                     <SelectValue placeholder="আপনার দক্ষতা নির্বাচন করুন" />
                   </SelectTrigger>
-                  <SelectContent className="bg-[#6e0e11] border-white/10 text-white">
+                  <SelectContent className="bg-[#7a1013] border-white/10 text-white">
                     <SelectItem value="teaching">শিক্ষা প্রদান</SelectItem>
                     <SelectItem value="medical">চিকিৎসা সহায়তা</SelectItem>
                     <SelectItem value="it">আইটি ও প্রযুক্তি</SelectItem>
@@ -67,7 +67,7 @@ export default function VolunteerPage() {
                 <Textarea placeholder="আপনার আগ্রহ এবং অভিজ্ঞতা সংক্ষেপে লিখুন..." className="min-h-[120px] bg-white/5 border-white/10 text-white rounded-xl focus:ring-white/20" required />
               </div>
 
-              <Button type="submit" className="w-full bg-white text-[#6e0e11] hover:bg-white/90 font-bold h-14 rounded-2xl shadow-xl flex items-center justify-center gap-2 text-lg transition-all active:scale-95">
+              <Button type="submit" className="w-full bg-white text-[#7a1013] hover:bg-white/90 font-bold h-14 rounded-2xl shadow-xl flex items-center justify-center gap-2 text-lg transition-all active:scale-95">
                 <Send className="h-5 w-5" /> আবেদন জমা দিন
               </Button>
             </form>

@@ -27,7 +27,7 @@ export default function MembershipPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col selection:bg-white/20" style={{ backgroundColor: 'rgb(110, 14, 17)' }}>
+    <div className="min-h-screen flex flex-col selection:bg-white/20" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
       <Navbar />
       <main className="container mx-auto px-4 py-32 flex-grow max-w-6xl">
         <div className="text-center space-y-4 mb-16">
@@ -50,7 +50,7 @@ export default function MembershipPage() {
               ].map((item, i) => (
                 <Card key={i} className="bg-white/5 border-white/5 rounded-[2rem] p-6 hover:bg-white/10 transition-all group">
                   <div className="flex gap-4">
-                    <div className="p-3 rounded-2xl bg-white/10 text-white group-hover:bg-white group-hover:text-[#6e0e11] transition-all h-fit">
+                    <div className="p-3 rounded-2xl bg-white/10 text-white group-hover:bg-white group-hover:text-[#7a1013] transition-all h-fit">
                       <item.icon className="h-6 w-6" />
                     </div>
                     <div>
@@ -82,7 +82,7 @@ export default function MembershipPage() {
                         <SelectTrigger className="bg-white/5 border-white/10 text-white h-14 rounded-2xl">
                           <SelectValue placeholder="নির্বাচন করুন" />
                         </SelectTrigger>
-                        <SelectContent className="bg-[#6e0e11] border-white/10 text-white">
+                        <SelectContent className="bg-[#7a1013] border-white/10 text-white">
                           <SelectItem value="life">আজীবন সদস্য (Life Member)</SelectItem>
                           <SelectItem value="donor">দাতা সদস্য (Donor Member)</SelectItem>
                           <SelectItem value="general">সাধারণ সদস্য (General Member)</SelectItem>
@@ -118,7 +118,7 @@ export default function MembershipPage() {
                   <Button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className="w-full h-16 bg-white text-[#6e0e11] hover:bg-white/90 font-bold text-lg rounded-2xl shadow-xl transition-all active:scale-95"
+                    className="w-full h-16 bg-white text-[#7a1013] hover:bg-white/90 font-bold text-lg rounded-2xl shadow-xl transition-all active:scale-95"
                   >
                     {isSubmitting ? "প্রসেসিং..." : "আবেদন জমা দিন"}
                   </Button>

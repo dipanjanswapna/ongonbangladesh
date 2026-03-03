@@ -51,7 +51,7 @@ export default function CareersPage() {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
-    <div className="min-h-screen flex flex-col selection:bg-white/20" style={{ backgroundColor: 'rgb(110, 14, 17)' }}>
+    <div className="min-h-screen flex flex-col selection:bg-white/20" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
       <Navbar />
       <main className="container mx-auto px-4 py-32 flex-grow max-w-6xl">
         <div className="space-y-12">
@@ -98,7 +98,7 @@ export default function CareersPage() {
                   
                   <div className="flex gap-4">
                     <Button variant="outline" className="border-white/10 text-white hover:bg-white/10 h-14 px-8 rounded-2xl font-bold flex-1 md:flex-none">বিস্তারিত</Button>
-                    <Button className="bg-white text-[#6e0e11] hover:bg-white/90 h-14 px-8 rounded-2xl font-black shadow-xl flex-1 md:flex-none transition-all active:scale-95">
+                    <Button className="bg-white text-[#7a1013] hover:bg-white/90 h-14 px-8 rounded-2xl font-black shadow-xl flex-1 md:flex-none transition-all active:scale-95">
                       এখনি আবেদন করুন <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </div>
@@ -111,7 +111,7 @@ export default function CareersPage() {
             <div className="relative z-10 space-y-4">
               <h2 className="text-3xl font-bold text-white">মনমতো পদ খুঁজে পাচ্ছেন না?</h2>
               <p className="text-white/60 max-w-xl mx-auto">আমরা সবসময় প্রতিভাবান এবং মানবিক ব্যক্তিদের খুঁজছি। আপনার সিভি পাঠিয়ে রাখতে পারেন আমাদের ডাটাবেজে।</p>
-              <Button size="lg" className="bg-white text-[#6e0e11] font-black rounded-2xl h-16 px-12 text-lg shadow-2xl hover:scale-105 transition-all active:scale-95">ওপেন অ্যাপ্লিকেশন পাঠান</Button>
+              <Button size="lg" className="bg-white text-[#7a1013] font-black rounded-2xl h-16 px-12 text-lg shadow-2xl hover:scale-105 transition-all active:scale-95">ওপেন অ্যাপ্লিকেশন পাঠান</Button>
             </div>
             <Globe className="absolute -bottom-20 -right-20 h-64 w-64 text-white/5" />
           </div>

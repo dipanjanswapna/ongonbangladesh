@@ -29,7 +29,7 @@ export default function RegularDonationPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col selection:bg-white/20" style={{ backgroundColor: 'rgb(110, 14, 17)' }}>
+    <div className="min-h-screen flex flex-col selection:bg-white/20" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
       <Navbar />
       <main className="container mx-auto px-4 py-32 flex-grow max-w-5xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -52,7 +52,7 @@ export default function RegularDonationPage() {
                 { icon: Sparkles, title: "ইমপ্যাক্ট", desc: "শতশত শিশুর শিক্ষা ও চিকিৎসা নিশ্চিত হয়।" }
               ].map((item, i) => (
                 <div key={i} className="flex gap-4 items-start p-5 rounded-3xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all group">
-                  <div className="p-3 rounded-2xl bg-white/10 text-white group-hover:bg-white group-hover:text-[#6e0e11] transition-all">
+                  <div className="p-3 rounded-2xl bg-white/10 text-white group-hover:bg-white group-hover:text-[#7a1013] transition-all">
                     <item.icon className="h-5 w-5" />
                   </div>
                   <div>
@@ -97,7 +97,7 @@ export default function RegularDonationPage() {
                         key={amt}
                         type="button"
                         variant="outline"
-                        className={`h-12 rounded-xl border-white/10 text-white font-bold hover:bg-white hover:text-[#6e0e11] ${amount === amt ? 'bg-white text-[#6e0e11] shadow-lg' : 'bg-white/5'}`}
+                        className={`h-12 rounded-xl border-white/10 text-white font-bold hover:bg-white hover:text-[#7a1013] ${amount === amt ? 'bg-white text-[#7a1013] shadow-lg' : 'bg-white/5'}`}
                         onClick={() => setAmount(amt)}
                       >
                         ৳{amt}
@@ -126,7 +126,7 @@ export default function RegularDonationPage() {
                 <Button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full h-16 bg-white text-[#6e0e11] hover:bg-white/90 font-bold text-lg rounded-2xl shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2"
+                  className="w-full h-16 bg-white text-[#7a1013] hover:bg-white/90 font-bold text-lg rounded-2xl shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? "প্রসেসিং..." : (
                     <>সাবস্ক্রাইব করুন <ArrowRight className="h-5 w-5" /></>

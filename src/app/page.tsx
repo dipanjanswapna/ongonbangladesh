@@ -192,7 +192,7 @@ export default function Home() {
         </section>
 
         {/* Join Us Section */}
-        <section className="py-24" style={{ backgroundColor: 'rgb(110, 14, 17)' }}>
+        <section className="py-24" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
           <div className="container mx-auto px-4">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">আমাদের সাথে যুক্ত হোন</h2>
@@ -209,13 +209,13 @@ export default function Home() {
                 { icon: Briefcase, title: "ক্যারিয়ার", description: "মানবিক কাজের মাধ্যমে আপনার পেশাদার জীবন গড়ে তুলুন।", link: "/careers" }
               ].map((option, i) => (
                 <div key={i} className="group p-8 rounded-[2.5rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-500 flex flex-col items-center text-center shadow-2xl backdrop-blur-sm">
-                  <div className="mb-6 p-4 rounded-3xl bg-white/10 text-white group-hover:bg-white group-hover:text-[#6e0e11] transition-all shadow-xl">
+                  <div className="mb-6 p-4 rounded-3xl bg-white/10 text-white group-hover:bg-white group-hover:text-[#7a1013] transition-all shadow-xl">
                     <option.icon className="h-8 w-8" />
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-white">{option.title}</h3>
                   <p className="text-sm text-white/50 mb-8 leading-relaxed">{option.description}</p>
                   <Link href={option.link} className="mt-auto w-full">
-                    <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white hover:text-[#6e0e11] font-bold rounded-2xl transition-all h-12 shadow-lg">
+                    <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white hover:text-[#7a1013] font-bold rounded-2xl transition-all h-12 shadow-lg">
                       বিস্তারিত দেখুন
                     </Button>
                   </Link>
@@ -305,7 +305,7 @@ export default function Home() {
         <div className="container mx-auto max-w-7xl">
           <div 
             className="rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden border border-white/10"
-            style={{ backgroundColor: 'rgb(110, 14, 17)' }}
+            style={{ backgroundColor: 'rgb(122, 16, 19)' }}
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-10">
               <div className="lg:col-span-5 space-y-6">
@@ -323,7 +323,7 @@ export default function Home() {
                       placeholder="আপনার ইমেইল" 
                       className="bg-white/10 border-white/20 text-white placeholder:text-white/40 h-10 rounded-xl" 
                     />
-                    <Button className="bg-white text-[#6e0e11] hover:bg-white/90 font-bold h-10 px-6 rounded-xl">
+                    <Button className="bg-white text-[#7a1013] hover:bg-white/90 font-bold h-10 px-6 rounded-xl">
                       সাবস্ক্রাইব
                     </Button>
                   </div>
