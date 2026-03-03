@@ -42,7 +42,7 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
     setIsMounted(true);
   }, []);
 
-  if (!isMounted) return <div className="w-full h-full bg-[#0a0a0a] animate-pulse" />;
+  if (!isMounted) return <div className="w-full h-full bg-[#0a0a0a]" />;
 
   const defaultCenter: [number, number] = [23.7509, 90.3843]; // Dhaka center
   const mapCenter = selectedDonor ? [selectedDonor.lat, selectedDonor.lng] : (userLocation ? [userLocation.lat, userLocation.lng] : defaultCenter);
@@ -51,102 +51,93 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
   // Custom Donor Icon
   const donorIcon = (group: string, isSelected: boolean) => L.divIcon({
     html: renderToStaticMarkup(
-      <div className={`relative transition-all duration-500 ${isSelected ? 'scale-125' : 'hover:scale-110'}`}>
-        <div className={`p-2.5 rounded-2xl shadow-2xl flex items-center justify-center ${isSelected ? 'bg-red-600 ring-4 ring-white/20' : 'bg-white text-red-600 border border-red-100'}`}>
-          <Droplet className={`h-7 w-7 ${isSelected ? 'fill-white' : 'fill-red-600'}`} />
-          <div className="absolute -top-2 -right-2 h-6 w-6 bg-[#0f0203] text-white text-[10px] font-black rounded-full flex items-center justify-center border-2 border-red-600 shadow-lg">
+      <div className={`relative transition-all duration-300 ${isSelected ? 'scale-110' : 'hover:scale-105'}`}>
+        <div className={`p-2 rounded-2xl shadow-2xl flex items-center justify-center ${isSelected ? 'bg-red-600 ring-2 ring-white/50' : 'bg-white text-red-600 border border-red-200'}`}>
+          <Droplet className={`h-6 w-6 ${isSelected ? 'fill-white' : 'fill-red-600'}`} />
+          <div className="absolute -top-1 -right-1 h-5 w-5 bg-[#0f0203] text-white text-[8px] font-black rounded-full flex items-center justify-center border-2 border-red-600">
             {group}
           </div>
         </div>
       </div>
     ),
     className: '',
-    iconSize: [44, 44],
-    iconAnchor: [22, 22],
+    iconSize: [40, 40],
+    iconAnchor: [20, 20],
   });
 
   // Custom User Location Icon
   const userIcon = L.divIcon({
     html: renderToStaticMarkup(
       <div className="relative">
-        <div className="h-6 w-6 bg-blue-500 rounded-full border-4 border-white shadow-2xl animate-pulse" />
-        <div className="absolute -inset-4 bg-blue-500/20 rounded-full animate-ping" />
+        <div className="h-5 w-5 bg-blue-500 rounded-full border-2 border-white shadow-xl animate-pulse" />
+        <div className="absolute -inset-3 bg-blue-500/20 rounded-full animate-ping" />
       </div>
     ),
     className: '',
-    iconSize: [24, 24],
-    iconAnchor: [12, 12],
+    iconSize: [20, 20],
+    iconAnchor: [10, 10],
   });
 
   return (
-    <MapContainer 
-      center={mapCenter as [number, number]} 
-      zoom={13} 
-      className="w-full h-full"
-      zoomControl={false}
-      scrollWheelZoom={true}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      
-      <ZoomControl position="topright" />
-      <MapUpdater center={mapCenter as [number, number]} zoom={zoomLevel} />
+    <div className="w-full h-full relative">
+      <MapContainer 
+        center={mapCenter as [number, number]} 
+        zoom={13} 
+        className="w-full h-full"
+        zoomControl={false}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        
+        <ZoomControl position="topright" />
+        <MapUpdater center={mapCenter as [number, number]} zoom={zoomLevel} />
 
-      {/* Donor Markers */}
-      {donors.map((donor) => (
-        <Marker 
-          key={donor.id} 
-          position={[donor.lat, donor.lng]} 
-          icon={donorIcon(donor.group, selectedDonor?.id === donor.id)}
-          eventHandlers={{
-            click: () => onSelectDonor(donor),
-          }}
-        >
-          <Popup closeButton={false} offset={[0, -10]}>
-            <div className="p-4 min-w-[200px] space-y-3 bg-[#1a0405]">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-xl bg-red-600 flex items-center justify-center text-white font-bold text-sm">
-                  {donor.group}
+        {/* Donor Markers */}
+        {donors.map((donor) => (
+          <Marker 
+            key={donor.id} 
+            position={[donor.lat, donor.lng]} 
+            icon={donorIcon(donor.group, selectedDonor?.id === donor.id)}
+            eventHandlers={{
+              click: () => onSelectDonor(donor),
+            }}
+          >
+            <Popup closeButton={false} offset={[0, -5]}>
+              <div className="p-3 min-w-[180px] bg-[#1a0405] text-white">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="h-8 w-8 rounded-lg bg-red-600 flex items-center justify-center text-white font-bold text-xs">
+                    {donor.group}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm leading-none">{donor.name}</h4>
+                    <p className="text-[9px] text-white/40 flex items-center gap-1 mt-1">
+                      <MapPin className="h-2 w-2" /> {donor.location}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-bold text-white text-base leading-none">{donor.name}</h4>
-                  <p className="text-[10px] text-white/40 flex items-center gap-1 mt-1">
-                    <MapPin className="h-3 w-3" /> {donor.location}
-                  </p>
+                <div className="flex gap-2">
+                  <Link href={`tel:${donor.phone}`} className="flex-1">
+                    <Button size="sm" className="w-full bg-white text-red-600 hover:bg-red-50 h-7 rounded-md text-[9px] font-bold">
+                      কল করুন
+                    </Button>
+                  </Link>
                 </div>
               </div>
-              <div className="flex gap-2">
-                <Link href={`tel:${donor.phone}`} className="flex-1">
-                  <Button size="sm" className="w-full bg-white text-red-600 hover:bg-red-50 h-8 rounded-lg text-[10px] font-bold">
-                    <Phone className="h-3 w-3 mr-1" /> কল দিন
-                  </Button>
-                </Link>
-                <Button 
-                  size="sm" 
-                  variant="outline" 
-                  className="flex-1 border-white/10 text-white h-8 rounded-lg text-[10px] font-bold"
-                  onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${donor.lat},${donor.lng}`, '_blank')}
-                >
-                  <Navigation className="h-3 w-3 mr-1" /> পথ দেখুন
-                </Button>
-              </div>
-            </div>
-          </Popup>
-        </Marker>
-      ))}
+            </Popup>
+          </Marker>
+        ))}
 
-      {/* User Location Marker */}
-      {userLocation && (
-        <Marker position={[userLocation.lat, userLocation.lng]} icon={userIcon}>
-          <Popup closeButton={false}>
-            <div className="p-2 text-center">
-              <p className="text-xs font-bold text-blue-400">আপনি এখানে আছেন</p>
-            </div>
-          </Popup>
-        </Marker>
-      )}
-    </MapContainer>
+        {/* User Location Marker */}
+        {userLocation && (
+          <Marker position={[userLocation.lat, userLocation.lng]} icon={userIcon}>
+            <Popup closeButton={false}>
+              <p className="text-[10px] font-bold text-blue-500 p-1">আপনার অবস্থান</p>
+            </Popup>
+          </Marker>
+        )}
+      </MapContainer>
+    </div>
   );
 }

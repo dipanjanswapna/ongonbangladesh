@@ -6,7 +6,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { MapPin, Search, Phone, Droplet, Navigation, Crosshair, List, Map as MapIcon, Loader2, Info, ChevronRight } from 'lucide-react';
+import { MapPin, Search, Phone, Droplet, Navigation, Crosshair, List, Map as MapIcon, Loader2, Info, ChevronRight, ArrowLeft } from 'lucide-react';
 import { bloodDonors } from '@/lib/blood-data';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
@@ -54,7 +54,8 @@ export default function DonorsListPage() {
           const { latitude, longitude } = position.coords;
           setUserLocation({ lat: latitude, lng: longitude });
           setIsLocating(false);
-          setViewMode('map');
+          // Auto switch to map on mobile to show location
+          if (window.innerWidth < 1024) setViewMode('map');
         },
         () => {
           alert("আপনার লোকেশন পাওয়া যায়নি। দয়া করে জিপিএস পারমিশন চেক করুন।");
@@ -86,20 +87,20 @@ export default function DonorsListPage() {
   }, [searchTerm, userLocation]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0a0a0a] selection:bg-red-600/30 overflow-hidden">
+    <div className="min-h-screen flex flex-col bg-[#0a0a0a] selection:bg-red-600/30 overflow-hidden font-body">
       <Navbar />
       
-      <main className="flex-grow pt-16 md:pt-20">
-        <div className="h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] flex flex-col lg:flex-row overflow-hidden relative">
+      <main className="flex-grow pt-16 md:pt-20 overflow-hidden h-screen">
+        <div className="h-full flex flex-col lg:flex-row overflow-hidden relative">
           
-          {/* Mobile View Toggle - Fixed at bottom for easy access */}
-          <div className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] bg-[#1a0405]/80 backdrop-blur-2xl border border-white/10 p-1.5 rounded-2xl flex gap-1 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+          {/* Mobile View Toggle */}
+          <div className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] bg-[#1a0405]/90 backdrop-blur-2xl border border-white/10 p-1.5 rounded-2xl flex gap-1 shadow-2xl">
             <Button 
               size="sm"
               variant={viewMode === 'list' ? 'default' : 'ghost'} 
               className={cn(
                 "rounded-xl px-6 h-10 text-[10px] font-black uppercase tracking-widest transition-all", 
-                viewMode === 'list' ? "bg-white text-red-600 shadow-xl" : "text-white/40 hover:text-white"
+                viewMode === 'list' ? "bg-red-600 text-white shadow-xl" : "text-white/40 hover:text-white"
               )}
               onClick={() => setViewMode('list')}
             >
@@ -110,7 +111,7 @@ export default function DonorsListPage() {
               variant={viewMode === 'map' ? 'default' : 'ghost'} 
               className={cn(
                 "rounded-xl px-6 h-10 text-[10px] font-black uppercase tracking-widest transition-all", 
-                viewMode === 'map' ? "bg-white text-red-600 shadow-xl" : "text-white/40 hover:text-white"
+                viewMode === 'map' ? "bg-red-600 text-white shadow-xl" : "text-white/40 hover:text-white"
               )}
               onClick={() => setViewMode('map')}
             >
@@ -119,18 +120,18 @@ export default function DonorsListPage() {
           </div>
 
           {/* Sidebar Section */}
-          <div className={cn(
-            "w-full lg:w-[420px] h-full flex flex-col border-r border-white/5 bg-[#0f0203] transition-all duration-300 z-50",
+          <aside className={cn(
+            "w-full lg:w-[420px] h-full flex flex-col border-r border-white/5 bg-[#0f0203] transition-all duration-300 z-50 shrink-0",
             viewMode === 'map' ? 'hidden lg:flex' : 'flex'
           )}>
-            {/* Search Header - Sticky */}
-            <div className="p-6 space-y-4 bg-[#0f0203] border-b border-white/5 shadow-2xl z-20 shrink-0">
+            {/* Sidebar Header */}
+            <div className="p-6 space-y-4 bg-[#0f0203] border-b border-white/5 shrink-0">
               <div className="flex items-center justify-between">
-                <h1 className="text-xl font-black text-white tracking-tighter flex items-center gap-2">
-                  <Droplet className="h-5 w-5 text-red-600 fill-red-600 animate-pulse" />
-                  রক্তদাতা অনুসন্ধান
-                </h1>
-                <Badge className="bg-red-600 text-white animate-pulse text-[9px] font-black tracking-widest px-2 py-0.5">LIVE</Badge>
+                <Link href="/blood" className="flex items-center gap-2 text-white/40 hover:text-white transition-colors">
+                  <ArrowLeft className="h-4 w-4" />
+                  <span className="text-[10px] font-black uppercase tracking-widest">ফিরে যান</span>
+                </Link>
+                <Badge className="bg-red-600 text-white animate-pulse text-[9px] font-black tracking-widest px-2 py-0.5">LIVE MAP</Badge>
               </div>
               
               <div className="space-y-3">
@@ -147,22 +148,22 @@ export default function DonorsListPage() {
                 <Button 
                   onClick={handleNearMe}
                   disabled={isLocating}
-                  className="w-full bg-red-600 hover:bg-red-700 text-white font-black h-12 rounded-xl flex items-center justify-center gap-2 shadow-[0_8px_30px_rgba(220,38,38,0.2)] active:scale-95 transition-all group text-xs uppercase tracking-wider"
+                  className="w-full bg-red-600 hover:bg-red-700 text-white font-black h-12 rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95 group text-xs uppercase tracking-wider"
                 >
                   {isLocating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Crosshair className="h-4 w-4 group-hover:rotate-90 transition-transform" />}
-                  Blood Near Me (GPS)
+                  নিকটস্থ দাতা খুঁজুন (GPS)
                 </Button>
               </div>
             </div>
 
-            {/* Donor List - Enhanced Scroll System */}
+            {/* Donor List with Custom Scrollbar */}
             <div className="flex-grow overflow-y-auto px-4 py-6 space-y-4 custom-scrollbar scroll-smooth pb-24 lg:pb-6">
               {filteredDonors.length > 0 ? filteredDonors.map((donor) => (
                 <Card 
                   key={donor.id} 
                   className={cn(
                     "border-white/5 bg-white/5 hover:bg-white/10 transition-all cursor-pointer rounded-3xl p-4 group relative overflow-hidden",
-                    selectedDonor?.id === donor.id ? 'ring-2 ring-red-600 bg-white/10 shadow-2xl' : ''
+                    selectedDonor?.id === donor.id ? 'ring-2 ring-red-600 bg-white/10 shadow-xl' : ''
                   )}
                   onClick={() => {
                     setSelectedDonor(donor);
@@ -171,7 +172,7 @@ export default function DonorsListPage() {
                 >
                   <div className="flex justify-between items-start">
                     <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 flex flex-col items-center justify-center text-white font-black shadow-lg group-hover:scale-105 transition-transform duration-500">
+                      <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 flex flex-col items-center justify-center text-white font-black shadow-lg">
                         <span className="text-[7px] uppercase leading-none opacity-60 mb-0.5">Group</span>
                         <span className="text-xl">{donor.group}</span>
                       </div>
@@ -214,14 +215,14 @@ export default function DonorsListPage() {
                   <div className="h-20 w-20 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-6 border border-white/5">
                     <Search className="h-8 w-8 text-white/10" />
                   </div>
-                  <h3 className="text-white font-bold text-base">কোনো দাতা পাওয়া যায়নি</h3>
+                  <h3 className="text-white font-bold text-base">দাতা পাওয়া যায়নি</h3>
                   <p className="text-white/20 text-[10px] mt-2 max-w-[180px] mx-auto leading-relaxed">আপনার এলাকা বা ব্লাড গ্রুপটি পুনরায় পরীক্ষা করে দেখুন।</p>
                 </div>
               )}
             </div>
-          </div>
+          </aside>
 
-          {/* Live Map Interface */}
+          {/* Map Section */}
           <div className={cn(
             "flex-grow relative bg-[#0a0a0a] overflow-hidden transition-all duration-700",
             viewMode === 'list' ? 'hidden lg:block' : 'block'
@@ -233,79 +234,50 @@ export default function DonorsListPage() {
               onSelectDonor={(donor) => setSelectedDonor(donor)}
             />
 
-            {/* Selection Card Overlay - Enhanced for Mobile */}
+            {/* Selection Card Overlay (Mobile Friendly) */}
             {selectedDonor && (
-              <div className="absolute bottom-20 md:bottom-10 left-4 right-4 md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-md z-[1000] animate-in slide-in-from-bottom-10 duration-500">
-                <Card className="glass-card border-white/20 p-5 md:p-8 rounded-[2.5rem] shadow-[0_32px_80px_rgba(0,0,0,0.9)] border-b-8 border-red-600">
-                  <div className="flex items-center justify-between mb-5">
+              <div className="absolute bottom-24 md:bottom-10 left-4 right-4 md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-md z-[1000] animate-in slide-in-from-bottom-10 duration-500">
+                <Card className="glass-card border-white/20 p-5 rounded-[2rem] shadow-2xl border-b-8 border-red-600">
+                  <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-4">
-                      <div className="h-16 w-16 rounded-[1.5rem] bg-red-600 flex flex-col items-center justify-center text-white font-black text-3xl shadow-2xl ring-4 ring-white/10 shrink-0">
-                        <span className="text-[8px] uppercase opacity-50 mb-0.5">Group</span>
+                      <div className="h-14 w-14 rounded-2xl bg-red-600 flex flex-col items-center justify-center text-white font-black text-2xl shadow-xl ring-2 ring-white/10 shrink-0">
+                        <span className="text-[7px] uppercase opacity-50">Group</span>
                         {selectedDonor.group}
                       </div>
                       <div className="min-w-0">
-                        <h2 className="text-xl font-black text-white tracking-tighter truncate">{selectedDonor.name}</h2>
-                        <p className="text-white/50 text-[11px] flex items-center gap-1.5 font-bold mt-1">
-                          <MapPin className="h-3.5 w-3.5 text-red-600" /> {selectedDonor.location}
+                        <h2 className="text-lg font-black text-white truncate">{selectedDonor.name}</h2>
+                        <p className="text-white/50 text-[10px] flex items-center gap-1.5 font-bold">
+                          <MapPin className="h-3 w-3 text-red-600" /> {selectedDonor.location}
                         </p>
                       </div>
                     </div>
                     <Button 
                       size="icon" 
                       variant="ghost" 
-                      className="rounded-full h-10 w-10 text-white/20 hover:text-white hover:bg-white/10 shrink-0" 
+                      className="rounded-full h-8 w-8 text-white/20 hover:text-white hover:bg-white/10" 
                       onClick={() => setSelectedDonor(null)}
                     >
-                      <Crosshair className="h-5 w-5 rotate-45" />
+                      <Crosshair className="h-4 w-4 rotate-45" />
                     </Button>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-3 mb-6">
-                    <div className="p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl">
-                      <p className="text-[8px] text-white/40 uppercase font-black tracking-widest mb-1">রক্তদান স্থিতি</p>
-                      <Badge className="bg-green-500/20 text-green-400 border-0 text-[9px] font-black">উপলব্ধ</Badge>
-                    </div>
-                    <div className="p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl">
-                      <p className="text-[8px] text-white/40 uppercase font-black tracking-widest mb-1">শেষবার দান</p>
-                      <p className="text-[10px] text-white font-bold">{selectedDonor.lastDonated}</p>
-                    </div>
                   </div>
 
                   <div className="flex gap-3">
                     <Link href={`tel:${selectedDonor.phone}`} className="flex-1">
-                      <Button className="w-full h-14 bg-white text-red-700 hover:bg-white/90 font-black text-lg rounded-2xl shadow-2xl transition-all active:scale-95 flex items-center justify-center gap-2 uppercase tracking-tighter">
-                        <Phone className="h-6 w-6" /> কল দিন
+                      <Button className="w-full h-12 bg-white text-red-700 hover:bg-white/90 font-black text-sm rounded-xl shadow-xl flex items-center justify-center gap-2 uppercase">
+                        <Phone className="h-5 w-5" /> কল দিন
                       </Button>
                     </Link>
                     <Button 
                       variant="outline" 
-                      className="h-14 w-14 border-white/10 bg-white/5 text-white hover:bg-white/10 rounded-2xl flex items-center justify-center transition-all shrink-0"
+                      className="h-12 w-12 border-white/10 bg-white/5 text-white hover:bg-white/10 rounded-xl flex items-center justify-center transition-all"
                       onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${selectedDonor.lat},${selectedDonor.lng}`, '_blank')}
                     >
-                      <Navigation className="h-6 w-6" />
+                      <Navigation className="h-5 w-5" />
                     </Button>
                   </div>
                 </Card>
               </div>
             )}
-
-            {/* Map UI Controls - Hidden on mobile because they conflict with the toggle */}
-            <div className="hidden md:flex absolute top-6 right-6 flex-col gap-3 z-[1000]">
-              <Button 
-                size="icon" 
-                className="bg-[#0f0203]/80 backdrop-blur-2xl border border-white/10 text-white hover:bg-white hover:text-red-600 rounded-2xl shadow-2xl h-12 w-12 transition-all" 
-                onClick={() => window.location.reload()}
-              >
-                <Navigation className="h-5 w-5" />
-              </Button>
-              <Button 
-                size="icon" 
-                className="bg-[#0f0203]/80 backdrop-blur-2xl border border-white/10 text-white hover:bg-white hover:text-red-600 rounded-2xl shadow-2xl h-12 w-12 transition-all" 
-                onClick={handleNearMe}
-              >
-                <Crosshair className="h-5 w-5" />
-              </Button>
-            </div>
           </div>
         </div>
       </main>
