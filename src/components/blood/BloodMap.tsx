@@ -25,14 +25,15 @@ interface BloodMapProps {
   onSelectDonor: (donor: Donor) => void;
 }
 
-// Static default center to ensure no NaN during initialization
+// Static default center constants
 const DEFAULT_LAT = 23.7509;
 const DEFAULT_LNG = 90.3843;
-const DEFAULT_CENTER: [number, number] = [DEFAULT_LAT, DEFAULT_LNG];
 
 // Helper to validate coordinates strictly
-const isValidCoord = (val: any): val is number => {
-  return typeof val === 'number' && !isNaN(val) && isFinite(val);
+const isValidCoord = (val: any): boolean => {
+  if (val === null || val === undefined) return false;
+  const num = typeof val === 'string' ? parseFloat(val) : val;
+  return typeof num === 'number' && !isNaN(num) && isFinite(num);
 };
 
 // Component to handle map centering and zoom animation with safe validation
@@ -49,6 +50,7 @@ function MapUpdater({ lat, lng, zoom, active }: { lat: number, lng: number, zoom
           easeLinearity: 0.25
         });
       } catch (err) {
+        // Log locally if flyTo fails, but don't crash the app
         console.warn('Leaflet flyTo failed silently:', err);
       }
     }
@@ -69,12 +71,20 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
   const mapCoords = useMemo(() => {
     // 1. Prioritize selected donor location with strict validation
     if (selectedDonor && isValidCoord(selectedDonor.lat) && isValidCoord(selectedDonor.lng)) {
-      return { lat: selectedDonor.lat, lng: selectedDonor.lng, active: true };
+      return { 
+        lat: Number(selectedDonor.lat), 
+        lng: Number(selectedDonor.lng), 
+        active: true 
+      };
     }
     
     // 2. Fallback to user location with strict validation
     if (userLocation && isValidCoord(userLocation.lat) && isValidCoord(userLocation.lng)) {
-      return { lat: userLocation.lat, lng: userLocation.lng, active: true };
+      return { 
+        lat: Number(userLocation.lat), 
+        lng: Number(userLocation.lng), 
+        active: true 
+      };
     }
     
     // 3. Absolute fallback to default center
@@ -121,13 +131,13 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
   return (
     <div className="w-full h-full relative z-0">
       <MapContainer 
-        center={DEFAULT_CENTER} 
+        center={[23.7509, 90.3843]} 
         zoom={13} 
         className="w-full h-full"
         zoomControl={false}
         ref={mapRef}
         preferCanvas={true}
-        key={isMounted ? 'mounted' : 'unmounted'} // Force re-render on mount for proper Leaflet init
+        key={isMounted ? 'map-mounted' : 'map-unmounted'}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
@@ -145,7 +155,7 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
         />
 
         {donors.map((donor) => {
-          // Extra safety check for each marker position
+          // Double check for each marker position
           if (!isValidCoord(donor.lat) || !isValidCoord(donor.lng)) {
             return null;
           }
@@ -153,7 +163,7 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
           return (
             <Marker 
               key={donor.id} 
-              position={[donor.lat, donor.lng]} 
+              position={[Number(donor.lat), Number(donor.lng)]} 
               icon={donorIcon(donor.group, selectedDonor?.id === donor.id)}
               eventHandlers={{
                 click: () => onSelectDonor(donor),
@@ -173,7 +183,11 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
         })}
 
         {userLocation && isValidCoord(userLocation.lat) && isValidCoord(userLocation.lng) && (
-          <Marker position={[userLocation.lat, userLocation.lng]} icon={userIcon}>
+          <Marker 
+            key="user-live-location"
+            position={[Number(userLocation.lat), Number(userLocation.lng)]} 
+            icon={userIcon}
+          >
             <Popup closeButton={false} offset={[0, -10]}>
               <div className="p-2 text-center">
                 <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest">লাইভ লোকেশন সচল</p>
@@ -183,7 +197,6 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
         )}
       </MapContainer>
       
-      {/* Map Attribution Custom Overlay for Better UX */}
       <div className="absolute bottom-4 left-4 z-[999] opacity-30 pointer-events-none">
         <span className="text-[8px] text-white font-bold uppercase tracking-[0.2em]">ONGON LIVE MAP ENGINE v2.0</span>
       </div>

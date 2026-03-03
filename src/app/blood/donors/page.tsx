@@ -37,8 +37,16 @@ export default function DonorsListPage() {
   const [isTracking, setIsTracking] = useState(false);
   const watchId = useRef<number | null>(null);
 
+  // Helper to validate coordinates strictly
+  const isValidCoord = (val: any): boolean => {
+    if (val === null || val === undefined) return false;
+    const num = typeof val === 'string' ? parseFloat(val) : val;
+    return typeof num === 'number' && !isNaN(num) && isFinite(num);
+  };
+
   // Haversine formula to calculate distance in km
   const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+    if (!isValidCoord(lat1) || !isValidCoord(lon1) || !isValidCoord(lat2) || !isValidCoord(lon2)) return null;
     const R = 6371;
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLon = (lon2 - lon1) * Math.PI / 180;
@@ -51,7 +59,7 @@ export default function DonorsListPage() {
   };
 
   const startTracking = () => {
-    if (!navigator.geolocation) {
+    if (typeof window === 'undefined' || !navigator.geolocation) {
       toast({ title: "জিপিএস নট সাপোর্টেড", description: "আপনার ব্রাউজার জিপিএস সাপোর্ট করে না।", variant: "destructive" });
       return;
     }
@@ -64,10 +72,14 @@ export default function DonorsListPage() {
     watchId.current = navigator.geolocation.watchPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        setUserLocation({ lat: latitude, lng: longitude });
-        setIsLocating(false);
-        setIsTracking(true);
-        if (window.innerWidth < 1024 && !isTracking) setViewMode('map');
+        if (isValidCoord(latitude) && isValidCoord(longitude)) {
+          setUserLocation({ lat: latitude, lng: longitude });
+          setIsLocating(false);
+          setIsTracking(true);
+        } else {
+          setIsLocating(false);
+          toast({ title: "জিপিএস এরর", description: "সঠিক লোকেশন ডাটা পাওয়া যায়নি।", variant: "destructive" });
+        }
       },
       (error) => {
         setIsLocating(false);
@@ -102,11 +114,11 @@ export default function DonorsListPage() {
       donor.group.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    if (userLocation) {
+    if (userLocation && isValidCoord(userLocation.lat) && isValidCoord(userLocation.lng)) {
       result = result.map(donor => ({
         ...donor,
         distance: getDistance(userLocation.lat, userLocation.lng, donor.lat, donor.lng)
-      })).sort((a, b) => (a.distance || 0) - (b.distance || 0));
+      })).sort((a, b) => (Number(a.distance) || 0) - (Number(b.distance) || 0));
     }
 
     return result;
@@ -119,7 +131,6 @@ export default function DonorsListPage() {
       <main className="flex-grow pt-16 md:pt-20 overflow-hidden h-[100dvh]">
         <div className="h-full flex flex-col lg:flex-row overflow-hidden relative">
           
-          {/* Mobile View Toggle - Floating at bottom */}
           <div className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[1001] bg-black/80 backdrop-blur-2xl border border-white/10 p-1.5 rounded-full flex gap-1 shadow-2xl">
             <Button 
               size="sm"
@@ -145,12 +156,10 @@ export default function DonorsListPage() {
             </Button>
           </div>
 
-          {/* Sidebar Section */}
           <aside className={cn(
             "w-full lg:w-[400px] h-full flex flex-col border-r border-white/5 bg-[#0f0203] z-[50] shrink-0 transition-transform duration-300",
             viewMode === 'map' ? 'hidden lg:flex' : 'flex'
           )}>
-            {/* Sidebar Header */}
             <div className="p-6 space-y-4 bg-[#0f0203] border-b border-white/5 shrink-0">
               <div className="flex items-center justify-between">
                 <Link href="/blood" className="flex items-center gap-2 text-white/40 hover:text-white transition-colors">
@@ -189,13 +198,12 @@ export default function DonorsListPage() {
                     )}
                   >
                     {isLocating ? <Loader2 className="h-4 w-4 animate-spin" /> : isTracking ? <LocateFixed className="h-4 w-4" /> : <Crosshair className="h-4 w-4" />}
-                    {isTracking ? "লাইভ লোকেশন অফ করুন" : "নিকটস্থ দাতা খুঁজুন (GPS)"}
+                    {isTracking ? "লাইভ ট্র্যাকিং বন্ধ করুন" : "নিকটস্থ দাতা খুঁজুন (GPS)"}
                   </Button>
                 </div>
               </div>
             </div>
 
-            {/* Donor List */}
             <div className="flex-grow overflow-y-auto px-4 py-6 space-y-4 custom-scrollbar scroll-smooth pb-28 lg:pb-6">
               {filteredDonors.length > 0 ? filteredDonors.map((donor) => (
                 <Card 
@@ -220,9 +228,9 @@ export default function DonorsListPage() {
                         <div className="flex items-center gap-1.5 text-[10px] text-white/40 uppercase tracking-widest font-bold">
                           <MapPin className="h-3.5 w-3.5 text-red-600" /> {donor.location}
                         </div>
-                        {donor.distance !== undefined && (
+                        {donor.distance !== undefined && donor.distance !== null && (
                           <div className="text-[10px] text-green-400 font-black flex items-center gap-1 mt-1">
-                            <Navigation className="h-3 w-3" /> {donor.distance.toFixed(1)} km দূরে
+                            <Navigation className="h-3 w-3" /> {Number(donor.distance).toFixed(1)} km দূরে
                           </div>
                         )}
                       </div>
@@ -250,7 +258,6 @@ export default function DonorsListPage() {
             </div>
           </aside>
 
-          {/* Map Section */}
           <div className={cn(
             "flex-grow relative bg-[#0a0a0a] overflow-hidden",
             viewMode === 'list' ? 'hidden lg:block' : 'block'
@@ -262,7 +269,6 @@ export default function DonorsListPage() {
               onSelectDonor={(donor) => setSelectedDonor(donor)}
             />
 
-            {/* Selection Card Overlay */}
             {selectedDonor && (
               <div className="absolute bottom-24 lg:bottom-10 left-4 right-4 lg:left-1/2 lg:-translate-x-1/2 lg:w-full lg:max-w-md z-[1000] animate-in slide-in-from-bottom-10 duration-500">
                 <Card className="glass-card border-white/20 p-6 rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] border-b-8 border-red-600">
@@ -298,7 +304,11 @@ export default function DonorsListPage() {
                     <Button 
                       variant="outline" 
                       className="h-14 w-14 border-white/10 bg-white/5 text-white hover:bg-white/10 rounded-2xl flex items-center justify-center transition-all"
-                      onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${selectedDonor.lat},${selectedDonor.lng}`, '_blank')}
+                      onClick={() => {
+                        if (isValidCoord(selectedDonor.lat) && isValidCoord(selectedDonor.lng)) {
+                          window.open(`https://www.google.com/maps/dir/?api=1&destination=${selectedDonor.lat},${selectedDonor.lng}`, '_blank');
+                        }
+                      }}
                     >
                       <Navigation className="h-6 w-6" />
                     </Button>
