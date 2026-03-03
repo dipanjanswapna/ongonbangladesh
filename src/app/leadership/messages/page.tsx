@@ -46,11 +46,11 @@ export default function LeadershipMessagesPage() {
 
         <div className="space-y-12">
           {leadershipMessages.map((leader, i) => (
-            <Card key={i} className="bg-white/5 border-white/10 rounded-none overflow-hidden shadow-2xl backdrop-blur-xl group">
+            <Card key={i} className="bg-white/5 border-white/10 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl group">
               <CardContent className="p-8 md:p-12">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                   <div className="md:col-span-4 flex flex-col items-center text-center space-y-4">
-                    <div className="relative h-56 w-56 rounded-none overflow-hidden border-4 border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-105">
+                    <div className="relative h-56 w-56 rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-105">
                       <Image 
                         src={leader.image} 
                         alt={leader.name} 
@@ -66,7 +66,7 @@ export default function LeadershipMessagesPage() {
                     </div>
                   </div>
                   <div className="md:col-span-8 space-y-6">
-                    <div className="inline-flex p-3 rounded-none bg-white/10 text-white mb-2">
+                    <div className="inline-flex p-3 rounded-xl bg-white/10 text-white mb-2">
                       <Quote className="h-8 w-8 text-white fill-white" />
                     </div>
                     <p className="text-xl md:text-2xl font-medium text-white italic leading-relaxed line-clamp-4">

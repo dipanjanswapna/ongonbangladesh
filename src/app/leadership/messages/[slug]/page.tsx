@@ -65,7 +65,7 @@ export default function LeadershipDetail() {
       <Navbar />
       <main className="container mx-auto px-4 py-32 flex-grow max-w-6xl">
         <Link href="/leadership/messages">
-          <Button variant="ghost" className="text-white/60 hover:text-white mb-12 rounded-none px-0 group">
+          <Button variant="ghost" className="text-white/60 hover:text-white mb-12 rounded-xl px-4 group">
             <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
             ফিরে যান
           </Button>
@@ -74,7 +74,7 @@ export default function LeadershipDetail() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           {/* Left Side: Profile Image & Bio */}
           <div className="lg:col-span-5 space-y-8">
-            <div className="relative aspect-square w-full rounded-none overflow-hidden border-8 border-white/5 shadow-2xl">
+            <div className="relative aspect-square w-full rounded-3xl overflow-hidden border-8 border-white/5 shadow-2xl">
               <Image 
                 src={leader.image} 
                 alt={leader.name} 
@@ -89,7 +89,7 @@ export default function LeadershipDetail() {
               </div>
             </div>
 
-            <div className="bg-white/5 border border-white/10 p-8 rounded-none backdrop-blur-md">
+            <div className="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-md">
               <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                 <ShieldCheck className="h-5 w-5 text-primary" /> সংক্ষিপ্ত পরিচিতি
               </h3>
@@ -102,7 +102,7 @@ export default function LeadershipDetail() {
               <h3 className="text-sm font-black text-white/40 uppercase tracking-widest px-2">মূল লক্ষ্যসমূহ</h3>
               <div className="grid gap-3">
                 {leader.values.map((val: string, i: number) => (
-                  <div key={i} className="flex items-center gap-3 bg-white/5 border border-white/5 p-4 rounded-none hover:bg-white/10 transition-all">
+                  <div key={i} className="flex items-center gap-3 bg-white/5 border border-white/5 p-4 rounded-2xl hover:bg-white/10 transition-all">
                     <Sparkles className="h-4 w-4 text-primary" />
                     <span className="text-white font-bold text-sm">{val}</span>
                   </div>
@@ -114,7 +114,7 @@ export default function LeadershipDetail() {
           {/* Right Side: Detailed Message */}
           <div className="lg:col-span-7 space-y-10">
             <div className="space-y-6">
-              <div className="inline-flex p-4 bg-white/10 rounded-none text-white">
+              <div className="inline-flex p-4 bg-white/10 rounded-2xl text-white">
                 <Quote className="h-10 w-10 fill-white" />
               </div>
               <h2 className="text-3xl md:text-5xl font-black text-white leading-tight uppercase">
@@ -132,14 +132,14 @@ export default function LeadershipDetail() {
 
             <div className="pt-10 border-t border-white/10">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="p-6 bg-white/5 rounded-none border border-white/5 flex items-center gap-4">
+                <div className="p-6 bg-white/5 rounded-2xl border border-white/5 flex items-center gap-4">
                   <Globe className="h-6 w-6 text-primary" />
                   <div>
                     <p className="text-white font-black text-xs uppercase tracking-tighter">গ্লোবাল মিশন</p>
                     <p className="text-[10px] text-white/40 uppercase">২০৩০ লক্ষ্যমাত্রা</p>
                   </div>
                 </div>
-                <div className="p-6 bg-white/5 rounded-none border border-white/5 flex items-center gap-4">
+                <div className="p-6 bg-white/5 rounded-2xl border border-white/5 flex items-center gap-4">
                   <Heart className="h-6 w-6 text-primary fill-primary" />
                   <div>
                     <p className="text-white font-black text-xs uppercase tracking-tighter">সরাসরি ইমপ্যাক্ট</p>
@@ -151,7 +151,7 @@ export default function LeadershipDetail() {
 
             <div className="pt-8">
               <Link href="/donate">
-                <Button size="lg" className="bg-white text-[#7a1013] hover:bg-white/90 font-black h-16 px-12 rounded-none shadow-2xl transition-all active:scale-95 text-lg uppercase tracking-widest w-full md:w-auto">
+                <Button size="lg" className="bg-white text-[#7a1013] hover:bg-white/90 font-black h-16 px-12 rounded-2xl shadow-2xl transition-all active:scale-95 text-lg uppercase tracking-widest w-full md:w-auto">
                   আমাদের মিশনে অংশ নিন
                 </Button>
               </Link>

@@ -135,7 +135,7 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {campaigns.map((camp) => (
-                <Card key={camp.id} className="glass-card border-white/10 overflow-hidden flex flex-col group">
+                <Card key={camp.id} className="glass-card border-white/10 overflow-hidden flex flex-col group rounded-3xl">
                   <div className="relative h-48 w-full">
                     <Image src={camp.image} alt={camp.title} fill className="object-cover" unoptimized />
                   </div>
@@ -208,14 +208,14 @@ export default function Home() {
                 { icon: HeartHandshake, title: "স্বেচ্ছাসেবক", description: "আপনার দক্ষতা ও সময় দিয়ে সরাসরি মাঠ পর্যায়ে সাহায্য পৌঁছে দিন।", link: "/volunteer" },
                 { icon: Briefcase, title: "ক্যারিয়ার", description: "মানবিক কাজের মাধ্যমে আপনার পেশাদার জীবন গড়ে তুলুন।", link: "/careers" }
               ].map((option, i) => (
-                <div key={i} className="group p-8 rounded-none bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-500 flex flex-col items-center text-center shadow-2xl backdrop-blur-sm">
-                  <div className="mb-6 p-4 rounded-none bg-white/10 text-white group-hover:bg-white group-hover:text-[#7a1013] transition-all shadow-xl">
+                <div key={i} className="group p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-500 flex flex-col items-center text-center shadow-2xl backdrop-blur-sm">
+                  <div className="mb-6 p-4 rounded-xl bg-white/10 text-white group-hover:bg-white group-hover:text-[#7a1013] transition-all shadow-xl">
                     <option.icon className="h-8 w-8" />
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-white">{option.title}</h3>
                   <p className="text-sm text-white/50 mb-8 leading-relaxed">{option.description}</p>
                   <Link href={option.link} className="mt-auto w-full">
-                    <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white hover:text-[#7a1013] font-bold rounded-none transition-all h-12 shadow-lg">
+                    <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white hover:text-[#7a1013] font-bold rounded-xl transition-all h-12 shadow-lg">
                       বিস্তারিত দেখুন
                     </Button>
                   </Link>
@@ -255,7 +255,7 @@ export default function Home() {
                   ].map((item) => {
                     const img = PlaceHolderImages.find(p => p.id === item.imageId);
                     return (
-                      <Card key={item.id} className="glass-card border-white/10 overflow-hidden hover:scale-[1.02] transition-transform duration-300">
+                      <Card key={item.id} className="glass-card border-white/10 overflow-hidden hover:scale-[1.02] transition-transform duration-300 rounded-2xl">
                         <CardContent className="p-0">
                           <div className="relative aspect-[3/4] w-full bg-white/5">
                             {img?.imageUrl ? (
@@ -317,7 +317,7 @@ export default function Home() {
                 { name: "সাদিয়া ইসলাম", role: "সেক্রেটারি জেনারেল", image: "https://picsum.photos/seed/leader3/400/400" }
               ].map((leader, i) => (
                 <div key={i} className="group relative text-center">
-                  <div className="relative h-64 w-64 mx-auto rounded-none overflow-hidden border-4 border-white/5 shadow-2xl mb-6">
+                  <div className="relative h-64 w-64 mx-auto rounded-2xl overflow-hidden border-4 border-white/5 shadow-2xl mb-6">
                     <Image src={leader.image} alt={leader.name} fill className="object-cover transition-transform duration-500 group-hover:scale-110" unoptimized />
                     <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <Quote className="text-white h-10 w-10 opacity-50" />
