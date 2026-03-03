@@ -348,8 +348,8 @@ export default function Home() {
                   <h4 className="font-bold text-white text-xs uppercase opacity-50 tracking-widest">সাপোর্ট</h4>
                   <ul className="space-y-2 text-xs font-bold">
                     <li><Link href="/contact" className="text-white/70 hover:text-white">যোগাযোগ</Link></li>
-                    <li><Link href="/faq" className="text-white/70 hover:text-white">সাধারণ জিজ্ঞাসা</Link></li>
-                    <li><Link href="/terms" className="text-white/70 hover:text-white">শর্তাবলী</Link></li>
+                    <li><Link href="/refund-policy" className="text-white/70 hover:text-white">রিফান্ড নীতি</Link></li>
+                    <li><Link href="/refund-request" className="text-white/70 hover:text-white">রিফান্ড অনুরোধ</Link></li>
                   </ul>
                 </div>
                 <div className="space-y-4">
