@@ -25,25 +25,31 @@ interface BloodMapProps {
   onSelectDonor: (donor: Donor) => void;
 }
 
+// Static default center to ensure no NaN during initialization
+const DEFAULT_LAT = 23.7509;
+const DEFAULT_LNG = 90.3843;
+const DEFAULT_CENTER: [number, number] = [DEFAULT_LAT, DEFAULT_LNG];
+
+// Helper to validate coordinates strictly
+const isValidCoord = (val: any): val is number => {
+  return typeof val === 'number' && !isNaN(val) && isFinite(val);
+};
+
 // Component to handle map centering and zoom animation with safe validation
 function MapUpdater({ lat, lng, zoom, active }: { lat: number, lng: number, zoom: number, active: boolean }) {
   const map = useMap();
   
   useEffect(() => {
-    // Extra safe check for lat/lng and zoom to prevent (NaN, NaN) errors
-    const isLatValid = typeof lat === 'number' && !isNaN(lat) && isFinite(lat);
-    const isLngValid = typeof lng === 'number' && !isNaN(lng) && isFinite(lng);
-    const isZoomValid = typeof zoom === 'number' && !isNaN(zoom);
-
-    if (active && isLatValid && isLngValid && isZoomValid) {
+    if (active && isValidCoord(lat) && isValidCoord(lng)) {
       try {
-        map.flyTo([lat, lng], zoom, {
+        // Stop any current animation and fly to new valid coordinates
+        map.stop().flyTo([lat, lng], zoom, {
           animate: true,
           duration: 1.5,
           easeLinearity: 0.25
         });
       } catch (err) {
-        // Silently catch Leaflet internal errors to prevent UI crash
+        console.warn('Leaflet flyTo failed silently:', err);
       }
     }
   }, [lat, lng, zoom, map, active]);
@@ -59,26 +65,20 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
     setIsMounted(true);
   }, []);
 
-  const defaultCenter: [number, number] = [23.7509, 90.3843]; // Default to Dhaka
-  
   // Compute safe individual lat/lng values for the MapUpdater
   const mapCoords = useMemo(() => {
     // 1. Prioritize selected donor location with strict validation
-    if (selectedDonor && 
-        typeof selectedDonor.lat === 'number' && !isNaN(selectedDonor.lat) &&
-        typeof selectedDonor.lng === 'number' && !isNaN(selectedDonor.lng)) {
+    if (selectedDonor && isValidCoord(selectedDonor.lat) && isValidCoord(selectedDonor.lng)) {
       return { lat: selectedDonor.lat, lng: selectedDonor.lng, active: true };
     }
     
     // 2. Fallback to user location with strict validation
-    if (userLocation && 
-        typeof userLocation.lat === 'number' && !isNaN(userLocation.lat) &&
-        typeof userLocation.lng === 'number' && !isNaN(userLocation.lng)) {
+    if (userLocation && isValidCoord(userLocation.lat) && isValidCoord(userLocation.lng)) {
       return { lat: userLocation.lat, lng: userLocation.lng, active: true };
     }
     
     // 3. Absolute fallback to default center
-    return { lat: defaultCenter[0], lng: defaultCenter[1], active: false };
+    return { lat: DEFAULT_LAT, lng: DEFAULT_LNG, active: false };
   }, [selectedDonor, userLocation]);
 
   const zoomLevel = selectedDonor ? 17 : 14;
@@ -121,12 +121,13 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
   return (
     <div className="w-full h-full relative z-0">
       <MapContainer 
-        center={defaultCenter} 
+        center={DEFAULT_CENTER} 
         zoom={13} 
         className="w-full h-full"
         zoomControl={false}
         ref={mapRef}
         preferCanvas={true}
+        key={isMounted ? 'mounted' : 'unmounted'} // Force re-render on mount for proper Leaflet init
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
@@ -145,8 +146,7 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
 
         {donors.map((donor) => {
           // Extra safety check for each marker position
-          if (typeof donor.lat !== 'number' || isNaN(donor.lat) || 
-              typeof donor.lng !== 'number' || isNaN(donor.lng)) {
+          if (!isValidCoord(donor.lat) || !isValidCoord(donor.lng)) {
             return null;
           }
 
@@ -172,9 +172,7 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
           );
         })}
 
-        {userLocation && 
-         typeof userLocation.lat === 'number' && !isNaN(userLocation.lat) &&
-         typeof userLocation.lng === 'number' && !isNaN(userLocation.lng) && (
+        {userLocation && isValidCoord(userLocation.lat) && isValidCoord(userLocation.lng) && (
           <Marker position={[userLocation.lat, userLocation.lng]} icon={userIcon}>
             <Popup closeButton={false} offset={[0, -10]}>
               <div className="p-2 text-center">
