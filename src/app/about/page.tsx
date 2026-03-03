@@ -19,38 +19,6 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Founder Section */}
-          <div className="relative p-8 md:p-12 rounded-[3rem] bg-white/5 border border-white/10 backdrop-blur-xl overflow-hidden group">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative z-10">
-              <div className="md:col-span-4 flex flex-col items-center text-center space-y-4">
-                <div className="relative h-48 w-48 rounded-[2.5rem] overflow-hidden border-4 border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-105">
-                  <Image 
-                    src="https://picsum.photos/seed/founder/400/400" 
-                    alt="DIPANJAN SWAPNA PRANGON" 
-                    fill 
-                    className="object-cover"
-                    unoptimized 
-                  />
-                </div>
-                <div>
-                  <h3 className="text-xl font-black text-white tracking-tight uppercase">দীপাঞ্জন স্বপ্ন প্রাঙ্গণ</h3>
-                  <p className="text-xs font-bold text-primary uppercase tracking-[0.2em]">প্রতিষ্ঠাতা, ওঙ্গন বাংলাদেশ</p>
-                </div>
-              </div>
-              <div className="md:col-span-8 space-y-6">
-                <div className="inline-flex p-3 rounded-2xl bg-primary/20 text-white mb-2">
-                  <Quote className="h-6 w-6 text-primary fill-primary" />
-                </div>
-                <p className="text-xl md:text-2xl font-medium text-white italic leading-relaxed">
-                  "আমাদের লক্ষ্য শুধু সাহায্য করা নয়, বরং এমন একটি সমাজ তৈরি করা যেখানে কেউ নিজেকে অসহায় মনে করবে না। প্রযুক্তির সঠিক ব্যবহার করে আমরা প্রতিটি মানুষের দুয়ারে মানবিকতা পৌঁছে দিতে চাই।"
-                </p>
-                <div className="h-px w-24 bg-white/20" />
-                <p className="text-sm text-white/50 font-bold uppercase tracking-widest">— ফাউন্ডার মেসেজ</p>
-              </div>
-            </div>
-          </div>
-
           {/* Mission & Vision */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Card className="glass-card border-white/10 rounded-[2.5rem] p-4">
@@ -99,6 +67,38 @@ export default function AboutPage() {
                   <p className="text-sm text-white/60 leading-relaxed">{item.desc}</p>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Founder Section (Founder Message) - Moved to bottom */}
+          <div className="relative p-8 md:p-12 rounded-[3rem] bg-white/5 border border-white/10 backdrop-blur-xl overflow-hidden group shadow-2xl">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative z-10">
+              <div className="md:col-span-4 flex flex-col items-center text-center space-y-4">
+                <div className="relative h-48 w-48 rounded-[2.5rem] overflow-hidden border-4 border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-105">
+                  <Image 
+                    src="https://picsum.photos/seed/founder/400/400" 
+                    alt="DIPANJAN SWAPNA PRANGON" 
+                    fill 
+                    className="object-cover"
+                    unoptimized 
+                  />
+                </div>
+                <div>
+                  <h3 className="text-xl font-black text-white tracking-tight uppercase">দীপাঞ্জন স্বপ্ন প্রাঙ্গণ</h3>
+                  <p className="text-xs font-bold text-primary uppercase tracking-[0.2em]">প্রতিষ্ঠাতা, ওঙ্গন বাংলাদেশ</p>
+                </div>
+              </div>
+              <div className="md:col-span-8 space-y-6">
+                <div className="inline-flex p-3 rounded-2xl bg-primary/20 text-white mb-2">
+                  <Quote className="h-6 w-6 text-primary fill-primary" />
+                </div>
+                <p className="text-xl md:text-2xl font-medium text-white italic leading-relaxed">
+                  "আমাদের লক্ষ্য শুধু সাহায্য করা নয়, বরং এমন একটি সমাজ তৈরি করা যেখানে কেউ নিজেকে অসহায় মনে করবে না। প্রযুক্তির সঠিক ব্যবহার করে আমরা প্রতিটি মানুষের দুয়ারে মানবিকতা পৌঁছে দিতে চাই।"
+                </p>
+                <div className="h-px w-24 bg-white/20" />
+                <p className="text-sm text-white/50 font-bold uppercase tracking-widest">— ফাউন্ডার মেসেজ</p>
+              </div>
             </div>
           </div>
         </div>
