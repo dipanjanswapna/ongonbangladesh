@@ -1,16 +1,17 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { MapPin, Search, Phone, Droplet, Navigation, Crosshair, List, Map as MapIcon, Loader2, Info, ChevronRight, ArrowLeft, X } from 'lucide-react';
+import { MapPin, Search, Phone, Droplet, Navigation, Crosshair, List, Map as MapIcon, Loader2, Info, ChevronRight, ArrowLeft, X, LocateFixed } from 'lucide-react';
 import { bloodDonors } from '@/lib/blood-data';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import { useToast } from '@/hooks/use-toast';
 
 // Dynamically import the Map component to avoid SSR issues with Leaflet
 const BloodMap = dynamic(() => import('@/components/blood/BloodMap'), { 
@@ -21,17 +22,20 @@ const BloodMap = dynamic(() => import('@/components/blood/BloodMap'), {
         <Droplet className="h-16 w-16 text-red-600 animate-pulse fill-red-600" />
         <div className="absolute inset-0 bg-red-600/20 blur-2xl animate-pulse rounded-full" />
       </div>
-      <p className="text-white/20 font-black uppercase tracking-[0.4em] text-xs animate-pulse">ম্যাপ লোড হচ্ছে...</p>
+      <p className="text-white/20 font-black uppercase tracking-[0.4em] text-xs animate-pulse">ম্যাপ দ্রুত লোড হচ্ছে...</p>
     </div>
   )
 });
 
 export default function DonorsListPage() {
+  const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDonor, setSelectedDonor] = useState<any>(null);
   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [isLocating, setIsLocating] = useState(false);
+  const [isTracking, setIsTracking] = useState(false);
+  const watchId = useRef<number | null>(null);
 
   // Haversine formula to calculate distance in km
   const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
@@ -46,26 +50,50 @@ export default function DonorsListPage() {
     return R * c;
   };
 
-  const handleNearMe = () => {
-    setIsLocating(true);
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setUserLocation({ lat: latitude, lng: longitude });
-          setIsLocating(false);
-          // Auto-switch to map on mobile when locating
-          if (window.innerWidth < 1024) setViewMode('map');
-        },
-        () => {
-          setIsLocating(false);
-        },
-        { enableHighAccuracy: true }
-      );
-    } else {
-      setIsLocating(false);
+  const startTracking = () => {
+    if (!navigator.geolocation) {
+      toast({ title: "জিপিএস নট সাপোর্টেড", description: "আপনার ব্রাউজার জিপিএস সাপোর্ট করে না।", variant: "destructive" });
+      return;
     }
+
+    setIsLocating(true);
+    
+    // Stop previous tracking if exists
+    if (watchId.current) navigator.geolocation.clearWatch(watchId.current);
+
+    watchId.current = navigator.geolocation.watchPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setUserLocation({ lat: latitude, lng: longitude });
+        setIsLocating(false);
+        setIsTracking(true);
+        if (window.innerWidth < 1024 && !isTracking) setViewMode('map');
+      },
+      (error) => {
+        setIsLocating(false);
+        setIsTracking(false);
+        let msg = "লোকেশন অ্যাক্সেস পাওয়া যায়নি।";
+        if (error.code === 1) msg = "লোকেশন পারমিশন ডিনাইড। সেটিংস থেকে পারমিশন দিন।";
+        toast({ title: "জিপিএস এরর", description: msg, variant: "destructive" });
+      },
+      { enableHighAccuracy: true, maximumAge: 10000, timeout: 5000 }
+    );
   };
+
+  const stopTracking = () => {
+    if (watchId.current) {
+      navigator.geolocation.clearWatch(watchId.current);
+      watchId.current = null;
+    }
+    setIsTracking(false);
+    setUserLocation(null);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (watchId.current) navigator.geolocation.clearWatch(watchId.current);
+    };
+  }, []);
 
   const filteredDonors = useMemo(() => {
     let result = bloodDonors.filter(donor => 
@@ -129,7 +157,15 @@ export default function DonorsListPage() {
                   <ArrowLeft className="h-4 w-4" />
                   <span className="text-[10px] font-black uppercase tracking-widest">ফিরে যান</span>
                 </Link>
-                <Badge className="bg-red-600/10 text-red-500 border-red-500/20 text-[9px] font-black tracking-widest px-2 py-0.5">LIVE PORTAL</Badge>
+                <div className="flex items-center gap-2">
+                  {isTracking && (
+                    <div className="flex items-center gap-1.5 animate-pulse">
+                      <div className="h-2 w-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
+                      <span className="text-[9px] font-bold text-green-500 uppercase">GPS ACTIVE</span>
+                    </div>
+                  )}
+                  <Badge className="bg-red-600/10 text-red-500 border-red-500/20 text-[9px] font-black tracking-widest px-2 py-0.5">LIVE PORTAL</Badge>
+                </div>
               </div>
               
               <div className="space-y-3">
@@ -143,14 +179,19 @@ export default function DonorsListPage() {
                   />
                 </div>
                 
-                <Button 
-                  onClick={handleNearMe}
-                  disabled={isLocating}
-                  className="w-full bg-red-600 hover:bg-red-700 text-white font-black h-12 rounded-2xl flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95 group text-xs uppercase tracking-wider"
-                >
-                  {isLocating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Crosshair className="h-4 w-4" />}
-                  নিকটস্থ দাতা খুঁজুন (GPS)
-                </Button>
+                <div className="flex gap-2">
+                  <Button 
+                    onClick={isTracking ? stopTracking : startTracking}
+                    disabled={isLocating}
+                    className={cn(
+                      "flex-grow font-black h-12 rounded-2xl flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95 group text-xs uppercase tracking-wider",
+                      isTracking ? "bg-green-600 hover:bg-green-700 text-white" : "bg-red-600 hover:bg-red-700 text-white"
+                    )}
+                  >
+                    {isLocating ? <Loader2 className="h-4 w-4 animate-spin" /> : isTracking ? <LocateFixed className="h-4 w-4" /> : <Crosshair className="h-4 w-4" />}
+                    {isTracking ? "লাইভ লোকেশন অফ করুন" : "নিকটস্থ দাতা খুঁজুন (GPS)"}
+                  </Button>
+                </div>
               </div>
             </div>
 
@@ -221,7 +262,7 @@ export default function DonorsListPage() {
               onSelectDonor={(donor) => setSelectedDonor(donor)}
             />
 
-            {/* Selection Card Overlay - Fixed UX for mobile and desktop */}
+            {/* Selection Card Overlay */}
             {selectedDonor && (
               <div className="absolute bottom-24 lg:bottom-10 left-4 right-4 lg:left-1/2 lg:-translate-x-1/2 lg:w-full lg:max-w-md z-[1000] animate-in slide-in-from-bottom-10 duration-500">
                 <Card className="glass-card border-white/20 p-6 rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] border-b-8 border-red-600">
