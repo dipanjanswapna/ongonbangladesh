@@ -6,7 +6,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { MapPin, Search, Phone, Droplet, Navigation, Crosshair, List, Map as MapIcon, Loader2, Info, ChevronRight, ArrowLeft, X, LocateFixed } from 'lucide-react';
+import { MapPin, Search, Phone, Droplet, Navigation, Crosshair, List, Map as MapIcon, Loader2, ChevronRight, ArrowLeft, X, LocateFixed } from 'lucide-react';
 import { bloodDonors } from '@/lib/blood-data';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
@@ -27,6 +27,13 @@ const BloodMap = dynamic(() => import('@/components/blood/BloodMap'), {
   )
 });
 
+// Helper to validate coordinates strictly
+const isValidCoord = (val: any): boolean => {
+  if (val === null || val === undefined) return false;
+  const num = typeof val === 'string' ? parseFloat(val) : Number(val);
+  return typeof num === 'number' && !isNaN(num) && isFinite(num);
+};
+
 export default function DonorsListPage() {
   const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
@@ -36,13 +43,6 @@ export default function DonorsListPage() {
   const [isLocating, setIsLocating] = useState(false);
   const [isTracking, setIsTracking] = useState(false);
   const watchId = useRef<number | null>(null);
-
-  // Helper to validate coordinates strictly
-  const isValidCoord = (val: any): boolean => {
-    if (val === null || val === undefined) return false;
-    const num = typeof val === 'string' ? parseFloat(val) : Number(val);
-    return typeof num === 'number' && !isNaN(num) && isFinite(num);
-  };
 
   // Haversine formula to calculate distance in km
   const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
@@ -75,16 +75,13 @@ export default function DonorsListPage() {
           setUserLocation({ lat: latitude, lng: longitude });
           setIsLocating(false);
           setIsTracking(true);
-        } else {
-          setIsLocating(false);
-          toast({ title: "জিপিএস এরর", description: "সঠিক লোকেশন ডাটা পাওয়া যায়নি।", variant: "destructive" });
         }
       },
       (error) => {
         setIsLocating(false);
         setIsTracking(false);
         let msg = "লোকেশন অ্যাক্সেস পাওয়া যায়নি।";
-        if (error.code === 1) msg = "লোকেশন পারমিশন ডিনাইড। সেটিংস থেকে পারমিশন দিন।";
+        if (error.code === 1) msg = "লোকেশন পারমিশন ডিনাইড।";
         toast({ title: "জিপিএস এরর", description: msg, variant: "destructive" });
       },
       { enableHighAccuracy: true, maximumAge: 10000, timeout: 5000 }
@@ -107,22 +104,19 @@ export default function DonorsListPage() {
   }, []);
 
   const filteredDonors = useMemo(() => {
-    // Basic filter
     let result = bloodDonors.filter(donor => 
       donor.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
       donor.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
       donor.group.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // Filter out donors with bad coordinates to prevent map crashes
     result = result.filter(donor => isValidCoord(donor.lat) && isValidCoord(donor.lng));
 
-    // Distance calculation
     if (userLocation && isValidCoord(userLocation.lat) && isValidCoord(userLocation.lng)) {
       result = result.map(donor => ({
         ...donor,
         distance: getDistance(userLocation.lat, userLocation.lng, donor.lat, donor.lng)
-      })).sort((a, b) => {
+      })).sort((a: any, b: any) => {
         const distA = a.distance === null ? Infinity : a.distance;
         const distB = b.distance === null ? Infinity : b.distance;
         return distA - distB;
@@ -139,6 +133,7 @@ export default function DonorsListPage() {
       <main className="flex-grow pt-16 md:pt-20 overflow-hidden h-[100dvh]">
         <div className="h-full flex flex-col lg:flex-row overflow-hidden relative">
           
+          {/* Mobile Toggler */}
           <div className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[1001] bg-black/80 backdrop-blur-2xl border border-white/10 p-1.5 rounded-full flex gap-1 shadow-2xl">
             <Button 
               size="sm"
@@ -164,6 +159,7 @@ export default function DonorsListPage() {
             </Button>
           </div>
 
+          {/* Sidebar List */}
           <aside className={cn(
             "w-full lg:w-[400px] h-full flex flex-col border-r border-white/5 bg-[#0f0203] z-[50] shrink-0 transition-transform duration-300",
             viewMode === 'map' ? 'hidden lg:flex' : 'flex'
@@ -174,41 +170,35 @@ export default function DonorsListPage() {
                   <ArrowLeft className="h-4 w-4" />
                   <span className="text-[10px] font-black uppercase tracking-widest">ফিরে যান</span>
                 </Link>
-                <div className="flex items-center gap-2">
-                  {isTracking && (
-                    <div className="flex items-center gap-1.5 animate-pulse">
-                      <div className="h-2 w-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
-                      <span className="text-[9px] font-bold text-green-500 uppercase">GPS ACTIVE</span>
-                    </div>
-                  )}
-                  <Badge className="bg-red-600/10 text-red-500 border-red-500/20 text-[9px] font-black tracking-widest px-2 py-0.5">LIVE PORTAL</Badge>
-                </div>
+                {isTracking && (
+                  <div className="flex items-center gap-1.5 animate-pulse">
+                    <div className="h-2 w-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
+                    <span className="text-[9px] font-bold text-green-500 uppercase">GPS ACTIVE</span>
+                  </div>
+                )}
               </div>
               
               <div className="space-y-3">
                 <div className="relative">
                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30" />
                   <Input 
-                    placeholder="শহর বা ব্লাড গ্রুপ (উদা: A+)" 
+                    placeholder="শহর বা ব্লাড গ্রুপ (A+)" 
                     className="bg-white/5 border-white/10 text-white pl-12 h-12 rounded-2xl focus:ring-red-600/50 focus:border-red-600 transition-all placeholder:text-white/20 text-sm"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </div>
-                
-                <div className="flex gap-2">
-                  <Button 
-                    onClick={isTracking ? stopTracking : startTracking}
-                    disabled={isLocating}
-                    className={cn(
-                      "flex-grow font-black h-12 rounded-2xl flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95 group text-xs uppercase tracking-wider",
-                      isTracking ? "bg-green-600 hover:bg-green-700 text-white" : "bg-red-600 hover:bg-red-700 text-white"
-                    )}
-                  >
-                    {isLocating ? <Loader2 className="h-4 w-4 animate-spin" /> : isTracking ? <LocateFixed className="h-4 w-4" /> : <Crosshair className="h-4 w-4" />}
-                    {isTracking ? "লাইভ ট্র্যাকিং বন্ধ করুন" : "নিকটস্থ দাতা খুঁজুন (GPS)"}
-                  </Button>
-                </div>
+                <Button 
+                  onClick={isTracking ? stopTracking : startTracking}
+                  disabled={isLocating}
+                  className={cn(
+                    "w-full font-black h-12 rounded-2xl flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95 group text-xs uppercase tracking-wider",
+                    isTracking ? "bg-green-600 hover:bg-green-700 text-white" : "bg-red-600 hover:bg-red-700 text-white"
+                  )}
+                >
+                  {isLocating ? <Loader2 className="h-4 w-4 animate-spin" /> : isTracking ? <LocateFixed className="h-4 w-4" /> : <Crosshair className="h-4 w-4" />}
+                  {isTracking ? "লাইভ ট্র্যাকিং বন্ধ করুন" : "নিকটস্থ দাতা খুঁজুন (GPS)"}
+                </Button>
               </div>
             </div>
 
@@ -245,27 +235,17 @@ export default function DonorsListPage() {
                     </div>
                     <ChevronRight className="h-5 w-5 text-white/10 group-hover:text-red-600 transition-colors" />
                   </div>
-                  
-                  <div className="mt-5 flex gap-2">
-                    <Link href={`tel:${donor.phone}`} className="flex-1" onClick={(e) => e.stopPropagation()}>
-                      <Button className="w-full h-10 rounded-xl bg-white text-red-700 font-black text-[11px] hover:bg-white/90 shadow-lg uppercase tracking-wider">
-                        <Phone className="h-3.5 w-3.5 mr-2" /> কল করুন
-                      </Button>
-                    </Link>
-                  </div>
                 </Card>
               )) : (
-                <div className="text-center py-24 px-6">
-                  <div className="h-20 w-20 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-6 border border-white/5">
-                    <Search className="h-8 w-8 text-white/10" />
-                  </div>
+                <div className="text-center py-24 px-6 opacity-40">
+                  <Search className="h-12 w-12 mx-auto mb-4" />
                   <h3 className="text-white font-bold text-base">দাতা পাওয়া যায়নি</h3>
-                  <p className="text-white/20 text-[10px] mt-2 max-w-[180px] mx-auto leading-relaxed">আপনার এলাকা বা ব্লাড গ্রুপটি পুনরায় পরীক্ষা করে দেখুন।</p>
                 </div>
               )}
             </div>
           </aside>
 
+          {/* Map View */}
           <div className={cn(
             "flex-grow relative bg-[#0a0a0a] overflow-hidden",
             viewMode === 'list' ? 'hidden lg:block' : 'block'
@@ -277,30 +257,32 @@ export default function DonorsListPage() {
               onSelectDonor={(donor) => setSelectedDonor(donor)}
             />
 
+            {/* Selected Donor UI Fix */}
             {selectedDonor && (
               <div className="absolute bottom-24 lg:bottom-10 left-4 right-4 lg:left-1/2 lg:-translate-x-1/2 lg:w-full lg:max-w-md z-[1000] animate-in slide-in-from-bottom-10 duration-500">
-                <Card className="glass-card border-white/20 p-6 rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] border-b-8 border-red-600">
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="flex items-center gap-4">
-                      <div className="h-16 w-16 rounded-3xl bg-red-600 flex flex-col items-center justify-center text-white font-black text-3xl shadow-xl ring-4 ring-white/5 shrink-0">
-                        <span className="text-[8px] uppercase opacity-50 mb-0.5">Group</span>
-                        {selectedDonor.group}
-                      </div>
-                      <div className="min-w-0">
-                        <h2 className="text-xl font-black text-white truncate">{selectedDonor.name}</h2>
-                        <p className="text-white/50 text-xs flex items-center gap-1.5 font-bold mt-1">
-                          <MapPin className="h-3.5 w-3.5 text-red-600" /> {selectedDonor.location}
-                        </p>
-                      </div>
+                <Card className="bg-[#1a0405]/95 backdrop-blur-2xl border border-white/20 p-6 rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] border-b-8 border-red-600 relative overflow-hidden">
+                  
+                  {/* Improved Close Button */}
+                  <Button 
+                    size="icon" 
+                    variant="ghost" 
+                    className="absolute top-4 right-4 rounded-full h-8 w-8 text-white/30 hover:text-white hover:bg-white/10 z-10" 
+                    onClick={() => setSelectedDonor(null)}
+                  >
+                    <X className="h-5 w-5" />
+                  </Button>
+
+                  <div className="flex items-center gap-5 mb-6">
+                    <div className="h-16 w-16 rounded-3xl bg-red-600 flex flex-col items-center justify-center text-white font-black text-3xl shadow-xl ring-4 ring-white/5 shrink-0 pt-1">
+                      <span className="text-[7px] uppercase opacity-60 -mb-1">Group</span>
+                      {selectedDonor.group}
                     </div>
-                    <Button 
-                      size="icon" 
-                      variant="ghost" 
-                      className="rounded-full h-10 w-10 text-white/20 hover:text-white hover:bg-white/10" 
-                      onClick={() => setSelectedDonor(null)}
-                    >
-                      <X className="h-5 w-5" />
-                    </Button>
+                    <div className="min-w-0 pr-6">
+                      <h2 className="text-xl font-black text-white truncate tracking-tight">{selectedDonor.name}</h2>
+                      <p className="text-white/50 text-xs flex items-center gap-1.5 font-bold mt-1.5">
+                        <MapPin className="h-3.5 w-3.5 text-red-600" /> {selectedDonor.location}
+                      </p>
+                    </div>
                   </div>
 
                   <div className="flex gap-3">
@@ -311,7 +293,7 @@ export default function DonorsListPage() {
                     </Link>
                     <Button 
                       variant="outline" 
-                      className="h-14 w-14 border-white/10 bg-white/5 text-white hover:bg-white/10 rounded-2xl flex items-center justify-center transition-all"
+                      className="h-14 w-14 border-white/10 bg-white/5 text-white hover:bg-white/10 rounded-2xl flex items-center justify-center transition-all shrink-0"
                       onClick={() => {
                         if (isValidCoord(selectedDonor.lat) && isValidCoord(selectedDonor.lng)) {
                           window.open(`https://www.google.com/maps/dir/?api=1&destination=${selectedDonor.lat},${selectedDonor.lng}`, '_blank');
