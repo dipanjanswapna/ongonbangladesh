@@ -32,7 +32,7 @@ const DEFAULT_LNG = 90.3843;
 // Helper to validate coordinates strictly
 const isValidCoord = (val: any): boolean => {
   if (val === null || val === undefined) return false;
-  const num = typeof val === 'string' ? parseFloat(val) : val;
+  const num = typeof val === 'string' ? parseFloat(val) : Number(val);
   return typeof num === 'number' && !isNaN(num) && isFinite(num);
 };
 
@@ -43,15 +43,20 @@ function MapUpdater({ lat, lng, zoom, active }: { lat: number, lng: number, zoom
   useEffect(() => {
     if (active && isValidCoord(lat) && isValidCoord(lng)) {
       try {
-        // Stop any current animation and fly to new valid coordinates
-        map.stop().flyTo([lat, lng], zoom, {
-          animate: true,
-          duration: 1.5,
-          easeLinearity: 0.25
-        });
+        const targetLat = Number(lat);
+        const targetLng = Number(lng);
+        
+        // Final sanity check before calling Leaflet API
+        if (!isNaN(targetLat) && !isNaN(targetLng) && isFinite(targetLat) && isFinite(targetLng)) {
+          map.stop().flyTo([targetLat, targetLng], zoom, {
+            animate: true,
+            duration: 1.5,
+            easeLinearity: 0.25
+          });
+        }
       } catch (err) {
-        // Log locally if flyTo fails, but don't crash the app
-        console.warn('Leaflet flyTo failed silently:', err);
+        // Silent fail to prevent app crash
+        console.warn('Leaflet flyTo failed safely:', err);
       }
     }
   }, [lat, lng, zoom, map, active]);
@@ -131,13 +136,13 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
   return (
     <div className="w-full h-full relative z-0">
       <MapContainer 
-        center={[23.7509, 90.3843]} 
+        center={[DEFAULT_LAT, DEFAULT_LNG]} 
         zoom={13} 
         className="w-full h-full"
         zoomControl={false}
         ref={mapRef}
         preferCanvas={true}
-        key={isMounted ? 'map-mounted' : 'map-unmounted'}
+        key={isMounted ? 'map-mounted-v3' : 'map-unmounted'}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
@@ -155,7 +160,6 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
         />
 
         {donors.map((donor) => {
-          // Double check for each marker position
           if (!isValidCoord(donor.lat) || !isValidCoord(donor.lng)) {
             return null;
           }
@@ -198,7 +202,7 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
       </MapContainer>
       
       <div className="absolute bottom-4 left-4 z-[999] opacity-30 pointer-events-none">
-        <span className="text-[8px] text-white font-bold uppercase tracking-[0.2em]">ONGON LIVE MAP ENGINE v2.0</span>
+        <span className="text-[8px] text-white font-bold uppercase tracking-[0.2em]">ONGON LIVE MAP ENGINE v2.5</span>
       </div>
     </div>
   );

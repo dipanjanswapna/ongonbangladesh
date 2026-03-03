@@ -40,7 +40,7 @@ export default function DonorsListPage() {
   // Helper to validate coordinates strictly
   const isValidCoord = (val: any): boolean => {
     if (val === null || val === undefined) return false;
-    const num = typeof val === 'string' ? parseFloat(val) : val;
+    const num = typeof val === 'string' ? parseFloat(val) : Number(val);
     return typeof num === 'number' && !isNaN(num) && isFinite(num);
   };
 
@@ -66,7 +66,6 @@ export default function DonorsListPage() {
 
     setIsLocating(true);
     
-    // Stop previous tracking if exists
     if (watchId.current) navigator.geolocation.clearWatch(watchId.current);
 
     watchId.current = navigator.geolocation.watchPosition(
@@ -108,17 +107,26 @@ export default function DonorsListPage() {
   }, []);
 
   const filteredDonors = useMemo(() => {
+    // Basic filter
     let result = bloodDonors.filter(donor => 
       donor.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
       donor.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
       donor.group.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+    // Filter out donors with bad coordinates to prevent map crashes
+    result = result.filter(donor => isValidCoord(donor.lat) && isValidCoord(donor.lng));
+
+    // Distance calculation
     if (userLocation && isValidCoord(userLocation.lat) && isValidCoord(userLocation.lng)) {
       result = result.map(donor => ({
         ...donor,
         distance: getDistance(userLocation.lat, userLocation.lng, donor.lat, donor.lng)
-      })).sort((a, b) => (Number(a.distance) || 0) - (Number(b.distance) || 0));
+      })).sort((a, b) => {
+        const distA = a.distance === null ? Infinity : a.distance;
+        const distB = b.distance === null ? Infinity : b.distance;
+        return distA - distB;
+      });
     }
 
     return result;
