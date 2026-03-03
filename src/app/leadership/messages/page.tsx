@@ -2,11 +2,14 @@
 
 import { Navbar } from '@/components/layout/Navbar';
 import { Card, CardContent } from '@/components/ui/card';
-import { Quote, User } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Quote, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const leadershipMessages = [
   {
+    slug: "chairman",
     role: "চেয়ারম্যান",
     name: "দীপাঞ্জন স্বপ্ন প্রাঙ্গণ",
     image: "https://picsum.photos/seed/chairman/400/400",
@@ -14,6 +17,7 @@ const leadershipMessages = [
     hint: "chairman portrait"
   },
   {
+    slug: "vice-chairman",
     role: "ভাইস চেয়ারম্যান",
     name: "মোঃ আরিফুর রহমান",
     image: "https://picsum.photos/seed/vice/400/400",
@@ -21,6 +25,7 @@ const leadershipMessages = [
     hint: "vice chairman portrait"
   },
   {
+    slug: "secretary-general",
     role: "সেক্রেটারি জেনারেল",
     name: "সাদিয়া ইসলাম",
     image: "https://picsum.photos/seed/secretary/400/400",
@@ -41,11 +46,11 @@ export default function LeadershipMessagesPage() {
 
         <div className="space-y-12">
           {leadershipMessages.map((leader, i) => (
-            <Card key={i} className="bg-white/5 border-white/10 rounded-none overflow-hidden shadow-2xl backdrop-blur-xl">
+            <Card key={i} className="bg-white/5 border-white/10 rounded-none overflow-hidden shadow-2xl backdrop-blur-xl group">
               <CardContent className="p-8 md:p-12">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                   <div className="md:col-span-4 flex flex-col items-center text-center space-y-4">
-                    <div className="relative h-56 w-56 rounded-none overflow-hidden border-4 border-white/10 shadow-2xl transition-transform duration-500 hover:scale-105">
+                    <div className="relative h-56 w-56 rounded-none overflow-hidden border-4 border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-105">
                       <Image 
                         src={leader.image} 
                         alt={leader.name} 
@@ -64,10 +69,15 @@ export default function LeadershipMessagesPage() {
                     <div className="inline-flex p-3 rounded-none bg-white/10 text-white mb-2">
                       <Quote className="h-8 w-8 text-white fill-white" />
                     </div>
-                    <p className="text-xl md:text-2xl font-medium text-white italic leading-relaxed">
+                    <p className="text-xl md:text-2xl font-medium text-white italic leading-relaxed line-clamp-4">
                       "{leader.message}"
                     </p>
                     <div className="h-px w-24 bg-white/20" />
+                    <Link href={`/leadership/messages/${leader.slug}`}>
+                      <Button variant="link" className="p-0 text-white font-black uppercase tracking-widest text-xs hover:gap-3 transition-all">
+                        সম্পূর্ণ বাণী পড়ুন <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </CardContent>
@@ -77,7 +87,7 @@ export default function LeadershipMessagesPage() {
       </main>
 
       <footer className="py-12 text-center border-t border-white/5 bg-black/10">
-        <p className="text-[10px] text-white/20 uppercase tracking-[0.3em] font-bold">
+        <p className="text-[10px] text-white/40 uppercase tracking-[0.3em] font-black">
           ONGON BANGLADESH • LEADERSHIP & GUIDANCE
         </p>
       </footer>
