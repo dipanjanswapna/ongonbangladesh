@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Heart, Menu, User, Droplet, Home, Megaphone, HeartHandshake, Users, Briefcase, Info, Phone, X } from 'lucide-react';
+import { Heart, Menu, User, Droplet, Home, Megaphone, HeartHandshake, Users, Briefcase, Info, Phone, X, ShieldCheck } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import {
@@ -28,6 +28,7 @@ export function Navbar() {
   const navLinks = [
     { label: 'হোম', href: '/', icon: Home },
     { label: 'আমাদের সম্পর্কে', href: '/about', icon: Info },
+    { label: 'নেতৃত্ব', href: '/leadership/messages', icon: ShieldCheck },
     { label: 'ক্যাম্পেইনসমূহ', href: '/campaigns', icon: Megaphone },
     { label: 'রক্তদান', href: '/blood', icon: Droplet, color: 'text-red-500' },
     { label: 'সাহায্য অনুরোধ', href: '/requests', icon: HeartHandshake },
