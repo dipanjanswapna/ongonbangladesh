@@ -4,11 +4,9 @@ import { useEffect, useState, useRef, useMemo } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Droplet, MapPin, Navigation } from 'lucide-react';
+import { Droplet } from 'lucide-react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import Link from 'next/link';
 
 interface Donor {
   id: string;
@@ -31,7 +29,14 @@ interface BloodMapProps {
 function MapUpdater({ center, zoom, active }: { center: [number, number], zoom: number, active: boolean }) {
   const map = useMap();
   useEffect(() => {
-    if (active) {
+    // Validate coordinates to prevent (NaN, NaN) error before calling flyTo
+    const isValidCoordinate = 
+      Array.isArray(center) && 
+      center.length === 2 && 
+      typeof center[0] === 'number' && !isNaN(center[0]) &&
+      typeof center[1] === 'number' && !isNaN(center[1]);
+
+    if (active && isValidCoordinate) {
       map.flyTo(center, zoom, {
         animate: true,
         duration: 1.5,
@@ -51,9 +56,16 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
   }, []);
 
   const defaultCenter: [number, number] = [23.7509, 90.3843]; // Default to Dhaka
+  
   const mapCenter = useMemo(() => {
-    if (selectedDonor) return [selectedDonor.lat, selectedDonor.lng] as [number, number];
-    if (userLocation) return [userLocation.lat, userLocation.lng] as [number, number];
+    // Prioritize selected donor location with validation
+    if (selectedDonor && typeof selectedDonor.lat === 'number' && !isNaN(selectedDonor.lat)) {
+      return [selectedDonor.lat, selectedDonor.lng] as [number, number];
+    }
+    // Fallback to user location with validation
+    if (userLocation && typeof userLocation.lat === 'number' && !isNaN(userLocation.lat)) {
+      return [userLocation.lat, userLocation.lng] as [number, number];
+    }
     return defaultCenter;
   }, [selectedDonor, userLocation]);
 
@@ -102,7 +114,7 @@ export default function BloodMap({ donors, userLocation, selectedDonor, onSelect
         className="w-full h-full"
         zoomControl={false}
         ref={mapRef}
-        preferCanvas={true} // For faster rendering of many markers
+        preferCanvas={true}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
