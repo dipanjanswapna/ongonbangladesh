@@ -1,14 +1,13 @@
-
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
 import { Input } from '@/components/ui/input';
-import { Heart, ShieldCheck, Users, Zap, Search, ArrowRight, Calendar, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase, Newspaper, Tv, BookOpen, Globe, Smartphone, GraduationCap, Stethoscope, Lock } from 'lucide-react';
+import { Heart, Zap, Search, ArrowRight, Calendar, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase, Tv, BookOpen, Globe, Lock } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { campaigns } from '@/lib/campaigns-data';
 
 export default function Home() {
@@ -120,7 +119,7 @@ export default function Home() {
         </section>
 
         {/* Campaigns Section */}
-        <section className="py-10 md:py-12 bg-background">
+        <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
               <div className="max-w-2xl">
@@ -170,7 +169,7 @@ export default function Home() {
         </section>
 
         {/* Featured Requests Section */}
-        <section className="py-10 md:py-12" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
+        <section className="py-20" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 text-center md:text-left">
               <div className="w-full md:w-auto">
@@ -193,9 +192,9 @@ export default function Home() {
         </section>
 
         {/* Join Us Section */}
-        <section className="py-10 md:py-12 bg-background">
+        <section className="py-24" style={{ backgroundColor: 'rgb(110, 14, 17)' }}>
           <div className="container mx-auto px-4">
-            <div className="text-center max-w-2xl mx-auto mb-10">
+            <div className="text-center max-w-2xl mx-auto mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">আমাদের সাথে যুক্ত হোন</h2>
               <p className="text-white/70">
                 নিচের যে কোনো পদ্ধতিতে আমাদের সঙ্গে যুক্ত হয়ে আর্তমানবতার সেবায় ভূমিকা রাখতে পারেন।
@@ -209,14 +208,14 @@ export default function Home() {
                 { icon: HeartHandshake, title: "স্বেচ্ছাসেবক", description: "আপনার দক্ষতা ও সময় দিয়ে সরাসরি মাঠ পর্যায়ে সাহায্য পৌঁছে দিন।", link: "/volunteer" },
                 { icon: Briefcase, title: "ক্যারিয়ার", description: "মানবিক কাজের মাধ্যমে আপনার পেশাদার জীবন গড়ে তুলুন।", link: "/careers" }
               ].map((option, i) => (
-                <div key={i} className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 flex flex-col items-center text-center">
-                  <div className="mb-4 p-3 rounded-xl bg-white/10 text-white group-hover:bg-primary group-hover:text-primary-foreground transition-all">
-                    <option.icon className="h-6 w-6" />
+                <div key={i} className="group p-8 rounded-[2.5rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-500 flex flex-col items-center text-center shadow-2xl backdrop-blur-sm">
+                  <div className="mb-6 p-4 rounded-3xl bg-white/10 text-white group-hover:bg-white group-hover:text-[#6e0e11] transition-all shadow-xl">
+                    <option.icon className="h-8 w-8" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2 text-white">{option.title}</h3>
-                  <p className="text-xs text-white/60 mb-6">{option.description}</p>
+                  <h3 className="text-xl font-bold mb-3 text-white">{option.title}</h3>
+                  <p className="text-sm text-white/50 mb-8 leading-relaxed">{option.description}</p>
                   <Link href={option.link} className="mt-auto w-full">
-                    <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white hover:text-[#781013] font-bold rounded-xl transition-all h-10 text-xs">
+                    <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white hover:text-[#6e0e11] font-bold rounded-2xl transition-all h-12 shadow-lg">
                       বিস্তারিত দেখুন
                     </Button>
                   </Link>
@@ -227,7 +226,7 @@ export default function Home() {
         </section>
 
         {/* Media Coverage Section */}
-        <section className="py-10 md:py-12 bg-background border-t border-white/5">
+        <section className="py-20 bg-background border-t border-white/5">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-10">
               <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">যেখানে আমাদের গল্প প্রকাশিত হয়েছে</h2>
@@ -314,7 +313,7 @@ export default function Home() {
                   <Heart className="h-6 w-6 text-white fill-white" />
                   <span className="text-lg font-bold text-white uppercase tracking-tighter">ONGON BANGLADESH</span>
                 </div>
-                <p className="text-sm text-white/80 leading-relaxed max-w-sm">
+                <p className="text-sm text-white/80 leading-relaxed max-sm:max-w-xs">
                   বাংলাদেশের একটি AI-চালিত কমিউনিটি প্ল্যাটফর্ম, যা মানবিক সহায়তার প্রয়োজনে দ্রুত সংযোগ তৈরি করে।
                 </p>
                 <div className="pt-6 space-y-3">

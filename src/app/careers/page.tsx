@@ -51,18 +51,18 @@ export default function CareersPage() {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0f0203]">
+    <div className="min-h-screen flex flex-col selection:bg-white/20" style={{ backgroundColor: 'rgb(110, 14, 17)' }}>
       <Navbar />
       <main className="container mx-auto px-4 py-32 flex-grow max-w-6xl">
         <div className="space-y-12">
           
           <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <Badge className="bg-primary/20 text-primary border-primary/20 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Join our mission</Badge>
+            <Badge className="bg-white/10 text-white border-white/20 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-4">Join our mission</Badge>
             <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight">আপনার পেশাকে <br />মানবিকতায় রূপান্তর করুন</h1>
             <p className="text-lg text-white/60">ওঙ্গন বাংলাদেশে ক্যারিয়ার গড়া মানে শুধু একটি চাকরি নয়, বরং সমাজের ইতিবাচক পরিবর্তনে সরাসরি ভূমিকা রাখা।</p>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between p-4 bg-white/5 rounded-3xl border border-white/5 backdrop-blur-md">
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between p-4 bg-white/5 rounded-3xl border border-white/10 backdrop-blur-md shadow-xl">
             <div className="relative flex-grow w-full">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-white/30" />
               <Input 
@@ -72,44 +72,46 @@ export default function CareersPage() {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <Button variant="outline" className="border-white/10 text-white hover:bg-white/5 rounded-xl px-8 h-12 w-full md:w-auto">
+            <Button variant="outline" className="border-white/10 text-white hover:bg-white/5 rounded-2xl px-8 h-12 w-full md:w-auto font-bold">
               <Filter className="h-4 w-4 mr-2" /> ফিল্টার
             </Button>
           </div>
 
           <div className="grid grid-cols-1 gap-6">
             {jobs.map((job) => (
-              <Card key={job.id} className="bg-white/5 border-white/5 rounded-[2rem] p-8 hover:bg-white/10 hover:border-white/10 transition-all group overflow-hidden relative">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-primary/20 transition-all" />
+              <Card key={job.id} className="bg-white/5 border-white/5 rounded-[2.5rem] p-8 hover:bg-white/10 hover:border-white/10 transition-all group overflow-hidden relative shadow-2xl">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-white/10 transition-all" />
                 
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10">
                   <div className="space-y-4">
                     <div className="flex flex-wrap gap-2">
                       <Badge className="bg-white/10 text-white/60 font-bold border-0">{job.department}</Badge>
-                      <Badge className="bg-green-500/10 text-green-400 font-bold border-0">{job.type}</Badge>
+                      <Badge className="bg-green-500/20 text-green-400 font-bold border-0">{job.type}</Badge>
                     </div>
-                    <h3 className="text-2xl font-bold text-white group-hover:text-primary transition-colors">{job.title}</h3>
+                    <h3 className="text-2xl font-bold text-white group-hover:text-white/80 transition-colors">{job.title}</h3>
                     <div className="flex flex-wrap gap-6 text-white/40 text-sm font-medium">
-                      <div className="flex items-center gap-2"><MapPin className="h-4 w-4 text-primary" /> {job.location}</div>
-                      <div className="flex items-center gap-2"><DollarSign className="h-4 w-4 text-primary" /> {job.salary}</div>
-                      <div className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> {job.posted}</div>
+                      <div className="flex items-center gap-2"><MapPin className="h-4 w-4 text-white/60" /> {job.location}</div>
+                      <div className="flex items-center gap-2"><DollarSign className="h-4 w-4 text-white/60" /> {job.salary}</div>
+                      <div className="flex items-center gap-2"><Clock className="h-4 w-4 text-white/60" /> {job.posted}</div>
                     </div>
                   </div>
                   
                   <div className="flex gap-4">
                     <Button variant="outline" className="border-white/10 text-white hover:bg-white/10 h-14 px-8 rounded-2xl font-bold flex-1 md:flex-none">বিস্তারিত</Button>
-                    <Button className="bg-white text-primary hover:bg-white/90 h-14 px-8 rounded-2xl font-black shadow-xl flex-1 md:flex-none">এখনি আবেদন করুন <ArrowRight className="ml-2 h-4 w-4" /></Button>
+                    <Button className="bg-white text-[#6e0e11] hover:bg-white/90 h-14 px-8 rounded-2xl font-black shadow-xl flex-1 md:flex-none transition-all active:scale-95">
+                      এখনি আবেদন করুন <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
                   </div>
                 </div>
               </Card>
             ))}
           </div>
 
-          <div className="rounded-[3rem] bg-gradient-to-br from-primary/20 to-transparent border border-white/10 p-12 text-center space-y-8 relative overflow-hidden">
+          <div className="rounded-[3rem] bg-white/5 border border-white/10 p-12 text-center space-y-8 relative overflow-hidden backdrop-blur-md">
             <div className="relative z-10 space-y-4">
               <h2 className="text-3xl font-bold text-white">মনমতো পদ খুঁজে পাচ্ছেন না?</h2>
               <p className="text-white/60 max-w-xl mx-auto">আমরা সবসময় প্রতিভাবান এবং মানবিক ব্যক্তিদের খুঁজছি। আপনার সিভি পাঠিয়ে রাখতে পারেন আমাদের ডাটাবেজে।</p>
-              <Button size="lg" className="bg-white text-primary font-black rounded-2xl h-16 px-12 text-lg shadow-2xl hover:scale-105 transition-all">ওপেন অ্যাপ্লিকেশন পাঠান</Button>
+              <Button size="lg" className="bg-white text-[#6e0e11] font-black rounded-2xl h-16 px-12 text-lg shadow-2xl hover:scale-105 transition-all active:scale-95">ওপেন অ্যাপ্লিকেশন পাঠান</Button>
             </div>
             <Globe className="absolute -bottom-20 -right-20 h-64 w-64 text-white/5" />
           </div>
