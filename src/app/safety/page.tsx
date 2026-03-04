@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -21,7 +22,8 @@ import {
   CloudSun,
   Wind,
   Sunrise,
-  Bot
+  Bot,
+  BookOpen
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
@@ -170,7 +172,7 @@ export default function SafetyHub() {
     <div className="min-h-screen flex flex-col bg-[#0f0203] selection:bg-red-600/30">
       <Navbar />
       
-      <main className="container mx-auto px-4 py-24 md:py-32 flex-grow max-w-7xl">
+      <main className="container mx-auto px-4 py-24 md:py-32 flex-grow max-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Main SOS Control */}
@@ -265,8 +267,8 @@ export default function SafetyHub() {
               {[
                 { icon: PhoneCall, title: "জরুরি হেল্পলাইন", desc: "৯৯৯ ও ১০৯ এর সরাসরি সংযোগ", link: "/safety/helplines", color: "text-blue-400" },
                 { icon: Bot, title: "এআই সাপোর্ট", desc: "মানসিক সহায়তা ও পরামর্শ", link: "/safety/chat", color: "text-pink-400" },
+                { icon: BookOpen, title: "সচেতনতা ও শিক্ষা", desc: "আইনি অধিকার ও আত্মরক্ষা টিপস", link: "/safety/education", color: "text-green-400" },
                 { icon: MessageSquare, title: "বেনামী রিপোর্ট", desc: "পরিচয় গোপন রেখে অভিযোগ দিন", link: "/safety/report", color: "text-orange-400" },
-                { icon: ShieldCheck, title: "আইনি অধিকার", desc: "নারী ও শিশু নির্যাতন দমন আইন", link: "/safety/education", color: "text-green-400" },
               ].map((tool, i) => (
                 <Link key={i} href={tool.link}>
                   <Card className="bg-white/5 border-white/5 hover:bg-white/10 transition-all rounded-[2rem] p-6 group shadow-xl flex items-center justify-between">
