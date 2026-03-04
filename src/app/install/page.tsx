@@ -1,10 +1,11 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Download, Smartphone, Monitor, CheckCircle2, Apple, ShieldCheck, Zap, ArrowDownToLine, Info } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Download, Smartphone, Monitor, CheckCircle2, Apple, ShieldCheck, Zap, ArrowDownToLine } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 
@@ -14,17 +15,19 @@ export default function InstallPage() {
   const [isInstalled, setIsInstalled] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-      setIsInstalled(true);
+    if (typeof window !== 'undefined') {
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        setIsInstalled(true);
+      }
+
+      const handleBeforeInstallPrompt = (e: any) => {
+        e.preventDefault();
+        setInstallPrompt(e);
+      };
+
+      window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
     }
-
-    const handleBeforeInstallPrompt = (e: any) => {
-      e.preventDefault();
-      setInstallPrompt(e);
-    };
-
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
   }, []);
 
   const handleInstall = async () => {
@@ -87,7 +90,7 @@ export default function InstallPage() {
         
         <div className="text-center space-y-6 mb-16">
           <div className="relative inline-block">
-            <div className="p-4 rounded-2xl bg-white text-primary shadow-2xl animate-pulse">
+            <div className="p-4 rounded-2xl bg-white text-primary shadow-2xl">
               <Download className="h-8 w-8" />
             </div>
             <div className="absolute -bottom-1 -right-1 p-1.5 bg-green-500 rounded-full text-white ring-2 ring-[#0f0203]">

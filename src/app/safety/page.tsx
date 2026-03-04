@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ShieldAlert, MapPin, PhoneCall, MessageSquare, AlertCircle, Radio, Navigation, Scale, BookOpen, UserSecret } from 'lucide-react';
+import { ShieldAlert, MapPin, PhoneCall, MessageSquare, AlertCircle, Radio, Navigation, Scale, BookOpen, UserRound } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
@@ -16,7 +16,7 @@ export default function SafetyHub() {
   const [location, setLocation] = useState<{lat: number, lng: number} | null>(null);
 
   const triggerSOS = () => {
-    if (!navigator.geolocation) {
+    if (typeof navigator === 'undefined' || !navigator.geolocation) {
       toast({ title: "জিপিএস নট সাপোর্টেড", variant: "destructive" });
       return;
     }
@@ -45,7 +45,7 @@ export default function SafetyHub() {
     { icon: PhoneCall, title: "জরুরি হেল্পলাইন", desc: "৯৯৯ ও ১০৯ এর সরাসরি সংযোগ", link: "/safety/helplines", color: "text-blue-400" },
     { icon: MessageSquare, title: "বেনামী রিপোর্ট", desc: "পরিচয় গোপন রেখে অভিযোগ দিন", link: "/safety/report", color: "text-orange-400" },
     { icon: Scale, title: "আইনি অধিকার", desc: "নারী ও শিশু নির্যাতন দমন আইন", link: "/safety/education", color: "text-green-400" },
-    { icon: Navigation, title: "নিরাপদ ম্যাপ", desc: "ঝুঁকিপূর্ণ এলাকা ও সেফ রুট", link: "#", color: "text-purple-400" },
+    { icon: UserRound, title: "সুরক্ষিত প্রোফাইল", desc: "গোপনীয়তা সেটিংস এবং লগ", link: "/profile", color: "text-purple-400" },
   ];
 
   return (

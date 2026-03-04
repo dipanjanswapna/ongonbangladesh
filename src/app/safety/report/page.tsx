@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ShieldAlert, UserSecret, Send, CheckCircle2, Lock, Camera, MapPin, AlertTriangle } from 'lucide-react';
+import { ShieldAlert, UserRound, Send, CheckCircle2, Lock, Camera, MapPin, AlertTriangle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
 
@@ -64,7 +64,7 @@ export default function AnonymousReport() {
           
           <CardHeader className="px-0 pt-0 mb-8 relative z-10 text-center space-y-4">
             <div className="inline-flex p-4 rounded-3xl bg-white/10 text-white mb-2 shadow-xl border border-white/10">
-              <UserSecret className="h-8 w-8" />
+              <UserRound className="h-8 w-8" />
             </div>
             <CardTitle className="text-3xl font-black text-white uppercase tracking-tighter">বেনামী হয়রানি রিপোর্ট</CardTitle>
             <CardDescription className="text-white/40 font-medium">আপনার পরিচয় ১০০% গোপন থাকবে। কোনো ব্যক্তিগত তথ্য ছাড়াই রিপোর্ট দিন।</CardDescription>
