@@ -1,15 +1,14 @@
-
-const CACHE_NAME = 'ongon-bd-v1';
-const ASSETS_TO_CACHE = [
+const CACHE_NAME = 'ongon-cache-v1';
+const urlsToCache = [
   '/',
   '/manifest.json',
-  'https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Alegreya:wght@400;700&display=swap'
+  '/favicon.ico'
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
+      return cache.addAll(urlsToCache);
     })
   );
 });
