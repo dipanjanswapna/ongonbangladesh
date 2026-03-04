@@ -11,6 +11,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetClose,
 } from "@/components/ui/sheet";
 
 export function Navbar() {
@@ -73,7 +74,7 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2 md:gap-3">
-            {/* Language Switcher - Hidden on very small screens */}
+            {/* Language Switcher */}
             <div className="hidden sm:flex bg-white/5 backdrop-blur-md rounded-xl p-1 border border-white/10">
               <button 
                 onClick={() => setLang('bn')}
@@ -117,12 +118,17 @@ export function Navbar() {
                     <Menu className="h-6 w-6" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-full sm:w-[350px] bg-[#1a0405] border-l border-white/10 p-0 overflow-hidden shadow-2xl">
+                <SheetContent side="right" className="w-[280px] sm:w-[350px] bg-[#1a0405] border-l border-white/10 p-0 overflow-hidden shadow-2xl">
                   <div className="h-full flex flex-col relative">
+                    {/* Active Close Button */}
+                    <SheetClose className="absolute right-4 top-4 z-50 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-all border border-white/10">
+                      <X className="h-5 w-5" />
+                    </SheetClose>
+
                     {/* Background Decoration */}
                     <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
                     
-                    <SheetHeader className="p-8 border-b border-white/5 relative z-10">
+                    <SheetHeader className="p-8 pb-4 border-b border-white/5 relative z-10">
                       <SheetTitle className="flex items-center gap-3">
                         <div className="bg-primary/20 p-2 rounded-xl">
                           <Heart className="h-6 w-6 text-primary fill-primary" />
@@ -134,36 +140,41 @@ export function Navbar() {
                       </SheetTitle>
                     </SheetHeader>
                     
-                    <div className="flex-grow p-6 space-y-2 overflow-y-auto custom-scrollbar relative z-10">
+                    <div className="flex-grow p-6 space-y-1 overflow-y-auto custom-scrollbar relative z-10">
                       <p className="text-[10px] font-black text-white/20 uppercase tracking-[0.3em] mb-4 ml-2">Main Menu</p>
                       {navLinks.map((link) => (
-                        <Link 
-                          key={link.href} 
-                          href={link.href} 
-                          className={cn(
-                            "flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 text-white/70 font-bold transition-all group border border-transparent hover:border-white/5",
-                            link.color && "text-red-500 hover:text-red-400"
-                          )}
-                        >
-                          <div className={cn(
-                            "p-2.5 rounded-xl bg-white/5 group-hover:bg-white/10 transition-all",
-                            link.color && "bg-red-500/10"
-                          )}>
-                            <link.icon className="h-5 w-5" />
-                          </div>
-                          <span className="text-base tracking-tight">{link.label}</span>
-                        </Link>
+                        <SheetClose asChild key={link.href}>
+                          <Link 
+                            href={link.href} 
+                            className={cn(
+                              "flex items-center gap-4 p-3.5 rounded-2xl hover:bg-white/5 text-white/70 font-bold transition-all group border border-transparent",
+                              link.color && "text-red-500 hover:text-red-400"
+                            )}
+                          >
+                            <div className={cn(
+                              "p-2 rounded-xl bg-white/5 group-hover:bg-white/10 transition-all",
+                              link.color && "bg-red-500/10"
+                            )}>
+                              <link.icon className="h-4 w-4" />
+                            </div>
+                            <span className="text-sm tracking-tight">{link.label}</span>
+                          </Link>
+                        </SheetClose>
                       ))}
                     </div>
 
                     <div className="p-8 bg-white/5 border-t border-white/5 space-y-6 relative z-10">
                       <div className="grid grid-cols-2 gap-3">
-                        <Link href="/login" className="w-full">
-                          <Button variant="outline" className="w-full border-white/10 text-white font-bold h-12 rounded-2xl hover:bg-white/5">লগইন</Button>
-                        </Link>
-                        <Link href="/register" className="w-full">
-                          <Button className="w-full bg-white text-[#781013] font-bold h-12 rounded-2xl shadow-xl">রেজিস্ট্রেশন</Button>
-                        </Link>
+                        <SheetClose asChild>
+                          <Link href="/login" className="w-full">
+                            <Button variant="outline" className="w-full border-white/10 text-white font-bold h-12 rounded-2xl hover:bg-white/5">লগইন</Button>
+                          </Link>
+                        </SheetClose>
+                        <SheetClose asChild>
+                          <Link href="/register" className="w-full">
+                            <Button className="w-full bg-white text-[#781013] font-bold h-12 rounded-2xl shadow-xl">রেজিস্ট্রেশন</Button>
+                          </Link>
+                        </SheetClose>
                       </div>
                       
                       <p className="text-[9px] text-white/20 text-center font-bold uppercase tracking-[0.4em]">
