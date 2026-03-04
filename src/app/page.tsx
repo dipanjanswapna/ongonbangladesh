@@ -1,9 +1,34 @@
-
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
 import { Input } from '@/components/ui/input';
-import { Heart, Zap, Search, ArrowRight, Calendar, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase, Tv, BookOpen, Globe, Lock, Quote, Droplet, Plus, Megaphone, ShieldCheck, Download, ShieldAlert, PhoneCall, UserSecret } from 'lucide-react';
+import { 
+  Heart, 
+  Zap, 
+  Search, 
+  ArrowRight, 
+  Calendar, 
+  Facebook, 
+  Youtube, 
+  Instagram, 
+  HandCoins, 
+  UserCheck, 
+  HeartHandshake, 
+  Briefcase, 
+  Tv, 
+  BookOpen, 
+  Globe, 
+  Lock, 
+  Quote, 
+  Droplet, 
+  Plus, 
+  Megaphone, 
+  ShieldCheck, 
+  Download, 
+  ShieldAlert, 
+  PhoneCall, 
+  UserSecret 
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -103,7 +128,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SOS Alert Section - Added High Visibility */}
+        {/* SOS Alert Section */}
         <section className="py-12 border-y border-white/5" style={{ backgroundColor: 'rgb(15, 2, 3)' }}>
           <div className="container mx-auto px-4">
             <div className="bg-red-600/10 border border-red-600/20 rounded-[3rem] p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[0_20px_50px_rgba(220,38,38,0.1)]">

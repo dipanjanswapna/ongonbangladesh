@@ -1,9 +1,24 @@
-
 'use client';
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Heart, Menu, User, Droplet, Home, Megaphone, HeartHandshake, Users, Briefcase, Info, Phone, X, ShieldCheck, Download, ShieldAlert } from 'lucide-react';
+import { 
+  Heart, 
+  Menu, 
+  User, 
+  Droplet, 
+  Home, 
+  Megaphone, 
+  HeartHandshake, 
+  Users, 
+  Briefcase, 
+  Info, 
+  Phone, 
+  X, 
+  ShieldCheck, 
+  Download, 
+  ShieldAlert 
+} from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import {
