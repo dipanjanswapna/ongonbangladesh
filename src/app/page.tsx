@@ -1,4 +1,3 @@
-
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
@@ -22,7 +21,10 @@ import {
   Megaphone, 
   ShieldCheck, 
   Download, 
-  ShieldAlert
+  ShieldAlert,
+  CloudLightning,
+  Navigation,
+  Activity
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -123,8 +125,50 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Disaster Management Section */}
+        <section className="py-24 border-y border-white/5 bg-[#1a0405] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-12 max-w-6xl mx-auto">
+              <div className="space-y-6 text-center lg:text-left flex-1">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-500/20 text-orange-400 text-[10px] font-black uppercase tracking-[0.2em] rounded-full border border-orange-500/30">
+                  <CloudLightning className="h-3 w-3 animate-bounce" /> Disaster Management
+                </div>
+                <h2 className="text-4xl md:text-6xl font-black text-white leading-[0.9] uppercase tracking-tighter font-headline">
+                  দুর্যোগ <br /><span className="text-orange-500 italic">প্রস্তুতি ও ব্যবস্থাপনা</span>
+                </h2>
+                <p className="text-white/60 text-base md:text-xl max-w-xl font-medium leading-relaxed font-body">
+                  ঘূর্ণিঝড়, বন্যা ও প্রাকৃতিক দুর্যোগে দ্রুত তথ্য ও সহায়তা পৌঁছে দিতে ওঙ্গন দুর্যোগ ব্যবস্থাপনা কেন্দ্র সর্বদা সজাগ।
+                </p>
+                <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+                  <Link href="/disaster">
+                    <Button className="bg-orange-500 text-white hover:bg-orange-600 h-14 px-8 rounded-xl font-bold text-xs uppercase tracking-widest transition-all hover:scale-105 active:scale-95 group">
+                      ম্যানেজমেন্ট হাব <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
+                  <Link href="/disaster/alerts">
+                    <Button variant="outline" className="h-14 px-8 border-white/10 text-white hover:bg-white/5 rounded-xl font-bold uppercase tracking-widest text-[10px] backdrop-blur-md">
+                      লাইভ অ্যালার্ট
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4 w-full md:w-auto">
+                <Card className="p-6 bg-white/5 border border-white/10 rounded-xl text-center space-y-2 group hover:bg-white/10 transition-all">
+                  <ShieldCheck className="h-8 w-8 text-blue-400 mx-auto" />
+                  <p className="text-[10px] text-white/40 uppercase font-black tracking-widest">শেল্টার গাইড</p>
+                </Card>
+                <Card className="p-6 bg-white/5 border border-white/10 rounded-xl text-center space-y-2 group hover:bg-white/10 transition-all">
+                  <Activity className="h-8 w-8 text-red-500 mx-auto" />
+                  <p className="text-[10px] text-white/40 uppercase font-black tracking-widest">রিয়েল-টাইম ডাটা</p>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* SOS Integrated Section System */}
-        <section className="py-24 border-y border-white/5 bg-[#0f0203] relative overflow-hidden">
+        <section className="py-24 border-b border-white/5 bg-[#0f0203] relative overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-600/5 rounded-full blur-[120px] pointer-events-none" />
           
           <div className="container mx-auto px-4 relative z-10">

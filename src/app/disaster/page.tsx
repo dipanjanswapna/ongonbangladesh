@@ -1,7 +1,7 @@
 'use client';
 
 import { Navbar } from '@/components/layout/Navbar';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { 
   CloudLightning, 
@@ -14,7 +14,9 @@ import {
   Navigation,
   Activity,
   Droplets,
-  Wind
+  Wind,
+  ShieldCheck,
+  ChevronRight
 } from 'lucide-react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
@@ -88,7 +90,7 @@ export default function DisasterHub() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {tools.map((tool, i) => (
               <Link key={i} href={tool.link}>
-                <Card className="bg-white/5 border-white/5 hover:bg-white/10 hover:border-white/10 transition-all rounded-xl p-8 group shadow-2xl relative overflow-hidden flex flex-col h-full border-b-4 border-b-white/5 hover:border-b-orange-500/50">
+                <Card className="bg-white/5 border-white/5 hover:bg-white/10 transition-all rounded-xl p-8 group shadow-2xl relative overflow-hidden flex flex-col h-full border-b-4 border-b-white/5 hover:border-b-orange-500/50">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full blur-3xl -mr-12 -mt-12 transition-all group-hover:bg-white/10" />
                   <div className={`p-4 rounded-xl bg-white/5 ${tool.color} group-hover:scale-110 transition-transform w-fit mb-6 shadow-xl`}>
                     <tool.icon className="h-8 w-8" />
@@ -98,6 +100,37 @@ export default function DisasterHub() {
                 </Card>
               </Link>
             ))}
+          </div>
+
+          {/* Special Aid Section Teaser */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <Card className="bg-white/5 border border-white/10 p-8 rounded-xl relative overflow-hidden group hover:bg-white/10 transition-all">
+              <div className="flex items-center justify-between mb-6">
+                <div className="p-4 rounded-xl bg-green-500/20 text-green-400">
+                  <HeartHandshake className="h-10 w-10" />
+                </div>
+                <Badge className="bg-green-500/20 text-green-400 border-green-500/20 uppercase text-[8px] font-black">Community Link</Badge>
+              </div>
+              <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-4">স্বেচ্ছাসেবক হিসেবে যোগ দিন</h3>
+              <p className="text-white/50 text-sm leading-relaxed mb-8">দুর্যোগের সময় উদ্ধার কাজ এবং ত্রাণ বিতরণে সরাসরি অংশগ্রহণের মাধ্যমে মানুষের পাশে দাঁড়ান।</p>
+              <Link href="/disaster/requests">
+                <Button className="bg-white text-[#7a1013] font-black rounded-xl h-12 px-8 uppercase tracking-widest text-[10px]">পোর্টালে প্রবেশ করুন <ChevronRight className="ml-2 h-4 w-4" /></Button>
+              </Link>
+            </Card>
+
+            <Card className="bg-white/5 border border-white/10 p-8 rounded-xl relative overflow-hidden group hover:bg-white/10 transition-all">
+              <div className="flex items-center justify-between mb-6">
+                <div className="p-4 rounded-xl bg-blue-500/20 text-blue-400">
+                  <ShieldCheck className="h-10 w-10" />
+                </div>
+                <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/20 uppercase text-[8px] font-black">Official Resources</Badge>
+              </div>
+              <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-4">আশ্রয়কেন্দ্র ও মেডিকেল গাইড</h3>
+              <p className="text-white/50 text-sm leading-relaxed mb-8">আপনার এলাকার নিকটস্থ সেফ জোন এবং জরুরি সেবা কেন্দ্রগুলোর হালনাগাদ তথ্য এখানে পাবেন।</p>
+              <Link href="/disaster/resources">
+                <Button variant="outline" className="border-white/10 text-white font-bold rounded-xl h-12 px-8 uppercase tracking-widest text-[10px]">রিসোর্স ম্যাপ দেখুন</Button>
+              </Link>
+            </Card>
           </div>
 
           {/* Disaster Helpline Banner */}
