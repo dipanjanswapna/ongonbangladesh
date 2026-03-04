@@ -1,6 +1,7 @@
+
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -21,7 +22,8 @@ import {
   Bot,
   BookOpen,
   Map as MapIcon,
-  Navigation
+  Navigation,
+  WifiOff
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
@@ -29,7 +31,6 @@ import { Badge } from '@/components/ui/badge';
 import dynamic from 'next/dynamic';
 import { cn } from '@/lib/utils';
 
-// Dynamic import for Map to prevent SSR issues
 const SOSMap = dynamic(() => import('@/components/blood/BloodMap'), { 
   ssr: false,
   loading: () => <div className="w-full h-full bg-white/5 animate-pulse rounded-xl" />
@@ -42,10 +43,22 @@ export default function SafetyHub() {
   const [showSafeRoutes, setShowSafeRoutes] = useState(false);
   const [userLocation, setUserLocation] = useState<{lat: number, lng: number} | null>(null);
   const [trackingLogs, setTrackingLogs] = useState<{time: string, status: string}[]>([]);
+  const [isOnline, setIsOnline] = useState(true);
   const watchId = useRef<number | null>(null);
   const longPressTimer = useRef<NodeJS.Timeout | null>(null);
 
-  // Mock safety data for mapping
+  useEffect(() => {
+    setIsOnline(navigator.onLine);
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
   const safetyMarkers = [
     { id: 's1', name: 'পুলিশ চেকপোস্ট (নিরাপদ)', group: 'Safe', location: 'ধানমন্ডি ২৭', lat: 23.7509, lng: 90.3843, phone: '999' },
     { id: 's2', name: 'উচ্চ ঝুঁকি এলাকা (সতর্ক থাকুন)', group: 'Risk', location: 'হাতিরঝিল (অন্ধকার এলাকা)', lat: 23.7709, lng: 90.4043, phone: '0' },
@@ -58,12 +71,24 @@ export default function SafetyHub() {
     }
 
     setIsSOSActive(true);
-    setTrackingLogs(prev => [{ time: new Date().toLocaleTimeString(), status: "SOS সংকেত পাঠানো হয়েছে" }, ...prev]);
+    const logMsg = isOnline ? "SOS সংকেত পাঠানো হয়েছে" : "অফলাইন SOS রেকর্ড করা হয়েছে (SMS Fallback)";
+    setTrackingLogs(prev => [{ time: new Date().toLocaleTimeString(), status: logMsg }, ...prev]);
+
+    if (!isOnline) {
+      toast({ 
+        title: "আপনি অফলাইনে আছেন", 
+        description: "আপনার লোকেশন রেকর্ড করা হয়েছে। জরুরি সাহায্যের জন্য এসএমএস বাটন ব্যবহার করুন।",
+        variant: "destructive"
+      });
+    }
 
     watchId.current = navigator.geolocation.watchPosition(
       (pos) => {
         const coords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
         setUserLocation(coords);
+        if (!isOnline) {
+          localStorage.setItem('last_sos_location', JSON.stringify(coords));
+        }
         setTrackingLogs(prev => [{ time: new Date().toLocaleTimeString(), status: `লোকেশন আপডেট: ${coords.lat.toFixed(4)}, ${coords.lng.toFixed(4)}` }, ...prev].slice(0, 5));
       },
       () => {
@@ -71,12 +96,6 @@ export default function SafetyHub() {
       },
       { enableHighAccuracy: true }
     );
-
-    toast({ 
-      title: "লাইভ ট্র্যাকিং সচল!", 
-      description: "আপনার অবস্থান রিয়েল-টাইমে কন্ট্রোল রুমে পাঠানো হচ্ছে।",
-      variant: "destructive"
-    });
   };
 
   const stopTracking = () => {
@@ -85,7 +104,7 @@ export default function SafetyHub() {
       watchId.current = null;
     }
     setIsSOSActive(false);
-    toast({ title: "ট্র্যাকিং বন্ধ করা হয়েছে", description: "নিরাপত্তা নিশ্চিত করতে সর্বদা সজাগ থাকুন।" });
+    toast({ title: "ট্র্যাকিং বন্ধ করা হয়েছে" });
   };
 
   const handleStartPress = () => {
@@ -166,9 +185,20 @@ export default function SafetyHub() {
     <div className="min-h-screen flex flex-col bg-[#0f0203] selection:bg-red-600/30">
       <Navbar />
       
-      <main className="container mx-auto px-4 py-24 md:py-32 flex-grow max-7xl">
+      <main className="container mx-auto px-4 py-24 md:py-32 flex-grow max-w-7xl">
+        {!isOnline && (
+          <div className="mb-6 p-4 bg-red-600/20 border border-red-600/30 rounded-xl flex items-center justify-between animate-in slide-in-from-top-4">
+            <div className="flex items-center gap-3">
+              <WifiOff className="h-5 w-5 text-red-500" />
+              <p className="text-xs font-bold text-white">আপনি অফলাইনে আছেন। জরুরি প্রয়োজনে এসএমএস ফলব্যাক ব্যবহার করুন।</p>
+            </div>
+            <Link href="sms:999?body=SOS! My location: http://maps.google.com/maps?q=">
+              <Button size="sm" className="bg-white text-red-600 font-bold rounded-lg h-8 text-[10px] uppercase">SMS SOS</Button>
+            </Link>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
           <div className="lg:col-span-8 space-y-8">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
               <div className="space-y-2">
@@ -235,11 +265,13 @@ export default function SafetyHub() {
                       <Bot className="h-5 w-5" /> এআই সাপোর্ট চ্যাট (বিনা মূল্যে)
                     </Button>
                   </Link>
-                  <Link href="/safety/helplines" className="w-full">
-                    <Button variant="outline" className="w-full border-white/10 text-white hover:bg-white/5 h-14 rounded-xl font-bold uppercase tracking-widest text-xs">
-                      পুলিশ ও জরুরি হেল্পলাইন
-                    </Button>
-                  </Link>
+                  {!isOnline && (
+                    <Link href="tel:999" className="w-full">
+                      <Button className="w-full bg-red-600 text-white font-black h-14 rounded-xl shadow-xl flex items-center justify-center gap-2">
+                        <PhoneCall className="h-5 w-5" /> সরাসরি কল (৯৯৯)
+                      </Button>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
@@ -280,31 +312,9 @@ export default function SafetyHub() {
                 </Link>
               ))}
             </div>
-
-            <Card className="bg-gradient-to-br from-red-600/10 to-transparent border-white/10 rounded-xl p-8 space-y-6 shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -mr-16 -mt-16" />
-              <div className="flex items-center gap-3">
-                <AlertCircle className="h-6 w-6 text-orange-400" />
-                <h4 className="text-white font-black text-xs uppercase tracking-widest">জরুরি বার্তা</h4>
-              </div>
-              <p className="text-white/60 text-sm leading-relaxed italic">
-                "বিপদে আতঙ্কিত না হয়ে শান্ত থাকুন। ওঙ্গন নিরাপত্তা ব্যবস্থা আপনার সহায়তায় সর্বদা সজাগ। আপনার স্মার্টফোনের পাওয়ার বাটন পরপর ৫ বার প্রেস করলেও SOS সক্রিয় হবে।"
-              </p>
-              <div className="h-px w-full bg-white/10" />
-              <div className="flex items-center justify-between">
-                <p className="text-[10px] text-white/30 uppercase font-bold tracking-[0.2em]">Ongon Shield v3.0</p>
-                <Zap className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-              </div>
-            </Card>
           </div>
         </div>
       </main>
-
-      <footer className="py-12 text-center border-t border-white/5 bg-black/10">
-        <p className="text-[10px] text-white/20 uppercase tracking-[0.3em] font-black">
-          ONGON BANGLADESH • ZERO TOLERANCE TO HARASSMENT
-        </p>
-      </footer>
     </div>
   );
 }

@@ -1,71 +1,23 @@
+
 {
-  "name": "ONGON BANGLADESH - মানবিক সহায়তায় সংযোগ",
+  "name": "ONGON BANGLADESH",
   "short_name": "ONGON BD",
-  "description": "বাংলাদেশের একটি AI-চালিত কমিউনিটি প্ল্যাটফর্ম, যা মানবিক সহায়তার প্রয়োজনে দ্রুত সংযোগ তৈরি করে।",
-  "id": "/",
-  "start_url": "/?source=pwa",
+  "description": "মানবিক সহায়তা ও নিরাপত্তা প্ল্যাটফর্ম",
+  "start_url": "/",
   "display": "standalone",
-  "display_override": ["window-controls-overlay", "minimal-ui"],
-  "scope": "/",
   "background_color": "#7a1013",
   "theme_color": "#7a1013",
-  "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "https://picsum.photos/seed/icon192/192/192",
+      "src": "https://i.postimg.cc/ZqMsP1F1/1690289479-3647.avif",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
-      "src": "https://picsum.photos/seed/icon512/512/512",
+      "src": "https://i.postimg.cc/ZqMsP1F1/1690289479-3647.avif",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "https://picsum.photos/seed/iconmask/512/512",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "https://picsum.photos/seed/pwa-desktop/1280/720",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "Desktop View"
-    },
-    {
-      "src": "https://picsum.photos/seed/pwa-mobile/720/1280",
-      "sizes": "720x1280",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Mobile View"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "এখনই দান করুন",
-      "short_name": "দান",
-      "description": "সরাসরি অনুদান দিন",
-      "url": "/donate?source=pwa_shortcut",
-      "icons": [{ "src": "https://picsum.photos/seed/donate/192/192", "sizes": "192x192" }]
-    },
-    {
-      "name": "রক্তদাতা খুঁজুন",
-      "short_name": "রক্ত",
-      "description": "নিকটস্থ রক্তদাতা খুঁজুন",
-      "url": "/blood/donors?source=pwa_shortcut",
-      "icons": [{ "src": "https://picsum.photos/seed/blood/192/192", "sizes": "192x192" }]
-    }
-  ],
-  "protocol_handlers": [
-    {
-      "protocol": "web+donate",
-      "url": "/donate?amount=%s"
+      "type": "image/png"
     }
   ]
 }

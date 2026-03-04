@@ -1,35 +1,20 @@
-const CACHE_NAME = 'ongon-cache-v3';
-const OFFLINE_URL = '/';
 
-const ASSETS_TO_CACHE = [
+const CACHE_NAME = 'ongon-cache-v1';
+const OFFLINE_URL = '/offline';
+
+const urlsToCache = [
   '/',
-  '/manifest.json',
-  '/favicon.ico',
-  'https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Alegreya:wght@400;700&display=swap'
+  OFFLINE_URL,
+  '/globals.css',
+  '/manifest.json'
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
+      return cache.addAll(urlsToCache);
     })
   );
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
@@ -39,12 +24,11 @@ self.addEventListener('fetch', (event) => {
         return caches.match(OFFLINE_URL);
       })
     );
-    return;
+  } else {
+    event.respondWith(
+      caches.match(event.request).then((response) => {
+        return response || fetch(event.request);
+      })
+    );
   }
-
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
-  );
 });
