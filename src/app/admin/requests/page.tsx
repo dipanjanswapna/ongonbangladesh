@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, XCircle, Eye, Search, Filter } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 
 const requests = [
   { id: "RQ-101", user: "Rahim Ahmed", title: "Emergency meds for heart patient", category: "Medical", date: "10 mins ago", status: "Pending" },
@@ -33,7 +34,7 @@ export default function RequestsManagement() {
         </Button>
       </div>
 
-      <Card className="border-white/5 bg-white/5 backdrop-blur-md rounded-[2.5rem] overflow-hidden shadow-2xl">
+      <Card className="border-white/5 bg-white/5 backdrop-blur-md rounded-xl overflow-hidden shadow-2xl">
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <Table>
@@ -61,10 +62,10 @@ export default function RequestsManagement() {
                     </TableCell>
                     <TableCell>
                       <Badge className={cn(
-                        "text-[10px] font-bold",
-                        req.status === "Pending" ? "bg-orange-500/10 text-orange-400 border-orange-500/20" :
-                        req.status === "Approved" ? "bg-green-500/10 text-green-400 border-green-500/20" :
-                        "bg-red-500/10 text-red-400 border-red-500/20"
+                        "text-[10px] font-bold border-0",
+                        req.status === "Pending" ? "bg-orange-500/10 text-orange-400" :
+                        req.status === "Approved" ? "bg-green-500/10 text-green-400" :
+                        "bg-red-500/10 text-red-400"
                       )}>
                         {req.status}
                       </Badge>
@@ -91,8 +92,4 @@ export default function RequestsManagement() {
       </Card>
     </div>
   );
-}
-
-function cn(...inputs: any[]) {
-  return inputs.filter(Boolean).join(' ');
 }

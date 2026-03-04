@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -21,6 +22,7 @@ import {
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from '@/lib/utils';
 
 export default function DisasterAidMatching() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -49,7 +51,7 @@ export default function DisasterAidMatching() {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-[10px] font-black uppercase tracking-widest border border-green-500/20">
                 <HeartHandshake className="h-3 w-3" /> Community Connection
               </div>
-              <h1 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase">সাহায্য ও <span className="text-white/40">সমন্বয়</span></h1>
+              <h1 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase leading-none">সাহায্য ও <span className="text-white/40">সমন্বয়</span></h1>
               <p className="text-white/60 max-w-xl leading-relaxed font-medium text-sm">আক্রান্ত মানুষ ও সাহায্যকারীদের মাঝে সরাসরি সংযোগ স্থাপন। আপনার একটি ছোট উদ্যোগ কারো জীবন বাঁচাতে পারে।</p>
             </div>
             <div className="flex flex-col gap-3 w-full md:w-auto relative z-10">
@@ -93,13 +95,13 @@ export default function DisasterAidMatching() {
                     <div className="flex justify-between items-start mb-6">
                       <Badge className={`bg-white/5 text-white/60 border-white/10 font-black text-[8px] uppercase tracking-widest`}>{req.category}</Badge>
                       <Badge className={cn(
-                        "text-[8px] font-black uppercase tracking-widest",
+                        "text-[8px] font-black uppercase tracking-widest border-0",
                         req.urgency === 'high' ? "bg-red-600 text-white" : "bg-orange-500 text-white"
                       )}>
                         {req.urgency === 'high' ? 'জরুরি' : 'মাঝারি'}
                       </Badge>
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors">{req.title}</h3>
+                    <h3 className="text-xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors leading-tight">{req.title}</h3>
                     <div className="space-y-3 mb-8">
                       <div className="flex items-center gap-2 text-white/40 text-xs font-medium">
                         <MapPin className="h-3.5 w-3.5 text-red-500" /> {req.location}
@@ -109,8 +111,8 @@ export default function DisasterAidMatching() {
                       </div>
                     </div>
                     <div className="flex gap-2">
-                      <Button className="flex-1 bg-white text-[#7a1013] font-black rounded-lg h-10 text-[10px] uppercase tracking-widest hover:scale-105 transition-all">সাহায্য করব</Button>
-                      <Button variant="outline" className="h-10 w-10 border-white/10 text-white/20 hover:text-white rounded-lg p-0">
+                      <Button className="flex-1 bg-white text-[#7a1013] font-black rounded-xl h-10 text-[10px] uppercase tracking-widest hover:scale-105 transition-all">সাহায্য করব</Button>
+                      <Button variant="outline" className="h-10 w-10 border-white/10 text-white/20 hover:text-white rounded-xl p-0">
                         <ChevronRight className="h-4 w-4" />
                       </Button>
                     </div>
@@ -122,17 +124,17 @@ export default function DisasterAidMatching() {
 
           {/* Stats / Info */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="p-6 bg-white/5 border-white/10 rounded-xl text-center space-y-2">
+            <Card className="p-6 bg-white/5 border-white/10 rounded-xl text-center space-y-2 shadow-xl">
               <Users className="h-8 w-8 text-blue-400 mx-auto" />
               <h4 className="text-2xl font-black text-white">১,৫০০+</h4>
               <p className="text-[10px] text-white/40 uppercase font-black tracking-widest">নিবন্ধিত ভলান্টিয়ার</p>
             </Card>
-            <Card className="p-6 bg-white/5 border-white/10 rounded-xl text-center space-y-2">
+            <Card className="p-6 bg-white/5 border-white/10 rounded-xl text-center space-y-2 shadow-xl">
               <CheckCircle2 className="h-8 w-8 text-green-400 mx-auto" />
               <h4 className="text-2xl font-black text-white">৪২০</h4>
               <p className="text-[10px] text-white/40 uppercase font-black tracking-widest">সমাধানকৃত আবেদন</p>
             </Card>
-            <Card className="p-6 bg-white/5 border-white/10 rounded-xl text-center space-y-2">
+            <Card className="p-6 bg-white/5 border-white/10 rounded-xl text-center space-y-2 shadow-xl">
               <AlertCircle className="h-8 w-8 text-orange-400 mx-auto" />
               <h4 className="text-2xl font-black text-white">১২</h4>
               <p className="text-[10px] text-white/40 uppercase font-black tracking-widest">সক্রিয় রিকোয়েস্ট</p>
