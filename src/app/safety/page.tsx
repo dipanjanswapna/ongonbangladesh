@@ -1,10 +1,9 @@
-
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { 
   ShieldAlert, 
   MapPin, 
@@ -14,16 +13,15 @@ import {
   Zap,
   EyeOff,
   Settings,
-  Share2,
   ChevronRight,
-  ShieldCheck,
   History,
-  Navigation,
   CloudSun,
   Wind,
   Sunrise,
   Bot,
-  BookOpen
+  BookOpen,
+  Map as MapIcon,
+  Navigation
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
@@ -41,10 +39,17 @@ export default function SafetyHub() {
   const { toast } = useToast();
   const [isSOSActive, setIsSOSActive] = useState(false);
   const [isDiscreetMode, setIsDiscreetMode] = useState(false);
+  const [showSafeRoutes, setShowSafeRoutes] = useState(false);
   const [userLocation, setUserLocation] = useState<{lat: number, lng: number} | null>(null);
   const [trackingLogs, setTrackingLogs] = useState<{time: string, status: string}[]>([]);
   const watchId = useRef<number | null>(null);
   const longPressTimer = useRef<NodeJS.Timeout | null>(null);
+
+  // Mock safety data for mapping
+  const safetyMarkers = [
+    { id: 's1', name: 'পুলিশ চেকপোস্ট (নিরাপদ)', group: 'Safe', location: 'ধানমন্ডি ২৭', lat: 23.7509, lng: 90.3843, phone: '999' },
+    { id: 's2', name: 'উচ্চ ঝুঁকি এলাকা (সতর্ক থাকুন)', group: 'Risk', location: 'হাতিরঝিল (অন্ধকার এলাকা)', lat: 23.7709, lng: 90.4043, phone: '0' },
+  ];
 
   const startTracking = () => {
     if (typeof window === 'undefined' || !navigator.geolocation) {
@@ -107,7 +112,7 @@ export default function SafetyHub() {
           <h1 className="text-xl font-bold text-white flex items-center gap-2">
             <CloudSun className="h-5 w-5 text-white/60" /> আজকের আবহাওয়া
           </h1>
-          <button onClick={() => setIsDiscreetMode(false)} className="opacity-0 w-10 h-10 cursor-default" aria-hidden="true">Exit</button>
+          <button onClick={() => setIsDiscreetMode(false)} className="opacity-0 w-10 h-10 cursor-default">Exit</button>
         </div>
 
         <div className="space-y-6">
@@ -144,17 +149,6 @@ export default function SafetyHub() {
               <p className="text-lg font-bold text-white">০৫:৪৫ AM</p>
             </div>
           </div>
-
-          <div className="mt-12 p-6 border-t border-white/5 text-center space-y-2">
-            <p className="text-[10px] text-white/20 uppercase font-black tracking-[0.3em]">
-              {isSOSActive ? "ব্যাকগ্রাউন্ডে সিস্টেম সচল আছে..." : "সিস্টেম স্ট্যান্ডবাই"}
-            </p>
-            <div className="flex justify-center gap-1">
-              <div className={cn("h-1 w-1 rounded-full", isSOSActive ? "bg-red-500 animate-pulse" : "bg-white/10")} />
-              <div className={cn("h-1 w-1 rounded-full opacity-50", isSOSActive ? "bg-red-500 animate-pulse delay-75" : "bg-white/10")} />
-              <div className={cn("h-1 w-1 rounded-full opacity-30", isSOSActive ? "bg-red-500 animate-pulse delay-150" : "bg-white/10")} />
-            </div>
-          </div>
         </div>
         
         <button 
@@ -175,7 +169,6 @@ export default function SafetyHub() {
       <main className="container mx-auto px-4 py-24 md:py-32 flex-grow max-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Main SOS Control */}
           <div className="lg:col-span-8 space-y-8">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
               <div className="space-y-2">
@@ -192,8 +185,14 @@ export default function SafetyHub() {
                 >
                   <EyeOff className="h-4 w-4" /> ডিসক্রিট মোড
                 </Button>
-                <Button variant="outline" className="bg-white/5 border-white/10 text-white hover:bg-white/10 rounded-xl h-12 w-12 p-0">
-                  <Settings className="h-4 w-4" />
+                <Button 
+                  variant="outline" onClick={() => setShowSafeRoutes(!showSafeRoutes)}
+                  className={cn(
+                    "border-white/10 rounded-xl h-12 px-6 font-bold flex items-center gap-2 transition-all",
+                    showSafeRoutes ? "bg-green-600 text-white border-green-500" : "bg-white/5 text-white hover:bg-white/10"
+                  )}
+                >
+                  <MapIcon className="h-4 w-4" /> {showSafeRoutes ? 'রুট ম্যাপ অফ' : 'সেফ রুট ম্যাপ'}
                 </Button>
               </div>
             </div>
@@ -245,30 +244,27 @@ export default function SafetyHub() {
               </div>
             </div>
 
-            {/* Live Map View */}
             <div className="h-[400px] w-full rounded-xl overflow-hidden border border-white/10 bg-white/5 shadow-2xl relative">
-              {isSOSActive ? <SOSMap donors={[]} userLocation={userLocation} selectedDonor={null} onSelectDonor={() => {}} /> : (
-                <div className="w-full h-full flex flex-col items-center justify-center text-center p-8">
-                  <div className="p-6 rounded-full bg-white/5 text-white/20 mb-4"><MapPin className="h-12 w-12" /></div>
-                  <h4 className="text-white font-bold text-lg mb-2">লাইভ ম্যাপ ভিউ</h4>
-                  <p className="text-white/40 text-sm max-w-xs">SOS সক্রিয় করলে এখানে আপনার রিয়েল-টাইম অবস্থান দেখা যাবে।</p>
-                </div>
-              )}
+              <SOSMap 
+                donors={showSafeRoutes ? safetyMarkers : []} 
+                userLocation={userLocation} 
+                selectedDonor={null} 
+                onSelectDonor={() => {}} 
+              />
               <div className="absolute top-6 left-6 z-[100] px-4 py-2 bg-black/80 backdrop-blur-md rounded-full border border-white/10 flex items-center gap-2">
                 <div className={`h-2 w-2 rounded-full ${isSOSActive ? 'bg-red-500 animate-pulse' : 'bg-white/20'}`} />
-                <span className="text-[10px] font-black text-white uppercase tracking-widest">{isSOSActive ? 'Live Tracking Active' : 'GPS Standby'}</span>
+                <span className="text-[10px] font-black text-white uppercase tracking-widest">{showSafeRoutes ? 'Safe Route View' : isSOSActive ? 'Live Tracking Active' : 'GPS Standby'}</span>
               </div>
             </div>
           </div>
 
-          {/* Sidebar Tools */}
           <div className="lg:col-span-4 space-y-6">
             <div className="grid grid-cols-1 gap-4">
               {[
                 { icon: PhoneCall, title: "জরুরি হেল্পলাইন", desc: "৯৯৯ ও ১০৯ এর সরাসরি সংযোগ", link: "/safety/helplines", color: "text-blue-400" },
                 { icon: Bot, title: "এআই সাপোর্ট", desc: "মানসিক সহায়তা ও পরামর্শ", link: "/safety/chat", color: "text-pink-400" },
                 { icon: BookOpen, title: "সচেতনতা ও শিক্ষা", desc: "আইনি অধিকার ও আত্মরক্ষা টিপস", link: "/safety/education", color: "text-green-400" },
-                { icon: MessageSquare, title: "বেনামী রিপোর্ট", desc: "পরিচয় গোপন রেখে অভিযোগ দিন", link: "/safety/report", color: "text-orange-400" },
+                { icon: MessageSquare, title: "বেনামী রিপোর্ট ও সার্ভে", desc: "পরিচয় গোপন রেখে অভিযোগ দিন", link: "/safety/report", color: "text-orange-400" },
               ].map((tool, i) => (
                 <Link key={i} href={tool.link}>
                   <Card className="bg-white/5 border-white/5 hover:bg-white/10 transition-all rounded-xl p-6 group shadow-xl flex items-center justify-between">
