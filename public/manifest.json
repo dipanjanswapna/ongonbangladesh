@@ -5,6 +5,7 @@
   "description": "মানবিক সহায়তায় আমরা আপনার পাশে। এটি একটি AI-চালিত কমিউনিটি প্ল্যাটফর্ম।",
   "start_url": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "minimal-ui"],
   "background_color": "#7a1013",
   "theme_color": "#7a1013",
   "orientation": "portrait",
@@ -22,7 +23,7 @@
       "purpose": "any"
     },
     {
-      "src": "https://placehold.co/512x512/7a1013/ffffff?text=ONGON",
+      "src": "https://placehold.co/512x512/7a1013/ffffff?text=APP",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -30,18 +31,18 @@
   ],
   "screenshots": [
     {
-      "src": "https://placehold.co/1280x720/1a0405/ffffff?text=ONGON+Desktop",
+      "src": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1280&h=720&auto=format&fit=crop",
       "sizes": "1280x720",
-      "type": "image/png",
+      "type": "image/jpeg",
       "form_factor": "wide",
-      "label": "Desktop Dashboard"
+      "label": "ONGON BD Desktop App"
     },
     {
-      "src": "https://placehold.co/720x1280/1a0405/ffffff?text=ONGON+Mobile",
+      "src": "https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=720&h=1280&auto=format&fit=crop",
       "sizes": "720x1280",
-      "type": "image/png",
+      "type": "image/jpeg",
       "form_factor": "narrow",
-      "label": "Mobile App View"
+      "label": "ONGON BD Mobile App"
     }
   ],
   "protocol_handlers": [
@@ -49,6 +50,5 @@
       "protocol": "web+donate",
       "url": "/donate?amount=%s"
     }
-  ],
-  "display_override": ["window-controls-overlay"]
+  ]
 }
