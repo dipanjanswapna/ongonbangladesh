@@ -2,7 +2,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
 import { Input } from '@/components/ui/input';
-import { Heart, Zap, Search, ArrowRight, Calendar, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase, Tv, BookOpen, Globe, Lock, Quote, Droplet, Plus, Megaphone, ShieldCheck } from 'lucide-react';
+import { Heart, Zap, Search, ArrowRight, Calendar, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase, Tv, BookOpen, Globe, Lock, Quote, Droplet, Plus, Megaphone, ShieldCheck, Download } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -428,9 +428,16 @@ export default function Home() {
                 <p className="text-sm text-white/80 leading-relaxed max-sm:max-w-xs">
                   বাংলাদেশের একটি AI-চালিত কমিউনিটি প্ল্যাটফর্ম, যা মানবিক সহায়তার প্রয়োজনে দ্রুত সংযোগ তৈরি করে।
                 </p>
-                <div className="pt-4">
-                  <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em]">Founder & Leadership</p>
-                  <p className="text-xs font-bold text-white mt-1 uppercase">DIPANJAN SWAPNA PRANGON</p>
+                <div className="pt-4 flex flex-col gap-4">
+                  <div>
+                    <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em]">Founder & Leadership</p>
+                    <p className="text-xs font-bold text-white mt-1 uppercase">DIPANJAN SWAPNA PRANGON</p>
+                  </div>
+                  <Link href="/install">
+                    <Button variant="outline" className="w-full sm:w-auto border-white/20 text-white hover:bg-white hover:text-[#7a1013] font-bold rounded-xl flex items-center gap-2">
+                      <Download className="h-4 w-4" /> অ্যাপ ডাউনলোড করুন
+                    </Button>
+                  </Link>
                 </div>
                 <div className="pt-6 space-y-3">
                   <h4 className="font-bold text-white text-sm">নিউজলেটারে যোগ দিন</h4>
@@ -453,6 +460,7 @@ export default function Home() {
                     <li><Link href="/about" className="text-white/70 hover:text-white">আমাদের সম্পর্কে</Link></li>
                     <li><Link href="/blog" className="text-white/70 hover:text-white">ব্লগ</Link></li>
                     <li><Link href="/volunteer" className="text-white/70 hover:text-white">স্বেচ্ছাসেবক হন</Link></li>
+                    <li><Link href="/install" className="text-white/70 hover:text-white flex items-center gap-1 font-black"><Download className="h-3 w-3" /> ইনস্টল অ্যাপ</Link></li>
                     <li><Link href="/admin/login" className="text-white/70 hover:text-white flex items-center gap-1"><Lock className="h-3 w-3" /> অ্যাডমিন পোর্টাল</Link></li>
                   </ul>
                 </div>

@@ -11,7 +11,8 @@ import {
   LogOut,
   ChevronRight,
   Menu,
-  X
+  X,
+  Download
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
@@ -23,6 +24,7 @@ const navItems = [
   { label: 'সাহায্য আবেদন', href: '/admin/requests', icon: HeartHandshake },
   { label: 'ক্যাম্পেইন', href: '/admin/campaigns', icon: Megaphone },
   { label: 'স্বেচ্ছাসেবক', href: '/admin/volunteers', icon: Users },
+  { label: 'ইনস্টল অ্যাপ', href: '/install', icon: Download },
   { label: 'সেটিংস', href: '/admin/settings', icon: Settings },
 ];
 
@@ -66,7 +68,7 @@ export function AdminSidebar() {
         <div className="flex flex-col h-full py-8">
           <div className="px-8 mb-10">
             <div className="flex items-center gap-2 mb-2">
-              <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
+              <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8_rgba(34,197,94,0.6)]" />
               <span className="text-[10px] font-bold text-white/40 uppercase tracking-[0.3em]">Command Center</span>
             </div>
             <h2 className="text-xl font-bold text-white tracking-tighter uppercase">ONGON <span className="text-white/40">Admin</span></h2>

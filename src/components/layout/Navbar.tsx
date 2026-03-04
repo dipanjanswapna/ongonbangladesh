@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Heart, Menu, User, Droplet, Home, Megaphone, HeartHandshake, Users, Briefcase, Info, Phone, X, ShieldCheck } from 'lucide-react';
+import { Heart, Menu, User, Droplet, Home, Megaphone, HeartHandshake, Users, Briefcase, Info, Phone, X, ShieldCheck, Download } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import {
@@ -35,6 +35,7 @@ export function Navbar() {
     { label: 'সাহায্য অনুরোধ', href: '/requests', icon: HeartHandshake },
     { label: 'স্বেচ্ছাসেবক', href: '/volunteer', icon: Users },
     { label: 'ক্যারিয়ার', href: '/careers', icon: Briefcase },
+    { label: 'ইনস্টল অ্যাপ', href: '/install', icon: Download, color: 'text-blue-400' },
     { label: 'যোগাযোগ', href: '/contact', icon: Phone },
   ];
 

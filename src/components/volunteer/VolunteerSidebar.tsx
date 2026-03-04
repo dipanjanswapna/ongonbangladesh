@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -12,7 +11,8 @@ import {
   ChevronRight,
   Menu,
   X,
-  MessageSquare
+  MessageSquare,
+  Download
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
@@ -24,6 +24,7 @@ const navItems = [
   { label: 'আমার কাজ', href: '/volunteer/tasks', icon: ClipboardList },
   { label: 'ইভেন্ট ক্যালেন্ডার', href: '/volunteer/events', icon: Calendar },
   { label: 'মেসেজ', href: '/volunteer/messages', icon: MessageSquare },
+  { label: 'ইনস্টল অ্যাপ', href: '/install', icon: Download },
   { label: 'প্রোফাইল', href: '/volunteer/profile', icon: User },
 ];
 
