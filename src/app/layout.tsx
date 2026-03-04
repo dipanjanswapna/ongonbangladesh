@@ -1,4 +1,3 @@
-
 import type {Metadata} from 'next';
 import './globals.css';
 import {Toaster} from '@/components/ui/toaster';
@@ -10,6 +9,7 @@ export const metadata: Metadata = {
   description: "ONGON BANGLADESH - a sister concern of PRANGON'S ECOSYSTEM. একটি প্ল্যাটফর্ম যেখানে সাহায্যের জন্য আবেদন করা যায় এবং সাহায্য প্রদান করা যায়।",
   manifest: '/manifest.json',
   themeColor: '#7a1013',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',

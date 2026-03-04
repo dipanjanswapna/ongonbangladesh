@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Download, Smartphone, Monitor, CheckCircle2, Apple, ShieldCheck, Globe, Zap, ArrowDownToLine } from 'lucide-react';
+import { Download, Smartphone, Monitor, CheckCircle2, Apple, ShieldCheck, Globe, Zap, ArrowDownToLine, Info } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 
@@ -14,7 +14,6 @@ export default function InstallPage() {
   const [isInstalled, setIsInstalled] = useState(false);
 
   useEffect(() => {
-    // Check if already installed
     if (window.matchMedia('(display-mode: standalone)').matches) {
       setIsInstalled(true);
     }
@@ -31,8 +30,8 @@ export default function InstallPage() {
   const handleInstall = async () => {
     if (!installPrompt) {
       toast({
-        title: "ইনস্টল অপশন পাওয়া যায়নি",
-        description: "আপনার ব্রাউজার মেনু থেকে 'Add to Home Screen' বা 'Install' অপশনটি ব্যবহার করুন।",
+        title: "ব্রাউজার সাপোর্ট করছে না",
+        description: "দয়া করে আপনার ব্রাউজার মেনু থেকে 'Add to Home Screen' অপশনটি ব্যবহার করুন।",
         variant: "destructive"
       });
       return;
@@ -51,9 +50,10 @@ export default function InstallPage() {
       title: 'অ্যান্ড্রয়েড (Android)',
       icon: Smartphone,
       steps: [
-        'Google Chrome ব্রাউজার থেকে সাইটটি ওপেন করুন।',
-        'নিচে আসা "Install App" বাটনে ক্লিক করুন।',
-        'অথবা ব্রাউজার মেনু (৩টি ডট) থেকে "Install App" সিলেক্ট করুন।'
+        'Google Chrome বা Edge ব্রাউজার থেকে এই সাইটটি ওপেন করুন।',
+        'ব্রাউজারের ডানদিকের ৩টি ডট (Menu) আইকনে ক্লিক করুন।',
+        'নিচে থাকা "Install App" বা "Add to Home Screen" অপশনে ক্লিক করুন।',
+        'কিছুক্ষণ অপেক্ষা করুন, অ্যাপটি আপনার ফোনের হোম স্ক্রিনে চলে আসবে।'
       ],
       badge: 'মোবাইল'
     },
@@ -62,22 +62,23 @@ export default function InstallPage() {
       title: 'আইফোন (iOS)',
       icon: Apple,
       steps: [
-        'Safari ব্রাউজার ব্যবহার করে সাইটটি ওপেন করুন।',
-        'নিচের "Share" (তীর চিহ্ন) আইকনে ক্লিক করুন।',
-        'মেনু থেকে "Add to Home Screen" অপশনটি সিলেক্ট করুন।'
+        'Safari ব্রাউজার ব্যবহার করে ওঙ্গন বাংলাদেশ সাইটটি ওপেন করুন।',
+        'নিচের দিকে মাঝখানে থাকা "Share" (তীর চিহ্ন সহ বক্স) আইকনে ক্লিক করুন।',
+        'মেনু থেকে নিচে স্ক্রল করে "Add to Home Screen" অপশনটি সিলেক্ট করুন।',
+        'এরপর "Add" বাটনে ক্লিক করলে এটি আপনার ডিভাইসে অ্যাপ হিসেবে সেভ হবে।'
       ],
-      badge: 'সহজ'
+      badge: 'আইফোন'
     },
     {
       id: 'desktop',
       title: 'ডেস্কটপ (Windows/Mac)',
       icon: Monitor,
       steps: [
-        'Chrome বা Edge ব্রাউজারের অ্যাড্রেস বারের ডান পাশে ইনস্টল আইকনটি খুঁজুন।',
-        'সরাসরি ইনস্টল করতে "Install ONGON BD" বাটনে ক্লিক করুন।',
-        'এখন থেকে আপনি আপনার টাস্কবার থেকে সরাসরি অ্যাপটি ওপেন করতে পারবেন।'
+        'Chrome বা Edge ব্রাউজারের অ্যাড্রেস বারের (URL Bar) ডান পাশে একটি ➕ বা কম্পিউটার আইকন দেখা যাবে।',
+        'সেখানে ক্লিক করুন এবং "Install ONGON BD" কনফার্ম করুন।',
+        'অ্যাপটি সাথে সাথে আপনার ডেস্কটপে এবং টাস্কবারে যুক্ত হয়ে যাবে।'
       ],
-      badge: 'অফিসিয়াল'
+      badge: 'কম্পিউটার'
     }
   ];
 
@@ -99,24 +100,31 @@ export default function InstallPage() {
 
           <div className="space-y-4">
             <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter uppercase leading-none">
-              Direct Download <br /><span className="text-white/40">ONGON BD APP</span>
+              সরাসরি অ্যাপ <br /><span className="text-white/40">ডাউনলোড করুন</span>
             </h1>
             <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto font-medium">
-              ওঙ্গন বাংলাদেশ এখন আপনার হাতের মুঠোয়। দ্রুত এবং নিরাপদ অভিজ্ঞতার জন্য সরাসরি আপনার ডিভাইসে ইনস্টল করুন।
+              ওঙ্গন বাংলাদেশ এখন আপনার হাতের মুঠোয়। দ্রুত এবং নিরাপদ অভিজ্ঞতার জন্য সরাসরি আপনার মোবাইল বা পিসিতে ইনস্টল করুন।
             </p>
           </div>
 
           {isInstalled ? (
             <div className="inline-flex items-center gap-3 bg-green-500/20 text-green-400 px-8 py-4 rounded-2xl border border-green-500/30 font-bold">
-              <CheckCircle2 className="h-6 w-6" /> অ্যাপটি ইতিমধ্যে ইনস্টল করা আছে
+              <CheckCircle2 className="h-6 w-6" /> অ্যাপটি আপনার ডিভাইসে ইতিমধ্যে ইনস্টল করা আছে
             </div>
           ) : (
-            <Button 
-              onClick={handleInstall}
-              className="bg-white text-[#7a1013] font-black h-20 px-16 rounded-[2rem] text-2xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] hover:scale-105 transition-all active:scale-95 uppercase tracking-widest group"
-            >
-              <ArrowDownToLine className="mr-4 h-8 w-8 group-hover:animate-bounce" /> সরাসরি ডাউনলোড করুন
-            </Button>
+            <div className="flex flex-col items-center gap-4">
+              <Button 
+                onClick={handleInstall}
+                className="bg-white text-[#7a1013] font-black h-20 px-16 rounded-[2rem] text-2xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] hover:scale-105 transition-all active:scale-95 uppercase tracking-widest group"
+              >
+                <ArrowDownToLine className="mr-4 h-8 w-8 group-hover:animate-bounce" /> ইনস্টল বাটন চাপুন
+              </Button>
+              {!installPrompt && (
+                <div className="flex items-center gap-2 text-white/40 text-xs font-bold bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                  <Info className="h-3 w-3" /> ব্রাউজারে ইনস্টল অপশন না দেখলে নিচের গাইড ফলো করুন
+                </div>
+              )}
+            </div>
           )}
         </div>
 
@@ -147,7 +155,7 @@ export default function InstallPage() {
               <div className="p-8 pt-0 mt-auto">
                 <div className="h-px w-full bg-white/5 mb-6" />
                 <div className="flex items-center gap-2 text-[10px] text-white/30 uppercase font-black tracking-[0.2em]">
-                  <ShieldCheck className="h-3 w-3 text-green-500" /> SECURE INSTALLATION
+                  <ShieldCheck className="h-3 w-3 text-green-500" /> ১-ক্লিক নিরাপদ ইনস্টলেশন
                 </div>
               </div>
             </Card>
@@ -161,9 +169,9 @@ export default function InstallPage() {
               <div className="h-12 w-12 rounded-2xl bg-blue-500/20 text-blue-400 flex items-center justify-center">
                 <Globe className="h-6 w-6" />
               </div>
-              <h2 className="text-2xl font-bold text-white">মাল্টি-ডিভাইস সিঙ্ক</h2>
+              <h2 className="text-2xl font-bold text-white">মাল্টি-ডিভাইস সাপোর্ট</h2>
               <p className="text-white/50 text-sm leading-relaxed">
-                আপনার অ্যাকাউন্ট এবং সকল তথ্য সব ডিভাইসে একসাথে সিংক্রোনাইজ হবে। মোবাইল দিয়ে করা আবেদন আপনি ডেস্কটপ থেকেও ট্র্যাক করতে পারবেন।
+                আপনার স্মার্টফোন, ট্যাবলেট এবং ল্যাপটপ থেকে সরাসরি অ্যাপটি ব্যবহার করুন। সব তথ্য ক্লাউডে সিঙ্ক হবে।
               </p>
             </div>
           </div>
@@ -172,9 +180,9 @@ export default function InstallPage() {
               <div className="h-12 w-12 rounded-2xl bg-green-500/20 text-green-400 flex items-center justify-center">
                 <CheckCircle2 className="h-6 w-6" />
               </div>
-              <h2 className="text-2xl font-bold text-white">১-ক্লিক আপডেট</h2>
+              <h2 className="text-2xl font-bold text-white">সর্বদা আপডেট থাকে</h2>
               <p className="text-white/50 text-sm leading-relaxed">
-                অ্যাপটি রি-ইনস্টল করার ঝামেলা নেই। আমাদের নতুন ফিচারগুলো স্বয়ংক্রিয়ভাবে আপনার ডিভাইসে আপডেট হয়ে যাবে।
+                অ্যাপটি রি-ইনস্টল করার ঝামেলা নেই। আমাদের নতুন আপডেটগুলো অটোমেটিক অ্যাপে যুক্ত হয়ে যাবে।
               </p>
             </div>
           </div>
@@ -183,7 +191,7 @@ export default function InstallPage() {
 
       <footer className="py-12 text-center border-t border-white/5 bg-black/10">
         <p className="text-[10px] text-white/20 uppercase tracking-[0.3em] font-black">
-          ONGON BANGLADESH • SECURE APPLICATION INFRASTRUCTURE • v3.5
+          ONGON BANGLADESH • SECURE INFRASTRUCTURE • {new Date().getFullYear()}
         </p>
       </footer>
     </div>
