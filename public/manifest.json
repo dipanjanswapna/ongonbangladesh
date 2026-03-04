@@ -1,14 +1,15 @@
 {
-  "name": "ONGON BANGLADESH",
+  "name": "ONGON BANGLADESH - মানবিক সহায়তায় সংযোগ",
   "short_name": "ONGON BD",
-  "description": "মানবিক সহায়তায় আমরা আপনার পাশে। এটি একটি AI-চালিত কমিউনিটি প্ল্যাটফর্ম।",
+  "description": "বাংলাদেশের একটি AI-চালিত কমিউনিটি প্ল্যাটফর্ম, যা মানবিক সহায়তার প্রয়োজনে দ্রুত সংযোগ তৈরি করে।",
   "id": "/",
-  "start_url": "/",
+  "start_url": "/?source=pwa",
   "display": "standalone",
-  "display_override": ["window-controls-overlay"],
+  "display_override": ["window-controls-overlay", "minimal-ui"],
+  "scope": "/",
   "background_color": "#7a1013",
   "theme_color": "#7a1013",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "https://picsum.photos/seed/icon192/192/192",
@@ -23,7 +24,7 @@
       "purpose": "any"
     },
     {
-      "src": "https://picsum.photos/seed/maskable512/512/512",
+      "src": "https://picsum.photos/seed/iconmask/512/512",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -31,30 +32,34 @@
   ],
   "screenshots": [
     {
-      "src": "https://picsum.photos/seed/desktop/1280/720",
+      "src": "https://picsum.photos/seed/pwa-desktop/1280/720",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "ONGON BD Desktop View"
+      "label": "Desktop View"
     },
     {
-      "src": "https://picsum.photos/seed/mobile/720/1280",
+      "src": "https://picsum.photos/seed/pwa-mobile/720/1280",
       "sizes": "720x1280",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "ONGON BD Mobile View"
+      "label": "Mobile View"
     }
   ],
   "shortcuts": [
     {
-      "name": "Donate Now",
-      "url": "/donate",
-      "icons": [{ "src": "https://picsum.photos/seed/donate96/96/96", "sizes": "96x96" }]
+      "name": "এখনই দান করুন",
+      "short_name": "দান",
+      "description": "সরাসরি অনুদান দিন",
+      "url": "/donate?source=pwa_shortcut",
+      "icons": [{ "src": "https://picsum.photos/seed/donate/192/192", "sizes": "192x192" }]
     },
     {
-      "name": "Find Blood Donor",
-      "url": "/blood/donors",
-      "icons": [{ "src": "https://picsum.photos/seed/blood96/96/96", "sizes": "96x96" }]
+      "name": "রক্তদাতা খুঁজুন",
+      "short_name": "রক্ত",
+      "description": "নিকটস্থ রক্তদাতা খুঁজুন",
+      "url": "/blood/donors?source=pwa_shortcut",
+      "icons": [{ "src": "https://picsum.photos/seed/blood/192/192", "sizes": "192x192" }]
     }
   ],
   "protocol_handlers": [
