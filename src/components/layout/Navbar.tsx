@@ -29,7 +29,8 @@ import {
   Download, 
   ShieldAlert,
   HandCoins,
-  Bot
+  Bot,
+  CloudLightning
 } from 'lucide-react';
 
 export function Navbar() {
@@ -46,6 +47,7 @@ export function Navbar() {
 
   const navLinks = [
     { label: 'হোম', href: '/', icon: Home },
+    { label: 'দুর্যোগ ব্যবস্থাপনা', href: '/disaster', icon: CloudLightning, color: 'text-orange-400 font-bold' },
     { label: 'নিরাপত্তা ও SOS', href: '/safety', icon: ShieldAlert, color: 'text-red-500 font-black' },
     { label: 'এআই অ্যাসিস্ট্যান্ট', href: '/assistant', icon: Bot, color: 'text-blue-400' },
     { label: 'আমাদের সম্পর্কে', href: '/about', icon: Info },
@@ -78,7 +80,7 @@ export function Navbar() {
           </Link>
 
           <div className="hidden xl:flex items-center gap-6">
-            {navLinks.slice(0, 8).map((link) => (
+            {navLinks.slice(0, 9).map((link) => (
               <Link 
                 key={link.href} 
                 href={link.href} 
@@ -155,13 +157,13 @@ export function Navbar() {
                     </SheetHeader>
                     
                     <div className="flex-grow p-6 space-y-1 overflow-y-auto custom-scrollbar relative z-10">
-                      <p className="text-[10px] font-black text-white/20 uppercase tracking-[0.3em] mb-4 ml-2">Main Menu</p>
+                      <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] mb-4 ml-2">Main Menu</p>
                       {navLinks.map((link) => (
                         <SheetClose asChild key={link.href}>
                           <Link 
                             href={link.href} 
                             className={cn(
-                              "flex items-center gap-4 p-3.5 rounded-2xl hover:bg-white/5 text-white/70 font-bold transition-all group border border-transparent",
+                              "flex items-center gap-4 p-3.5 rounded-xl hover:bg-white/5 text-white/70 font-bold transition-all group border border-transparent",
                               link.color?.includes('text-red-500') && "text-red-500 hover:text-red-400"
                             )}
                           >
@@ -181,12 +183,12 @@ export function Navbar() {
                       <div className="grid grid-cols-2 gap-3">
                         <SheetClose asChild>
                           <Link href="/login" className="w-full">
-                            <Button variant="outline" className="w-full border-white/10 text-white font-bold h-12 rounded-2xl hover:bg-white/5">লগইন</Button>
+                            <Button variant="outline" className="w-full border-white/10 text-white font-bold h-12 rounded-xl hover:bg-white/5">লগইন</Button>
                           </Link>
                         </SheetClose>
                         <SheetClose asChild>
                           <Link href="/register" className="w-full">
-                            <Button className="w-full bg-white text-[#781013] font-bold h-12 rounded-2xl shadow-xl">রেজিস্ট্রেশন</Button>
+                            <Button className="w-full bg-white text-[#781013] font-bold h-12 rounded-xl shadow-xl">রেজিস্ট্রেশন</Button>
                           </Link>
                         </SheetClose>
                       </div>
