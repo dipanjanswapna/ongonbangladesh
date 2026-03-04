@@ -119,7 +119,7 @@ export function Navbar() {
               </Button>
             </Link>
 
-            <Link href="/donate">
+            <Link href="/donate" className="relative group">
               <Button className="bg-white text-[#781013] hover:bg-white/90 font-black px-4 md:px-6 h-10 md:h-11 rounded-xl shadow-2xl transition-all active:scale-95 text-[10px] md:text-xs uppercase tracking-widest flex items-center gap-2">
                 <HandCoins className="h-4 w-4" /> দান করুন
               </Button>

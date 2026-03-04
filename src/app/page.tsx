@@ -146,12 +146,12 @@ export default function Home() {
               
               <div className="flex flex-wrap justify-center gap-4">
                 <Link href="/safety">
-                  <Button size="lg" className="bg-red-600 text-white hover:bg-red-700 h-20 px-12 rounded-[2rem] font-black text-2xl shadow-[0_20px_50px_rgba(220,38,38,0.3)] uppercase tracking-widest transition-all hover:scale-105 active:scale-95 group">
-                    SOS সেন্টার <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-2 transition-transform" />
+                  <Button className="bg-red-600 text-white hover:bg-red-700 h-14 px-8 rounded-2xl font-bold text-sm shadow-[0_10px_30px_rgba(220,38,38,0.2)] uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-95 group">
+                    SOS সেন্টার <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
                 <Link href="/safety/helplines">
-                  <Button size="lg" variant="outline" className="h-20 px-10 border-white/10 text-white hover:bg-white/5 rounded-[2rem] font-bold uppercase tracking-widest text-sm backdrop-blur-md">
+                  <Button variant="outline" className="h-14 px-8 border-white/10 text-white hover:bg-white/5 rounded-2xl font-bold uppercase tracking-widest text-xs backdrop-blur-md">
                     হেল্পলাইনসমূহ
                   </Button>
                 </Link>
