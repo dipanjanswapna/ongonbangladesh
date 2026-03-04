@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -21,7 +20,8 @@ import {
   Navigation,
   CloudSun,
   Wind,
-  Sunrise
+  Sunrise,
+  Bot
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
@@ -81,7 +81,6 @@ export default function SafetyHub() {
     toast({ title: "ট্র্যাকিং বন্ধ করা হয়েছে", description: "নিরাপত্তা নিশ্চিত করতে সর্বদা সজাগ থাকুন।" });
   };
 
-  // Custom Long Press Logic for Discreet Mode Exit
   const handleStartPress = () => {
     longPressTimer.current = setTimeout(() => {
       setIsDiscreetMode(false);
@@ -96,7 +95,6 @@ export default function SafetyHub() {
     }
   };
 
-  // Discreet Mode UI Simulation
   if (isDiscreetMode) {
     return (
       <div 
@@ -107,13 +105,7 @@ export default function SafetyHub() {
           <h1 className="text-xl font-bold text-white flex items-center gap-2">
             <CloudSun className="h-5 w-5 text-white/60" /> আজকের আবহাওয়া
           </h1>
-          <button 
-            onClick={() => setIsDiscreetMode(false)} 
-            className="opacity-0 w-10 h-10 cursor-default"
-            aria-hidden="true"
-          >
-            Exit
-          </button>
+          <button onClick={() => setIsDiscreetMode(false)} className="opacity-0 w-10 h-10 cursor-default" aria-hidden="true">Exit</button>
         </div>
 
         <div className="space-y-6">
@@ -163,14 +155,10 @@ export default function SafetyHub() {
           </div>
         </div>
         
-        {/* Long Press Exit Button - Styled to match theme */}
         <button 
-          onMouseDown={handleStartPress}
-          onMouseUp={handleEndPress}
-          onMouseLeave={handleEndPress}
-          onTouchStart={handleStartPress}
-          onTouchEnd={handleEndPress}
-          className="fixed bottom-10 left-1/2 -translate-x-1/2 px-8 py-4 bg-white/5 backdrop-blur-xl rounded-full text-[10px] font-black text-white/30 border border-white/10 active:scale-95 transition-all select-none uppercase tracking-[0.2em] hover:bg-white/10 hover:text-white/50 shadow-2xl"
+          onMouseDown={handleStartPress} onMouseUp={handleEndPress} onMouseLeave={handleEndPress}
+          onTouchStart={handleStartPress} onTouchEnd={handleEndPress}
+          className="fixed bottom-10 left-1/2 -translate-x-1/2 px-8 py-4 bg-white/5 backdrop-blur-xl rounded-full text-[10px] font-black text-white/30 border border-white/10 active:scale-95 transition-all select-none uppercase tracking-[0.2em] shadow-2xl"
         >
           লং প্রেস করে মূল অ্যাপে ফিরুন
         </button>
@@ -197,16 +185,12 @@ export default function SafetyHub() {
               
               <div className="flex gap-2">
                 <Button 
-                  variant="outline" 
-                  onClick={() => setIsDiscreetMode(true)}
+                  variant="outline" onClick={() => setIsDiscreetMode(true)}
                   className="bg-white/5 border-white/10 text-white hover:bg-white/10 rounded-2xl h-12 px-6 font-bold flex items-center gap-2"
                 >
                   <EyeOff className="h-4 w-4" /> ডিসক্রিট মোড
                 </Button>
-                <Button 
-                  variant="outline" 
-                  className="bg-white/5 border-white/10 text-white hover:bg-white/10 rounded-2xl h-12 w-12 p-0"
-                >
+                <Button variant="outline" className="bg-white/5 border-white/10 text-white hover:bg-white/10 rounded-2xl h-12 w-12 p-0">
                   <Settings className="h-4 w-4" />
                 </Button>
               </div>
@@ -217,9 +201,7 @@ export default function SafetyHub() {
               
               <div className="flex justify-center relative z-10">
                 <div className="relative">
-                  {isSOSActive && (
-                    <div className="absolute inset-0 bg-red-600 rounded-full animate-ping opacity-20 scale-150" />
-                  )}
+                  {isSOSActive && <div className="absolute inset-0 bg-red-600 rounded-full animate-ping opacity-20 scale-150" />}
                   <button 
                     onClick={isSOSActive ? stopTracking : startTracking}
                     className={`relative z-10 h-56 w-56 md:h-72 md:w-72 rounded-full border-8 border-white/5 bg-gradient-to-br from-red-600 to-red-900 shadow-[0_0_60px_rgba(220,38,38,0.4)] flex flex-col items-center justify-center transition-all active:scale-90 group ${isSOSActive ? 'opacity-90' : 'hover:scale-105'}`}
@@ -242,16 +224,16 @@ export default function SafetyHub() {
                         <span className="text-white/40">{log.time}</span>
                         <span className="text-white/80">{log.status}</span>
                       </div>
-                    )) : (
-                      <p className="text-[10px] text-white/20 italic">কোনো সক্রিয় ট্র্যাকিং নেই</p>
-                    )}
+                    )) : <p className="text-[10px] text-white/20 italic">কোনো সক্রিয় ট্র্যাকিং নেই</p>}
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-3">
-                  <Button className="w-full bg-red-600 text-white h-14 rounded-2xl font-black uppercase tracking-widest text-xs shadow-xl flex items-center justify-center gap-2">
-                    <Share2 className="h-4 w-4" /> বিশ্বস্ত কন্টাক্টকে লোকেশন পাঠান
-                  </Button>
+                  <Link href="/safety/chat" className="w-full">
+                    <Button className="w-full bg-white text-[#7a1013] hover:bg-white/90 h-14 rounded-2xl font-black uppercase tracking-widest text-xs shadow-xl flex items-center justify-center gap-2 transition-all active:scale-95">
+                      <Bot className="h-5 w-5" /> এআই সাপোর্ট চ্যাট (বিনা মূল্যে)
+                    </Button>
+                  </Link>
                   <Link href="/safety/helplines" className="w-full">
                     <Button variant="outline" className="w-full border-white/10 text-white hover:bg-white/5 h-14 rounded-2xl font-bold uppercase tracking-widest text-xs">
                       পুলিশ ও জরুরি হেল্পলাইন
@@ -263,18 +245,9 @@ export default function SafetyHub() {
 
             {/* Live Map View */}
             <div className="h-[400px] w-full rounded-[2.5rem] overflow-hidden border border-white/10 bg-white/5 shadow-2xl relative">
-              {isSOSActive ? (
-                <SOSMap 
-                  donors={[]} 
-                  userLocation={userLocation} 
-                  selectedDonor={null} 
-                  onSelectDonor={() => {}} 
-                />
-              ) : (
+              {isSOSActive ? <SOSMap donors={[]} userLocation={userLocation} selectedDonor={null} onSelectDonor={() => {}} /> : (
                 <div className="w-full h-full flex flex-col items-center justify-center text-center p-8">
-                  <div className="p-6 rounded-full bg-white/5 text-white/20 mb-4">
-                    <MapPin className="h-12 w-12" />
-                  </div>
+                  <div className="p-6 rounded-full bg-white/5 text-white/20 mb-4"><MapPin className="h-12 w-12" /></div>
                   <h4 className="text-white font-bold text-lg mb-2">লাইভ ম্যাপ ভিউ</h4>
                   <p className="text-white/40 text-sm max-w-xs">SOS সক্রিয় করলে এখানে আপনার রিয়েল-টাইম অবস্থান দেখা যাবে।</p>
                 </div>
@@ -291,16 +264,14 @@ export default function SafetyHub() {
             <div className="grid grid-cols-1 gap-4">
               {[
                 { icon: PhoneCall, title: "জরুরি হেল্পলাইন", desc: "৯৯৯ ও ১০৯ এর সরাসরি সংযোগ", link: "/safety/helplines", color: "text-blue-400" },
+                { icon: Bot, title: "এআই সাপোর্ট", desc: "মানসিক সহায়তা ও পরামর্শ", link: "/safety/chat", color: "text-pink-400" },
                 { icon: MessageSquare, title: "বেনামী রিপোর্ট", desc: "পরিচয় গোপন রেখে অভিযোগ দিন", link: "/safety/report", color: "text-orange-400" },
                 { icon: ShieldCheck, title: "আইনি অধিকার", desc: "নারী ও শিশু নির্যাতন দমন আইন", link: "/safety/education", color: "text-green-400" },
-                { icon: Navigation, title: "নিরাপদ রুট", desc: "নিরাপদ রাস্তা ও এলাকা খুঁজুন", link: "/safety/routes", color: "text-purple-400" },
               ].map((tool, i) => (
                 <Link key={i} href={tool.link}>
                   <Card className="bg-white/5 border-white/5 hover:bg-white/10 transition-all rounded-[2rem] p-6 group shadow-xl flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className={`p-3 rounded-2xl bg-white/5 ${tool.color} group-hover:scale-110 transition-transform`}>
-                        <tool.icon className="h-6 w-6" />
-                      </div>
+                      <div className={`p-3 rounded-2xl bg-white/5 ${tool.color} group-hover:scale-110 transition-transform`}><tool.icon className="h-6 w-6" /></div>
                       <div>
                         <h4 className="text-white font-bold text-base leading-tight">{tool.title}</h4>
                         <p className="text-white/40 text-[10px] uppercase font-bold tracking-wider mt-1">{tool.desc}</p>
