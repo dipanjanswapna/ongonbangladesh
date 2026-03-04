@@ -38,6 +38,7 @@ export default function SafetyHub() {
   const [userLocation, setUserLocation] = useState<{lat: number, lng: number} | null>(null);
   const [trackingLogs, setTrackingLogs] = useState<{time: string, status: string}[]>([]);
   const watchId = useRef<number | null>(null);
+  const longPressTimer = useRef<NodeJS.Timeout | null>(null);
 
   const startTracking = () => {
     if (typeof window === 'undefined' || !navigator.geolocation) {
@@ -76,7 +77,22 @@ export default function SafetyHub() {
     toast({ title: "ট্র্যাকিং বন্ধ করা হয়েছে", description: "নিরাপত্তা নিশ্চিত করতে সর্বদা সজাগ থাকুন।" });
   };
 
-  // Discreet Mode UI Simulation (Weather App camouflage)
+  // Custom Long Press Logic for Discreet Mode Exit
+  const handleStartPress = () => {
+    longPressTimer.current = setTimeout(() => {
+      setIsDiscreetMode(false);
+      toast({ title: "ডিসক্রিট মোড বন্ধ করা হয়েছে" });
+    }, 1500);
+  };
+
+  const handleEndPress = () => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+  };
+
+  // Discreet Mode UI Simulation
   if (isDiscreetMode) {
     return (
       <div className="min-h-screen bg-[#f8f9fa] text-black p-6 flex flex-col gap-6 font-sans animate-in fade-in duration-500">
@@ -104,10 +120,15 @@ export default function SafetyHub() {
             {isSOSActive ? "ব্যাকগ্রাউন্ডে সিস্টেম সচল আছে..." : "সিস্টেম স্ট্যান্ডবাই"}
           </div>
         </div>
+        
+        {/* Long Press Exit Button */}
         <button 
-          onLongPress={() => setIsDiscreetMode(false)}
-          onClick={() => setIsDiscreetMode(false)}
-          className="fixed bottom-10 left-1/2 -translate-x-1/2 px-8 py-3 bg-gray-100 rounded-full text-[10px] font-bold text-gray-400 border border-gray-200"
+          onMouseDown={handleStartPress}
+          onMouseUp={handleEndPress}
+          onMouseLeave={handleEndPress}
+          onTouchStart={handleStartPress}
+          onTouchEnd={handleEndPress}
+          className="fixed bottom-10 left-1/2 -translate-x-1/2 px-8 py-3 bg-gray-100 rounded-full text-[10px] font-bold text-gray-400 border border-gray-200 active:scale-95 transition-all select-none"
         >
           লং প্রেস করে মূল অ্যাপে ফিরুন
         </button>
