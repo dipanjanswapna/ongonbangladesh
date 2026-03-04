@@ -126,25 +126,32 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SOS Alert Section */}
-        <section className="py-12 border-y border-white/5" style={{ backgroundColor: 'rgb(15, 2, 3)' }}>
-          <div className="container mx-auto px-4">
-            <div className="bg-red-600/10 border border-red-600/20 rounded-[3rem] p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[0_20px_50px_rgba(220,38,38,0.1)]">
-              <div className="space-y-4 text-center lg:text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 text-red-500 text-[10px] font-black uppercase tracking-widest rounded-full mb-2">
+        {/* SOS Integrated Section System */}
+        <section className="py-24 border-y border-white/5 bg-[#0f0203] relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-600/5 rounded-full blur-[120px] pointer-events-none" />
+          
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-12 max-w-6xl mx-auto">
+              <div className="space-y-6 text-center lg:text-left flex-1">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-red-600/20 text-red-500 text-[10px] font-black uppercase tracking-[0.2em] rounded-full border border-red-600/30">
                   <ShieldAlert className="h-3 w-3 animate-pulse" /> Emergency Assistance
                 </div>
-                <h2 className="text-3xl md:text-5xl font-black text-white leading-none uppercase tracking-tighter">তাৎক্ষণিক <span className="text-red-600">নিরাপত্তা ও SOS</span></h2>
-                <p className="text-white/60 text-sm md:text-lg max-w-xl font-medium">হয়রানি বা যেকোনো বিপদে ভয় পাবেন না। আমাদের SOS কমান্ড সেন্টার আপনার পাশে আছে।</p>
+                <h2 className="text-4xl md:text-6xl font-black text-white leading-[0.9] uppercase tracking-tighter">
+                  তাৎক্ষণিক <br /><span className="text-red-600 italic">নিরাপত্তা ও SOS</span>
+                </h2>
+                <p className="text-white/60 text-base md:text-xl max-w-xl font-medium leading-relaxed">
+                  হয়রানি বা যেকোনো বিপদে ভয় পাবেন না। ওঙ্গন নিরাপত্তা কমান্ড সেন্টার আপনার সুরক্ষায় সর্বদা সজাগ।
+                </p>
               </div>
+              
               <div className="flex flex-wrap justify-center gap-4">
                 <Link href="/safety">
-                  <Button size="lg" className="bg-red-600 text-white hover:bg-red-700 h-16 px-10 rounded-2xl font-black text-xl shadow-2xl uppercase tracking-widest animate-bounce">
-                    SOS সেন্টার
+                  <Button size="lg" className="bg-red-600 text-white hover:bg-red-700 h-20 px-12 rounded-[2rem] font-black text-2xl shadow-[0_20px_50px_rgba(220,38,38,0.3)] uppercase tracking-widest transition-all hover:scale-105 active:scale-95 group">
+                    SOS সেন্টার <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-2 transition-transform" />
                   </Button>
                 </Link>
                 <Link href="/safety/helplines">
-                  <Button size="lg" variant="outline" className="h-16 px-8 border-white/10 text-white hover:bg-white/5 rounded-2xl font-bold uppercase tracking-widest">
+                  <Button size="lg" variant="outline" className="h-20 px-10 border-white/10 text-white hover:bg-white/5 rounded-[2rem] font-bold uppercase tracking-widest text-sm backdrop-blur-md">
                     হেল্পলাইনসমূহ
                   </Button>
                 </Link>
@@ -360,7 +367,7 @@ export default function Home() {
                   {[
                     { id: '1', title: 'Daily Ittefaq', date: '10 Aug', imageId: 'news-ittefaq' },
                     { id: '2', title: 'Prothom Alo', date: '17 Aug', imageId: 'news-prothom-alo' },
-                    { id: '3', title: 'Kaler Kontho', date: '16 Aug', imageId: 'news-kaler-kontho' },
+                    { id: '3', title: 'Kaler Kontho', date: '16 Aug', imageId: 'news-kalbela' },
                     { id: '4', title: 'Kal Bela', date: '10 Aug', imageId: 'news-kalbela' },
                   ].map((item) => {
                     const img = PlaceHolderImages.find(p => p.id === item.imageId);
