@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -29,7 +28,8 @@ import {
   ShieldCheck, 
   Download, 
   ShieldAlert,
-  HandCoins
+  HandCoins,
+  Bot
 } from 'lucide-react';
 
 export function Navbar() {
@@ -47,6 +47,7 @@ export function Navbar() {
   const navLinks = [
     { label: 'হোম', href: '/', icon: Home },
     { label: 'নিরাপত্তা ও SOS', href: '/safety', icon: ShieldAlert, color: 'text-red-500 font-black' },
+    { label: 'এআই অ্যাসিস্ট্যান্ট', href: '/assistant', icon: Bot, color: 'text-blue-400' },
     { label: 'আমাদের সম্পর্কে', href: '/about', icon: Info },
     { label: 'নেতৃত্ব', href: '/leadership/messages', icon: ShieldCheck },
     { label: 'ক্যাম্পেইনসমূহ', href: '/campaigns', icon: Megaphone },
@@ -77,7 +78,7 @@ export function Navbar() {
           </Link>
 
           <div className="hidden xl:flex items-center gap-6">
-            {navLinks.slice(0, 7).map((link) => (
+            {navLinks.slice(0, 8).map((link) => (
               <Link 
                 key={link.href} 
                 href={link.href} 
