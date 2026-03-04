@@ -1,24 +1,65 @@
 
 {
+  "id": "/",
   "name": "ONGON BANGLADESH",
   "short_name": "ONGON BD",
-  "description": "মানবিক সহায়তায় হৃদয়ের সংযোগ।",
+  "description": "মানবিক সহায়তায় আমরা আপনার পাশে। এটি একটি AI-চালিত কমিউনিটি প্ল্যাটফর্ম।",
   "start_url": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "minimal-ui"],
   "background_color": "#7a1013",
   "theme_color": "#7a1013",
+  "orientation": "portrait",
   "icons": [
     {
-      "src": "https://picsum.photos/seed/icon192/192/192",
+      "src": "https://picsum.photos/seed/ongon-icon-192/192/192",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "https://picsum.photos/seed/icon512/512/512",
+      "src": "https://picsum.photos/seed/ongon-icon-512/512/512",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "https://picsum.photos/seed/ongon-maskable/512/512",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1280&h=720",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "ONGON BD Desktop Dashboard"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=720&h=1280",
+      "sizes": "720x1280",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "ONGON BD Mobile App"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Donate Now",
+      "short_name": "Donate",
+      "description": "Make a contribution to those in need",
+      "url": "/donate",
+      "icons": [{ "src": "https://picsum.photos/seed/donate/192/192", "sizes": "192x192" }]
+    },
+    {
+      "name": "Blood Donors",
+      "short_name": "Blood",
+      "description": "Find blood donors near you",
+      "url": "/blood/donors",
+      "icons": [{ "src": "https://picsum.photos/seed/blood/192/192", "sizes": "192x192" }]
     }
   ]
 }
