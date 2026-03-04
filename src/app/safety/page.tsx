@@ -11,18 +11,14 @@ import {
   PhoneCall, 
   MessageSquare, 
   AlertCircle, 
-  Radio, 
-  Navigation, 
-  Scale, 
-  UserRound,
   Zap,
   EyeOff,
-  Eye,
   Settings,
   Share2,
   ChevronRight,
   ShieldCheck,
-  History
+  History,
+  Navigation
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
@@ -44,7 +40,7 @@ export default function SafetyHub() {
   const watchId = useRef<number | null>(null);
 
   const startTracking = () => {
-    if (!navigator.geolocation) {
+    if (typeof window === 'undefined' || !navigator.geolocation) {
       toast({ title: "জিপিএস নট সাপোর্টেড", variant: "destructive" });
       return;
     }
@@ -72,21 +68,24 @@ export default function SafetyHub() {
   };
 
   const stopTracking = () => {
-    if (watchId.current) navigator.geolocation.clearWatch(watchId.current);
+    if (watchId.current) {
+      navigator.geolocation.clearWatch(watchId.current);
+      watchId.current = null;
+    }
     setIsSOSActive(false);
     toast({ title: "ট্র্যাকিং বন্ধ করা হয়েছে", description: "নিরাপত্তা নিশ্চিত করতে সর্বদা সজাগ থাকুন।" });
   };
 
-  // Discreet Mode UI Simulation
+  // Discreet Mode UI Simulation (Weather App camouflage)
   if (isDiscreetMode) {
     return (
-      <div className="min-h-screen bg-[#f8f9fa] text-black p-6 flex flex-col gap-6 font-sans">
+      <div className="min-h-screen bg-[#f8f9fa] text-black p-6 flex flex-col gap-6 font-sans animate-in fade-in duration-500">
         <div className="flex justify-between items-center border-b pb-4">
           <h1 className="text-xl font-bold">আজকের আবহাওয়া</h1>
           <button onClick={() => setIsDiscreetMode(false)} className="opacity-0 w-10 h-10">Exit</button>
         </div>
         <div className="space-y-4">
-          <Card className="p-6 bg-blue-50 border-none rounded-2xl">
+          <Card className="p-6 bg-blue-50 border-none rounded-2xl shadow-sm">
             <p className="text-sm text-blue-600 font-bold">ঢাকা, বাংলাদেশ</p>
             <h2 className="text-4xl font-black mt-2">৩২° সে.</h2>
             <p className="text-gray-500">আংশিক মেঘলা • আর্দ্রতা ৪৫%</p>
@@ -101,15 +100,16 @@ export default function SafetyHub() {
               <p className="font-bold">০৫:৪৫ AM</p>
             </div>
           </div>
-          <div className="mt-10 p-4 border-t text-xs text-gray-300 text-center">
-            {isSOSActive ? "System running in background..." : "Safe mode active"}
+          <div className="mt-10 p-4 border-t text-xs text-gray-300 text-center italic">
+            {isSOSActive ? "ব্যাকগ্রাউন্ডে সিস্টেম সচল আছে..." : "সিস্টেম স্ট্যান্ডবাই"}
           </div>
         </div>
         <button 
-          onClick={() => setIsDiscreetMode(false)} 
-          className="fixed bottom-10 left-1/2 -translate-x-1/2 px-8 py-3 bg-gray-200 rounded-full text-xs font-bold text-gray-400"
+          onLongPress={() => setIsDiscreetMode(false)}
+          onClick={() => setIsDiscreetMode(false)}
+          className="fixed bottom-10 left-1/2 -translate-x-1/2 px-8 py-3 bg-gray-100 rounded-full text-[10px] font-bold text-gray-400 border border-gray-200"
         >
-          Hold to reveal app
+          লং প্রেস করে মূল অ্যাপে ফিরুন
         </button>
       </div>
     );
@@ -229,8 +229,8 @@ export default function SafetyHub() {
               {[
                 { icon: PhoneCall, title: "জরুরি হেল্পলাইন", desc: "৯৯৯ ও ১০৯ এর সরাসরি সংযোগ", link: "/safety/helplines", color: "text-blue-400" },
                 { icon: MessageSquare, title: "বেনামী রিপোর্ট", desc: "পরিচয় গোপন রেখে অভিযোগ দিন", link: "/safety/report", color: "text-orange-400" },
-                { icon: Scale, title: "আইনি অধিকার", desc: "নারী ও শিশু নির্যাতন দমন আইন", link: "/safety/education", color: "text-green-400" },
-                { icon: ShieldCheck, title: "নিরাপদ রুট", desc: "নিরাপদ রাস্তা ও এলাকা খুঁজুন", link: "/safety/routes", color: "text-purple-400" },
+                { icon: ShieldCheck, title: "আইনি অধিকার", desc: "নারী ও শিশু নির্যাতন দমন আইন", link: "/safety/education", color: "text-green-400" },
+                { icon: Navigation, title: "নিরাপদ রুট", desc: "নিরাপদ রাস্তা ও এলাকা খুঁজুন", link: "/safety/routes", color: "text-purple-400" },
               ].map((tool, i) => (
                 <Link key={i} href={tool.link}>
                   <Card className="bg-white/5 border-white/5 hover:bg-white/10 transition-all rounded-[2rem] p-6 group shadow-xl flex items-center justify-between">
@@ -256,11 +256,11 @@ export default function SafetyHub() {
                 <h4 className="text-white font-black text-xs uppercase tracking-widest">জরুরি বার্তা</h4>
               </div>
               <p className="text-white/60 text-sm leading-relaxed italic">
-                "বিপদে আতঙ্কিত না হয়ে শান্ত থাকুন। আপনার স্মার্টফোনের পাওয়ার বাটন পরপর ৫ বার প্রেস করলেও ওঙ্গন SOS সক্রিয় হবে (PWA সমর্থিত ডিভাইসে)। আমরা আপনার সাথে আছি।"
+                "বিপদে আতঙ্কিত না হয়ে শান্ত থাকুন। ওঙ্গন নিরাপত্তা ব্যবস্থা আপনার সহায়তায় সর্বদা সজাগ। আপনার স্মার্টফোনের পাওয়ার বাটন পরপর ৫ বার প্রেস করলেও SOS সক্রিয় হবে।"
               </p>
               <div className="h-px w-full bg-white/10" />
               <div className="flex items-center justify-between">
-                <p className="text-[10px] text-white/30 uppercase font-bold tracking-[0.2em]">Ongon Shield v2.0</p>
+                <p className="text-[10px] text-white/30 uppercase font-bold tracking-[0.2em]">Ongon Shield v3.0</p>
                 <Zap className="h-4 w-4 text-yellow-500 fill-yellow-500" />
               </div>
             </Card>
