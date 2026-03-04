@@ -52,7 +52,7 @@ export default function BlogPage() {
           
           {/* Header Section */}
           <div className="text-center space-y-4">
-            <div className="inline-flex p-4 rounded-3xl bg-white/5 border border-white/10 text-white mb-4 shadow-2xl">
+            <div className="inline-flex p-4 rounded-xl bg-white/5 border border-white/10 text-white mb-4 shadow-2xl">
               <BookOpen className="h-8 w-8" />
             </div>
             <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase leading-none">ওঙ্গন <span className="text-white/40">কমিউনিটি ব্লগ</span></h1>
@@ -61,21 +61,21 @@ export default function BlogPage() {
 
           {/* Action Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card className="bg-white/5 border-white/10 p-8 rounded-[2.5rem] flex items-center justify-between group cursor-pointer hover:bg-white/10 transition-all shadow-2xl">
+            <Card className="bg-white/5 border-white/10 p-8 rounded-xl flex items-center justify-between group cursor-pointer hover:bg-white/10 transition-all shadow-2xl">
               <div className="space-y-2">
                 <h3 className="text-2xl font-black text-white uppercase tracking-tighter">অভিজ্ঞতা শেয়ার করুন</h3>
                 <p className="text-white/40 text-sm font-medium">আপনার জীবনের কোনো শিক্ষা বা টিপস অন্যদের জানান।</p>
               </div>
-              <div className="p-4 rounded-2xl bg-white text-[#7a1013] group-hover:scale-110 transition-transform">
+              <div className="p-4 rounded-xl bg-white text-[#7a1013] group-hover:scale-110 transition-transform">
                 <PlusCircle className="h-8 w-8" />
               </div>
             </Card>
-            <Card className="bg-white/5 border-white/10 p-8 rounded-[2.5rem] flex items-center justify-between group cursor-pointer hover:bg-white/10 transition-all shadow-2xl">
+            <Card className="bg-white/5 border-white/10 p-8 rounded-xl flex items-center justify-between group cursor-pointer hover:bg-white/10 transition-all shadow-2xl">
               <div className="space-y-2">
                 <h3 className="text-2xl font-black text-white uppercase tracking-tighter">আলোচনা ফোরাম</h3>
                 <h2 className="text-white/40 text-sm font-medium">নিরাপত্তা ও সহায়তা নিয়ে সরাসরি কথা বলুন।</h2>
               </div>
-              <div className="p-4 rounded-2xl bg-white/10 text-white group-hover:scale-110 transition-transform">
+              <div className="p-4 rounded-xl bg-white/10 text-white group-hover:scale-110 transition-transform">
                 <MessageSquare className="h-8 w-8" />
               </div>
             </Card>
@@ -89,7 +89,7 @@ export default function BlogPage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {posts.map((post, i) => (
-                <Card key={i} className="bg-white/5 border-white/5 overflow-hidden flex flex-col group hover:translate-y-[-8px] transition-all duration-500 shadow-2xl rounded-[2.5rem]">
+                <Card key={i} className="bg-white/5 border-white/5 overflow-hidden flex flex-col group hover:translate-y-[-8px] transition-all duration-500 shadow-2xl rounded-xl">
                   <div className="relative h-56 w-full overflow-hidden">
                     <Image 
                       src={post.image} 
@@ -140,9 +140,9 @@ export default function BlogPage() {
               <h2 className="text-2xl font-black text-white uppercase tracking-widest border-l-4 border-white pl-4">জনপ্রিয় আলোচনা</h2>
               <div className="space-y-4">
                 {forumDiscussions.map((forum, i) => (
-                  <div key={i} className="p-6 bg-white/5 border border-white/5 rounded-3xl hover:bg-white/10 transition-all flex items-center justify-between group shadow-xl">
+                  <div key={i} className="p-6 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 transition-all flex items-center justify-between group shadow-xl">
                     <div className="flex items-center gap-4">
-                      <div className="p-3 rounded-2xl bg-white/5 text-white">
+                      <div className="p-3 rounded-xl bg-white/5 text-white">
                         <MessageSquare className="h-5 w-5" />
                       </div>
                       <div>
@@ -165,7 +165,7 @@ export default function BlogPage() {
             {/* Newsletter */}
             <div className="space-y-6">
               <h2 className="text-2xl font-black text-white uppercase tracking-widest border-l-4 border-white pl-4">সাবস্ক্রাইব</h2>
-              <Card className="bg-white text-[#7a1013] p-8 rounded-[3rem] shadow-2xl relative overflow-hidden">
+              <Card className="bg-white text-[#7a1013] p-8 rounded-xl shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-black/5 rounded-full -mr-8 -mt-8" />
                 <div className="relative z-10 space-y-4">
                   <h3 className="text-2xl font-black uppercase tracking-tighter leading-none">নতুন পোস্টের <br />আপডেট পান</h3>

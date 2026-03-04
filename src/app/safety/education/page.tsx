@@ -56,7 +56,7 @@ export default function SafetyEducation() {
         
         {/* Header Section */}
         <div className="text-center space-y-4 mb-16">
-          <div className="inline-flex p-4 rounded-3xl bg-white/5 border border-white/10 text-white mb-4 shadow-2xl">
+          <div className="inline-flex p-4 rounded-xl bg-white/5 border border-white/10 text-white mb-4 shadow-2xl">
             <BookOpen className="h-8 w-8" />
           </div>
           <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase leading-tight">
@@ -73,7 +73,7 @@ export default function SafetyEducation() {
           <div className="lg:col-span-7 space-y-12">
             <section className="space-y-6">
               <div className="flex items-center gap-4">
-                <div className="p-3 rounded-2xl bg-white/10 text-white border border-white/10">
+                <div className="p-3 rounded-xl bg-white/10 text-white border border-white/10">
                   <Gavel className="h-8 w-8" />
                 </div>
                 <h2 className="text-2xl font-black text-white uppercase tracking-widest">আইনি অধিকার ও সুরক্ষা</h2>
@@ -81,32 +81,32 @@ export default function SafetyEducation() {
               
               <div className="grid gap-4">
                 {laws.map((law, i) => (
-                  <Card key={i} className="bg-white/5 border-white/5 rounded-[2rem] p-6 hover:bg-white/10 transition-all group overflow-hidden relative">
+                  <Card key={i} className="bg-white/5 border-white/5 rounded-xl p-6 hover:bg-white/10 transition-all group overflow-hidden relative">
                     <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full blur-2xl -mr-12 -mt-12" />
                     <div className="relative z-10">
                       <Badge variant="outline" className="mb-2 border-white/20 text-white/40 text-[8px] font-black uppercase tracking-widest">{law.category}</Badge>
                       <h4 className="text-white font-bold text-lg mb-2 group-hover:text-primary transition-colors">{law.title}</h4>
-                      <p className="text-white/50 text-sm leading-relaxed leading-relaxed font-medium italic">"{law.desc}"</p>
+                      <p className="text-white/50 text-sm leading-relaxed font-medium italic">"{law.desc}"</p>
                     </div>
                   </Card>
                 ))}
               </div>
               
-              <Button className="w-full h-16 bg-white text-[#7a1013] hover:bg-white/90 rounded-2xl font-black shadow-xl flex items-center justify-center gap-3 uppercase tracking-widest text-xs transition-all active:scale-95">
+              <Button className="w-full h-16 bg-white text-[#7a1013] hover:bg-white/90 rounded-xl font-black shadow-xl flex items-center justify-center gap-3 uppercase tracking-widest text-xs transition-all active:scale-95">
                 <FileText className="h-5 w-5" /> আইনি সহায়িকা (PDF) ডাউনলোড করুন
               </Button>
             </section>
 
             <section className="space-y-6">
               <div className="flex items-center gap-4">
-                <div className="p-3 rounded-2xl bg-white/10 text-white border border-white/10">
+                <div className="p-3 rounded-xl bg-white/10 text-white border border-white/10">
                   <ShieldCheck className="h-8 w-8" />
                 </div>
                 <h2 className="text-2xl font-black text-white uppercase tracking-widest">আত্মরক্ষা (Self-Defense) টিপস</h2>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {selfDefenseTips.map((tip, i) => (
-                  <div key={i} className="p-6 rounded-[2rem] bg-white/5 border border-white/5 flex gap-4 text-white/70 text-sm leading-relaxed group hover:bg-white/10 transition-all">
+                  <div key={i} className="p-6 rounded-xl bg-white/5 border border-white/5 flex gap-4 text-white/70 text-sm leading-relaxed group hover:bg-white/10 transition-all">
                     <div className="h-2 w-2 rounded-full bg-green-500 mt-2 shrink-0 shadow-[0_0_10px_rgba(34,197,94,0.6)] group-hover:scale-125 transition-transform" />
                     <div>
                       <h5 className="font-bold text-white mb-1">{tip.title}</h5>
@@ -130,7 +130,7 @@ export default function SafetyEducation() {
                   { title: "বিপদে শান্ত থাকার ৩টি উপায়", time: "০৮:১৫", views: "৩কে+", image: "https://picsum.photos/seed/safe2/400/250" },
                   { title: "আইনি লড়াইয়ের প্রাথমিক ধাপসমূহ", time: "১৫:২০", views: "২কে+", image: "https://picsum.photos/seed/safe3/400/250" },
                 ].map((video, i) => (
-                  <Card key={i} className="bg-white/5 border-white/5 rounded-3xl overflow-hidden group shadow-2xl transition-all hover:translate-y-[-4px]">
+                  <Card key={i} className="bg-white/5 border-white/5 rounded-xl overflow-hidden group shadow-2xl transition-all hover:translate-y-[-4px]">
                     <div className="relative aspect-video">
                       <img src={video.image} alt={video.title} className="object-cover w-full h-full opacity-60 group-hover:scale-110 transition-transform duration-700" />
                       <div className="absolute inset-0 flex items-center justify-center">
@@ -149,7 +149,7 @@ export default function SafetyEducation() {
               </div>
             </div>
 
-            <Card className="bg-white/5 border border-white/10 rounded-[3rem] p-8 space-y-6 shadow-2xl relative overflow-hidden backdrop-blur-md">
+            <Card className="bg-white/5 border border-white/10 rounded-xl p-8 space-y-6 shadow-2xl relative overflow-hidden backdrop-blur-md">
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl" />
               <div className="flex items-center gap-3 text-orange-400">
                 <AlertCircle className="h-6 w-6" />

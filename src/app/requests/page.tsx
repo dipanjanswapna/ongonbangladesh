@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -90,7 +91,7 @@ export default function RequestsPage() {
       <main className="container mx-auto px-4 py-32 flex-grow">
         <div className="max-w-7xl mx-auto space-y-12">
           {/* Header & CTA Section */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8 bg-white/5 border border-white/10 p-8 rounded-[2.5rem] backdrop-blur-md">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8 bg-white/5 border border-white/10 p-8 rounded-xl backdrop-blur-md">
             <div className="space-y-4 text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-white text-[10px] font-bold uppercase tracking-widest border border-white/10">
                 <HeartHandshake className="h-3 w-3" /> Community Support
@@ -101,7 +102,7 @@ export default function RequestsPage() {
               </p>
             </div>
             <Link href="/requests/new">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-bold h-16 px-10 rounded-2xl shadow-2xl flex items-center gap-3 text-lg transition-transform active:scale-95">
+              <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-bold h-16 px-10 rounded-xl shadow-2xl flex items-center gap-3 text-lg transition-transform active:scale-95">
                 <Plus className="h-6 w-6" /> আবেদন করুন
               </Button>
             </Link>
@@ -113,7 +114,7 @@ export default function RequestsPage() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 h-5 w-5" />
               <Input 
                 placeholder="টাইটেল, অবস্থান বা কী-ওয়ার্ড দিয়ে খুঁজুন..." 
-                className="pl-12 h-14 bg-white/5 border-white/10 text-white placeholder:text-white/30 w-full rounded-2xl focus:ring-primary/40"
+                className="pl-12 h-14 bg-white/5 border-white/10 text-white placeholder:text-white/30 w-full rounded-xl focus:ring-primary/40"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -121,7 +122,7 @@ export default function RequestsPage() {
             
             <div className="w-full md:w-64">
               <Select value={category} onValueChange={setCategory}>
-                <SelectTrigger className="bg-white/5 border-white/10 text-white h-14 rounded-2xl">
+                <SelectTrigger className="bg-white/5 border-white/10 text-white h-14 rounded-xl">
                   <div className="flex items-center gap-2">
                     <Filter className="h-4 w-4 text-white/40" />
                     <SelectValue placeholder="বিভাগ নির্বাচন করুন" />
@@ -147,7 +148,7 @@ export default function RequestsPage() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-32 bg-white/5 rounded-[2.5rem] border border-dashed border-white/10 flex flex-col items-center gap-4">
+            <div className="text-center py-32 bg-white/5 rounded-xl border border-dashed border-white/10 flex flex-col items-center gap-4">
               <AlertCircle className="h-12 w-12 text-white/20" />
               <p className="text-white/40 font-bold text-lg">দুঃখিত, আপনার খোঁজা অনুযায়ী কোনো অনুরোধ পাওয়া যায়নি।</p>
               <Button variant="outline" onClick={() => {setSearchTerm(''); setCategory('all')}} className="border-white/20 text-white hover:bg-white/10 rounded-xl">সবগুলো দেখুন</Button>
@@ -157,7 +158,7 @@ export default function RequestsPage() {
       </main>
 
       <footer className="py-12 text-center border-t border-white/5 bg-black/10">
-        <p className="text-[10px] text-white/20 uppercase tracking-[0.3em] font-bold">
+        <p className="text-[10px] text-white/20 uppercase tracking-[0.3em] font-black">
           ONGON BANGLADESH • CONNECTING THOSE IN NEED
         </p>
       </footer>

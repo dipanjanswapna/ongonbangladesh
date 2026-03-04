@@ -1,3 +1,4 @@
+
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
@@ -108,12 +109,12 @@ export default function Home() {
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4">
                 <Link href="/requests/new" className="w-full sm:w-auto">
-                  <Button size="lg" className="bg-white text-[#781013] hover:bg-white/90 h-14 px-10 text-base font-bold w-full shadow-2xl rounded-2xl transition-all active:scale-95">
+                  <Button size="lg" className="bg-white text-[#781013] hover:bg-white/90 h-14 px-10 text-base font-bold w-full shadow-2xl rounded-xl transition-all active:scale-95">
                     আমার সাহায্য চাই
                   </Button>
                 </Link>
                 <Link href="/volunteer" className="w-full sm:w-auto">
-                  <Button size="lg" variant="outline" className="h-14 px-10 text-base font-bold border-white/40 text-white hover:bg-white/10 w-full backdrop-blur-md rounded-2xl transition-all active:scale-95">
+                  <Button size="lg" variant="outline" className="h-14 px-10 text-base font-bold border-white/40 text-white hover:bg-white/10 w-full backdrop-blur-md rounded-xl transition-all active:scale-95">
                     স্বেচ্ছাসেবক হতে চাই
                   </Button>
                 </Link>
@@ -142,12 +143,12 @@ export default function Home() {
               
               <div className="flex flex-wrap justify-center gap-4">
                 <Link href="/safety">
-                  <Button className="bg-red-600 text-white hover:bg-red-700 h-14 px-8 rounded-2xl font-bold text-xs shadow-[0_10px_30px_rgba(220,38,38,0.2)] uppercase tracking-widest transition-all hover:scale-105 active:scale-95 group">
+                  <Button className="bg-red-600 text-white hover:bg-red-700 h-14 px-8 rounded-xl font-bold text-xs shadow-[0_10px_30px_rgba(220,38,38,0.2)] uppercase tracking-widest transition-all hover:scale-105 active:scale-95 group">
                     SOS সেন্টার <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
                 <Link href="/safety/helplines">
-                  <Button variant="outline" className="h-14 px-8 border-white/10 text-white hover:bg-white/5 rounded-2xl font-bold uppercase tracking-widest text-[10px] backdrop-blur-md transition-all active:scale-95">
+                  <Button variant="outline" className="h-14 px-8 border-white/10 text-white hover:bg-white/5 rounded-xl font-bold uppercase tracking-widest text-[10px] backdrop-blur-md transition-all active:scale-95">
                     হেল্পলাইনসমূহ
                   </Button>
                 </Link>
@@ -158,7 +159,7 @@ export default function Home() {
 
         {/* Search Bar Section */}
         <section className="container mx-auto px-4 -mt-10 relative z-20">
-          <div className="glass-card p-2 md:p-3 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-2 items-center max-w-3xl mx-auto border-white/10 backdrop-blur-2xl">
+          <div className="glass-card p-2 md:p-3 rounded-xl shadow-2xl flex flex-col md:flex-row gap-2 items-center max-w-3xl mx-auto border-white/10 backdrop-blur-2xl">
             <div className="relative flex-grow w-full">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 h-5 w-5" />
               <Input 
@@ -191,7 +192,7 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {campaigns.map((camp) => (
-                <Card key={camp.id} className="glass-card border-white/10 overflow-hidden flex flex-col group rounded-3xl transition-transform hover:scale-[1.02] duration-300">
+                <Card key={camp.id} className="glass-card border-white/10 overflow-hidden flex flex-col group rounded-xl transition-transform hover:scale-[1.02] duration-300">
                   <div className="relative h-48 w-full">
                     <Image src={camp.image} alt={camp.title} fill className="object-cover transition-transform group-hover:scale-110 duration-500" unoptimized />
                   </div>
@@ -260,12 +261,12 @@ export default function Home() {
               </div>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link href="/blood/donors">
-                  <Button size="lg" className="bg-white text-red-600 hover:bg-white/90 h-14 px-8 rounded-2xl font-black uppercase tracking-widest text-xs transition-all active:scale-95">
+                  <Button size="lg" className="bg-white text-red-600 hover:bg-white/90 h-14 px-8 rounded-xl font-black uppercase tracking-widest text-xs transition-all active:scale-95">
                     রক্তদাতা খুঁজুন
                   </Button>
                 </Link>
                 <Link href="/blood/register">
-                  <Button size="lg" variant="outline" className="h-14 px-8 border-white/20 text-white hover:bg-white/5 rounded-2xl font-bold uppercase tracking-widest text-xs transition-all active:scale-95">
+                  <Button size="lg" variant="outline" className="h-14 px-8 border-white/20 text-white hover:bg-white/5 rounded-xl font-bold uppercase tracking-widest text-xs transition-all active:scale-95">
                     রেজিস্ট্রেশন করুন
                   </Button>
                 </Link>
@@ -291,8 +292,8 @@ export default function Home() {
                 { icon: HeartHandshake, title: "স্বেচ্ছাসেবক", description: "আপনার দক্ষতা ও সময় দিয়ে সরাসরি মাঠ পর্যায়ে সাহায্য পৌঁছে দিন।", link: "/volunteer" },
                 { icon: Briefcase, title: "ক্যারিয়ার", description: "মানবিক কাজের মাধ্যমে আপনার পেশাদার জীবন গড়ে তুলুন।", link: "/careers" }
               ].map((option, i) => (
-                <div key={i} className="group p-8 bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-500 flex flex-col items-center text-center shadow-2xl backdrop-blur-sm rounded-3xl border-b-4 border-b-primary/20 hover:border-b-primary">
-                  <div className="mb-6 p-4 bg-white/10 text-white group-hover:bg-white group-hover:text-[#7a1013] transition-all shadow-xl rounded-2xl">
+                <div key={i} className="group p-8 bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-500 flex flex-col items-center text-center shadow-2xl backdrop-blur-sm rounded-xl border-b-4 border-b-primary/20 hover:border-b-primary">
+                  <div className="mb-6 p-4 bg-white/10 text-white group-hover:bg-white group-hover:text-[#7a1013] transition-all shadow-xl rounded-xl">
                     <option.icon className="h-8 w-8" />
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-white uppercase tracking-tight font-headline">{option.title}</h3>
@@ -322,7 +323,7 @@ export default function Home() {
           <div className="relative flex overflow-hidden">
             <div className="flex animate-infinite-scroll py-4 gap-8">
               {[...partners, ...partners, ...partners].map((i, idx) => (
-                <div key={idx} className="flex-shrink-0 w-40 md:w-56 h-20 bg-white/5 border border-white/5 rounded-2xl flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer p-6">
+                <div key={idx} className="flex-shrink-0 w-40 md:w-56 h-20 bg-white/5 border border-white/5 rounded-xl flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer p-6">
                   <div className="relative w-full h-full">
                     <Image 
                       src={`https://placehold.co/200x100/1a0405/ffffff?text=PARTNER+${i}`} 
@@ -368,7 +369,7 @@ export default function Home() {
                   ].map((item) => {
                     const img = PlaceHolderImages.find(p => p.id === item.imageId);
                     return (
-                      <Card key={item.id} className="glass-card border-white/10 overflow-hidden hover:scale-[1.05] transition-transform duration-300 rounded-2xl">
+                      <Card key={item.id} className="glass-card border-white/10 overflow-hidden hover:scale-[1.05] transition-transform duration-300 rounded-xl">
                         <CardContent className="p-0">
                           <div className="relative aspect-[3/4] w-full bg-white/5">
                             {img?.imageUrl ? (
@@ -430,7 +431,7 @@ export default function Home() {
                 { name: "সাদিয়া ইসলাম", role: "সেক্রেটারি জেনারেল", image: "https://picsum.photos/seed/leader3/400/400", slug: "secretary-general" }
               ].map((leader, i) => (
                 <Link key={i} href={`/leadership/messages/${leader.slug}`} className="group relative text-center">
-                  <div className="relative h-64 w-64 mx-auto rounded-3xl overflow-hidden border-4 border-white/5 shadow-2xl mb-6 transition-all group-hover:border-primary/20">
+                  <div className="relative h-64 w-64 mx-auto rounded-xl overflow-hidden border-4 border-white/5 shadow-2xl mb-6 transition-all group-hover:border-primary/20">
                     <Image src={leader.image} alt={leader.name} fill className="object-cover transition-transform duration-500 group-hover:scale-110" unoptimized />
                     <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <Quote className="text-white h-10 w-10 opacity-50" />
@@ -456,7 +457,7 @@ export default function Home() {
       <footer className="px-4 pb-8 bg-transparent">
         <div className="container mx-auto max-w-7xl">
           <div 
-            className="rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden border border-white/10"
+            className="rounded-xl p-8 md:p-12 shadow-2xl relative overflow-hidden border border-white/10"
             style={{ backgroundColor: 'rgb(122, 16, 19)' }}
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-10">

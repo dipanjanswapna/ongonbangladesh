@@ -34,7 +34,7 @@ import { cn } from '@/lib/utils';
 // Dynamic import for Map to prevent SSR issues
 const SOSMap = dynamic(() => import('@/components/blood/BloodMap'), { 
   ssr: false,
-  loading: () => <div className="w-full h-full bg-white/5 animate-pulse rounded-3xl" />
+  loading: () => <div className="w-full h-full bg-white/5 animate-pulse rounded-xl" />
 });
 
 export default function SafetyHub() {
@@ -111,7 +111,7 @@ export default function SafetyHub() {
         </div>
 
         <div className="space-y-6">
-          <Card className="p-8 glass-card border-white/10 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
+          <Card className="p-8 glass-card border-white/10 rounded-xl shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -mr-16 -mt-16" />
             <div className="relative z-10 space-y-4">
               <div className="flex items-center gap-2 text-white/60">
@@ -129,14 +129,14 @@ export default function SafetyHub() {
           </Card>
 
           <div className="grid grid-cols-2 gap-4">
-            <div className="p-6 glass-card rounded-3xl border-white/5 space-y-3">
+            <div className="p-6 glass-card rounded-xl border-white/5 space-y-3">
               <div className="flex items-center gap-2 text-white/40">
                 <Wind className="h-4 w-4" />
                 <p className="text-[10px] uppercase font-black tracking-widest">বাতাস</p>
               </div>
               <p className="text-lg font-bold text-white">১২ কিমি/ঘণ্টা</p>
             </div>
-            <div className="p-6 glass-card rounded-3xl border-white/5 space-y-3">
+            <div className="p-6 glass-card rounded-xl border-white/5 space-y-3">
               <div className="flex items-center gap-2 text-white/40">
                 <Sunrise className="h-4 w-4" />
                 <p className="text-[10px] uppercase font-black tracking-widest">সূর্যোদয়</p>
@@ -188,17 +188,17 @@ export default function SafetyHub() {
               <div className="flex gap-2">
                 <Button 
                   variant="outline" onClick={() => setIsDiscreetMode(true)}
-                  className="bg-white/5 border-white/10 text-white hover:bg-white/10 rounded-2xl h-12 px-6 font-bold flex items-center gap-2"
+                  className="bg-white/5 border-white/10 text-white hover:bg-white/10 rounded-xl h-12 px-6 font-bold flex items-center gap-2"
                 >
                   <EyeOff className="h-4 w-4" /> ডিসক্রিট মোড
                 </Button>
-                <Button variant="outline" className="bg-white/5 border-white/10 text-white hover:bg-white/10 rounded-2xl h-12 w-12 p-0">
+                <Button variant="outline" className="bg-white/5 border-white/10 text-white hover:bg-white/10 rounded-xl h-12 w-12 p-0">
                   <Settings className="h-4 w-4" />
                 </Button>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white/5 border border-white/10 rounded-[3rem] p-8 md:p-12 overflow-hidden relative shadow-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white/5 border border-white/10 rounded-xl p-8 md:p-12 overflow-hidden relative shadow-2xl">
               <div className="absolute top-0 right-0 w-64 h-64 bg-red-600/5 rounded-full blur-[100px] pointer-events-none" />
               
               <div className="flex justify-center relative z-10">
@@ -216,7 +216,7 @@ export default function SafetyHub() {
               </div>
 
               <div className="space-y-6 relative z-10">
-                <div className="p-6 rounded-[2rem] bg-black/40 border border-white/5 backdrop-blur-md">
+                <div className="p-6 rounded-xl bg-black/40 border border-white/5 backdrop-blur-md">
                   <h3 className="text-white font-bold mb-4 flex items-center gap-2">
                     <History className="h-4 w-4 text-red-500" /> সাম্প্রতিক কার্যক্রম
                   </h3>
@@ -232,12 +232,12 @@ export default function SafetyHub() {
 
                 <div className="flex flex-col gap-3">
                   <Link href="/safety/chat" className="w-full">
-                    <Button className="w-full bg-white text-[#7a1013] hover:bg-white/90 h-14 rounded-2xl font-black uppercase tracking-widest text-xs shadow-xl flex items-center justify-center gap-2 transition-all active:scale-95">
+                    <Button className="w-full bg-white text-[#7a1013] hover:bg-white/90 h-14 rounded-xl font-black uppercase tracking-widest text-xs shadow-xl flex items-center justify-center gap-2 transition-all active:scale-95">
                       <Bot className="h-5 w-5" /> এআই সাপোর্ট চ্যাট (বিনা মূল্যে)
                     </Button>
                   </Link>
                   <Link href="/safety/helplines" className="w-full">
-                    <Button variant="outline" className="w-full border-white/10 text-white hover:bg-white/5 h-14 rounded-2xl font-bold uppercase tracking-widest text-xs">
+                    <Button variant="outline" className="w-full border-white/10 text-white hover:bg-white/5 h-14 rounded-xl font-bold uppercase tracking-widest text-xs">
                       পুলিশ ও জরুরি হেল্পলাইন
                     </Button>
                   </Link>
@@ -246,7 +246,7 @@ export default function SafetyHub() {
             </div>
 
             {/* Live Map View */}
-            <div className="h-[400px] w-full rounded-[2.5rem] overflow-hidden border border-white/10 bg-white/5 shadow-2xl relative">
+            <div className="h-[400px] w-full rounded-xl overflow-hidden border border-white/10 bg-white/5 shadow-2xl relative">
               {isSOSActive ? <SOSMap donors={[]} userLocation={userLocation} selectedDonor={null} onSelectDonor={() => {}} /> : (
                 <div className="w-full h-full flex flex-col items-center justify-center text-center p-8">
                   <div className="p-6 rounded-full bg-white/5 text-white/20 mb-4"><MapPin className="h-12 w-12" /></div>
@@ -271,9 +271,9 @@ export default function SafetyHub() {
                 { icon: MessageSquare, title: "বেনামী রিপোর্ট", desc: "পরিচয় গোপন রেখে অভিযোগ দিন", link: "/safety/report", color: "text-orange-400" },
               ].map((tool, i) => (
                 <Link key={i} href={tool.link}>
-                  <Card className="bg-white/5 border-white/5 hover:bg-white/10 transition-all rounded-[2rem] p-6 group shadow-xl flex items-center justify-between">
+                  <Card className="bg-white/5 border-white/5 hover:bg-white/10 transition-all rounded-xl p-6 group shadow-xl flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className={`p-3 rounded-2xl bg-white/5 ${tool.color} group-hover:scale-110 transition-transform`}><tool.icon className="h-6 w-6" /></div>
+                      <div className={`p-3 rounded-xl bg-white/5 ${tool.color} group-hover:scale-110 transition-transform`}><tool.icon className="h-6 w-6" /></div>
                       <div>
                         <h4 className="text-white font-bold text-base leading-tight">{tool.title}</h4>
                         <p className="text-white/40 text-[10px] uppercase font-bold tracking-wider mt-1">{tool.desc}</p>
@@ -285,7 +285,7 @@ export default function SafetyHub() {
               ))}
             </div>
 
-            <Card className="bg-gradient-to-br from-red-600/10 to-transparent border-white/10 rounded-[2.5rem] p-8 space-y-6 shadow-2xl relative overflow-hidden">
+            <Card className="bg-gradient-to-br from-red-600/10 to-transparent border-white/10 rounded-xl p-8 space-y-6 shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -mr-16 -mt-16" />
               <div className="flex items-center gap-3">
                 <AlertCircle className="h-6 w-6 text-orange-400" />

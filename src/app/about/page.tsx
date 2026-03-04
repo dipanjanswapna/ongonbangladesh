@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Navbar } from '@/components/layout/Navbar';
@@ -21,10 +22,10 @@ export default function AboutPage() {
 
           {/* Mission & Vision */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card className="glass-card border-white/10 rounded-[2.5rem] p-4">
+            <Card className="glass-card border-white/10 rounded-xl p-4">
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-white">
-                  <div className="p-3 rounded-2xl bg-primary/20">
+                  <div className="p-3 rounded-xl bg-primary/20">
                     <Target className="h-6 w-6 text-primary" />
                   </div> 
                   আমাদের লক্ষ্য
@@ -35,10 +36,10 @@ export default function AboutPage() {
               </CardContent>
             </Card>
 
-            <Card className="glass-card border-white/10 rounded-[2.5rem] p-4">
+            <Card className="glass-card border-white/10 rounded-xl p-4">
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-white">
-                  <div className="p-3 rounded-2xl bg-primary/20">
+                  <div className="p-3 rounded-xl bg-primary/20">
                     <Heart className="h-6 w-6 text-primary" />
                   </div>
                   আমাদের ভিশন
@@ -59,8 +60,8 @@ export default function AboutPage() {
                 { icon: Users, title: "কমিউনিটি শক্তি", desc: "হাজারো স্বেচ্ছাসেবকের এক বিশাল নেটওয়ার্ক আমাদের মূল চালিকাশক্তি।" },
                 { icon: Heart, title: "সরাসরি প্রভাব", desc: "মাঝারি কোনো খরচ ছাড়াই সাহায্য সরাসরি প্রাপকের কাছে পৌঁছায়।" }
               ].map((item, i) => (
-                <div key={i} className="p-8 glass-card rounded-[2rem] text-center space-y-4 hover:bg-white/10 transition-all border-white/5">
-                  <div className="inline-flex p-4 rounded-2xl bg-white/5 text-white shadow-xl">
+                <div key={i} className="p-8 glass-card rounded-xl text-center space-y-4 hover:bg-white/10 transition-all border-white/5">
+                  <div className="inline-flex p-4 rounded-xl bg-white/5 text-white shadow-xl">
                     <item.icon className="h-6 w-6 text-primary" />
                   </div>
                   <h3 className="text-xl font-bold text-white">{item.title}</h3>
@@ -71,11 +72,11 @@ export default function AboutPage() {
           </div>
 
           {/* Founder Section (Founder Message) - Moved to bottom */}
-          <div className="relative p-8 md:p-12 rounded-[3rem] bg-white/5 border border-white/10 backdrop-blur-xl overflow-hidden group shadow-2xl">
+          <div className="relative p-8 md:p-12 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xl overflow-hidden group shadow-2xl">
             <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative z-10">
               <div className="md:col-span-4 flex flex-col items-center text-center space-y-4">
-                <div className="relative h-48 w-48 rounded-[2.5rem] overflow-hidden border-4 border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-105">
+                <div className="relative h-48 w-48 rounded-xl overflow-hidden border-4 border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-105">
                   <Image 
                     src="https://picsum.photos/seed/founder/400/400" 
                     alt="DIPANJAN SWAPNA PRANGON" 
@@ -90,7 +91,7 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="md:col-span-8 space-y-6">
-                <div className="inline-flex p-3 rounded-2xl bg-primary/20 text-white mb-2">
+                <div className="inline-flex p-3 rounded-xl bg-primary/20 text-white mb-2">
                   <Quote className="h-6 w-6 text-primary fill-primary" />
                 </div>
                 <p className="text-xl md:text-2xl font-medium text-white italic leading-relaxed">
