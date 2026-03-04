@@ -1,29 +1,29 @@
 {
-  "id": "/",
-  "name": "ONGON BANGLADESH",
+  "name": "ONGON BANGLADESH - সাহায্যের মাধ্যমে হৃদয় সংযোগ",
   "short_name": "ONGON BD",
-  "description": "মানবিক সহায়তায় আমরা আপনার পাশে। এটি একটি AI-চালিত কমিউনিটি প্ল্যাটফর্ম।",
-  "start_url": "/",
+  "description": "মানবিক সহায়তায় আমরা আপনার পাশে। এটি একটি AI-চালিত কমিউনিটি প্ল্যাটফর্ম যেখানে মানবিকতা প্রয়োজনে সাড়া দেয়।",
+  "id": "/",
+  "start_url": "/?source=pwa",
   "display": "standalone",
-  "display_override": ["window-controls-overlay"],
+  "display_override": ["window-controls-overlay", "minimal-ui"],
   "background_color": "#7a1013",
   "theme_color": "#7a1013",
-  "orientation": "portrait",
+  "scope": "/",
   "icons": [
     {
-      "src": "https://picsum.photos/seed/icon192/192/192",
+      "src": "https://picsum.photos/seed/pwa-icon-192/192/192",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://picsum.photos/seed/icon512/512/512",
+      "src": "https://picsum.photos/seed/pwa-icon-512/512/512",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://picsum.photos/seed/maskable/512/512",
+      "src": "https://picsum.photos/seed/pwa-mask-512/512/512",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -31,23 +31,41 @@
   ],
   "screenshots": [
     {
-      "src": "https://picsum.photos/seed/desktop/1280/720",
+      "src": "https://picsum.photos/seed/ong-mob/720/1280",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "ONGON Mobile View"
+    },
+    {
+      "src": "https://picsum.photos/seed/ong-desk/1280/720",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "ONGON BD Desktop Application"
-    },
-    {
-      "src": "https://picsum.photos/seed/mobile/720/1280",
-      "sizes": "720x1280",
-      "type": "image/png",
-      "label": "ONGON BD Mobile Application"
+      "label": "ONGON Desktop View"
     }
   ],
-  "protocol_handlers": [
+  "shortcuts": [
     {
-      "protocol": "web+donate",
-      "url": "/donate?id=%s"
+      "name": "অনুদান দিন",
+      "short_name": "Donate",
+      "description": "সরাসরি আর্তমানবতার সেবায় অনুদান প্রদান করুন",
+      "url": "/donate?source=pwa_shortcut",
+      "icons": [{ "src": "https://picsum.photos/seed/shortcut-donate/192/192", "sizes": "192x192" }]
+    },
+    {
+      "name": "রক্তদাতা খুঁজুন",
+      "short_name": "Blood",
+      "description": "আপনার নিকটস্থ রক্তদাতা খুঁজুন",
+      "url": "/blood/donors?source=pwa_shortcut",
+      "icons": [{ "src": "https://picsum.photos/seed/shortcut-blood/192/192", "sizes": "192x192" }]
+    },
+    {
+      "name": "স্বেচ্ছাসেবক হন",
+      "short_name": "Volunteer",
+      "description": "আমাদের স্বেচ্ছাসেবক বাহিনীতে যোগ দিন",
+      "url": "/volunteer?source=pwa_shortcut",
+      "icons": [{ "src": "https://picsum.photos/seed/shortcut-vol/192/192", "sizes": "192x192" }]
     }
   ]
 }
