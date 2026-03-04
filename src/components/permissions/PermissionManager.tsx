@@ -4,14 +4,15 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { MapPin, Camera, Bell, ShieldCheck, X } from 'lucide-react';
-import { toast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/use-toast';
 
 export function PermissionManager() {
   const [showBanner, setShowBanner] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
-    // Check if permissions are already granted or if we should show the reminder
-    const hasPrompted = localStorage.getItem('permissions_prompted');
+    // Check if permissions were already prompted in this session
+    const hasPrompted = sessionStorage.getItem('permissions_prompted');
     if (!hasPrompted) {
       const timer = setTimeout(() => setShowBanner(true), 3000);
       return () => clearTimeout(timer);
@@ -19,17 +20,23 @@ export function PermissionManager() {
   }, []);
 
   const requestLocation = async () => {
-    try {
-      await navigator.geolocation.getCurrentPosition(() => {
-        toast({ title: "লোকেশন পারমিশন গ্রান্টেড", description: "এখন থেকে আপনি নিকটস্থ সেবা সহজে পাবেন।" });
-      });
-    } catch (err) {
-      toast({ title: "পারমিশন এরর", variant: "destructive" });
+    if (!navigator.geolocation) {
+      toast({ title: "জিপিএস নট সাপোর্টেড", variant: "destructive" });
+      return;
     }
+    navigator.geolocation.getCurrentPosition(
+      () => {
+        toast({ title: "লোকেশন পারমিশন গ্রান্টেড", description: "এখন থেকে আপনি নিকটস্থ সেবা সহজে পাবেন।" });
+        setShowBanner(false);
+      },
+      () => {
+        toast({ title: "পারমিশন এরর", description: "লোকেশন অ্যাক্সেস ডিনাইড করা হয়েছে।", variant: "destructive" });
+      }
+    );
   };
 
   const closeBanner = () => {
-    localStorage.setItem('permissions_prompted', 'true');
+    sessionStorage.setItem('permissions_prompted', 'true');
     setShowBanner(false);
   };
 
