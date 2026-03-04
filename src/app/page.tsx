@@ -2,7 +2,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
 import { Input } from '@/components/ui/input';
-import { Heart, Zap, Search, ArrowRight, Calendar, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase, Tv, BookOpen, Globe, Lock, Quote } from 'lucide-react';
+import { Heart, Zap, Search, ArrowRight, Calendar, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase, Tv, BookOpen, Globe, Lock, Quote, Droplet, Plus, Megaphone, ShieldCheck } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -191,11 +191,59 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Blood Donation Call-to-Action */}
+        <section className="py-20 relative overflow-hidden" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
+          <div className="absolute top-0 left-0 w-64 h-64 bg-red-600/10 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute bottom-0 right-0 w-64 h-64 bg-black/20 rounded-full blur-[100px] pointer-events-none" />
+          
+          <div className="container mx-auto px-4 relative z-10">
+            <Card className="max-w-5xl mx-auto bg-white/5 border-white/10 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-12 overflow-hidden shadow-2xl">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+                  <div className="inline-flex p-4 rounded-3xl bg-red-600 text-white shadow-[0_0_20px_rgba(220,38,38,0.4)] mb-2">
+                    <Droplet className="h-10 w-10 fill-white" />
+                  </div>
+                  <h2 className="text-3xl md:text-5xl font-black text-white leading-tight uppercase tracking-tight">রক্তদান করুন, <br /><span className="text-red-500 italic">জীবন বাঁচান</span></h2>
+                  <p className="text-lg text-white/70 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                    আপনার এক ব্যাগ রক্ত বাঁচাতে পারে একটি প্রাণ। ওঙ্গন ব্লাড ব্যাংকের মাধ্যমে খুব সহজে আপনার নিকটস্থ দাতা খুঁজে নিন অথবা আজই দাতা হিসেবে রেজিস্ট্রেশন করুন।
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                    <Link href="/blood/donors">
+                      <Button size="lg" className="bg-white text-red-600 hover:bg-white/90 h-14 px-10 rounded-2xl font-black shadow-xl transition-all active:scale-95 uppercase tracking-widest text-xs">
+                        রক্তদাতা খুঁজুন <Search className="ml-2 h-4 w-4" />
+                      </Button>
+                    </Link>
+                    <Link href="/blood/register">
+                      <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 h-14 px-10 rounded-2xl font-bold backdrop-blur-md">
+                        দাতা হিসেবে নিবন্ধিত হন
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+                <div className="lg:col-span-5 relative h-64 md:h-80 w-full lg:w-[120%] lg:-mr-20">
+                  <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-transparent rounded-[3rem] p-1 shadow-2xl">
+                    <div className="relative h-full w-full rounded-[2.8rem] overflow-hidden">
+                      <Image 
+                        src="https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=800" 
+                        alt="Blood Donation" 
+                        fill 
+                        className="object-cover transition-transform duration-1000 hover:scale-110"
+                        unoptimized
+                      />
+                      <div className="absolute inset-0 bg-black/20" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </section>
+
         {/* Join Us Section */}
-        <section className="py-24" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
+        <section className="py-24 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">আমাদের সাথে যুক্ত হোন</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white uppercase tracking-tight">আমাদের সাথে যুক্ত হোন</h2>
               <p className="text-white/70">
                 নিচের যে কোনো পদ্ধতিতে আমাদের সঙ্গে যুক্ত হয়ে আর্তমানবতার সেবায় ভূমিকা রাখতে পারেন।
               </p>
@@ -208,19 +256,52 @@ export default function Home() {
                 { icon: HeartHandshake, title: "স্বেচ্ছাসেবক", description: "আপনার দক্ষতা ও সময় দিয়ে সরাসরি মাঠ পর্যায়ে সাহায্য পৌঁছে দিন।", link: "/volunteer" },
                 { icon: Briefcase, title: "ক্যারিয়ার", description: "মানবিক কাজের মাধ্যমে আপনার পেশাদার জীবন গড়ে তুলুন।", link: "/careers" }
               ].map((option, i) => (
-                <div key={i} className="group p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-500 flex flex-col items-center text-center shadow-2xl backdrop-blur-sm">
-                  <div className="mb-6 p-4 rounded-xl bg-white/10 text-white group-hover:bg-white group-hover:text-[#7a1013] transition-all shadow-xl">
+                <div key={i} className="group p-8 bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-500 flex flex-col items-center text-center shadow-2xl backdrop-blur-sm rounded-none border-b-4 border-b-primary/20 hover:border-b-primary">
+                  <div className="mb-6 p-4 bg-white/10 text-white group-hover:bg-white group-hover:text-[#7a1013] transition-all shadow-xl rounded-none">
                     <option.icon className="h-8 w-8" />
                   </div>
-                  <h3 className="text-xl font-bold mb-3 text-white">{option.title}</h3>
+                  <h3 className="text-xl font-bold mb-3 text-white uppercase tracking-tight">{option.title}</h3>
                   <p className="text-sm text-white/50 mb-8 leading-relaxed">{option.description}</p>
                   <Link href={option.link} className="mt-auto w-full">
-                    <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white hover:text-[#7a1013] font-bold rounded-xl transition-all h-12 shadow-lg">
+                    <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white hover:text-[#7a1013] font-bold rounded-none transition-all h-12 shadow-lg">
                       বিস্তারিত দেখুন
                     </Button>
                   </Link>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Advertisement / Partners Section */}
+        <section className="py-20 border-t border-white/5" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-10">
+              <div className="md:w-1/3 space-y-4 text-center md:text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 text-white text-[10px] font-black uppercase tracking-widest rounded-full border border-white/10">
+                  <Megaphone className="h-3 w-3" /> Collaboration
+                </div>
+                <h2 className="text-3xl font-black text-white uppercase tracking-tighter">আমাদের সহযোগী <br /><span className="text-white/40">ব্র্যান্ড ও স্পন্সর</span></h2>
+                <p className="text-white/50 text-sm leading-relaxed">ওঙ্গন বাংলাদেশের মানবিক মিশনের পথচলায় আমাদের সাথে আছেন দেশের শীর্ষস্থানীয় কর্পোরেট প্রতিষ্ঠানসমূহ।</p>
+                <Link href="/contact" className="inline-block pt-2">
+                  <Button variant="link" className="text-white p-0 font-black uppercase text-xs tracking-widest hover:gap-2 transition-all">বিজ্ঞাপন দিতে যোগাযোগ করুন <ArrowRight className="h-4 w-4 ml-2" /></Button>
+                </Link>
+              </div>
+              <div className="md:w-2/3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                  <div key={i} className="aspect-video bg-white/5 border border-white/5 rounded-2xl flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer group p-6">
+                    <div className="relative w-full h-full">
+                      <Image 
+                        src={`https://placehold.co/200x100/1a0405/ffffff?text=PARTNER+${i}`} 
+                        alt="Partner" 
+                        fill 
+                        className="object-contain filter invert opacity-50 group-hover:opacity-100"
+                        unoptimized
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -312,20 +393,20 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
-                { name: "দীপাঞ্জন স্বপ্ন প্রাঙ্গণ", role: "চেয়ারম্যান", image: "https://picsum.photos/seed/leader1/400/400" },
-                { name: "মোঃ আরিফুর রহমান", role: "ভাইস চেয়ারম্যান", image: "https://picsum.photos/seed/leader2/400/400" },
-                { name: "সাদিয়া ইসলাম", role: "সেক্রেটারি জেনারেল", image: "https://picsum.photos/seed/leader3/400/400" }
+                { name: "দীপাঞ্জন স্বপ্ন প্রাঙ্গণ", role: "চেয়ারম্যান", image: "https://picsum.photos/seed/leader1/400/400", slug: "chairman" },
+                { name: "মোঃ আরিফুর রহমান", role: "ভাইস চেয়ারম্যান", image: "https://picsum.photos/seed/leader2/400/400", slug: "vice-chairman" },
+                { name: "সাদিয়া ইসলাম", role: "সেক্রেটারি জেনারেল", image: "https://picsum.photos/seed/leader3/400/400", slug: "secretary-general" }
               ].map((leader, i) => (
-                <div key={i} className="group relative text-center">
-                  <div className="relative h-64 w-64 mx-auto rounded-2xl overflow-hidden border-4 border-white/5 shadow-2xl mb-6">
+                <Link key={i} href={`/leadership/messages/${leader.slug}`} className="group relative text-center">
+                  <div className="relative h-64 w-64 mx-auto rounded-3xl overflow-hidden border-4 border-white/5 shadow-2xl mb-6">
                     <Image src={leader.image} alt={leader.name} fill className="object-cover transition-transform duration-500 group-hover:scale-110" unoptimized />
                     <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <Quote className="text-white h-10 w-10 opacity-50" />
                     </div>
                   </div>
-                  <h3 className="text-xl font-bold text-white">{leader.name}</h3>
+                  <h3 className="text-xl font-bold text-white group-hover:text-primary transition-colors">{leader.name}</h3>
                   <p className="text-xs text-white/40 uppercase tracking-widest font-black mt-1">{leader.role}</p>
-                </div>
+                </Link>
               ))}
             </div>
             
