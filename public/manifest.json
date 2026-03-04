@@ -2,21 +2,20 @@
 {
   "name": "ONGON BANGLADESH",
   "short_name": "ONGON BD",
-  "description": "মানবিক সহায়তায় আমরা আপনার পাশে। এটি একটি AI-চালিত কমিউনিটি প্ল্যাটফর্ম।",
+  "description": "মানবিক সহায়তায় হৃদয়ের সংযোগ।",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#7a1013",
   "theme_color": "#7a1013",
-  "orientation": "portrait",
   "icons": [
     {
-      "src": "https://i.postimg.cc/ZqMsP1F1/1690289479-3647.avif",
+      "src": "https://picsum.photos/seed/icon192/192/192",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://i.postimg.cc/ZqMsP1F1/1690289479-3647.avif",
+      "src": "https://picsum.photos/seed/icon512/512/512",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
