@@ -18,12 +18,16 @@ import {
   ChevronRight,
   ShieldCheck,
   History,
-  Navigation
+  Navigation,
+  CloudSun,
+  Wind,
+  Sunrise
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import dynamic from 'next/dynamic';
+import { cn } from '@/lib/utils';
 
 // Dynamic import for Map to prevent SSR issues
 const SOSMap = dynamic(() => import('@/components/blood/BloodMap'), { 
@@ -95,40 +99,78 @@ export default function SafetyHub() {
   // Discreet Mode UI Simulation
   if (isDiscreetMode) {
     return (
-      <div className="min-h-screen bg-[#f8f9fa] text-black p-6 flex flex-col gap-6 font-sans animate-in fade-in duration-500">
-        <div className="flex justify-between items-center border-b pb-4">
-          <h1 className="text-xl font-bold">আজকের আবহাওয়া</h1>
-          <button onClick={() => setIsDiscreetMode(false)} className="opacity-0 w-10 h-10">Exit</button>
+      <div 
+        className="min-h-screen p-6 flex flex-col gap-6 font-body animate-in fade-in duration-500 selection:bg-white/20" 
+        style={{ backgroundColor: 'rgb(122, 16, 19)' }}
+      >
+        <div className="flex justify-between items-center border-b border-white/10 pb-4">
+          <h1 className="text-xl font-bold text-white flex items-center gap-2">
+            <CloudSun className="h-5 w-5 text-white/60" /> আজকের আবহাওয়া
+          </h1>
+          <button 
+            onClick={() => setIsDiscreetMode(false)} 
+            className="opacity-0 w-10 h-10 cursor-default"
+            aria-hidden="true"
+          >
+            Exit
+          </button>
         </div>
-        <div className="space-y-4">
-          <Card className="p-6 bg-blue-50 border-none rounded-2xl shadow-sm">
-            <p className="text-sm text-blue-600 font-bold">ঢাকা, বাংলাদেশ</p>
-            <h2 className="text-4xl font-black mt-2">৩২° সে.</h2>
-            <p className="text-gray-500">আংশিক মেঘলা • আর্দ্রতা ৪৫%</p>
-          </Card>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 bg-white border rounded-xl shadow-sm">
-              <p className="text-xs text-gray-400 uppercase font-bold">বাতাস</p>
-              <p className="font-bold">১২ কিমি/ঘণ্টা</p>
+
+        <div className="space-y-6">
+          <Card className="p-8 glass-card border-white/10 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -mr-16 -mt-16" />
+            <div className="relative z-10 space-y-4">
+              <div className="flex items-center gap-2 text-white/60">
+                <MapPin className="h-4 w-4" />
+                <p className="text-sm font-bold uppercase tracking-widest">ঢাকা, বাংলাদেশ</p>
+              </div>
+              <div className="flex items-end gap-4">
+                <h2 className="text-6xl font-black text-white leading-none tracking-tighter">৩২° সে.</h2>
+                <div className="pb-1">
+                  <p className="text-white/80 font-bold">আংশিক মেঘলা</p>
+                  <p className="text-white/40 text-xs font-medium">আর্দ্রতা ৪৫%</p>
+                </div>
+              </div>
             </div>
-            <div className="p-4 bg-white border rounded-xl shadow-sm">
-              <p className="text-xs text-gray-400 uppercase font-bold">সূর্যোদয়</p>
-              <p className="font-bold">০৫:৪৫ AM</p>
+          </Card>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="p-6 glass-card rounded-3xl border-white/5 space-y-3">
+              <div className="flex items-center gap-2 text-white/40">
+                <Wind className="h-4 w-4" />
+                <p className="text-[10px] uppercase font-black tracking-widest">বাতাস</p>
+              </div>
+              <p className="text-lg font-bold text-white">১২ কিমি/ঘণ্টা</p>
+            </div>
+            <div className="p-6 glass-card rounded-3xl border-white/5 space-y-3">
+              <div className="flex items-center gap-2 text-white/40">
+                <Sunrise className="h-4 w-4" />
+                <p className="text-[10px] uppercase font-black tracking-widest">সূর্যোদয়</p>
+              </div>
+              <p className="text-lg font-bold text-white">০৫:৪৫ AM</p>
             </div>
           </div>
-          <div className="mt-10 p-4 border-t text-xs text-gray-300 text-center italic">
-            {isSOSActive ? "ব্যাকগ্রাউন্ডে সিস্টেম সচল আছে..." : "সিস্টেম স্ট্যান্ডবাই"}
+
+          <div className="mt-12 p-6 border-t border-white/5 text-center space-y-2">
+            <p className="text-[10px] text-white/20 uppercase font-black tracking-[0.3em]">
+              {isSOSActive ? "ব্যাকগ্রাউন্ডে সিস্টেম সচল আছে..." : "সিস্টেম স্ট্যান্ডবাই"}
+            </p>
+            <div className="flex justify-center gap-1">
+              <div className={cn("h-1 w-1 rounded-full", isSOSActive ? "bg-red-500 animate-pulse" : "bg-white/10")} />
+              <div className={cn("h-1 w-1 rounded-full opacity-50", isSOSActive ? "bg-red-500 animate-pulse delay-75" : "bg-white/10")} />
+              <div className={cn("h-1 w-1 rounded-full opacity-30", isSOSActive ? "bg-red-500 animate-pulse delay-150" : "bg-white/10")} />
+            </div>
           </div>
         </div>
         
-        {/* Long Press Exit Button */}
+        {/* Long Press Exit Button - Styled to match theme */}
         <button 
           onMouseDown={handleStartPress}
           onMouseUp={handleEndPress}
           onMouseLeave={handleEndPress}
           onTouchStart={handleStartPress}
           onTouchEnd={handleEndPress}
-          className="fixed bottom-10 left-1/2 -translate-x-1/2 px-8 py-3 bg-gray-100 rounded-full text-[10px] font-bold text-gray-400 border border-gray-200 active:scale-95 transition-all select-none"
+          className="fixed bottom-10 left-1/2 -translate-x-1/2 px-8 py-4 bg-white/5 backdrop-blur-xl rounded-full text-[10px] font-black text-white/30 border border-white/10 active:scale-95 transition-all select-none uppercase tracking-[0.2em] hover:bg-white/10 hover:text-white/50 shadow-2xl"
         >
           লং প্রেস করে মূল অ্যাপে ফিরুন
         </button>
