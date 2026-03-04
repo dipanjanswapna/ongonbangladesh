@@ -1,4 +1,3 @@
-
 import type {Metadata} from 'next';
 import './globals.css';
 import {Toaster} from '@/components/ui/toaster';
@@ -9,8 +8,6 @@ export const metadata: Metadata = {
   title: 'ONGON BANGLADESH - সাহায্যের মাধ্যমে হৃদয় সংযোগ',
   description: "ONGON BANGLADESH - a sister concern of PRANGON'S ECOSYSTEM. একটি প্ল্যাটফর্ম যেখানে সাহায্যের জন্য আবেদন করা যায় এবং সাহায্য প্রদান করা যায়।",
   manifest: '/manifest.json',
-  themeColor: '#7a1013',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
@@ -30,6 +27,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Alegreya:wght@400;700&display=swap" rel="stylesheet" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#7a1013" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>

@@ -1,31 +1,30 @@
-
 {
   "name": "ONGON BANGLADESH",
   "short_name": "ONGON BD",
-  "description": "মানবিক সহায়তায় আমরা আপনার পাশে। এটি একটি AI-চালিত কমিউনিটি প্ল্যাটফর্ম যা দ্রুত সাহায্যের সংযোগ তৈরি করে।",
+  "description": "মানবিক সহায়তায় আমরা আপনার পাশে। এটি একটি AI-চালিত কমিউনিটি প্ল্যাটফর্ম।",
   "id": "/",
   "start_url": "/",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "minimal-ui"],
-  "scope": "/",
-  "theme_color": "#7a1013",
   "background_color": "#7a1013",
+  "theme_color": "#7a1013",
   "orientation": "portrait",
+  "scope": "/",
   "icons": [
     {
-      "src": "https://picsum.photos/seed/ongon192/192/192",
+      "src": "https://picsum.photos/seed/icon192/192/192",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://picsum.photos/seed/ongon512/512/512",
+      "src": "https://picsum.photos/seed/icon512/512/512",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://picsum.photos/seed/ongonmask/512/512",
+      "src": "https://picsum.photos/seed/maskable/512/512",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -33,32 +32,32 @@
   ],
   "screenshots": [
     {
-      "src": "https://picsum.photos/seed/pwa-mobile/720/1280",
-      "sizes": "720x1280",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "ওঙ্গন বাংলাদেশ মোবাইল অ্যাপ ইন্টারফেস"
-    },
-    {
-      "src": "https://picsum.photos/seed/pwa-desktop/1280/720",
+      "src": "https://picsum.photos/seed/pwa-wide/1280/720",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "ওঙ্গন বাংলাদেশ ডেস্কটপ ড্যাশবোর্ড"
+      "label": "ONGON BD Desktop Interface"
+    },
+    {
+      "src": "https://picsum.photos/seed/pwa-narrow/720/1280",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "ONGON BD Mobile Interface"
     }
   ],
   "shortcuts": [
     {
-      "name": "সাহায্য পাঠান (অনুদান)",
-      "short_name": "Donate",
+      "name": "Donate Now",
       "url": "/donate",
-      "icons": [{ "src": "https://picsum.photos/seed/donate/192/192", "sizes": "192x192" }]
+      "description": "Donate to help those in need",
+      "icons": [{ "src": "https://picsum.photos/seed/shortcut1/192/192", "sizes": "192x192" }]
     },
     {
-      "name": "রক্তদাতা খুঁজুন",
-      "short_name": "Blood",
-      "url": "/blood",
-      "icons": [{ "src": "https://picsum.photos/seed/blood/192/192", "sizes": "192x192" }]
+      "name": "Find Blood Donor",
+      "url": "/blood/donors",
+      "description": "Search for blood donors near you",
+      "icons": [{ "src": "https://picsum.photos/seed/shortcut2/192/192", "sizes": "192x192" }]
     }
   ],
   "protocol_handlers": [

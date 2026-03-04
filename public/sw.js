@@ -1,9 +1,8 @@
-
-const CACHE_NAME = 'ongon-cache-v3';
+const CACHE_NAME = 'ongon-cache-v2';
 const urlsToCache = [
   '/',
   '/manifest.json',
-  '/favicon.ico'
+  '/favicon.ico',
 ];
 
 self.addEventListener('install', event => {
@@ -21,7 +20,8 @@ self.addEventListener('fetch', event => {
           return response;
         }
         return fetch(event.request);
-      })
+      }
+    )
   );
 });
 
