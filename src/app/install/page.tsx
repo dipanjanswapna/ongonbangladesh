@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -115,7 +114,7 @@ export default function InstallPage() {
             ) : (
               <Button 
                 onClick={handleInstall}
-                className="bg-white text-primary font-black h-12 px-8 rounded-xl text-sm shadow-xl hover:scale-105 transition-all active:scale-95 uppercase tracking-widest"
+                className="bg-white text-primary font-black h-10 px-6 rounded-xl text-[10px] shadow-xl hover:scale-105 transition-all active:scale-95 uppercase tracking-widest"
               >
                 <ArrowDownToLine className="mr-2 h-4 w-4" /> ইনস্টল শুরু করুন
               </Button>

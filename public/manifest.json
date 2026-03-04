@@ -1,4 +1,3 @@
-
 {
   "name": "ONGON BANGLADESH",
   "short_name": "ONGON BD",
@@ -6,8 +5,7 @@
   "id": "/",
   "start_url": "/",
   "display": "standalone",
-  "display_override": ["window-controls-overlay", "minimal-ui"],
-  "scope": "/",
+  "display_override": ["window-controls-overlay"],
   "background_color": "#7a1013",
   "theme_color": "#7a1013",
   "orientation": "portrait",
@@ -50,17 +48,13 @@
   "shortcuts": [
     {
       "name": "Donate Now",
-      "short_name": "Donate",
-      "description": "Help someone in need",
       "url": "/donate",
-      "icons": [{ "src": "https://picsum.photos/seed/shortcut1/192/192", "sizes": "192x192" }]
+      "icons": [{ "src": "https://picsum.photos/seed/donate96/96/96", "sizes": "96x96" }]
     },
     {
-      "name": "Blood Donors",
-      "short_name": "Blood",
-      "description": "Search for blood donors",
+      "name": "Find Blood Donor",
       "url": "/blood/donors",
-      "icons": [{ "src": "https://picsum.photos/seed/shortcut2/192/192", "sizes": "192x192" }]
+      "icons": [{ "src": "https://picsum.photos/seed/blood96/96/96", "sizes": "96x96" }]
     }
   ],
   "protocol_handlers": [
