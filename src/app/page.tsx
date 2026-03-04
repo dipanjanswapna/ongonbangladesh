@@ -25,9 +25,7 @@ import {
   Megaphone, 
   ShieldCheck, 
   Download, 
-  ShieldAlert, 
-  PhoneCall, 
-  UserSecret 
+  ShieldAlert
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -249,39 +247,25 @@ export default function Home() {
         {/* Blood Donation Section */}
         <section className="py-12 border-y border-white/5" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
           <div className="container mx-auto px-4">
-            <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-20 max-w-6xl mx-auto">
-              <div className="lg:w-1/2 space-y-6 text-center lg:text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 text-red-500 text-[10px] font-black uppercase tracking-widest rounded-full mb-2 mx-auto lg:mx-0">
-                  <Droplet className="h-3 w-3 fill-red-500" /> Emergency Response
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-10 max-w-6xl mx-auto">
+              <div className="flex-1 space-y-4 text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 text-red-500 text-[10px] font-black uppercase tracking-widest rounded-full mb-2">
+                  <Droplet className="h-3 w-3 fill-red-500" /> Blood Donation
                 </div>
-                <h2 className="text-3xl md:text-5xl font-black text-white leading-tight uppercase tracking-tighter">রক্তদান করুন, <br /><span className="text-red-500 italic">জীবন বাঁচান</span></h2>
-                <p className="text-base text-white/70 leading-relaxed">
-                  আপনার এক ব্যাগ রক্ত বাঁচাতে পারে একটি প্রাণ। ওঙ্গন ব্লাড ব্যাংকের মাধ্যমে খুব সহজে আপনার নিকটস্থ দাতা খুঁজে নিন অথবা আজই দাতা হিসেবে রেজিস্ট্রেশন করুন।
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                  <Link href="/blood/donors" className="flex-1 lg:flex-none">
-                    <Button size="lg" className="w-full lg:w-auto bg-white text-red-600 hover:bg-white/90 h-12 px-8 rounded-xl font-black shadow-xl transition-all uppercase tracking-widest text-[10px]">
-                      রক্তদাতা খুঁজুন <Search className="ml-2 h-3.5 w-3.5" />
-                    </Button>
-                  </Link>
-                  <Link href="/blood/register" className="flex-1 lg:flex-none">
-                    <Button size="lg" variant="outline" className="w-full lg:w-auto border-white/20 text-white hover:bg-white/10 h-12 px-8 rounded-xl font-bold">
-                      দাতা হিসেবে নিবন্ধিত হন
-                    </Button>
-                  </Link>
-                </div>
+                <h2 className="text-3xl md:text-5xl font-black text-white leading-tight uppercase tracking-tighter">রক্তদান করুন, <span className="text-red-500">জীবন বাঁচান</span></h2>
+                <p className="text-white/70 max-w-xl mx-auto lg:mx-0">আপনার এক ব্যাগ রক্ত বাঁচাতে পারে একটি প্রাণ। ওঙ্গন ব্লাড ব্যাংকের মাধ্যমে দ্রুত দাতা খুঁজুন অথবা দাতা হিসেবে রেজিস্ট্রেশন করুন।</p>
               </div>
-              <div className="lg:w-1/2 relative h-48 md:h-64 w-full">
-                <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-transparent rounded-[2rem] p-px overflow-hidden shadow-2xl">
-                  <Image 
-                    src="https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=800" 
-                    alt="Blood Donation" 
-                    fill 
-                    className="object-cover opacity-60 rounded-[2rem]"
-                    unoptimized
-                  />
-                  <div className="absolute inset-0 bg-black/40" />
-                </div>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link href="/blood/donors">
+                  <Button size="lg" className="bg-white text-red-600 hover:bg-white/90 h-14 px-8 rounded-2xl font-black uppercase tracking-widest text-xs">
+                    রক্তদাতা খুঁজুন
+                  </Button>
+                </Link>
+                <Link href="/blood/register">
+                  <Button size="lg" variant="outline" className="h-14 px-8 border-white/20 text-white hover:bg-white/5 rounded-2xl font-bold uppercase tracking-widest text-xs">
+                    রেজিস্ট্রেশন করুন
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -321,7 +305,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Advertisement / Partners Section */}
+        {/* Advertisement / Partners Section - Infinite Scroll */}
         <section className="py-16 border-t border-white/5 overflow-hidden" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
           <div className="container mx-auto px-4 mb-10">
             <div className="text-center md:text-left space-y-2">
@@ -332,9 +316,9 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="relative flex overflow-x-hidden group">
+          <div className="relative flex overflow-hidden">
             <div className="flex animate-infinite-scroll py-4 gap-8">
-              {[...partners, ...partners].map((i, idx) => (
+              {[...partners, ...partners, ...partners].map((i, idx) => (
                 <div key={idx} className="flex-shrink-0 w-40 md:w-56 h-20 bg-white/5 border border-white/5 rounded-2xl flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer p-6">
                   <div className="relative w-full h-full">
                     <Image 

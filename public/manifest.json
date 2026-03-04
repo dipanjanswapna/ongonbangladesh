@@ -1,8 +1,8 @@
 {
+  "id": "/",
   "name": "ONGON BANGLADESH",
   "short_name": "ONGON BD",
   "description": "মানবিক সহায়তায় আমরা আপনার পাশে। এটি একটি AI-চালিত কমিউনিটি প্ল্যাটফর্ম।",
-  "id": "/",
   "start_url": "/",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "minimal-ui"],
@@ -12,19 +12,19 @@
   "scope": "/",
   "icons": [
     {
-      "src": "https://picsum.photos/seed/icon192/192/192",
+      "src": "https://picsum.photos/192/192",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://picsum.photos/seed/icon512/512/512",
+      "src": "https://picsum.photos/512/512",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://picsum.photos/seed/maskable/512/512",
+      "src": "https://picsum.photos/512/512?maskable=1",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -32,32 +32,32 @@
   ],
   "screenshots": [
     {
-      "src": "https://picsum.photos/seed/pwa-wide/1280/720",
+      "src": "https://picsum.photos/seed/pwa1/1280/720",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "ONGON BD Desktop Interface"
+      "label": "ONGON BD Desktop View"
     },
     {
-      "src": "https://picsum.photos/seed/pwa-narrow/720/1280",
+      "src": "https://picsum.photos/seed/pwa2/720/1280",
       "sizes": "720x1280",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "ONGON BD Mobile Interface"
+      "label": "ONGON BD Mobile View"
     }
   ],
   "shortcuts": [
     {
-      "name": "Donate Now",
+      "name": "এখনই দান করুন",
+      "short_name": "দান করুন",
       "url": "/donate",
-      "description": "Donate to help those in need",
-      "icons": [{ "src": "https://picsum.photos/seed/shortcut1/192/192", "sizes": "192x192" }]
+      "icons": [{ "src": "https://picsum.photos/192/192", "sizes": "192x192" }]
     },
     {
-      "name": "Find Blood Donor",
+      "name": "রক্তদাতা খুঁজুন",
+      "short_name": "রক্তদান",
       "url": "/blood/donors",
-      "description": "Search for blood donors near you",
-      "icons": [{ "src": "https://picsum.photos/seed/shortcut2/192/192", "sizes": "192x192" }]
+      "icons": [{ "src": "https://picsum.photos/192/192", "sizes": "192x192" }]
     }
   ],
   "protocol_handlers": [
