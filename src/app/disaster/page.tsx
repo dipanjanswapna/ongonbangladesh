@@ -63,22 +63,22 @@ export default function DisasterHub() {
 
             {/* Quick Stats Grid */}
             <div className="grid grid-cols-2 gap-4 w-full md:w-auto">
-              <Card className="p-6 bg-white/5 border-white/10 rounded-xl flex flex-col items-center justify-center space-y-2 text-center group hover:bg-white/10 transition-all">
+              <Card className="p-6 bg-white/5 border border-white/10 rounded-xl flex flex-col items-center justify-center space-y-2 text-center group hover:bg-white/10 transition-all">
                 <Droplets className="h-8 w-8 text-blue-400" />
                 <p className="text-[10px] text-white/40 uppercase font-black tracking-widest">বন্যা ঝুঁকি</p>
                 <h3 className="text-xl font-black text-white uppercase">নিম্ন</h3>
               </Card>
-              <Card className="p-6 bg-white/5 border-white/10 rounded-xl flex flex-col items-center justify-center space-y-2 text-center group hover:bg-white/10 transition-all">
+              <Card className="p-6 bg-white/5 border border-white/10 rounded-xl flex flex-col items-center justify-center space-y-2 text-center group hover:bg-white/10 transition-all">
                 <Wind className="h-8 w-8 text-green-400" />
                 <p className="text-[10px] text-white/40 uppercase font-black tracking-widest">বায়ু প্রবাহ</p>
                 <h3 className="text-xl font-black text-white uppercase">স্বাভাবিক</h3>
               </Card>
-              <Card className="p-6 bg-white/5 border-white/10 rounded-xl flex flex-col items-center justify-center space-y-2 text-center group hover:bg-white/10 transition-all">
+              <Card className="p-6 bg-white/5 border border-white/10 rounded-xl flex flex-col items-center justify-center space-y-2 text-center group hover:bg-white/10 transition-all">
                 <Activity className="h-8 w-8 text-red-500" />
                 <p className="text-[10px] text-white/40 uppercase font-black tracking-widest">ভূ-কম্পন</p>
                 <h3 className="text-xl font-black text-white uppercase">স্থির</h3>
               </Card>
-              <Card className="p-6 bg-white/5 border-white/10 rounded-xl flex flex-col items-center justify-center space-y-2 text-center group hover:bg-white/10 transition-all">
+              <Card className="p-6 bg-white/5 border border-white/10 rounded-xl flex flex-col items-center justify-center space-y-2 text-center group hover:bg-white/10 transition-all">
                 <CloudLightning className="h-8 w-8 text-yellow-400" />
                 <p className="text-[10px] text-white/40 uppercase font-black tracking-widest">বজ্রপাত</p>
                 <h3 className="text-xl font-black text-white uppercase">৫% সতর্কতা</h3>

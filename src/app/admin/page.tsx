@@ -1,8 +1,7 @@
-
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, HeartHandshake, CheckCircle, AlertTriangle, Activity, TrendingUp } from 'lucide-react';
+import { Users, HeartHandshake, CheckCircle, AlertTriangle, Activity, TrendingUp, CloudLightning } from 'lucide-react';
 import { 
   BarChart, 
   Bar, 
@@ -38,14 +37,19 @@ export default function AdminDashboard() {
           <h1 className="text-3xl font-bold text-white tracking-tight">ওভারভিউ</h1>
           <p className="text-white/40 mt-1">সিস্টেম স্ট্যাটাস চেক করুন এবং কার্যক্রম ট্র্যাক করুন।</p>
         </div>
-        <div className="px-4 py-2 bg-green-500/10 text-green-400 rounded-full border border-green-500/20 text-xs font-bold flex items-center gap-2">
-          <Activity className="h-3 w-3 animate-pulse" /> সিস্টেম অনলাইন
+        <div className="flex gap-2">
+          <div className="px-4 py-2 bg-green-500/10 text-green-400 rounded-xl border border-green-500/20 text-xs font-bold flex items-center gap-2">
+            <Activity className="h-3 w-3 animate-pulse" /> সিস্টেম অনলাইন
+          </div>
+          <div className="px-4 py-2 bg-orange-500/10 text-orange-400 rounded-xl border border-orange-500/20 text-xs font-bold flex items-center gap-2">
+            <CloudLightning className="h-3 w-3" /> দুর্যোগ মোড সচল
+          </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, i) => (
-          <Card key={i} className="border-white/5 bg-white/5 backdrop-blur-md rounded-3xl overflow-hidden shadow-2xl">
+          <Card key={i} className="border-white/5 bg-white/5 backdrop-blur-md rounded-xl overflow-hidden shadow-2xl">
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -55,7 +59,7 @@ export default function AdminDashboard() {
                     {stat.trend} এই সপ্তাহে
                   </p>
                 </div>
-                <div className={cn("p-4 rounded-2xl bg-white/5", stat.color)}>
+                <div className={cn("p-4 rounded-xl bg-white/5", stat.color)}>
                   <stat.icon className="h-6 w-6" />
                 </div>
               </div>
@@ -65,7 +69,7 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <Card className="lg:col-span-2 border-white/5 bg-white/5 backdrop-blur-md rounded-[2.5rem] shadow-2xl p-6">
+        <Card className="lg:col-span-2 border-white/5 bg-white/5 backdrop-blur-md rounded-xl shadow-2xl p-6">
           <CardHeader className="px-0 pt-0">
             <CardTitle className="text-white flex items-center gap-2">
               <TrendingUp className="h-5 w-5 text-primary" /> কার্যক্রম এনালাইসিস
@@ -93,16 +97,16 @@ export default function AdminDashboard() {
           </div>
         </Card>
 
-        <Card className="border-white/5 bg-white/5 backdrop-blur-md rounded-[2.5rem] shadow-2xl p-6">
+        <Card className="border-white/5 bg-white/5 backdrop-blur-md rounded-xl shadow-2xl p-6">
           <CardHeader className="px-0 pt-0">
             <CardTitle className="text-white">সাম্প্রতিক ইভেন্ট</CardTitle>
           </CardHeader>
           <CardContent className="px-0 pt-6 space-y-6">
             {[
               { title: "নতুন সাহায্য আবেদন", desc: "বন্যা দুর্গতদের জন্য", time: "৫ মিনিট আগে", color: "bg-blue-500" },
+              { title: "দুর্যোগ রিপোর্ট", desc: "সুনামগঞ্জে আকস্মিক বন্যা", time: "১০ মিনিট আগে", color: "bg-red-500" },
               { title: "পেমেন্ট প্রাপ্তি", desc: "যাকাত তহবিল: ৳৫০০০", time: "১২ মিনিট আগে", color: "bg-green-500" },
               { title: "সিস্টেম অ্যালার্ট", desc: "অ্যাডমিন লগইন সফল", time: "৩০ মিনিট আগে", color: "bg-primary" },
-              { title: "ভলান্টিয়ার যোগ", desc: "নতুন আবেদন জমা", time: "১ ঘণ্টা আগে", color: "bg-orange-500" },
             ].map((item, i) => (
               <div key={i} className="flex gap-4 items-start">
                 <div className={cn("w-2 h-2 rounded-full mt-1.5 shrink-0 shadow-[0_0_8px_rgba(255,255,255,0.5)]", item.color)} />
