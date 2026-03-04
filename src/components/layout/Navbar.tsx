@@ -1,8 +1,9 @@
+
 'use client';
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Heart, Menu, User, Droplet, Home, Megaphone, HeartHandshake, Users, Briefcase, Info, Phone, X, ShieldCheck, Download } from 'lucide-react';
+import { Heart, Menu, User, Droplet, Home, Megaphone, HeartHandshake, Users, Briefcase, Info, Phone, X, ShieldCheck, Download, ShieldAlert } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import {
@@ -28,6 +29,7 @@ export function Navbar() {
 
   const navLinks = [
     { label: 'হোম', href: '/', icon: Home },
+    { label: 'নিরাপত্তা ও SOS', href: '/safety', icon: ShieldAlert, color: 'text-red-500 font-black' },
     { label: 'আমাদের সম্পর্কে', href: '/about', icon: Info },
     { label: 'নেতৃত্ব', href: '/leadership/messages', icon: ShieldCheck },
     { label: 'ক্যাম্পেইনসমূহ', href: '/campaigns', icon: Megaphone },
@@ -47,7 +49,6 @@ export function Navbar() {
       <div className="container mx-auto max-w-7xl">
         <div className="flex items-center justify-between">
           
-          {/* Logo Section */}
           <Link href="/" className="flex items-center gap-2 group shrink-0">
             <div className="bg-primary/20 p-2 rounded-xl group-hover:bg-primary/30 transition-all duration-300 ring-1 ring-white/10">
               <Heart className="h-5 w-5 md:h-6 md:w-6 text-primary fill-primary" />
@@ -58,9 +59,8 @@ export function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Navigation - Hidden on Mobile/Tablet */}
           <div className="hidden xl:flex items-center gap-6">
-            {navLinks.slice(0, 6).map((link) => (
+            {navLinks.slice(0, 7).map((link) => (
               <Link 
                 key={link.href} 
                 href={link.href} 
@@ -75,7 +75,6 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2 md:gap-3">
-            {/* Language Switcher */}
             <div className="hidden sm:flex bg-white/5 backdrop-blur-md rounded-xl p-1 border border-white/10">
               <button 
                 onClick={() => setLang('bn')}
@@ -97,21 +96,18 @@ export function Navbar() {
               </button>
             </div>
 
-            {/* Profile Icon */}
             <Link href="/login" className="hidden md:block">
               <Button variant="ghost" size="icon" className="h-10 w-10 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white transition-all">
                 <User className="h-5 w-5" />
               </Button>
             </Link>
 
-            {/* Donate Button */}
-            <Link href="/donate">
-              <Button className="bg-white text-[#781013] hover:bg-white/90 font-black px-4 md:px-6 h-10 md:h-11 rounded-xl shadow-2xl transition-all active:scale-95 text-[10px] md:text-xs uppercase tracking-widest">
-                Donate
+            <Link href="/safety">
+              <Button className="bg-red-600 text-white hover:bg-red-700 font-black px-4 md:px-6 h-10 md:h-11 rounded-xl shadow-2xl transition-all active:scale-95 text-[10px] md:text-xs uppercase tracking-widest flex items-center gap-2">
+                <ShieldAlert className="h-4 w-4 animate-pulse" /> SOS
               </Button>
             </Link>
 
-            {/* Hamburger Menu (Mobile/Tablet Only) */}
             <div className="xl:hidden">
               <Sheet>
                 <SheetTrigger asChild>
@@ -121,12 +117,10 @@ export function Navbar() {
                 </SheetTrigger>
                 <SheetContent side="right" className="w-[280px] sm:w-[350px] bg-[#1a0405] border-l border-white/10 p-0 overflow-hidden shadow-2xl">
                   <div className="h-full flex flex-col relative">
-                    {/* Active Close Button */}
                     <SheetClose className="absolute right-4 top-4 z-50 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-all border border-white/10">
                       <X className="h-5 w-5" />
                     </SheetClose>
 
-                    {/* Background Decoration */}
                     <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
                     
                     <SheetHeader className="p-8 pb-4 border-b border-white/5 relative z-10">
@@ -149,12 +143,12 @@ export function Navbar() {
                             href={link.href} 
                             className={cn(
                               "flex items-center gap-4 p-3.5 rounded-2xl hover:bg-white/5 text-white/70 font-bold transition-all group border border-transparent",
-                              link.color && "text-red-500 hover:text-red-400"
+                              link.color?.includes('text-red-500') && "text-red-500 hover:text-red-400"
                             )}
                           >
                             <div className={cn(
                               "p-2 rounded-xl bg-white/5 group-hover:bg-white/10 transition-all",
-                              link.color && "bg-red-500/10"
+                              link.color?.includes('text-red-500') && "bg-red-500/10"
                             )}>
                               <link.icon className="h-4 w-4" />
                             </div>

@@ -1,8 +1,9 @@
+
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { AidCard } from '@/components/aid/AidCard';
 import { Input } from '@/components/ui/input';
-import { Heart, Zap, Search, ArrowRight, Calendar, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase, Tv, BookOpen, Globe, Lock, Quote, Droplet, Plus, Megaphone, ShieldCheck, Download } from 'lucide-react';
+import { Heart, Zap, Search, ArrowRight, Calendar, Facebook, Youtube, Instagram, HandCoins, UserCheck, HeartHandshake, Briefcase, Tv, BookOpen, Globe, Lock, Quote, Droplet, Plus, Megaphone, ShieldCheck, Download, ShieldAlert, PhoneCall, UserSecret } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -102,6 +103,33 @@ export default function Home() {
           </div>
         </section>
 
+        {/* SOS Alert Section - Added High Visibility */}
+        <section className="py-12 border-y border-white/5" style={{ backgroundColor: 'rgb(15, 2, 3)' }}>
+          <div className="container mx-auto px-4">
+            <div className="bg-red-600/10 border border-red-600/20 rounded-[3rem] p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[0_20px_50px_rgba(220,38,38,0.1)]">
+              <div className="space-y-4 text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 text-red-500 text-[10px] font-black uppercase tracking-widest rounded-full mb-2">
+                  <ShieldAlert className="h-3 w-3 animate-pulse" /> Emergency Assistance
+                </div>
+                <h2 className="text-3xl md:text-5xl font-black text-white leading-none uppercase tracking-tighter">তাৎক্ষণিক <span className="text-red-600">নিরাপত্তা ও SOS</span></h2>
+                <p className="text-white/60 text-sm md:text-lg max-w-xl font-medium">হয়রানি বা যেকোনো বিপদে ভয় পাবেন না। আমাদের SOS কমান্ড সেন্টার আপনার পাশে আছে।</p>
+              </div>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link href="/safety">
+                  <Button size="lg" className="bg-red-600 text-white hover:bg-red-700 h-16 px-10 rounded-2xl font-black text-xl shadow-2xl uppercase tracking-widest animate-bounce">
+                    SOS সেন্টার
+                  </Button>
+                </Link>
+                <Link href="/safety/helplines">
+                  <Button size="lg" variant="outline" className="h-16 px-8 border-white/10 text-white hover:bg-white/5 rounded-2xl font-bold uppercase tracking-widest">
+                    হেল্পলাইনসমূহ
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Search Bar Section */}
         <section className="container mx-auto px-4 -mt-10 relative z-20">
           <div className="glass-card p-2 md:p-3 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-2 items-center max-w-3xl mx-auto border-white/10">
@@ -193,12 +221,12 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Blood Donation Section - Redesigned Slimmer and Non-Card */}
+        {/* Blood Donation Section */}
         <section className="py-12 border-y border-white/5" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-20 max-w-6xl mx-auto">
               <div className="lg:w-1/2 space-y-6 text-center lg:text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 text-red-500 text-[10px] font-black uppercase tracking-widest rounded-full border border-red-600/20 mb-2 mx-auto lg:mx-0">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-red-600/20 text-red-500 text-[10px] font-black uppercase tracking-widest rounded-full mb-2 mx-auto lg:mx-0">
                   <Droplet className="h-3 w-3 fill-red-500" /> Emergency Response
                 </div>
                 <h2 className="text-3xl md:text-5xl font-black text-white leading-tight uppercase tracking-tighter">রক্তদান করুন, <br /><span className="text-red-500 italic">জীবন বাঁচান</span></h2>
@@ -268,7 +296,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Advertisement / Partners Section - Infinite Scroll */}
+        {/* Advertisement / Partners Section */}
         <section className="py-16 border-t border-white/5 overflow-hidden" style={{ backgroundColor: 'rgb(122, 16, 19)' }}>
           <div className="container mx-auto px-4 mb-10">
             <div className="text-center md:text-left space-y-2">
@@ -460,7 +488,7 @@ export default function Home() {
                     <li><Link href="/about" className="text-white/70 hover:text-white">আমাদের সম্পর্কে</Link></li>
                     <li><Link href="/blog" className="text-white/70 hover:text-white">ব্লগ</Link></li>
                     <li><Link href="/volunteer" className="text-white/70 hover:text-white">স্বেচ্ছাসেবক হন</Link></li>
-                    <li><Link href="/install" className="text-white/70 hover:text-white flex items-center gap-1 font-black"><Download className="h-3 w-3" /> ইনস্টল অ্যাপ</Link></li>
+                    <li><Link href="/safety" className="text-red-500 hover:text-red-400 flex items-center gap-1 font-black"><ShieldAlert className="h-3 w-3" /> নিরাপত্তা সেন্টার</Link></li>
                     <li><Link href="/admin/login" className="text-white/70 hover:text-white flex items-center gap-1"><Lock className="h-3 w-3" /> অ্যাডমিন পোর্টাল</Link></li>
                   </ul>
                 </div>
@@ -469,7 +497,7 @@ export default function Home() {
                   <ul className="space-y-2 text-xs font-bold">
                     <li><Link href="/contact" className="text-white/70 hover:text-white">যোগাযোগ</Link></li>
                     <li><Link href="/refund-policy" className="text-white/70 hover:text-white">রিফান্ড নীতি</Link></li>
-                    <li><Link href="/refund-request" className="text-white/70 hover:text-white">রিফান্ড অনুরোধ</Link></li>
+                    <li><Link href="/safety/helplines" className="text-white/70 hover:text-white">জরুরি নম্বর</Link></li>
                   </ul>
                 </div>
                 <div className="space-y-4">
