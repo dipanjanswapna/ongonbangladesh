@@ -1,0 +1,26 @@
+
+{
+  "name": "ONGON BANGLADESH",
+  "short_name": "ONGON BD",
+  "description": "মানবিক সহায়তায় হৃদয়ের সাথে হৃদয়ের সেতুবন্ধন।",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#7a1013",
+  "theme_color": "#7a1013",
+  "icons": [
+    {
+      "src": "https://picsum.photos/seed/ongon-icon/192/192",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://picsum.photos/seed/ongon-icon/512/512",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "orientation": "portrait",
+  "scope": "/"
+}
