@@ -84,6 +84,7 @@ export function Navbar() {
                   link.color || "text-white/70 hover:text-white"
                 )}
               >
+                <link.icon className="h-3.5 w-3.5" />
                 {link.label}
               </Link>
             ))}

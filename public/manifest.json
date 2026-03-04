@@ -1,8 +1,8 @@
 {
-  "id": "/",
   "name": "ONGON BANGLADESH",
   "short_name": "ONGON BD",
   "description": "মানবিক সহায়তায় আমরা আপনার পাশে। এটি একটি AI-চালিত কমিউনিটি প্ল্যাটফর্ম।",
+  "id": "/",
   "start_url": "/",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "minimal-ui"],
@@ -12,19 +12,19 @@
   "scope": "/",
   "icons": [
     {
-      "src": "https://picsum.photos/192/192",
+      "src": "https://picsum.photos/seed/icon192/192/192",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://picsum.photos/512/512",
+      "src": "https://picsum.photos/seed/icon512/512/512",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://picsum.photos/512/512?maskable=1",
+      "src": "https://picsum.photos/seed/iconmask/512/512",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -32,15 +32,15 @@
   ],
   "screenshots": [
     {
-      "src": "https://picsum.photos/seed/pwa1/1280/720",
+      "src": "https://picsum.photos/seed/ss-desktop/1280/720",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
       "label": "ONGON BD Desktop View"
     },
     {
-      "src": "https://picsum.photos/seed/pwa2/720/1280",
-      "sizes": "720x1280",
+      "src": "https://picsum.photos/seed/ss-mobile/750/1334",
+      "sizes": "750x1334",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "ONGON BD Mobile View"
@@ -48,16 +48,14 @@
   ],
   "shortcuts": [
     {
-      "name": "এখনই দান করুন",
-      "short_name": "দান করুন",
+      "name": "Donate Now",
       "url": "/donate",
-      "icons": [{ "src": "https://picsum.photos/192/192", "sizes": "192x192" }]
+      "icons": [{ "src": "https://picsum.photos/seed/s1/192/192", "sizes": "192x192" }]
     },
     {
-      "name": "রক্তদাতা খুঁজুন",
-      "short_name": "রক্তদান",
+      "name": "Find Donors",
       "url": "/blood/donors",
-      "icons": [{ "src": "https://picsum.photos/192/192", "sizes": "192x192" }]
+      "icons": [{ "src": "https://picsum.photos/seed/s2/192/192", "sizes": "192x192" }]
     }
   ],
   "protocol_handlers": [
