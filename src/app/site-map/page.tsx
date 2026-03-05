@@ -14,7 +14,8 @@ import {
   Globe, 
   Users,
   ChevronRight,
-  Info
+  Info,
+  Bot
 } from 'lucide-react';
 import Link from 'next/link';
 
