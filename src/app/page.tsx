@@ -553,7 +553,7 @@ export default function Home() {
                   <h4 className="font-bold text-white text-xs uppercase opacity-50 tracking-widest">সাপোর্ট</h4>
                   <ul className="space-y-2 text-xs font-bold">
                     <li><Link href="/contact" className="text-white/70 hover:text-white transition-colors">যোগাযোগ</Link></li>
-                    <li><Link href="/refund-policy" className="text-white/70 hover:text-white transition-colors">রিফান্ড নীতি</Link></li>
+                    <li><Link href="/site-map" className="text-white/70 hover:text-white transition-colors">সাইট ম্যাপ</Link></li>
                     <li><Link href="/safety/helplines" className="text-white/70 hover:text-white transition-colors">জরুরি নম্বর</Link></li>
                   </ul>
                 </div>
