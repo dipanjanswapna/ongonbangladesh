@@ -72,6 +72,7 @@ export function Navbar() {
     { label: 'রিসোর্স সেন্টার', href: '/resources', icon: BookOpen },
     { label: 'গ্যালারি', href: '/gallery', icon: Camera },
     { label: 'সফলতার গল্প', href: '/stories', icon: Star },
+    { label: 'সাইট ম্যাপ', href: '/site-map', icon: Info },
   ];
 
   return (

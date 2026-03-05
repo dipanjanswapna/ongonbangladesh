@@ -1,11 +1,9 @@
 /**
- * This file is purposefully deactivated to resolve a conflict with the 
- * root-level sitemap.ts metadata generator. In Next.js, having both 
- * causes a build error as they both attempt to claim the /sitemap segment.
+ * This file is deactivated to resolve a build conflict with Next.js metadata.
+ * Next.js reserves the 'sitemap' route segment for its metadata generator (sitemap.ts).
  * 
- * The visual sitemap for users is now located at: src/app/site-map/page.tsx
+ * The visual sitemap for users is now correctly located at: /site-map
+ * Path: src/app/site-map/page.tsx
+ * 
+ * DO NOT add a default export to this file.
  */
-
-export const dynamic = 'force-static';
-
-// No default export here prevents Next.js from treating this as a page route.
