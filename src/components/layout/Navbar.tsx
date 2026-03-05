@@ -12,6 +12,12 @@ import {
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { 
   Heart, 
   Menu, 
@@ -30,7 +36,12 @@ import {
   ShieldAlert,
   HandCoins,
   Bot,
-  CloudLightning
+  CloudLightning,
+  Newspaper,
+  BookOpen,
+  ChevronDown,
+  Camera,
+  Star
 } from 'lucide-react';
 
 export function Navbar() {
@@ -51,14 +62,16 @@ export function Navbar() {
     { label: 'নিরাপত্তা ও SOS', href: '/safety', icon: ShieldAlert, color: 'text-red-500 font-black' },
     { label: 'এআই অ্যাসিস্ট্যান্ট', href: '/assistant', icon: Bot, color: 'text-blue-400' },
     { label: 'আমাদের সম্পর্কে', href: '/about', icon: Info },
-    { label: 'নেতৃত্ব', href: '/leadership/messages', icon: ShieldCheck },
-    { label: 'ক্যাম্পেইনসমূহ', href: '/campaigns', icon: Megaphone },
-    { label: 'রক্তদান', href: '/blood', icon: Droplet, color: 'text-red-500' },
-    { label: 'সাহায্য অনুরোধ', href: '/requests', icon: HeartHandshake },
-    { label: 'স্বেচ্ছাসেবক', href: '/volunteer', icon: Users },
-    { label: 'ক্যারিয়ার', href: '/careers', icon: Briefcase },
-    { label: 'ইনস্টল অ্যাপ', href: '/install', icon: Download, color: 'text-blue-400' },
-    { label: 'যোগাযোগ', href: '/contact', icon: Phone },
+    { label: 'ব্লগ', href: '/blog', icon: Newspaper },
+  ];
+
+  const resourceLinks = [
+    { label: 'নিউজ ও প্রেস', href: '/news', icon: Newspaper },
+    { label: 'ইভেন্টসমূহ', href: '/events', icon: Megaphone },
+    { label: 'নোটিশ ও টেন্ডার', href: '/notices', icon: ShieldCheck },
+    { label: 'রিসোর্স সেন্টার', href: '/resources', icon: BookOpen },
+    { label: 'গ্যালারি', href: '/gallery', icon: Camera },
+    { label: 'সফলতার গল্প', href: '/stories', icon: Star },
   ];
 
   return (
@@ -75,12 +88,12 @@ export function Navbar() {
             </div>
             <div className="flex flex-col">
               <span className="text-sm md:text-lg font-black text-white leading-none tracking-tighter uppercase">ONGON <span className="text-white/40">BD</span></span>
-              <span className="hidden lg:block text-[8px] text-white/30 font-bold uppercase tracking-[0.2em] mt-1">Sister concern of PRANGON'S ECOSYSTEM</span>
+              <span className="hidden lg:block text-[8px] text-white/30 font-bold uppercase tracking-[0.2em] mt-1 text-nowrap">Sister concern of PRANGON'S ECOSYSTEM</span>
             </div>
           </Link>
 
-          <div className="hidden xl:flex items-center gap-6">
-            {navLinks.slice(0, 9).map((link) => (
+          <div className="hidden xl:flex items-center gap-4">
+            {navLinks.map((link) => (
               <Link 
                 key={link.href} 
                 href={link.href} 
@@ -93,6 +106,21 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
+
+            <DropdownMenu>
+              <DropdownMenuTrigger className="text-[11px] font-bold uppercase tracking-widest text-white/70 hover:text-white flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-white/5 outline-none transition-all">
+                মিডিয়া ও রিসোর্স <ChevronDown className="h-3 w-3" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-[#1a0405] border-white/10 p-2 rounded-xl shadow-2xl min-w-[200px]">
+                {resourceLinks.map((item) => (
+                  <DropdownMenuItem key={item.href} asChild>
+                    <Link href={item.href} className="flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 cursor-pointer text-[10px] font-bold uppercase tracking-widest transition-all">
+                      <item.icon className="h-4 w-4" /> {item.label}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           <div className="flex items-center gap-2 md:gap-3">
@@ -158,7 +186,7 @@ export function Navbar() {
                     
                     <div className="flex-grow p-6 space-y-1 overflow-y-auto custom-scrollbar relative z-10">
                       <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] mb-4 ml-2">Main Menu</p>
-                      {navLinks.map((link) => (
+                      {[...navLinks, ...resourceLinks].map((link) => (
                         <SheetClose asChild key={link.href}>
                           <Link 
                             href={link.href} 
