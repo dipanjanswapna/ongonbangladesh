@@ -1,38 +1,31 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://ongonbd.org'
-  
-  // Publicly accessible routes for SEO indexing
+  const baseUrl = 'https://ongonbd.org'; // Replace with your actual domain
+
+  // Core Pages
   const routes = [
     '',
     '/about',
     '/blog',
-    '/assistant',
     '/contact',
+    '/donate',
+    '/donate/regular',
     '/membership',
     '/volunteer',
-    '/careers',
-    '/install',
-    '/privacy',
-    '/terms',
-    '/refund-policy',
     '/blood',
     '/blood/donors',
     '/blood/register',
-    '/campaigns',
-    '/donate',
-    '/donate/regular',
     '/disaster',
     '/disaster/alerts',
     '/disaster/resources',
-    '/disaster/requests',
     '/disaster/education',
     '/disaster/report',
+    '/disaster/requests',
     '/safety',
     '/safety/chat',
-    '/safety/education',
     '/safety/helplines',
+    '/safety/education',
     '/safety/report',
     '/news',
     '/events',
@@ -41,14 +34,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/gallery',
     '/stories',
     '/site-map',
-    '/login',
-    '/profile',
+    '/privacy',
+    '/terms',
+    '/refund-policy',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
+    changeFrequency: 'daily' as const,
     priority: route === '' ? 1 : 0.8,
-  }))
+  }));
 
-  return routes
+  return routes;
 }

@@ -21,27 +21,26 @@ import {
 import { 
   Heart, 
   Menu, 
-  User, 
   Droplet, 
   Home, 
   Megaphone, 
-  HeartHandshake, 
   Users, 
   Briefcase, 
-  Info, 
-  Phone, 
   X, 
   ShieldCheck, 
-  Download, 
   ShieldAlert,
   HandCoins,
   Bot,
   CloudLightning,
   Newspaper,
-  BookOpen,
-  ChevronDown,
+  FileText,
   Camera,
-  Star
+  ChevronDown,
+  LayoutGrid,
+  Sparkles,
+  Info,
+  Star,
+  BookOpen
 } from 'lucide-react';
 
 export function Navbar() {
@@ -61,18 +60,19 @@ export function Navbar() {
     { label: 'দুর্যোগ ব্যবস্থাপনা', href: '/disaster', icon: CloudLightning, color: 'text-orange-400 font-bold' },
     { label: 'নিরাপত্তা ও SOS', href: '/safety', icon: ShieldAlert, color: 'text-red-500 font-black' },
     { label: 'এআই অ্যাসিস্ট্যান্ট', href: '/assistant', icon: Bot, color: 'text-blue-400' },
-    { label: 'আমাদের সম্পর্কে', href: '/about', icon: Info },
-    { label: 'ব্লগ', href: '/blog', icon: Newspaper },
+    { label: 'রক্তদান', href: '/blood', icon: Droplet, color: 'text-red-500' },
+    { label: 'স্বেচ্ছাসেবক', href: '/volunteer', icon: Users },
   ];
 
-  const resourceLinks = [
+  const mediaLinks = [
     { label: 'নিউজ ও প্রেস', href: '/news', icon: Newspaper },
     { label: 'ইভেন্টসমূহ', href: '/events', icon: Megaphone },
-    { label: 'নোটিশ ও টেন্ডার', href: '/notices', icon: ShieldCheck },
-    { label: 'রিসোর্স সেন্টার', href: '/resources', icon: BookOpen },
+    { label: 'নোটিশ ও টেন্ডার', href: '/notices', icon: FileText },
+    { label: 'রিসোর্স ও রিপোর্ট', href: '/resources', icon: Briefcase },
     { label: 'গ্যালারি', href: '/gallery', icon: Camera },
-    { label: 'সফলতার গল্প', href: '/stories', icon: Star },
-    { label: 'সাইট ম্যাপ', href: '/site-map', icon: Info },
+    { label: 'মানবিক গল্প', href: '/stories', icon: Sparkles },
+    { label: 'আমাদের সম্পর্কে', href: '/about', icon: Info },
+    { label: 'ব্লগ', href: '/blog', icon: Newspaper },
   ];
 
   return (
@@ -110,13 +110,13 @@ export function Navbar() {
 
             <DropdownMenu>
               <DropdownMenuTrigger className="text-[11px] font-bold uppercase tracking-widest text-white/70 hover:text-white flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-white/5 outline-none transition-all">
-                মিডিয়া ও রিসোর্স <ChevronDown className="h-3 w-3" />
+                <LayoutGrid className="h-3.5 w-3.5" /> মিডিয়া ও রিসোর্স <ChevronDown className="h-3 w-3" />
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-[#1a0405] border-white/10 p-2 rounded-xl shadow-2xl min-w-[200px]">
-                {resourceLinks.map((item) => (
+                {mediaLinks.map((item) => (
                   <DropdownMenuItem key={item.href} asChild>
                     <Link href={item.href} className="flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 cursor-pointer text-[10px] font-bold uppercase tracking-widest transition-all">
-                      <item.icon className="h-4 w-4" /> {item.label}
+                      <item.icon className="h-4 w-4 text-primary" /> {item.label}
                     </Link>
                   </DropdownMenuItem>
                 ))}
@@ -126,29 +126,13 @@ export function Navbar() {
 
           <div className="flex items-center gap-2 md:gap-3">
             <div className="hidden sm:flex bg-white/5 backdrop-blur-md rounded-xl p-1 border border-white/10">
-              <button 
-                onClick={() => setLang('bn')}
-                className={cn(
-                  "px-3 py-1 text-[10px] font-bold rounded-lg transition-all",
-                  lang === 'bn' ? "bg-white text-[#781013] shadow-lg" : "text-white/40 hover:text-white"
-                )}
-              >
-                বাং
-              </button>
-              <button 
-                onClick={() => setLang('en')}
-                className={cn(
-                  "px-3 py-1 text-[10px] font-bold rounded-lg transition-all",
-                  lang === 'en' ? "bg-white text-[#781013] shadow-lg" : "text-white/40 hover:text-white"
-                )}
-              >
-                EN
-              </button>
+              <button onClick={() => setLang('bn')} className={cn("px-3 py-1 text-[10px] font-bold rounded-lg transition-all", lang === 'bn' ? "bg-white text-[#781013] shadow-lg" : "text-white/40 hover:text-white")}>বাং</button>
+              <button onClick={() => setLang('en')} className={cn("px-3 py-1 text-[10px] font-bold rounded-lg transition-all", lang === 'en' ? "bg-white text-[#781013] shadow-lg" : "text-white/40 hover:text-white")}>EN</button>
             </div>
 
-            <Link href="/login" className="hidden md:block">
+            <Link href="/site-map" className="hidden md:block">
               <Button variant="ghost" size="icon" className="h-10 w-10 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white transition-all">
-                <User className="h-5 w-5" />
+                <LayoutGrid className="h-5 w-5" />
               </Button>
             </Link>
 
@@ -167,64 +151,33 @@ export function Navbar() {
                 </SheetTrigger>
                 <SheetContent side="right" className="w-[280px] sm:w-[350px] bg-[#1a0405] border-l border-white/10 p-0 overflow-hidden shadow-2xl">
                   <div className="h-full flex flex-col relative">
-                    <SheetClose className="absolute right-4 top-4 z-50 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-all border border-white/10">
-                      <X className="h-5 w-5" />
-                    </SheetClose>
-
+                    <SheetClose className="absolute right-4 top-4 z-50 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-all border border-white/10"><X className="h-5 w-5" /></SheetClose>
                     <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
-                    
                     <SheetHeader className="p-8 pb-4 border-b border-white/5 relative z-10">
                       <SheetTitle className="flex items-center gap-3">
-                        <div className="bg-primary/20 p-2 rounded-xl">
-                          <Heart className="h-6 w-6 text-primary fill-primary" />
-                        </div>
+                        <div className="bg-primary/20 p-2 rounded-xl"><Heart className="h-6 w-6 text-primary fill-primary" /></div>
                         <div className="text-left">
                           <span className="text-xl font-black text-white tracking-tighter uppercase block">ONGON BD</span>
                           <span className="text-[8px] text-white/30 font-bold uppercase tracking-widest leading-none">CONNECTING HEARTS</span>
                         </div>
                       </SheetTitle>
                     </SheetHeader>
-                    
                     <div className="flex-grow p-6 space-y-1 overflow-y-auto custom-scrollbar relative z-10">
                       <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] mb-4 ml-2">Main Menu</p>
-                      {[...navLinks, ...resourceLinks].map((link) => (
+                      {[...navLinks, ...mediaLinks].map((link) => (
                         <SheetClose asChild key={link.href}>
-                          <Link 
-                            href={link.href} 
-                            className={cn(
-                              "flex items-center gap-4 p-3.5 rounded-xl hover:bg-white/5 text-white/70 font-bold transition-all group border border-transparent",
-                              link.color?.includes('text-red-500') && "text-red-500 hover:text-red-400"
-                            )}
-                          >
-                            <div className={cn(
-                              "p-2 rounded-xl bg-white/5 group-hover:bg-white/10 transition-all",
-                              link.color?.includes('text-red-500') && "bg-red-500/10"
-                            )}>
-                              <link.icon className="h-4 w-4" />
-                            </div>
+                          <Link href={link.href} className="flex items-center gap-4 p-3.5 rounded-xl hover:bg-white/5 text-white/70 font-bold transition-all group">
+                            <div className="p-2 rounded-xl bg-white/5 group-hover:bg-white/10 transition-all"><link.icon className="h-4 w-4" /></div>
                             <span className="text-sm tracking-tight">{link.label}</span>
                           </Link>
                         </SheetClose>
                       ))}
                     </div>
-
                     <div className="p-8 bg-white/5 border-t border-white/5 space-y-6 relative z-10">
                       <div className="grid grid-cols-2 gap-3">
-                        <SheetClose asChild>
-                          <Link href="/login" className="w-full">
-                            <Button variant="outline" className="w-full border-white/10 text-white font-bold h-12 rounded-xl hover:bg-white/5">লগইন</Button>
-                          </Link>
-                        </SheetClose>
-                        <SheetClose asChild>
-                          <Link href="/register" className="w-full">
-                            <Button className="w-full bg-white text-[#781013] font-bold h-12 rounded-xl shadow-xl">রেজিস্ট্রেশন</Button>
-                          </Link>
-                        </SheetClose>
+                        <SheetClose asChild><Link href="/login" className="w-full"><Button variant="outline" className="w-full border-white/10 text-white font-bold h-12 rounded-xl">লগইন</Button></Link></SheetClose>
+                        <SheetClose asChild><Link href="/register" className="w-full"><Button className="w-full bg-white text-[#781013] font-bold h-12 rounded-xl">রেজিস্ট্রেশন</Button></Link></SheetClose>
                       </div>
-                      
-                      <p className="text-[9px] text-white/20 text-center font-bold uppercase tracking-[0.4em]">
-                        v3.5.0 Secure Environment
-                      </p>
                     </div>
                   </div>
                 </SheetContent>
