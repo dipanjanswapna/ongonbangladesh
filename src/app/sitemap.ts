@@ -3,6 +3,7 @@ import { MetadataRoute } from 'next'
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://ongonbd.org'
   
+  // Publicly accessible routes for SEO indexing
   const routes = [
     '',
     '/about',
@@ -40,6 +41,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/gallery',
     '/stories',
     '/site-map',
+    '/login',
+    '/profile',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
