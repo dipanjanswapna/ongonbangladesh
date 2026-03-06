@@ -20,7 +20,9 @@ import {
   BookOpen,
   Camera,
   Sparkles,
-  Gavel
+  Gavel,
+  Bot,
+  Megaphone
 } from 'lucide-react';
 import Link from 'next/link';
 
